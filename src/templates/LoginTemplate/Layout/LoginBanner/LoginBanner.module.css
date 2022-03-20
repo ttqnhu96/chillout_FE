@@ -1,0 +1,36 @@
+/*=============================================
+                LOGIN BANNER
+==============================================*/
+.login-banner {
+    width: 40% !important;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-text {
+    font-weight: 700;
+    font-size: 3rem;
+    color: rgba(0, 0, 0, 0.7);
+    padding-bottom: 3rem;
+}
+
+.welcome-image {
+    height: 20rem;
+}
+
+@media (max-width:811px) {
+    .login-banner{
+        display: none;     
+    }
+}
+@media (max-width:511px) {
+    .login-banner{
+        display: none;     
+    }
+}

@@ -1,0 +1,101 @@
+/*=============================================
+                    LOGIN
+==============================================*/
+.login {
+    width: 60% !important;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*=============================================
+                    LOGO
+==============================================*/
+.login-logo-container {
+    width: 50%;
+    padding-bottom: 2.5rem;
+    text-align: left;
+}
+.login-logo {
+    margin-right: 1rem;
+}
+.login-input-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.login-input {
+    width: 100%;
+    height: 4rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    border: 0.25rem solid rgba(211, 141, 140, 0.6);
+    padding: 0 1rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+.login-button {
+    width: 100%;
+    height: 4rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: rgba(211, 141, 140);
+    margin-top: 0.5rem;
+    color:rgb(255, 255, 255);
+    font-weight: 600;
+    cursor: pointer;
+}
+.signup-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+.not-have-account-text {
+    color: rgba(0, 0, 0, 0.7);
+    margin-right: 0.8rem;
+}
+.signup-text {
+    color: rgb(209, 124, 123);
+    font-weight: bolder;
+    cursor: pointer;
+}
+@media (max-width:911px) {
+    .signup-text-container {
+        flex-direction: column;
+    }
+}
+@media (max-width:811px) {
+    .login {
+        width: 100% !important;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3rem;
+    }
+}
+
+@media (max-width:511px) {
+    .login{
+      min-width: 100vw;
+      min-height: 100vh;     
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .login-logo {
+        display: none;
+    }
+  }

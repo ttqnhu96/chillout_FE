@@ -1,11 +1,10 @@
 import React from 'react'
 import { Route } from "react-router";
 import Footer from './Layout/Footer/Footer';
-//import '../../index.css';
 import Header from './Layout/Header/Header';
 
 
-export const ChilloutTemplate = (props) => {
+export const MainContentTemplate = (props) => {
     const { Component, ...restProps } = props;
     return <Route {...restProps} render={(propsRoute) => {
 

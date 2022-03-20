@@ -39,15 +39,37 @@ body {
   }
 }
 
-@media (max-width:870px) {
+@media (max-width:911px) {
   .chillout-container{
       width: 80rem;     
   }
 }
 
-@media (max-width:800px) {
+@media (max-width:811px) {
   .chillout-container{
       width: 70rem;     
+  }
+}
+
+@media (max-width:711px) {
+  .chillout-container{
+      width: 60rem;     
+  }
+}
+
+@media (max-width:611px) {
+  .chillout-container{
+      width: 50rem;     
+  }
+}
+
+@media (max-width:511px) {
+  .chillout-container{
+    min-width: 100vw;
+    min-height: 100vh;     
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 

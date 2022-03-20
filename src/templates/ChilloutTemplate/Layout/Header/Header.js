@@ -33,6 +33,7 @@ export default function Header() {
                 <button className={`${style['button-create']}`} />
             </div>
             <div className={`${style['notification-user-container']}`}>
+                <div className={`${style['message-icon']}`}><i height={20} className="far fa-comment-dots"></i></div>
                 <div className={`${style['notification-icon']}`}><i height={20} className="far fa-bell"></i></div>
                 <div>
                     <span className={`${style['username']}`}>Username</span>

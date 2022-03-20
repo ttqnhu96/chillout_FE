@@ -1,0 +1,78 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+}
+
+/*=============================================
+                   MAIN CONTAINER
+==============================================*/
+.chillout-bg {
+  background-color: rgb(255,208,197);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 100vh;
+  /* background-image: linear-gradient(to bottom right, rgb(255, 233, 215) , rgb(255, 191, 181)); */
+}
+
+.chillout-container {
+  width: 110rem;
+  height: 80rem;
+  margin: 6% 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 3rem;
+  box-shadow: rgba(58, 58, 58, 0.2) 0vh 2vh 10vh 0vh;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .chillout-container {
+      width: 90rem;
+  }
+}
+
+@media (max-width:870px) {
+  .chillout-container{
+      width: 80rem;     
+  }
+}
+
+@media (max-width:800px) {
+  .chillout-container{
+      width: 70rem;     
+  }
+}
+
+/*=============================================
+                   SCROLL BAR
+==============================================*/
+html::-webkit-scrollbar{
+  width:.8rem;
+}
+html::-webkit-scrollbar-thumb{
+  background-color: #000;
+  border-radius: 1rem;
+}
+a{
+  text-decoration: none;
+  display: block;
+  color: var(--text-color);
+  background-color: transparent;
+  cursor: pointer;
+}
+:root{
+  --primary-color: #ffc876;
+  --text-color: #676669;
+  --second-color: #303030;
+  --third-color: #121212;
+}
+
+

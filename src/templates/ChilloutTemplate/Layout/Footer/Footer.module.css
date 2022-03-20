@@ -1,0 +1,12 @@
+.chillout-footer {
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    background-color: green;
+    height: calc(100% / 15 * 2);
+}
+
+.chillout-footer-container {
+    padding: 2rem;
+}

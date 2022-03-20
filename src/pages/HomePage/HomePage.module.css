@@ -1,0 +1,8 @@
+.home-page {
+    height: calc(100% / 15 * 11);
+    background-color: yellow;
+}
+
+.home-page-container {
+    padding: 2rem;
+}

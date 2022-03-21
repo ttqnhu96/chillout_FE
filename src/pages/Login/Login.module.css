@@ -54,6 +54,7 @@
     cursor: pointer;
 }
 .signup-text-container {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,4 +99,10 @@
     .login-logo {
         display: none;
     }
-  }
+}
+
+@media (max-width:371px) {
+    .signup-text-container {
+        font-size: 1.3rem;
+    }
+}

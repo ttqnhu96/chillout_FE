@@ -1,6 +1,23 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { logInAction } from '../../redux/actions/AuthenticationActions';
 import style from './Login.module.css';
 
 export default function Login() {
+    let dispatch = useDispatch();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChangeUsername = (e) => {
+        setUsername(e.target.value);
+    }
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value);
+    }
+    const handleSubmit = () => {
+        dispatch(logInAction(username, password));
+    }
+
     return (
         <div className={`${style['login']}`}>
             <div className={`${style['login-logo-container']}`}>
@@ -14,9 +31,23 @@ export default function Login() {
                 />
             </div>
             <div className={`${style['login-input-container']}`}>
-                <input className={`${style['login-input']}`}></input>
-                <input className={`${style['login-input']}`}></input>
-                <button className={`${style['login-button']}`}>Login</button>
+                <input
+                    className={`${style['login-input']}`}
+                    placeholder="Username"
+                    onChange={handleChangeUsername}
+                />
+                <input
+                    className={`${style['login-input']}`}
+                    type="password"
+                    placeholder="Password"
+                    onChange={handleChangePassword}
+                />
+                <button
+                    className={`${style['login-button']}`}
+                    onClick={handleSubmit}
+                >
+                    Login
+                </button>
                 <div className={`${style['signup-text-container']}`}>
                     <div className={`${style['not-have-account-text']}`}>Don't have an account?</div>
                     <div className={`${style['signup-text']}`}>Sign Up</div>

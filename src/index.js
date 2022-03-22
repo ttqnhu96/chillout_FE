@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 //Setup redux
 import store from './redux/configStore'
 import { Router } from 'react-router-dom';
-import { history } from './common/history';
+import { history } from './util/history';
 
 ReactDOM.render(
   <Router history={history}>

@@ -1,8 +1,8 @@
-import { USER_LOGIN_SAGA } from "../constants/types"
+import { LOGIN_SAGA } from "../constants/types"
 
 export const logInAction = (username, password) => {
     return {
-        type: USER_LOGIN_SAGA,
+        type: LOGIN_SAGA,
         userLogin: {
             username: username,
             password: password

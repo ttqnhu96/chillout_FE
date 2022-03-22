@@ -1,4 +1,4 @@
-import { FUNCTION_CONSTANTS, URL_CONSTANTS } from "../common/constants/apiUrls";
+import { FUNCTION_CONSTANTS, URL_CONSTANTS } from "../util/constants/apiUrls";
 import { BaseService } from "./BaseService";
 
 export class AuthenticationService extends BaseService {

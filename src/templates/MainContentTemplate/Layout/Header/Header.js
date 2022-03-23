@@ -39,7 +39,7 @@ export default function Header() {
             <div className={`${style['notification-user-container']}`}>
                 <div className={`${style['message-icon']}`}><i height={20} className="far fa-comment-dots"></i></div>
                 <div className={`${style['notification-icon']}`}><i height={20} className="far fa-bell"></i></div>
-                <div>
+                <div className={`${style['user-container']}`}>
                     <span className={`${style['username']}`}>{firstName}</span>
                     <img src={avatar || "./image/avatar/default_avatar.png"}
                         alt="avatar"
@@ -47,6 +47,6 @@ export default function Header() {
                     />
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

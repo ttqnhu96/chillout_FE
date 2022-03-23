@@ -14,23 +14,58 @@ export default function HomePage() {
 
     return (
         <div className={`${style['home-page']}`}>
-            <div className={`${style['home-page-container']}`}>
-                2
-                {/* <div className="row">
-                <div className="col-3">
-                    <div style={{ background: 'pink', borderRadius: '20px', height: '100%', minHeight: '100%' }}>
-                    Left
+            <div className={`${style['menu-container']}`}>
+                <div className={`${style['menu-item-container']}`}>
+                    <img className={`${style['menu-item-icon']}`}
+                        src="./image/icon/menu-profile.svg"
+                        alt="menu-profile"
+                    />
+                    <div className={`${style['menu-item-text']}`}>
+                        Profile
                     </div>
                 </div>
-                <div className="col-6" >
-                    <div style={{background: 'green', borderRadius: '20px', height: '100%' }} >Middle</div>
-                </div>
-                <div className="col-3" >
-                    <div style={{ background: 'pink', borderRadius: '20px', height: '100%' }}>
-                    Right
+                <div className={`${style['menu-item-container']}`}>
+                    <img className={`${style['menu-item-icon']}`}
+                        src="./image/icon/menu-friends.png"
+                        alt="menu-friends"
+                    />
+                    <div className={`${style['menu-item-text']}`}>
+                        Friends
                     </div>
                 </div>
-            </div> */}
+                <div className={`${style['menu-item-container']}`}>
+                    <img className={`${style['menu-item-icon']}`}
+                        src="./image/icon/menu-message.svg"
+                        alt="menu_message"
+                    />
+                    <div className={`${style['menu-item-text']}`}>
+                        Messenger
+                    </div>
+                </div>
+                <div className={`${style['menu-item-container']}`}>
+                    <img className={`${style['menu-item-icon']}`}
+                        src="./image/icon/menu-most-recent.png"
+                        alt="menu-most-recent"
+                    />
+                    <div className={`${style['menu-item-text']}`}>
+                        Most Recent
+                    </div>
+                </div>
+                <div className={`${style['menu-item-container']}`}>
+                    <img className={`${style['menu-item-icon']}`}
+                        src="./image/icon/menu-settings.svg"
+                        alt="menu-settings"
+                    />
+                    <div className={`${style['menu-item-text']}`}>
+                        Settings
+                    </div>
+                </div>
+            </div>
+            <div className={`${style['news-feed-container']}`}>
+                news feed
+            </div >
+            <div className={`${style['contact-container']}`}>
+                contact
             </div>
         </div>
     )

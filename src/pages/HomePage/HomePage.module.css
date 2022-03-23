@@ -25,8 +25,17 @@
     cursor: pointer;
 }
 .menu-item-container:hover {
-    background-color: #f8a888;
+    background: linear-gradient(to right, #f8a888 50%, transparent 0);
+    animation: makeItfadeIn 1s forwards;
+    background-size: 200% 100%;
+    background-position: right;
+    /* background-color: #f8a888; */
 }
+@keyframes makeItfadeIn {
+    100% {
+      background-position: left;
+    }
+  }
 .menu-item-container-active {
     background-color: #f8a888;
     margin: 1.5em 2rem;

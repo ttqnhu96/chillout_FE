@@ -30,11 +30,13 @@
 .menu-item-container-active {
     background-color: #f8a888;
     margin: 1.5em 2rem;
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
+    border: 0;
     border-radius: 2rem;
     height: 6.5rem;
     display: flex;
     cursor: pointer;
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(235, 151, 151, 0.726);
 }
 .menu-item-icon {
     width: 35%;

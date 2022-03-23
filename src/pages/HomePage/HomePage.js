@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getProfileDetailByIdAction } from '../../redux/actions/ProfileActions';
-import { USER_LOGIN } from '../../util/constants/systemSettings';
+import React, { useState } from 'react';
 import style from './HomePage.module.css';
 
 export default function HomePage() {
-    let dispatch = useDispatch();
-    useEffect(() => {
-        // Call API to get user profile
-        const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.profileId;
-        dispatch(getProfileDetailByIdAction(profileId));
-    }, [])
+    const [activeMenuItem, setActiveMenuItem] = useState('');
+    const handleClickMenuItem = (itemName) => {
+        setActiveMenuItem(itemName);
+    }
+    const menuItemCSS = `${style['menu-item-container']}`;
+    const activeMenuItemCSS = `${style['menu-item-container-active']}`;
 
     return (
         <div className={`${style['home-page']}`}>
             <div className={`${style['menu-container']}`}>
-                <div className={`${style['menu-item-container']}`}>
+                <div
+                    className={activeMenuItem === 'profile' ? activeMenuItemCSS : menuItemCSS}
+                    onClick={() => { handleClickMenuItem('profile') }}>
                     <img className={`${style['menu-item-icon']}`}
                         src="./image/icon/menu-profile.svg"
                         alt="menu-profile"
@@ -24,7 +23,9 @@ export default function HomePage() {
                         Profile
                     </div>
                 </div>
-                <div className={`${style['menu-item-container']}`}>
+                <div
+                    className={activeMenuItem === 'friends' ? activeMenuItemCSS : menuItemCSS}
+                    onClick={() => { handleClickMenuItem('friends') }}>
                     <img className={`${style['menu-item-icon']}`}
                         src="./image/icon/menu-friends.png"
                         alt="menu-friends"
@@ -33,7 +34,9 @@ export default function HomePage() {
                         Friends
                     </div>
                 </div>
-                <div className={`${style['menu-item-container']}`}>
+                <div
+                    className={activeMenuItem === 'messenger' ? activeMenuItemCSS : menuItemCSS}
+                    onClick={() => { handleClickMenuItem('messenger') }}>
                     <img className={`${style['menu-item-icon']}`}
                         src="./image/icon/menu-message.svg"
                         alt="menu_message"
@@ -42,7 +45,9 @@ export default function HomePage() {
                         Messenger
                     </div>
                 </div>
-                <div className={`${style['menu-item-container']}`}>
+                <div
+                    className={activeMenuItem === 'mostRecent' ? activeMenuItemCSS : menuItemCSS}
+                    onClick={() => { handleClickMenuItem('mostRecent') }}>
                     <img className={`${style['menu-item-icon']}`}
                         src="./image/icon/menu-most-recent.png"
                         alt="menu-most-recent"
@@ -51,7 +56,9 @@ export default function HomePage() {
                         Most Recent
                     </div>
                 </div>
-                <div className={`${style['menu-item-container']}`}>
+                <div
+                    className={activeMenuItem === 'settings' ? activeMenuItemCSS : menuItemCSS}
+                    onClick={() => { handleClickMenuItem('settings') }}>
                     <img className={`${style['menu-item-icon']}`}
                         src="./image/icon/menu-settings.svg"
                         alt="menu-settings"

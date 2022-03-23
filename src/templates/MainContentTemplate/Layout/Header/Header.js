@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProfileDetailByIdAction } from '../../../../redux/actions/ProfileActions';
+import { USER_LOGIN } from '../../../../util/constants/systemSettings';
 
 export default function Header() {
+    //Call API to get user info
+    let dispatch = useDispatch();
+    useEffect(() => {
+        // Call API to get user profile
+        const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.profileId;
+        dispatch(getProfileDetailByIdAction(profileId));
+    }, [])
+
     //Get user first name and avatar from reducer
     const { firstName, avatar } = useSelector(state => state.ProfileReducer);
 

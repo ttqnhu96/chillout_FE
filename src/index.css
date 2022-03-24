@@ -21,14 +21,12 @@ body {
   align-items: center;
   overflow: hidden;
   min-height: 100vh;
-  /* background-image: linear-gradient(to bottom right, rgb(255, 233, 215) , rgb(255, 191, 181)); */
 }
 
 .chillout-container {
   width: 110rem;
   height: 80rem;
   margin: 6% 0;
-  /* background-color: rgba(255, 255, 255, 0.8); */
   background-color: transparent;
   border-radius: 3rem;
   box-shadow: rgba(58, 58, 58, 0.2) 0vh 2vh 10vh 0vh;
@@ -79,13 +77,13 @@ body {
                    SCROLL BAR
 ==============================================*/
 html::-webkit-scrollbar{
-  width:.8rem;
+  width:.6rem;
 }
 html::-webkit-scrollbar-thumb{
   background-color: #000;
   border-radius: 1rem;
 }
-a{
+/* a{
   text-decoration: none;
   display: block;
   color: var(--text-color);
@@ -97,6 +95,6 @@ a{
   --text-color: #676669;
   --second-color: #303030;
   --third-color: #121212;
-}
+} */
 
 

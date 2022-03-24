@@ -4,7 +4,7 @@ import { logInAction } from '../../redux/actions/AuthenticationActions';
 import style from './Login.module.css';
 
 export default function Login() {
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

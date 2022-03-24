@@ -16,9 +16,7 @@ function* logIn(action) {
         //Save login information to sessionStore when login success
         sessionStorage.setItem(ACCESS_TOKEN, data.Data.accessToken);
         sessionStorage.setItem(USER_LOGIN, JSON.stringify(data.Data));
-        // localStorage.setItem(ACCESS_TOKEN, data.Data.accessToken);
-        // localStorage.setItem(USER_LOGIN, JSON.stringify(data.Data));
-        // notify('success', 'Login successfully !');
+        
         history.push('/home');
     } catch (err) {
         console.log(err);

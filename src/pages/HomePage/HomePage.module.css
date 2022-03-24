@@ -29,7 +29,6 @@
     animation: makeItfadeIn 1s forwards;
     background-size: 200% 100%;
     background-position: right;
-    /* background-color: #f8a888; */
 }
 @keyframes makeItfadeIn {
     100% {
@@ -93,6 +92,7 @@
     background-color: rgb(102, 79, 72);
     border-radius: 1rem;
 }
+
 .post-container {
     margin: 1.5em 2rem;
     border: 0.1rem solid rgba(199, 199, 199, 0.6);
@@ -132,7 +132,6 @@
     margin-left: 1rem;
     width: 5%;
     cursor: pointer;
-    color: rgb(255,123,119);
 }
 
 /* Post content */
@@ -142,8 +141,8 @@
 
 /* Photo */
 .post-photo-container {
-    margin: 1.5rem 1.7rem 0 1.7rem;
-    width: 100% - 3.4rem;
+    margin: 1.5rem 1.7rem 1.7rem 1.7rem;
+    width: auto;
     position: relative;
     display: block;
     padding-bottom: 93.5%;
@@ -160,8 +159,10 @@
 
 /* Like and comment */
 .like-container {
-    padding: 1.7rem 1.7rem 0 1.7rem;
-    display: flex; 
+    padding: 0 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .likes-quantity {
     width:50%;
@@ -175,46 +176,129 @@
     text-align: right;
     cursor: pointer;
 }
-.comment-container {
-    border-radius: 3rem;
-    padding: 1.7rem 1.7rem 0 1.7rem;
-    /* border-top: 0.1rem solid rgba(199, 199, 199, 0.6); */
+
+/*=============================================
+                    COMMENTS
+==============================================*/
+.post-comment-container {
+    padding: 1rem 1.7rem 0 1.7rem;
+    display: flex;
 }
-.write-comment-container {
-    /* border-top: 0.1rem solid rgba(199, 199, 199, 0.6); */
-    /* margin: 1.7rem;
-    padding: 1rem;
+.post-comment-avatar {
+    height: 3em;
+    width: 3em;
     border-radius: 5rem;
+    cursor: pointer;
+}
+.post-comment-username-content-container {
     width: 80%;
-    border: 1px solid #f8a888; */
+    margin-left: 0.7rem;
+    padding: 0;
+    background-color: rgba(248, 206, 198, 0.5);
+    border-radius: 2rem;
+}
+.post-comment-username {
+    margin: 0.7rem 1.7rem 0 1.7rem;
+    font-weight: 500;
+}
+.post-comment-content {
+    margin: 0 1.7rem 0.7rem 1.7rem;
+}
+
+
+/*=============================================
+             CREATE COMMENT TEXT BOX
+==============================================*/
+.write-comment-container {
     padding: 1.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.avatar-comment {
-    height: 2.5em;
-    width: 2.5em;
+.avatar-current-user-comment {
+    height: 3em;
+    width: 3em;
     border-radius: 5rem;
     cursor: pointer;
 }
-.comment-text-area {
-    margin-left: 1rem;
-    border-radius: 5rem;
-    background-color: transparent;
+.comment-text-area-button-container {
+    width: 100%;
+    margin-left: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    background-color: rgba(248, 206, 198, 0.5);
 }
+.comment-text-area {
+    margin: 0.5rem;
+    background-color: transparent;
+    border: none;  
+}
+.send-comment-button {
+    height: 2em;
+    width: 2em;
+    cursor: pointer;
+    margin-right: 0.7rem;
+}
+
 /*=============================================
-                    CONTACT (4/18)
+                    CONTACTS (4/18)
 ==============================================*/
-.contact-container {
+.contacts-container {
     width: calc(100% / 18 * 4 - 1rem) !important;
     background-color: rgba(248, 206, 198, 0.74);
     height: 100%;
     margin: 0 2rem;
     padding: 2rem;
     border-radius: 3rem;
+    color: rgba(0, 0, 0, 0.7);
+    overflow-y: hidden;
 }
 
+.contacts-title {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.contacts-item-container {
+    margin: 1.5rem 0;
+    border-radius: 2rem;
+    height: 6.5rem;
+    display: flex;
+    cursor: pointer;
+}
+.contacts-item-avatar {
+    width: 35%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contacts-item-text-container {
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1rem;
+}
+.contacts-first-name {
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
+    font-size: 1em;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.7);
+}
+.contacts-username {
+    height: 50%;
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.9em;
+    color: rgba(44, 44, 44, 0.7);
+}
 
 /* @media (max-width: 511px) {
     .home-page{

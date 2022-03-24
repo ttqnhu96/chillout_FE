@@ -113,8 +113,9 @@ export default function HomePage() {
                             alt="avatar"
                         />
                     </div>
+                    <hr style={{ width: '95%' }} />
                     <div className={`${style['like-container']}`}>
-                        <img height={22} width={21}
+                        <img height={18} width={18}
                             src="./image/icon/like.png"
                             alt="like"
                         />
@@ -123,28 +124,176 @@ export default function HomePage() {
                         </span>
                         <span className={`${style['comment-quantity']}`}>1 Comments</span>
                     </div>
-                    <div className={`${style['comment-container']}`}>
-                        <div>Alo alo</div>
-                        <div>Hihi</div>
-                    </div>
-                    <div className={`${style['write-comment-container']}`}>
+                    <hr style={{ width: '95%' }} />
+                    <div className={`${style['post-comment-container']}`}>
                         <img
-                            className={`${style['avatar-comment']}`}
+                            className={`${style['post-comment-avatar']}`}
                             src="./image/avatar/default_avatar.png"
                             alt="avatar"
                         />
-                        <TextArea
-                            className={`${style['comment-text-area']}`}
-                            placeholder="Add a comment..."
-                            autoSize
-                            onChange={() => { }}
-                            onPressEnter={(e) => { console.log(e.target.value) }}
+                        <div className={`${style['post-comment-username-content-container']}`}>
+                            <div className={`${style['post-comment-username']}`}>Username</div>
+                            <div className={`${style['post-comment-content']}`}>Alo alo</div>
+                        </div>
+                    </div>
+                    <div className={`${style['post-comment-container']}`}>
+                        <img
+                            className={`${style['post-comment-avatar']}`}
+                            src="./image/avatar/default_avatar.png"
+                            alt="avatar"
                         />
+                        <div className={`${style['post-comment-username-content-container']}`}>
+                            <div className={`${style['post-comment-username']}`}>Username</div>
+                            <div className={`${style['post-comment-content']}`}>Hi there</div>
+                        </div>
+                    </div>
+                    <div className={`${style['write-comment-container']}`}>
+                        <img
+                            className={`${style['avatar-current-user-comment']}`}
+                            src="./image/avatar/default_avatar.png"
+                            alt="avatar"
+                        />
+                        <div className={`${style['comment-text-area-button-container']}`}>
+                            <TextArea
+                                className={`${style['comment-text-area']}`}
+                                placeholder="Add a comment..."
+                                autoSize
+                                onChange={() => { }}
+                                onPressEnter={(e) => { console.log(e.target.value) }}
+                            />
+                            <img
+                                className={`${style['send-comment-button']}`}
+                                src="./image/icon/send.png"
+                                alt="send"
+                            />
+                        </div>
                     </div>
                 </div >
             </div >
-            <div className={`${style['contact-container']}`}>
-                contact
+            <div className={`${style['contacts-container']}`}>
+                <div className={`${style['contacts-title']}`}>
+                    CONTACTS
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
+                <div className={`${style['contacts-item-container']}`}>
+                    <img
+                        className={`${style['contacts-item-avatar']}`}
+                        src="./image/avatar/default_avatar.png"
+                        alt="avatar"
+                    />
+                    <div className={`${style['contacts-item-text-container']}`}>
+                        <div className={`${style['contacts-first-name']}`}>
+                            First Name
+                        </div>
+                        <div className={`${style['contacts-username']}`}>
+                            @username
+                        </div>
+                    </div>
+                </div>
             </div>
         </div >
     )

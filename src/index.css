@@ -83,18 +83,12 @@ html::-webkit-scrollbar-thumb{
   background-color: #000;
   border-radius: 1rem;
 }
-/* a{
-  text-decoration: none;
-  display: block;
-  color: var(--text-color);
-  background-color: transparent;
-  cursor: pointer;
-}
-:root{
-  --primary-color: #ffc876;
-  --text-color: #676669;
-  --second-color: #303030;
-  --third-color: #121212;
-} */
 
+/* ANT Custom */
+.ant-input:focus, .ant-input-focused{
+  border-color: none !important;
+  box-shadow: 0 0 0 0 !important;
+  border-right-width: 0 !important;
+  outline: 0 !important;
+}
 

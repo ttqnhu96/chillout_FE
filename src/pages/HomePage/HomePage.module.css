@@ -15,7 +15,7 @@
     margin: 0 2rem;
     padding: 0.5rem 0;
     border-radius: 3rem;
-    box-shadow: 50px 0px 93px -11px rgba(255, 163, 163, 0.24);
+    box-shadow: 50px 0px 93px -11px rgba(250, 163, 163, 0.4);
 }
 .menu-item-container {
     margin: 1.5em 2rem;
@@ -67,6 +67,15 @@
     align-items: center;
     padding-left: 1rem;
 }
+.menu-banner {
+    margin: 0 2rem;
+    background-color: rgb(46, 31, 56);
+    border-radius: 2rem;
+    max-width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
 
 /*=============================================
                 NEWS FEED (10/18)
@@ -79,7 +88,7 @@
     margin: 0 2rem;
     padding: 0.5rem 0;
     border-radius: 3rem;
-    box-shadow: 0px 79px 93px -11px rgba(255, 163, 163, 0.24);
+    box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
     overflow-y: hidden;
 }
 .news-feed-container:hover {
@@ -205,7 +214,12 @@
 .post-comment-content {
     margin: 0 1.7rem 0.7rem 1.7rem;
 }
-
+.post-comments-options-container {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /*=============================================
              CREATE COMMENT TEXT BOX
@@ -249,7 +263,7 @@
 .contacts-container {
     /* width: calc(100% / 18 * 4 - 1rem) !important; */
     width: calc(100% / 18 * 4) !important;
-    background-color: rgba(248, 206, 198, 0.5);
+    background-color: rgba(253, 199, 189, 0.5);
     height: 100%;
     margin: 0 2rem;
     padding: 2rem;

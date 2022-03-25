@@ -70,6 +70,10 @@ export default function HomePage() {
                         Settings
                     </div>
                 </div>
+                <img className={`${style['menu-banner']}`}
+                    src="./image/banner/menu-banner.png"
+                    alt="welcome_image"
+                />
             </div>
             <div className={`${style['news-feed-container']}`}>
                 <div className={`${style['post-container']}`}>
@@ -90,7 +94,7 @@ export default function HomePage() {
                             </div>
                         </div>
                         <div className={`${style['post-options-container']}`}>
-                            <img height={17} width={17}
+                            <img height={20} width={20}
                                 src="./image/icon/more-options.png"
                                 alt="more-options"
                             />
@@ -125,6 +129,7 @@ export default function HomePage() {
                         <span className={`${style['comment-quantity']}`}>1 Comments</span>
                     </div>
                     <hr style={{ width: '95%' }} />
+
                     <div className={`${style['post-comment-container']}`}>
                         <img
                             className={`${style['post-comment-avatar']}`}
@@ -134,6 +139,14 @@ export default function HomePage() {
                         <div className={`${style['post-comment-username-content-container']}`}>
                             <div className={`${style['post-comment-username']}`}>Username</div>
                             <div className={`${style['post-comment-content']}`}>Alo alo</div>
+                        </div>
+                        <div className={`${style['post-comments-options-container']}`}>
+                            <img
+                                style={{ cursor: 'pointer' }}
+                                height={15} width={15}
+                                src="./image/icon/more-options.png"
+                                alt="more-options"
+                            />
                         </div>
                     </div>
                     <div className={`${style['post-comment-container']}`}>
@@ -146,7 +159,16 @@ export default function HomePage() {
                             <div className={`${style['post-comment-username']}`}>Username</div>
                             <div className={`${style['post-comment-content']}`}>Hi there</div>
                         </div>
+                        <div className={`${style['post-comments-options-container']}`}>
+                            <img
+                                style={{ cursor: 'pointer' }}
+                                height={15} width={15}
+                                src="./image/icon/more-options.png"
+                                alt="more-options"
+                            />
+                        </div>
                     </div>
+
                     <div className={`${style['write-comment-container']}`}>
                         <img
                             className={`${style['avatar-current-user-comment']}`}

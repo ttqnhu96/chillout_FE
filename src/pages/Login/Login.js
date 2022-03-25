@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import SignUp from '../../components/SignUp/SignUp';
 import { logInAction } from '../../redux/actions/AuthenticationActions';
 import style from './Login.module.css';
 
@@ -7,6 +8,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
 
     const handleChangeUsername = (e) => {
         setUsername(e.target.value);
@@ -16,6 +18,9 @@ export default function Login() {
     }
     const handleSubmit = () => {
         dispatch(logInAction(username, password));
+    }
+    const handleClickSignUp = () => {
+        setIsSignUpModalVisible(true);
     }
 
     return (
@@ -50,8 +55,14 @@ export default function Login() {
                 </button>
                 <div className={`${style['signup-text-container']}`}>
                     <div className={`${style['not-have-account-text']}`}>Don't have an account?</div>
-                    <div className={`${style['signup-text']}`}>Sign Up</div>
+                    <div
+                        className={`${style['signup-text']}`}
+                        onClick={handleClickSignUp}
+                    >
+                        Sign Up
+                    </div>
                 </div>
+                {isSignUpModalVisible && <SignUp />}
             </div>
         </div>
     )

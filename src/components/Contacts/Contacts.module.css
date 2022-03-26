@@ -1,0 +1,68 @@
+/*=============================================
+            CONTACTS (4/18 HOMEPAGE)
+==============================================*/
+.contacts-container {
+    width: calc(100% / 18 * 4) !important;
+    background-color: rgba(253, 199, 189, 0.5);
+    height: 100%;
+    margin: 0 2rem;
+    padding: 2rem;
+    border-radius: 3rem;
+    color: rgba(0, 0, 0, 1);
+    overflow-y: hidden;
+}
+.contacts-container:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.contacts-container::-webkit-scrollbar{
+    width:.5rem;
+}
+.contacts-container::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+.contacts-title {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.contacts-item-container {
+    margin: 2rem 0;
+    border-radius: 2rem;
+    height: 6.5rem;
+    display: flex;
+    cursor: pointer;
+}
+.contacts-item-avatar {
+    width: 35%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+.contacts-item-text-container {
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1rem;
+}
+.contacts-first-name {
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
+    font-size: 1em;
+    font-weight: 700;
+}
+.contacts-username {
+    height: 50%;
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.9em;
+    color: rgba(44, 44, 44, 0.7);
+}

@@ -1,0 +1,87 @@
+/*=============================================
+            MENU CONTAINER (4/18 HOMEPAGE)
+==============================================*/
+.menu-container {
+    width: calc(100% / 18 * 4) !important;
+    background-color: rgba(255, 255, 255, 1);
+    height: 100%;
+    margin: 0 2rem;
+    padding: 0.5rem 0;
+    border-radius: 3rem;
+    box-shadow: 50px 0px 93px -11px rgba(250, 163, 163, 0.4);
+}
+
+/*=============================================
+             MENU ITEM CONTAINER
+==============================================*/
+.menu-item-container {
+    margin: 1.5em 2rem;
+    border: 0.1rem solid rgba(199, 199, 199, 0.6);
+    border-radius: 2rem;
+    height: 6.5rem;
+    display: flex;
+    cursor: pointer;
+}
+.menu-item-container:hover {
+    background: linear-gradient(to right, #f8a888 50%, transparent 0);
+    animation: makeItfadeIn 1s forwards;
+    background-size: 200% 100%;
+    background-position: right;
+}
+@keyframes makeItfadeIn {
+    100% {
+      background-position: left;
+    }
+  }
+.menu-item-container-active {
+    background-color: #f8a888;
+    margin: 1.5em 2rem;
+    border: 0;
+    border-radius: 2rem;
+    height: 6.5rem;
+    display: flex;
+    cursor: pointer;
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(235, 151, 151, 0.726);
+}
+
+/*=============================================
+                MENU ITEM ICON
+==============================================*/
+.menu-item-icon {
+    width: 35%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #f8a888;
+    background-image: linear-gradient(270deg, #f8a888 0%, rgb(248, 198, 180) 90%);
+}
+
+/*=============================================
+                MENU ITEM LABEL
+==============================================*/
+.menu-item-text {
+    width: 65%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+/*=============================================
+                MENU BANNER IMAGE
+==============================================*/
+.menu-banner {
+    margin: 0 2rem;
+    background-color: rgb(46, 31, 56);
+    border-radius: 2rem;
+    max-width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}

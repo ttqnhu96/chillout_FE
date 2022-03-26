@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Profile",
+        "iconSrc": "./image/icon/menu-profile.svg",
+        "iconAlt": "menu-profile"
+    },
+    {
+        "id": 2,
+        "name": "Friends",
+        "iconSrc": "./image/icon/menu-friends.png",
+        "iconAlt": "menu-friends"
+    },
+    {
+        "id": 3,
+        "name": "Messenger",
+        "iconSrc": "./image/icon/menu-message.svg",
+        "iconAlt": "menu_message"
+    },
+    {
+        "id": 4,
+        "name": "Most Recent",
+        "iconSrc": "./image/icon/menu-most-recent.png",
+        "iconAlt": "menu-most-recent"
+    },
+    {
+        "id": 5,
+        "name": "Settings",
+        "iconSrc": "./image/icon/menu-settings.svg",
+        "iconAlt": "menu-settings"
+    }
+]

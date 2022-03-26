@@ -8,11 +8,12 @@ import { USER_LOGIN } from '../../../../util/constants/systemSettings';
 
 export default function Header() {
     //Call API to get user info
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
     useEffect(() => {
         // Call API to get user profile
         const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.profileId;
         dispatch(getProfileDetailByIdAction(profileId));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     //Get user first name and avatar from reducer

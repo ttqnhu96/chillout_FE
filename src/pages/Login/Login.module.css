@@ -14,6 +14,11 @@
     align-items: center;
 }
 
+.login.modal-open {
+    overflow: hidden;
+    position: fixed;
+  }
+
 /*=============================================
                     LOGO
 ==============================================*/
@@ -69,6 +74,7 @@
     font-weight: bolder;
     cursor: pointer;
 }
+
 @media (max-width:911px) {
     .signup-text-container {
         flex-direction: column;

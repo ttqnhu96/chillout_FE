@@ -1,9 +1,8 @@
-import { call, delay, takeLatest } from "redux-saga/effects";
+import { call, takeLatest } from "redux-saga/effects";
 import { ACCESS_TOKEN, USER_LOGIN } from "../../util/constants/systemSettings";
 import { history } from "../../util/history";
 import { authenticationService } from "../../services/AuthenticationService";
 import { LOGIN_SAGA } from "../constants/types";
-import { notify } from "../../util/notification";
 
 //--------------------------------------------------------------------------
 /**

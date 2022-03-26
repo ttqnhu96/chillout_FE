@@ -1,14 +1,23 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SignUp from '../../components/SignUp/SignUp';
 import { logInAction } from '../../redux/actions/AuthenticationActions';
+import { displaySignUpModalAction } from '../../redux/actions/SignUpAction';
 import style from './Login.module.css';
 
 export default function Login() {
     const dispatch = useDispatch();
+    useEffect(() => {
+        //Hide scrollbar when sign up modal is opened
+        document.body.style.overflow = isSignUpModalVisible ? 'hidden' : 'unset';
+    })
+
+    //Set state
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
+
+    //Get state from reducers
+    const { isSignUpModalVisible } = useSelector(state => state.SignUpReducer);
 
     const handleChangeUsername = (e) => {
         setUsername(e.target.value);
@@ -20,7 +29,7 @@ export default function Login() {
         dispatch(logInAction(username, password));
     }
     const handleClickSignUp = () => {
-        setIsSignUpModalVisible(true);
+        dispatch(displaySignUpModalAction());
     }
 
     return (
@@ -51,7 +60,7 @@ export default function Login() {
                     className={`${style['login-button']}`}
                     onClick={handleSubmit}
                 >
-                    Login
+                    Log In
                 </button>
                 <div className={`${style['signup-text-container']}`}>
                     <div className={`${style['not-have-account-text']}`}>Don't have an account?</div>

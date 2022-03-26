@@ -1,5 +1,9 @@
-//Log in, sign up
+//Log in
 export const LOGIN_SAGA = 'LOGIN_SAGA';
+
+//Sign up
+export const DISPLAY_SIGN_UP_MODAL = 'DISPLAY_SIGN_UP_MODAL';
+export const HIDE_SIGN_UP_MODAL = 'HIDE_SIGN_UP_MODAL';
 
 //User profile
 export const GET_PROFILE_DETAIL_BY_ID_SAGA = 'GET_PROFILE_DETAIL_BY_ID_SAGA';

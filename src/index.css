@@ -9,7 +9,6 @@ body {
   padding: 0;
   margin: 0;
 }
-
 /*=============================================
                   MAIN CONTAINER
 ==============================================*/
@@ -93,3 +92,4 @@ html::-webkit-scrollbar-thumb{
   border-right-width: 0 !important;
   outline: 0 !important;
 }
+

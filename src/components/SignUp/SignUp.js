@@ -54,7 +54,7 @@ export default function SignUp() {
     //State
     const [maxDate, setMaxDate] = useState('2122-01-01');
     const [checkedRadioId, setCheckedRadioId] = useState(0);
-    
+
     //Get state from reducers
     const { isSignUpModalVisible } = useSelector(state => state.SignUpReducer);
 
@@ -98,35 +98,50 @@ export default function SignUp() {
                     <div className={`${style['signup-modal-dialog-body']}`}>
                         <div className={`${style['signup-name-container']}`}>
                             <div className={`${style['signup-first-name']}`}>
-                                <Tooltip title="What's your name?" placement="left">
+                                <Tooltip
+                                    visible={false}
+                                    color="rgb(190, 75, 73)"
+                                    title="What's your name?"
+                                    placement="left">
                                     <input
                                         className={`${style['signup-input']}`}
                                         placeholder="First name"
+                                        maxlength="255"
                                         onChange={() => { }}
                                     />
                                 </Tooltip>
                             </div>
                             <div className={`${style['signup-last-name']}`}>
-                                <Tooltip title="What's your name?" placement="right">
+                                <Tooltip
+                                    color="rgb(190, 75, 73)"
+                                    title="What's your name?"
+                                    placement="right">
                                     <input
                                         className={`${style['signup-input']}`}
                                         placeholder="Last name"
+                                        maxlength="255"
                                         onChange={() => { }}
                                     />
                                 </Tooltip>
                             </div>
                         </div>
                         <div className={`${style['signup-username-container']}`}>
-                            <Tooltip title="Please enter username." placement="left">
+                            <Tooltip
+                                color="rgb(190, 75, 73)"
+                                title="Please enter username."
+                                placement="left">
                                 <input
                                     className={`${style['signup-input']}`}
                                     placeholder="Username"
+                                    maxlength="30"
                                     onChange={() => { }}
                                 />
                             </Tooltip>
                         </div>
                         <div className={`${style['signup-password-container']}`}>
-                            <Tooltip title="Please enter password." placement="left">
+                            <Tooltip color="rgb(190, 75, 73)"
+                                title="Please enter password."
+                                placement="left">
                                 <input
                                     type="password"
                                     className={`${style['signup-input']}`}
@@ -158,7 +173,7 @@ export default function SignUp() {
                     <div className={`${style['signup-modal-dialog-footer']}`}>
                         <button
                             className={`${style['signup-modal-dialog-signup-btn']}`}
-                            onClick={() => {}}
+                            onClick={() => { }}
                         >
                             Sign Up
                         </button>

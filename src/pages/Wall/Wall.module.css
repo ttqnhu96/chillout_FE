@@ -1,0 +1,25 @@
+.wall {
+    height: calc(100% / 15 * 11);
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0 2rem;
+}
+
+.wall-cover {
+    height: 15%;
+    background-color: aquamarine;
+}
+
+.wall-body {
+    height: 85%;
+    display: flex;
+}
+
+.wall-body-left {
+    width: 30%;
+    background-color: burlywood;
+}
+
+.wall-body-right {
+    width: 70%;
+    background-color: grey;
+}

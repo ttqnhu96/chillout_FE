@@ -13,8 +13,7 @@ body {
                   MAIN CONTAINER
 ==============================================*/
 .chillout-bg {
-  /* background-color: rgb(255,208,197); */
-  background-color: rgb(254,206,194);
+  background-color: rgb(254, 206, 194);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,9 +1,9 @@
-import style from './NewsFeed.module.css';
-import PostBody from '../PostBody/PostBody';
-import PostFooter from '../PostFooter/PostFooter';
+import PostBody from "../PostBody/PostBody";
+import PostFooter from "../PostFooter/PostFooter";
 import PostHeader from "../PostHeader/PostHeader";
+import style from './WallPosts.module.css';
 
-export default function NewsFeed() {
+export default function WallPosts() {
     const posts = [
         {
             avatar: "./image/avatar/default_avatar.png",
@@ -33,10 +33,9 @@ export default function NewsFeed() {
         },
     ];
 
-    //Render menu items
     const renderPostList = () => {
         return posts.map((post, index) => (
-            <div key={index} className={`${style['post-container']}`}>
+            <div key={index} className={`${style['view-post-container']}`}>
                 <PostHeader post={post} />
                 <PostBody post={post} />
                 <PostFooter post={post} />
@@ -45,7 +44,7 @@ export default function NewsFeed() {
     }
 
     return (
-        <div className={`${style['news-feed-container']}`}>
+        <div>
             {renderPostList()}
         </div>
     )

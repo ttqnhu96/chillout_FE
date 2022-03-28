@@ -1,0 +1,5 @@
+.view-post-container {
+    margin: 2.5rem;
+    border: 0.1rem solid rgba(199, 199, 199, 0.6);
+    border-radius: 3rem;
+}

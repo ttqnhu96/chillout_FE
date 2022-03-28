@@ -1,0 +1,46 @@
+/*=============================================
+                    CONTAINER
+==============================================*/
+.short-friend-list-container {
+    margin: 2rem 2rem 1rem 2rem;
+    padding: 2rem; 
+    border: 0.1rem solid rgba(199, 199, 199, 0.6);
+    border-radius: 3rem;
+    height: 50.5%;
+}
+
+/*=============================================
+                    TITLE
+==============================================*/
+.short-friend-list-title {
+    margin-left: 0.5rem;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/*=============================================
+                FRIEND ITEM
+==============================================*/
+.friend-item-container {
+    margin-top: 1rem;
+}
+
+/*=============================================
+                FRIEND ITEM
+==============================================*/
+.friend-item {
+    margin: 0.5rem;
+    height: 100%;
+    width: calc((100% - 3rem)/3);
+    background-color: transparent;
+    float: left;
+}
+.friend-avatar {
+    width: 100%;
+    background-color: yellow;
+    border-radius: 1rem;
+}
+.friend-name {
+    margin: 0.5rem 0 0.8rem 0;
+    text-align: center;
+}

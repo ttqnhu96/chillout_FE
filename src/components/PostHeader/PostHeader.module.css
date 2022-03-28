@@ -10,7 +10,6 @@
                     AVATAR
 ==============================================*/
 .avatar-container {
-    width: 10%;
     display: flex;
 }
 .avatar-image {
@@ -24,8 +23,8 @@
             USER'S NAME AND TIME
 ==============================================*/
 .name-time-container {
+    width: 95%;
     padding-left: 1rem;
-    width: 85%;
 }
 .name-text {
     font-size: 1.05em;

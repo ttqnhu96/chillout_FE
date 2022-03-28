@@ -14,11 +14,6 @@
     align-items: center;
 }
 
-.login.modal-open {
-    overflow: hidden;
-    position: fixed;
-  }
-
 /*=============================================
                     LOGO
 ==============================================*/
@@ -26,6 +21,7 @@
     width: 50%;
     padding-bottom: 2.5rem;
     text-align: left;
+    cursor: pointer;
 }
 .login-logo {
     margin-right: 1rem;

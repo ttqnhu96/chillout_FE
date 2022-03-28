@@ -7,8 +7,8 @@ export default function PostFooter(props) {
 
     const renderCommentList = () => {
         return post.commentList.map((comment, index) => (
-            <Fragment>
-                <div key={index} className={`${style['post-comment-container']}`}>
+            <Fragment key={index}>
+                <div className={`${style['post-comment-container']}`}>
                     <img
                         className={`${style['post-comment-avatar']}`}
                         src={comment.avatar}

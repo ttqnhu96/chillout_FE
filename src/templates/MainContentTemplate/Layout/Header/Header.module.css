@@ -27,6 +27,7 @@
     border-top-left-radius: 3rem;
     background-color: transparent;
     padding: 2rem 0;
+    cursor: pointer;
 }
 .logo {
     margin-left: 3rem;

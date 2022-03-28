@@ -9,10 +9,9 @@ function App() {
   return (
     <>
       <Switch>
-        <MainContentTemplate exact path="/home" Component={HomePage} />
+        <MainContentTemplate exact path="/" Component={HomePage} />
         <LoginTemplate exact path="/login" Component={Login} />
         <MainContentTemplate exact path="/wall" Component={Wall} />
-        <MainContentTemplate exact path="/" Component={HomePage} />
       </Switch>
     </>
   );

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import Cover from "../../components/Cover/Cover";
 import WallPosts from "../../components/WallPosts/WallPosts";
 import Intro from "../../components/Intro/Intro";

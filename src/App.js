@@ -4,14 +4,18 @@ import { MainContentTemplate } from './templates/MainContentTemplate/MainContent
 import Login from './pages/Login/Login';
 import { LoginTemplate } from './templates/LoginTemplate/LoginTemplate';
 import Wall from './pages/Wall/Wall';
+import Friends from './pages/Friends/Friends';
 
 function App() {
   return (
     <>
       <Switch>
-        <MainContentTemplate exact path="/" Component={HomePage} />
+        <MainContentTemplate exact path="/home" Component={HomePage} />
         <LoginTemplate exact path="/login" Component={Login} />
         <MainContentTemplate exact path="/wall" Component={Wall} />
+        <MainContentTemplate exact path="/friends" Component={Friends} />
+
+        <MainContentTemplate exact path="/" Component={HomePage} />
       </Switch>
     </>
   );

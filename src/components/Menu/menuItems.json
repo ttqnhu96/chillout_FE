@@ -3,30 +3,35 @@
         "id": 1,
         "name": "Profile",
         "iconSrc": "./image/icon/menu-profile.svg",
-        "iconAlt": "menu-profile"
+        "iconAlt": "menu-profile",
+        "navigateTo": "/wall"
     },
     {
         "id": 2,
         "name": "Friends",
         "iconSrc": "./image/icon/menu-friends.png",
-        "iconAlt": "menu-friends"
+        "iconAlt": "menu-friends",
+        "navigateTo": "/friends"
     },
     {
         "id": 3,
         "name": "Messenger",
         "iconSrc": "./image/icon/menu-message.svg",
-        "iconAlt": "menu_message"
+        "iconAlt": "menu_message",
+        "navigateTo": "/message"
     },
     {
         "id": 4,
         "name": "Most Recent",
         "iconSrc": "./image/icon/menu-most-recent.png",
-        "iconAlt": "menu-most-recent"
+        "iconAlt": "menu-most-recent",
+        "navigateTo": "/"
     },
     {
         "id": 5,
         "name": "Settings",
         "iconSrc": "./image/icon/menu-settings.svg",
-        "iconAlt": "menu-settings"
+        "iconAlt": "menu-settings",
+        "navigateTo": "/settings"
     }
 ]

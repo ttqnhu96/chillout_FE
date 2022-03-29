@@ -9,6 +9,8 @@ import { USER_LOGIN } from '../../../../util/constants/systemSettings';
 import { displayCreatePostModalAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
+import { useLocation } from 'react-router-dom';
+import { setMenuIdActiveAction } from '../../../../redux/actions/MenuAction';
 
 export default function Header() {
     //Call API to get user info
@@ -28,9 +30,17 @@ export default function Header() {
 
     }, [isCreatePostModalVisible])
 
+    // extract pathname from location
+    const { pathname } = useLocation();
+
     //Handle events
     const handleClickCreatePost = () => {
         dispatch(displayCreatePostModalAction())
+    }
+
+    const handleClickChilloutLogo = () => {
+        history.push('/');
+        dispatch(setMenuIdActiveAction('home', 0));
     }
 
     return (
@@ -38,7 +48,7 @@ export default function Header() {
             {isCreatePostModalVisible && <CreatePost />}
             <div className={`${style['chillout-header']}`}>
                 <div className={`${style['logo-container']}`}
-                    onClick={() => { history.push('/') }}>
+                    onClick={handleClickChilloutLogo}>
                     <img
                         className={`${style['logo']}`}
                         src="./image/logo/Chillout_logo_circle.png" height={35} alt="chillout_logo"
@@ -49,7 +59,12 @@ export default function Header() {
                     />
                 </div>
                 <div className={`${style['home-icon-container']}`}>
-                    <NavLink className={`${style['home-icon']}`} activeClassName={`${style['home-icon-active']}`} to='/'>
+                    <NavLink
+                        onClick={() => { dispatch(setMenuIdActiveAction('home', 0)) }}
+                        className={`${style['home-icon']}`}
+                        activeClassName={`${style['home-icon-active']}`}
+                        isActive={() => ['/', '/home'].includes(pathname)}
+                        to='/'>
                         <svg style={{ marginTop: '0.5rem' }} xmlns="http://www.w3.org/2000/svg" height={17} focusable="false" viewBox="0 0 12 12">
                             <path fill="none" stroke="currentColor" d="M2 11.5h2a.5.5 0 00.5-.5V8a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v3a.5.5 0 00.5.5h2a.5.5 0 00.5-.5V6.5h.389a.496.496 0 00.413-.838L6.422.681a.59.59 0 00-.844 0L.698 5.662a.496.496 0 00.413.838H1.5V11a.5.5 0 00.5.5z" />
                         </svg>

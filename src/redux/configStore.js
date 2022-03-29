@@ -4,6 +4,7 @@ import { rootSaga } from './sagas/rootSaga';
 import { ProfileReducer } from '../redux/reducers/ProfileReducer';
 import { SignUpReducer } from '../redux/reducers/SignUpReducer';
 import { PostReducer } from '../redux/reducers/PostReducer';
+import { MenuReducer } from '../redux/reducers/MenuReducer';
 import { LoadingReducer } from '../redux/reducers/LoadingReducer';
 
 //Create Saga middleware
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     ProfileReducer,
     SignUpReducer,
     PostReducer,
+    MenuReducer,
     LoadingReducer
 })
 

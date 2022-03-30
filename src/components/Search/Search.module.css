@@ -1,0 +1,32 @@
+/*=============================================
+                SEARCH CONTAINER
+==============================================*/
+.search-container {
+    width: 100%;
+    border-radius: 2rem;
+    background-color: rgba(248, 206, 198, 0.5);
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+/*=============================================
+                SEARCH INPUT
+==============================================*/
+.search-input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-right: 6px;
+}
+
+/*=============================================
+                SEARCH BUTTON
+==============================================*/
+.search-button {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: right;
+}

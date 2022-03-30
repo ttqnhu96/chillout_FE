@@ -40,7 +40,6 @@ export default function Header() {
 
     const handleClickChilloutLogo = () => {
         history.push('/');
-        dispatch(setMenuIdActiveAction('home', 0));
     }
 
     return (
@@ -48,7 +47,8 @@ export default function Header() {
             {isCreatePostModalVisible && <CreatePost />}
             <div className={`${style['chillout-header']}`}>
                 <div className={`${style['logo-container']}`}
-                    onClick={handleClickChilloutLogo}>
+                    onClick={handleClickChilloutLogo}
+                >
                     <img
                         className={`${style['logo']}`}
                         src="./image/logo/Chillout_logo_circle.png" height={35} alt="chillout_logo"
@@ -60,7 +60,6 @@ export default function Header() {
                 </div>
                 <div className={`${style['home-icon-container']}`}>
                     <NavLink
-                        onClick={() => { dispatch(setMenuIdActiveAction('home', 0)) }}
                         className={`${style['home-icon']}`}
                         activeClassName={`${style['home-icon-active']}`}
                         isActive={() => ['/', '/home'].includes(pathname)}
@@ -77,7 +76,7 @@ export default function Header() {
                     </div>
                 </div>
                 <div className={`${style['create-post-button-container']}`}>
-                    <button
+                    <div
                         className={`${style['button-create']}`}
                         onClick={handleClickCreatePost}
                     />

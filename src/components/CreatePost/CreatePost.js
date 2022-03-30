@@ -61,12 +61,12 @@ export default function CreatePost() {
 
                         {/* Footer */}
                         <div className={`${style['create-post-modal-dialog-footer']}`}>
-                            <button
+                            <div
                                 className={`${style['create-post-btn']}`}
                                 onClick={() => { }}
                             >
                                 Post
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>

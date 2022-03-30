@@ -29,7 +29,7 @@ export default function Intro() {
                     />
                 </div>
                 <div className={`${style['intro-item-text']}`}>
-                    Works at <span style={{ fontWeight: 'bold' }}>FPT</span>
+                    Works at <span style={{ fontWeight: 'bold' }}>FPT Software Can Tho</span>
                 </div>
             </div>
             <div className={`${style['intro-item']}`}>

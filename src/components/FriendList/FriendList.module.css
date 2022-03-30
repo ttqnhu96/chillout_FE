@@ -1,0 +1,57 @@
+/*=============================================
+                CONTAINER
+==============================================*/
+.friendlist-item-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 1rem;
+}
+
+.friendlist-item-container:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.friendlist-item-container::-webkit-scrollbar{
+    width:.5rem;
+}
+.friendlist-item-container::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+/*=============================================
+                FRIEND ITEM
+==============================================*/
+.friendlist-item {
+    margin: 0.5rem;
+    padding: 1rem;
+    height: 9rem;
+    width: calc(50% - 1rem);
+    background-color: transparent;
+    float: left;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: 2rem;
+    /* border: 0.1rem solid rgba(199, 199, 199, 0.6); */
+    box-shadow: rgba(235, 151, 151, 0.4) 0px 2px 8px 0px;
+}
+.friendlist-item-avatar {
+    height: 100%;
+    background-color: yellow;
+    border-radius: 2rem;
+}
+.friendlist-item-name {
+    width: 70%;
+    margin: 0.5rem 1rem;
+    text-align: left;
+}
+.friendlist-options {
+    margin-left: 1rem;
+    width: 5%;
+    cursor: pointer;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}

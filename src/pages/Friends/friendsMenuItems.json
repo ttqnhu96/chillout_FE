@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "name": "Friend Requests",
-        "iconSrc": "./image/icon/menu-profile.svg",
-        "iconAlt": "menu-profile"
-    },
-    {
-        "id": 2,
         "name": "All friends",
         "iconSrc": "./image/icon/menu-friends.png",
         "iconAlt": "menu-friends"
+    },
+    {
+        "id": 2,
+        "name": "Friend Requests",
+        "iconSrc": "./image/icon/add-friend.png",
+        "iconAlt": "add-friend"
     }
 ]

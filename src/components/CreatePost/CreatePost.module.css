@@ -134,4 +134,7 @@
     background-color: rgba(211, 141, 140);
     color:rgb(255, 255, 255);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

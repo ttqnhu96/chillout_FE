@@ -57,12 +57,12 @@ export default function Login() {
                     placeholder="Password"
                     onChange={handleChangePassword}
                 />
-                <button
+                <div
                     className={`${style['login-button']}`}
                     onClick={handleSubmit}
                 >
                     Log In
-                </button>
+                </div>
                 <div className={`${style['signup-text-container']}`}>
                     <div className={`${style['not-have-account-text']}`}>Don't have an account?</div>
                     <div

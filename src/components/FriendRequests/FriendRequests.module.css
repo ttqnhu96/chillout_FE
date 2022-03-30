@@ -1,0 +1,69 @@
+/*=============================================
+                CONTAINER
+==============================================*/
+.friend-request-item-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0 1rem;
+}
+
+.friend-request-item-container:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.friend-request-item-container::-webkit-scrollbar{
+    width:.5rem;
+}
+.friend-request-item-container::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+/*=============================================
+            FRIEND REQUEST ITEM
+==============================================*/
+.friend-request-item {
+    margin: 0.5rem;
+    padding: 1rem;
+    width: calc(25% - 1rem);
+    background-color: transparent;
+    float: left;
+    align-items: center;
+    border-radius: 2rem;
+    box-shadow: rgba(235, 151, 151, 0.4) 0px 2px 8px 0px;
+}
+.friend-request-item-avatar {
+    height: 13.8rem;
+    width: 100%;
+    background-color: yellow;
+    border-radius: 2rem;
+}
+.friend-request-item-name {
+    width: 100%;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+.friend-request-confirm-btn {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: mediumaquamarine;
+    border-radius: 1rem;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.friend-request-delete-btn {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    cursor: pointer;
+}

@@ -19,7 +19,7 @@
 }
 
 /*=============================================
-                FRIEND ITEM
+                FRIEND ITEM CONTAINER
 ==============================================*/
 .friend-item-container {
     margin-top: 1rem;
@@ -37,7 +37,7 @@
 }
 .friend-avatar {
     width: 100%;
-    background-color: yellow;
+    background-color: transparent;
     border-radius: 1rem;
 }
 .friend-name {

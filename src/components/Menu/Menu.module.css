@@ -12,68 +12,6 @@
 }
 
 /*=============================================
-             MENU ITEM CONTAINER
-==============================================*/
-.menu-item-container {
-    margin: 1.5em 2rem;
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
-    border-radius: 2rem;
-    height: 6.5rem;
-    display: flex;
-    cursor: pointer;
-}
-.menu-item-container:hover {
-    background: linear-gradient(to right, #f8a888 50%, transparent 0);
-    animation: makeItfadeIn 1s forwards;
-    background-size: 200% 100%;
-    background-position: right;
-}
-@keyframes makeItfadeIn {
-    100% {
-      background-position: left;
-    }
-  }
-.menu-item-container-active {
-    background-color: #f8a888;
-    margin: 1.5em 2rem;
-    border: 0;
-    border-radius: 2rem;
-    height: 6.5rem;
-    display: flex;
-    cursor: pointer;
-    transform: scale(0.9);
-    box-shadow: 3px 2px 22px 1px rgba(235, 151, 151, 0.726);
-}
-
-/*=============================================
-                MENU ITEM ICON
-==============================================*/
-.menu-item-icon {
-    width: 35%;
-    height: 100%;
-    border-radius: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: #f8a888;
-    background-image: linear-gradient(270deg, #f8a888 0%, rgb(248, 198, 180) 90%);
-}
-
-/*=============================================
-                MENU ITEM LABEL
-==============================================*/
-.menu-item-text {
-    width: 65%;
-    height: 100%;
-    background-color: transparent;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    padding-left: 1rem;
-}
-
-/*=============================================
                 MENU BANNER IMAGE
 ==============================================*/
 .menu-banner {

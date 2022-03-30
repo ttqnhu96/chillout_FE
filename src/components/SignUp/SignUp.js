@@ -171,12 +171,12 @@ export default function SignUp() {
 
                     {/* Footer */}
                     <div className={`${style['signup-modal-dialog-footer']}`}>
-                        <button
+                        <div
                             className={`${style['signup-modal-dialog-signup-btn']}`}
                             onClick={() => { }}
                         >
                             Sign Up
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>

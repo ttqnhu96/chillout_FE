@@ -24,8 +24,7 @@
         "id": 4,
         "name": "Most Recent",
         "iconSrc": "./image/icon/menu-most-recent.png",
-        "iconAlt": "menu-most-recent",
-        "navigateTo": "/"
+        "iconAlt": "menu-most-recent"
     },
     {
         "id": 5,

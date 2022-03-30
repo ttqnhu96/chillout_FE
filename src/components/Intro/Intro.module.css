@@ -30,7 +30,7 @@
 ==============================================*/
 .intro-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 0.5rem 0;
 }
 .intro-item-icon {

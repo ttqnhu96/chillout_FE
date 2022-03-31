@@ -1,8 +1,21 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setHomeMenuIdActiveAction } from "../../redux/actions/MenuAction";
+import { history } from "../../util/history";
 import MenuItem from "../Menutem/MenuItem";
 import style from './Menu.module.css';
 const menuItems = require('./menuItems.json');
 
 export default function Menu() {
+    const dispatch = useDispatch();
+    const { homeMenuIdActive } = useSelector(state => state.MenuReducer);
+
+    const handleClickMenuItem = (id, navigateTo) => {
+        dispatch(setHomeMenuIdActiveAction(id));
+        if (navigateTo) {
+            history.push(navigateTo);
+        }
+    }
+    
 
     //Render menu items
     const renderMenuItemList = () => {
@@ -10,7 +23,8 @@ export default function Menu() {
             <MenuItem
                 key={index}
                 menuItem={menuItem}
-                pageName='home'
+                menuIdActive={homeMenuIdActive}
+                handleClickMenuItem={handleClickMenuItem}
             />
         ))
     }

@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import PostBody from "../PostBody/PostBody";
 import PostFooter from "../PostFooter/PostFooter";
 import PostHeader from "../PostHeader/PostHeader";
@@ -34,18 +35,23 @@ export default function WallPosts() {
     ];
 
     const renderPostList = () => {
-        return posts.map((post, index) => (
-            <div key={index} className={`${style['view-post-container']}`}>
-                <PostHeader post={post} />
-                <PostBody post={post} />
-                <PostFooter post={post} />
-            </div>
-        ))
+        return (
+            posts.map((post, index) => (
+                <div key={index} className={`${style['view-post-container']}`}>
+                    <PostHeader post={post} />
+                    <PostBody post={post} />
+                    <PostFooter post={post} />
+                </div>
+            ))
+        )
     }
 
     return (
-        <div>
-            {renderPostList()}
-        </div>
+        <Fragment>
+            <div className={`${style['post-title']}`}>Post</div>
+            <div className={`${style['wall-post-container']}`}>
+                {renderPostList()}
+            </div>
+        </Fragment>
     )
 }

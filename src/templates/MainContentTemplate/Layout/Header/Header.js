@@ -10,7 +10,6 @@ import { displayCreatePostModalAction } from '../../../../redux/actions/PostActi
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
-import { setMenuIdActiveAction } from '../../../../redux/actions/MenuAction';
 
 export default function Header() {
     //Call API to get user info

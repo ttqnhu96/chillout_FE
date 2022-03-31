@@ -32,10 +32,11 @@
     /* margin: 0 1rem; */
     font-size: 0.75em;
     font-weight: 600;
-    border-bottom: 2px solid transparent;
+    border-bottom: 0.2rem solid transparent;
     cursor: pointer;
     background-color: transparent;
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.7rem;
 }
 
 .cover-menu-item:hover {
@@ -44,6 +45,11 @@
 }
 
 .cover-menu-item-active {
-    border-bottom: 2px solid rgb(255,123,119);
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.7rem;
+    border-bottom: 0.2rem solid rgb(255,123,119);
+    border-radius: 0;
     background-color: transparent;
 }

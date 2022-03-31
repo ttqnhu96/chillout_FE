@@ -1,7 +1,24 @@
 import { Fragment } from 'react';
 import style from './Cover.module.css';
 
-export default function Cover() {
+const menuItems = require('./coverMenuItems.json');
+export default function Cover(props) {
+    const { activeMenuId, setActiveMenuId } = props;
+    const menuItemCSS = `${style['cover-menu-item']}`;
+    const activeMenuItemCSS = `${style['cover-menu-item-active']}`;
+
+    //Render menu items
+    const renderMenu = () => {
+        return menuItems.map((menuItem, index) => (
+            <div key={index}
+            className={activeMenuId === menuItem.id ? activeMenuItemCSS : menuItemCSS}
+                onClick={() => { setActiveMenuId(menuItem.id) }}
+            >
+                {menuItem.name}
+            </div>
+        ))
+    }
+
     return (
         <Fragment>
             <div className={`${style['cover-avatar-container']}`}>
@@ -15,18 +32,7 @@ export default function Cover() {
                 Như Trịnh
                 <hr style={{ width: '95%' }} />
                 <div className={`${style['cover-menu-container']}`}>
-                    <div className={`${style['cover-menu-item']}`}>
-                        Posts
-                    </div>
-                    <div className={`${style['cover-menu-item']}`}>
-                        About
-                    </div>
-                    <div className={`${style['cover-menu-item']}`}>
-                        Friends
-                    </div>
-                    <div className={`${style['cover-menu-item']}`}>
-                        Photos
-                    </div>
+                    {renderMenu()}
                 </div>
             </div>
         </Fragment>

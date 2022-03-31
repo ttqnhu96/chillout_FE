@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Posts"
+    },
+    {
+        "id": 2,
+        "name": "About"
+    },
+    {
+        "id": 3,
+        "name": "Friends"
+    },
+    {
+        "id": 4,
+        "name": "Photos"
+    }
+]

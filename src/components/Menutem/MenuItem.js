@@ -1,22 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setMenuIdActiveAction } from "../../redux/actions/MenuAction";
-import { history } from "../../util/history";
 import style from './MenuItem.module.css';
 
 export default function MenuItem(props) {
-    const dispatch = useDispatch();
-
     //Get props
-    const { menuItem, pageName } = props;
+    const { menuItem, menuIdActive, handleClickMenuItem } = props;
 
-    const menuIdActive = useSelector(state => state.MenuReducer)[`${pageName}MenuIdActive`];
-
-    const handleClickMenuItem = (id, navigateTo) => {
-        dispatch(setMenuIdActiveAction(pageName, id));
-        if(navigateTo) {
-            history.push(navigateTo);
-        }
-    }
     const menuItemCSS = `${style['menu-item-container']}`;
     const activeMenuItemCSS = `${style['menu-item-container-active']}`;
 

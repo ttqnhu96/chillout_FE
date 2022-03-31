@@ -1,5 +1,39 @@
+/*=============================================
+                    CONTAINER
+==============================================*/
+.wall-post-container {
+    margin-top: 1.5rem;
+    height: 90%;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    overflow-y: hidden;
+}
+
+.wall-post-container:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.wall-post-container::-webkit-scrollbar{
+    width:.5rem;
+}
+.wall-post-container::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+/*=============================================
+                    TITLE
+==============================================*/
+.post-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: left;
+    height: 4%;
+}
+
+/*=============================================
+                    CONTAINER
+==============================================*/
 .view-post-container {
-    margin: 2.5rem;
     border: 0.1rem solid rgba(199, 199, 199, 0.6);
     border-radius: 3rem;
 }

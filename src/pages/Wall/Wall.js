@@ -5,6 +5,7 @@ import Intro from "../../components/Intro/Intro";
 import RecentContacts from "../../components/RecentContacts/RecentContacts";
 import style from './Wall.module.css';
 import FriendList from "../../components/FriendList/FriendList";
+import About from "../../components/About/About";
 
 export default function Wall() {
     const [activeMenuId, setActiveMenuId] = useState(1);
@@ -23,6 +24,7 @@ export default function Wall() {
                 </div>
                 <div className={`${style['wall-content-container']}`}>
                     {activeMenuId === 1 && <WallPosts />}
+                    {activeMenuId === 2 && <About />}
                     {activeMenuId === 3 && <FriendList />}
                 </div>
             </div>

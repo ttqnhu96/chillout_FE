@@ -30,7 +30,6 @@
         "id": 5,
         "name": "Settings",
         "iconSrc": "./image/icon/menu-settings.svg",
-        "iconAlt": "menu-settings",
-        "navigateTo": "/settings"
+        "iconAlt": "menu-settings"
     }
 ]

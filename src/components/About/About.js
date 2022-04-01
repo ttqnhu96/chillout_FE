@@ -2,6 +2,87 @@ import { Fragment } from "react";
 import style from './About.module.css';
 
 export default function About() {
+    const renderBio = () => {
+        return (
+            <Fragment>
+                <div className={`${style['info-title']}`}>
+                    Bio
+                </div>
+                <div style={{ display: "flex" }}>
+                    <div className={`${style['item-container']}`}>
+                        <div className={`${style['info-container']}`} style={{ width: '96%' }}>
+                            <div className={`${style['info-value']}`} >
+                                This is bio
+                            </div>
+                        </div>
+                        <div className={`${style['edit-btn-container']}`} >
+                            <img width={16} height={16}
+                                src="./image/icon/edit.png"
+                                alt="edit"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Fragment>
+        )
+    }
+
+    const renderName = () => {
+        return (
+            <Fragment>
+                <div className={`${style['info-title']}`}>
+                    Name
+                </div>
+                <div style={{ display: "flex" }}>
+                    <div className={`${style['item-container']}`}>
+                        {/* <div className={`${style['icon-container']}`} >
+                            <img width={30} height={30}
+                                src="./image/icon/gender.png"
+                                alt="gender"
+                            />
+                        </div> */}
+                        <div className={`${style['info-container']}`}>
+                            <div className={`${style['info-label']}`}>
+                                First Name
+                            </div>
+                            <div className={`${style['info-value']}`}>
+                                Như
+                            </div>
+                        </div>
+                        <div className={`${style['edit-btn-container']}`} >
+                            <img width={16} height={16}
+                                src="./image/icon/edit.png"
+                                alt="edit"
+                            />
+                        </div>
+                    </div>
+                    <div className={`${style['item-container']}`}>
+                        {/* <div className={`${style['icon-container']}`} >
+                            <img width={30} height={30}
+                                src="./image/icon/gender.png"
+                                alt="gender"
+                            />
+                        </div> */}
+                        <div className={`${style['info-container']}`}>
+                            <div className={`${style['info-label']}`}>
+                                Last Name
+                            </div>
+                            <div className={`${style['info-value']}`}>
+                                Trịnh
+                            </div>
+                        </div>
+                        <div className={`${style['edit-btn-container']}`} >
+                            <img width={16} height={16}
+                                src="./image/icon/edit.png"
+                                alt="edit"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Fragment>
+        )
+    }
+
     const renderBasicInfo = () => {
         return (
             <Fragment>
@@ -9,6 +90,7 @@ export default function About() {
                     Basic Info
                 </div>
                 <div style={{ display: "flex" }}>
+
                     <div className={`${style['item-container']}`}>
                         <div className={`${style['icon-container']}`} >
                             <img width={30} height={30}
@@ -242,6 +324,8 @@ export default function About() {
         <Fragment>
             <div className={`${style['title']}`}>About</div>
             <div className={`${style['container']}`}>
+                {renderBio()}
+                {renderName()}
                 {renderBasicInfo()}
                 {renderContactInfo()}
                 {renderPlaceLived()}

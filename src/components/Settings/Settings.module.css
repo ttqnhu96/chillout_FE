@@ -1,0 +1,78 @@
+/*=============================================
+            SETTING (14/18 HOMEPAGE)
+==============================================*/
+.settings {
+    width: calc(100% / 18 * 14 + 4.5rem);
+    /* background-color: greenyellow; */
+    background-color: rgba(255, 255, 255, 1);
+    height: 100%;
+    margin: 0 2rem;
+    padding: 2rem;
+    border-radius: 3rem;
+    box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
+    overflow-y: hidden;
+}
+.settings:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.settings::-webkit-scrollbar{
+    width:.5rem;
+}
+.settings::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+/*=============================================
+                SETTINGS TITLE
+==============================================*/
+.settings-title {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/*=============================================
+                SETTINGS CONTAINER
+==============================================*/
+.settings-container {
+    margin: 1.5em 2rem;
+    border: 0.1rem solid rgba(199, 199, 199, 0.6);
+    border-radius: 3rem;
+    font-weight: normal;
+    font-size: 0.95em;
+    height: 85%;
+    padding: 2rem;
+}
+
+.settings-label {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.language-select-box {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: rgba(199, 199, 199, 0.6);
+    margin: 1rem 0;
+}
+
+.save-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.save-button {
+    padding: 0.5rem 2rem;
+    width: 15;
+    text-align: center;
+    border-radius: 1rem;
+    background-color: rgba(211, 141, 140);
+    color:rgb(255, 255, 255);
+    font-weight: 600;
+    cursor: pointer;
+}

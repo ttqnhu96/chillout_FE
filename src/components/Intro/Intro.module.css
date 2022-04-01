@@ -22,6 +22,7 @@
 .intro-bio {
     margin-top: 1rem;
     text-align: center;
+    overflow-wrap: break-word;
 }
 
 /*=============================================
@@ -39,4 +40,5 @@
 }
 .intro-item-text {
     font-weight: normal;
+    overflow-wrap: break-word;
 }

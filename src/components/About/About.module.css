@@ -71,6 +71,7 @@
 .info-value {
     height: 50%;
     font-weight: 500;
+    overflow-wrap: break-word;
 }
 
 .info-label {
@@ -80,6 +81,7 @@
 
 .edit-btn-container {
     height: 100%;
+    margin-left: 1rem;
     display: flex;
     align-items: center;
     cursor: pointer;

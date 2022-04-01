@@ -1,0 +1,66 @@
+/*=============================================
+                    TITLE
+==============================================*/
+.title {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: left;
+}
+
+/*=============================================
+                CONTAINER
+==============================================*/
+.photo-list-container {
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
+.photo-list-container:hover {
+    overflow-y: overlay;
+    scroll-behavior: smooth;
+}
+.photo-list-container::-webkit-scrollbar{
+    width:.5rem;
+}
+.photo-list-container::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+/*=============================================
+                    ITEM
+==============================================*/
+.photo-container {
+    margin: 0.5rem;
+    padding-bottom: 23.5%;
+    width: calc(25% - 1rem);
+    border-radius: 1.5rem;
+    float: left;
+    align-items: center;
+    position: relative;
+    object-fit: cover;
+}
+.photo {
+    height: 100%;            
+    position: absolute;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.delete-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.7rem 0 0 75%;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+    z-index: 2;
+    cursor: pointer;
+}

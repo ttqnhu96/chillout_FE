@@ -6,6 +6,7 @@ import RecentContacts from "../../components/RecentContacts/RecentContacts";
 import style from './Wall.module.css';
 import FriendList from "../../components/FriendList/FriendList";
 import About from "../../components/About/About";
+import Photos from "../../components/Photos/Photos";
 
 export default function Wall() {
     const [activeMenuId, setActiveMenuId] = useState(1);
@@ -26,6 +27,7 @@ export default function Wall() {
                     {activeMenuId === 1 && <WallPosts />}
                     {activeMenuId === 2 && <About />}
                     {activeMenuId === 3 && <FriendList />}
+                    {activeMenuId === 4 && <Photos />}
                 </div>
             </div>
         </div >

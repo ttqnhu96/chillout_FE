@@ -52,4 +52,5 @@
     border-bottom: 0.2rem solid rgb(255,123,119);
     border-radius: 0;
     background-color: transparent;
+    cursor: pointer;
 }

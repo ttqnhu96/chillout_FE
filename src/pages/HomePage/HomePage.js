@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect } from 'react';
 import style from './HomePage.module.css';
 import Menu from '../../components/Menu/Menu';

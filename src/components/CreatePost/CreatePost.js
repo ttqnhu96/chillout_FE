@@ -11,6 +11,8 @@ export default function CreatePost() {
     //Get state from reducers
     const { isCreatePostModalVisible } = useSelector(state => state.PostReducer);
 
+    const maxFileLength = 10;
+
     return (
         <div> {isCreatePostModalVisible && (
             <div className={`${style['create-post-modal']}`}>
@@ -56,7 +58,7 @@ export default function CreatePost() {
                             onChange={() => { }}
                             onPressEnter={(e) => { console.log(e.target.value) }}
                         />
-                        <CropAndUploadImg />
+                        <CropAndUploadImg maxFileLength={maxFileLength} />
                         </div>
 
                         {/* Footer */}

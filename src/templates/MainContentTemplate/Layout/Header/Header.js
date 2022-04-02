@@ -5,7 +5,7 @@ import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileDetailByIdAction } from '../../../../redux/actions/ProfileActions';
-import { USER_LOGIN } from '../../../../util/constants/systemSettings';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../../../util/constants/systemSettings';
 import { displayCreatePostModalAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
@@ -20,13 +20,15 @@ export default function Header() {
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
 
     useEffect(() => {
-        //Hide scrollbar when sign up modal is opened
+        if (sessionStorage.getItem(USER_LOGIN) && sessionStorage.getItem(ACCESS_TOKEN)) {
+            // Call API to get user profile
+            const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).profileId;
+            dispatch(getProfileDetailByIdAction(profileId));
+        } else {
+            history.push('/login');
+        }
+        //Hide scrollbar when modal is opened
         document.body.style.overflow = isCreatePostModalVisible ? 'hidden' : 'unset';
-
-        // Call API to get user profile
-        const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.profileId;
-        dispatch(getProfileDetailByIdAction(profileId));
-
     }, [isCreatePostModalVisible])
 
     // extract pathname from location

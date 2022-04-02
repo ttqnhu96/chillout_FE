@@ -1,7 +1,7 @@
 /*=============================================
                 MODAL WINDOW
 ==============================================*/
-.create-post-modal {
+.upload-image-modal {
     display: block;
     position: fixed;
     align-items: center;
@@ -20,15 +20,15 @@
 /*=============================================
                 MODAL DIALOG
 ==============================================*/
-.create-post-modal-dialog {
+.upload-image-modal-dialog {
     background-color: #fefefe;
-    width: 50rem;
-    height: 46rem;
+    width: 40rem;
+    height: 29rem;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -25rem;
-    margin-top: -23rem;
+    margin-left: -22rem;
+    margin-top: -16rem;
     border-radius: 3rem;
     padding: 2rem;
     box-shadow: rgba(58, 58, 58, 0.1) 0vh 2vh 10vh 0vh;
@@ -37,94 +37,48 @@
 /*=============================================
             MODAL DIALOG HEADER
 ==============================================*/
-.create-post-modal-dialog-header {
+.upload-image-modal-dialog-header {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.create-post-modal-dialog-title {
+.upload-image-modal-dialog-title {
     width: 95%;
     font-size: 2em;
     font-weight: 700;
     text-align: center;
 }
-.create-post-modal-dialog-close-btn {
+.upload-image-modal-close-btn {
     width: 5%;
     text-align: right;
     font-size: 1.2em;
     cursor: pointer;
 }
-.create-post-modal-dialog-close-btn:hover {
+.upload-image-modal-close-btn:hover {
     font-weight: 700;
 }
 
 /*=============================================
             MODAL DIALOG BODY
 ==============================================*/
-.create-post-modal-dialog-body {
+.upload-image-modal-dialog-body {
     padding: 1rem 0;
-}
-
-.create-post-user-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 0.5rem;
-}
-.create-post-user-avatar {
-    width: 3em;
-    height: 3em;
-    border-radius: 5rem;
-    cursor: pointer;
-}
-.user-name-privacy-container {
-    margin-left: 1rem;
-}
-
-.user-name {
-    font-size: 1.05em;
-    font-weight: 600;
-}
-
-.privacy-select-box {
-    border-radius: 0.5rem;
-    margin-top: 0.1rem;
-    padding: 0 0.5rem;
-    border: none;
-    background-color: rgba(34, 34, 34, 0.2);
-}
-
-.post-content-container {
-    height: 24rem;
-    overflow-y: hidden;
-}
-.post-content-container:hover {
-    overflow-y: overlay;
-}
-.post-content-container::-webkit-scrollbar{
-    width:.5rem;
-}
-.post-content-container::-webkit-scrollbar-thumb{
-    background-color: rgba(248, 168, 136, 0.6);
-    border-radius: 1rem;
-}
-
-.post-content-text-area {
-    margin: 0.5rem 0 2.5rem 0;
-    background-color: transparent;
-    border: none;
 }
 
 /*=============================================
             MODAL DIALOG FOOTER
 ==============================================*/
-.create-post-modal-dialog-footer {
+.upload-image-modal-dialog-footer {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1rem;
 }
-.create-post-btn {
-    width: 100%;
+.upload-image-btn {
+    width: 30%;
     font-size: 1.1em;
     font-weight: 700;
     border-radius: 1rem;

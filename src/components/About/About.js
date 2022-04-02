@@ -125,7 +125,7 @@ export default function About() {
                                 Date of Birth
                             </div>
                             <div className={`${style['info-value']}`}>
-                                December 29, 1996
+                                1996/12/29
                             </div>
                         </div>
                         <div className={`${style['edit-btn-container']}`} >

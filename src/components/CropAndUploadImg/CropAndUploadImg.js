@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 
-export default function CropAndUploadImg() {
+export default function CropAndUploadImg(props) {
   const [fileList, setFileList] = useState([
     {
       uid: '-1',
@@ -11,6 +11,8 @@ export default function CropAndUploadImg() {
       url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
     },
   ]);
+
+  const { maxFileLength } = props;
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -40,7 +42,7 @@ export default function CropAndUploadImg() {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < 5 && '+ Upload'}
+        {fileList.length < maxFileLength && '+ Upload'}
       </Upload>
     </ImgCrop>
   );

@@ -157,6 +157,11 @@
 /*=============================================
             MODAL DIALOG FOOTER
 ==============================================*/
+/* .signup-modal-dialog-error {
+    color: rgb(190, 75, 73);
+    font-size: 0.9em;
+    text-align: center;
+} */
 .signup-modal-dialog-footer {
     display: flex;
     justify-content: center;

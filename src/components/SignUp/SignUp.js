@@ -1,7 +1,9 @@
 import { Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { signUpAction } from '../../redux/actions/AuthenticationActions';
 import { hideSignUpModalAction } from '../../redux/actions/SignUpAction';
+import { labels } from '../../util/constants/commonConstants';
 import style from './SignUp.module.css';
 
 export default function SignUp() {
@@ -41,7 +43,7 @@ export default function SignUp() {
                             type="radio"
                             checked={checkedRadioId === gender.id}
                             value={gender.name}
-                            onChange={() => { setCheckedRadioId(gender.id) }}
+                            onChange={() => { handleSelectGender(gender.id, gender.name) }}
                         />
                     </div>
                 )
@@ -53,7 +55,81 @@ export default function SignUp() {
     const dispatch = useDispatch();
     //State
     const [maxDate, setMaxDate] = useState('2122-01-01');
-    const [checkedRadioId, setCheckedRadioId] = useState(0);
+    const [checkedRadioId, setCheckedRadioId] = useState(3);
+    const [signUpValues, setSignUpValues] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        birthday: '',
+        gender: 'Other'
+    });
+
+    const [signUpErrors, setSignUpErrors] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        birthday: ''
+    })
+
+    //Handle events
+    const handleChangeValue = (event) => {
+        let { name, value } = event.target;
+
+        setSignUpValues(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+        setSignUpErrors(prevState => ({
+            ...prevState,
+            [name]: ''
+        }));
+    }
+
+    const handleSelectGender = (genderId, genderName) => {
+        //Set checked gender id
+        setCheckedRadioId(genderId)
+
+        //Set checked gender value
+        setSignUpValues(prevState => ({
+            ...prevState,
+            gender: genderName
+        }));
+    }
+
+    const handleSignUp = () => {
+        let isValid = true;
+        for (let key in signUpValues) {
+            //Validate required fields
+            if (signUpValues[key] === '') {
+                setSignUpErrors(prevState => ({
+                    ...prevState,
+                    [key]: labels[key] + ' is required!'
+                }));
+
+                isValid = false;
+            }
+
+            //Validate date of birth
+            if(key === "birthday") {
+                const minDate = new Date('1905/01/01');
+                const maxDate = new Date();
+                const dateOfBirth = new Date(signUpValues[key]);
+                if(dateOfBirth < minDate || dateOfBirth > maxDate) {
+                    setSignUpErrors(prevState => ({
+                        ...prevState,
+                        birthday: 'Invalid date'
+                    }));
+                }
+            }
+        }
+
+        if (isValid) {
+            dispatch(signUpAction(signUpValues));
+        }
+    }
 
     //Get state from reducers
     const { isSignUpModalVisible } = useSelector(state => state.SignUpReducer);
@@ -96,31 +172,46 @@ export default function SignUp() {
 
                     {/* Body */}
                     <div className={`${style['signup-modal-dialog-body']}`}>
-                        <div className={`${style['signup-name-container']}`}>
+                        <div className={`${style['signup-name-container']}`} >
                             <div className={`${style['signup-first-name']}`}>
                                 <Tooltip
-                                    visible={false}
                                     color="rgb(190, 75, 73)"
-                                    title="What's your name?"
+                                    title={signUpErrors.firstName}
                                     placement="left">
                                     <input
+                                        style={signUpErrors.firstName !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                         className={`${style['signup-input']}`}
                                         placeholder="First name"
-                                        maxlength="255"
-                                        onChange={() => { }}
+                                        maxLength="255"
+                                        name="firstName"
+                                        value={signUpValues.firstName}
+                                        onChange={handleChangeValue}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                handleSignUp()
+                                            }
+                                        }}
                                     />
                                 </Tooltip>
                             </div>
                             <div className={`${style['signup-last-name']}`}>
                                 <Tooltip
                                     color="rgb(190, 75, 73)"
-                                    title="What's your name?"
+                                    title={signUpErrors.lastName}
                                     placement="right">
                                     <input
+                                        style={signUpErrors.lastName !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                         className={`${style['signup-input']}`}
                                         placeholder="Last name"
-                                        maxlength="255"
-                                        onChange={() => { }}
+                                        maxLength="255"
+                                        name="lastName"
+                                        value={signUpValues.lastName}
+                                        onChange={handleChangeValue}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                handleSignUp()
+                                            }
+                                        }}
                                     />
                                 </Tooltip>
                             </div>
@@ -128,42 +219,75 @@ export default function SignUp() {
                         <div className={`${style['signup-username-container']}`}>
                             <Tooltip
                                 color="rgb(190, 75, 73)"
-                                title="Please enter username."
+                                title={signUpErrors.username}
                                 placement="left">
                                 <input
+                                    style={signUpErrors.username !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                     className={`${style['signup-input']}`}
                                     placeholder="Username"
-                                    maxlength="30"
-                                    onChange={() => { }}
+                                    maxLength="30"
+                                    name="username"
+                                    value={signUpValues.username}
+                                    onChange={handleChangeValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleSignUp()
+                                        }
+                                    }}
                                 />
                             </Tooltip>
                         </div>
                         <div className={`${style['signup-password-container']}`}>
                             <Tooltip color="rgb(190, 75, 73)"
-                                title="Please enter password."
+                                title={signUpErrors.password}
                                 placement="left">
                                 <input
+                                    style={signUpErrors.password !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                     type="password"
                                     className={`${style['signup-input']}`}
                                     placeholder="Password"
-                                    onChange={() => { }}
+                                    name="password"
+                                    value={signUpValues.password}
+                                    onChange={handleChangeValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleSignUp()
+                                        }
+                                    }}
                                 />
                             </Tooltip>
                         </div>
                         <div className={`${style['signup-birthday-container']}`}>
                             <label className={`${style['signup-birthday-label']}`}>Date of birth</label>
-                            <input
-                                className={`${style['signup-birthday-picker']}`}
-                                type="date"
-                                id="birthday"
-                                name="birthday"
-                                min="1905-01-01"
-                                max={maxDate}
-                            />
+                            <Tooltip
+                                color="rgb(190, 75, 73)"
+                                title={signUpErrors.birthday}
+                                placement="left">
+                                <input
+                                    style={signUpErrors.password !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
+                                    className={`${style['signup-birthday-picker']}`}
+                                    type="date"
+                                    id="birthday"
+                                    min="1905-01-01"
+                                    max={maxDate}
+                                    name="birthday"
+                                    value={signUpValues.birthday}
+                                    onChange={handleChangeValue}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleSignUp()
+                                        }
+                                    }}
+                                />
+                            </Tooltip>
                         </div>
                         <div className={`${style['signup-gender-container']}`}>
                             <label className={`${style['signup-gender-label']}`}>Gender</label>
-                            <div className={`${style['signup-gender-selection-container']}`}>
+                            <div
+                                className={`${style['signup-gender-selection-container']}`}
+                                name="gender"
+                            // value={signUpValues.gender}
+                            >
                                 {renderGenderList()}
                             </div>
                         </div>
@@ -173,7 +297,7 @@ export default function SignUp() {
                     <div className={`${style['signup-modal-dialog-footer']}`}>
                         <div
                             className={`${style['signup-modal-dialog-signup-btn']}`}
-                            onClick={() => { }}
+                            onClick={handleSignUp}
                         >
                             Sign Up
                         </div>

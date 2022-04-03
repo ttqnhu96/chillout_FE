@@ -1,8 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { profileService } from "../../services/ProfileService";
-import { STATUS_CODE } from "../../util/constants/systemSettings";
+import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { GET_PROFILE_DETAIL_BY_ID_SAGA } from "../constants/types";
-import { getFirstNameAndAvatarAction } from '../actions/ProfileActions';
+import { getUserProfileAction } from '../actions/ProfileActions';
+import { notify } from "../../util/notification";
+import { messages } from "../../util/constants/commonConstants";
 
 //--------------------------------------------------------------------------
 /**
@@ -11,12 +13,18 @@ import { getFirstNameAndAvatarAction } from '../actions/ProfileActions';
  */
 function* getProfileDetailById(action) {
     try {
-        const { data, status } = yield call(() => profileService.getProfileDetailById(action.profileId));
-        if(status === STATUS_CODE.SUCCESS) {
-            yield put(getFirstNameAndAvatarAction(data.Data.firstName, data.Data.avatar));
+        const { data } = yield call(() => profileService.getProfileDetailById(action.profileId));
+        const response = data.Data;
+        const errorCode = data.ErrorCode;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Call API successfully
+            yield put(getUserProfileAction(response));
+        } else {
+            //Inform error
+            return notify('error', messages[errorCode])
         }
     } catch (err) {
-        console.log(err);
+        return notify('error', messages.E500)
     }
 }
 /**

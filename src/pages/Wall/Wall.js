@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Cover from "../../components/Cover/Cover";
 import WallPosts from "../../components/WallPosts/WallPosts";
 import Intro from "../../components/Intro/Intro";

@@ -5,7 +5,7 @@ import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileDetailByIdAction } from '../../../../redux/actions/ProfileActions';
-import { ACCESS_TOKEN, USER_LOGIN } from '../../../../util/constants/systemSettings';
+import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../../../util/constants/systemSettings';
 import { displayCreatePostModalAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
@@ -15,8 +15,10 @@ export default function Header() {
     //Call API to get user info
     const dispatch = useDispatch();
 
-    //Get props from reducer
-    const { firstName, avatar } = useSelector(state => state.ProfileReducer);
+    //Get state from reducer
+    const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
+    const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
+
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
 
     useEffect(() => {
@@ -88,7 +90,8 @@ export default function Header() {
                     <div className={`${style['user-container']}`}
                         onClick={() => { history.push('/wall') }}>
                         <span className={`${style['username']}`}>{firstName}</span>
-                        <img src={avatar || "./image/avatar/default_avatar.png"}
+                        <img src={avatar ?
+                            `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['avatar']}`}
                         />

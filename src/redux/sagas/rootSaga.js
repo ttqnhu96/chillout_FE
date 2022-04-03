@@ -4,6 +4,7 @@ import * as ProfileSaga from './ProfileSaga';
 
 export function* rootSaga() {
     yield all([
+        AuthenticationSaga.signUpWatcher(),
         AuthenticationSaga.logInWatcher(),
         ProfileSaga.getProfileDetailByIdWatcher()
     ])

@@ -3,35 +3,35 @@ import { ACCESS_TOKEN, CHILLOUT_DOMAIN } from "../util/constants/systemSettings"
 const axios = require('axios').default;
 
 export class BaseService {
-    put = (functionName, url, model) => {
+    put = (url, model) => {
         return axios({
-            url: `${CHILLOUT_DOMAIN}/${functionName}/${url}`,
+            url: `${CHILLOUT_DOMAIN}/${url}`,
             method: 'PUT',
             data: model,
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN) }
         })
     }
 
-    post = (functionName, url, model) => {
+    post = (url, model) => {
         return axios({
-            url: `${CHILLOUT_DOMAIN}/${functionName}/${url}`,
+            url: `${CHILLOUT_DOMAIN}/${url}`,
             method: 'POST',
             data: model,
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN) }
         })
     }
 
-    get = (functionName, url) => {
+    get = (url) => {
         return axios({
-            url: `${CHILLOUT_DOMAIN}/${functionName}/${url}`,
+            url: `${CHILLOUT_DOMAIN}/${url}`,
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN) }
         })
     }
 
-    delete = (functionName, url) => {
+    delete = (url) => {
         return axios({
-            url: `${CHILLOUT_DOMAIN}/${functionName}/${url}`,
+            url: `${CHILLOUT_DOMAIN}/${url}`,
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN) }
         })

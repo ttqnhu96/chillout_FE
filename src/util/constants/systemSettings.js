@@ -4,8 +4,6 @@ export const AWS_S3_BUCKET_LINK = 'https://chillout-gallery.s3.ap-southeast-1.am
 export const ACCESS_TOKEN = 'ACCESS_TOKEN';
 export const USER_LOGIN = 'USER_LOGIN';
 
-export const STATUS_CODE = {
-    SUCCESS : 200,
-    NOT_FOUND: 404,
-    SERVER_ERROR: 500
+export const ERROR_CODE = {
+    SUCCESSFUL : 'SUCCESSFUL',
 }

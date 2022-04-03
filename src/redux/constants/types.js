@@ -2,6 +2,7 @@
 export const LOGIN_SAGA = 'LOGIN_SAGA';
 
 //Sign up
+export const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
 export const DISPLAY_SIGN_UP_MODAL = 'DISPLAY_SIGN_UP_MODAL';
 export const HIDE_SIGN_UP_MODAL = 'HIDE_SIGN_UP_MODAL';
 

@@ -1,4 +1,4 @@
-import { GET_FIRST_NAME_AND_AVATAR } from "../constants/types"
+import { GET_USER_PROFILE } from "../constants/types"
 
 const initialState = {
     userProfile: {}
@@ -6,7 +6,7 @@ const initialState = {
 
 export const ProfileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_FIRST_NAME_AND_AVATAR:
+        case GET_USER_PROFILE:
             state.userProfile = action.userProfile;
             return { ...state }
         default:

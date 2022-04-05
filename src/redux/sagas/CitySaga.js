@@ -1,0 +1,35 @@
+import { call, put, takeLatest } from "redux-saga/effects";
+import { cityService } from "../../services/CityService";
+import { messages } from "../../util/constants/commonConstants";
+import { ERROR_CODE } from "../../util/constants/systemSettings";
+import { notify } from "../../util/notification";
+import { getCityListAction } from "../actions/CityActions";
+import { GET_CITY_LIST_SAGA } from "../constants/types";
+
+/*=============================================
+                GET CITY LIST
+==============================================*/
+/**
+ * getCityList
+ * @param action 
+ */
+function* getCityList() {
+    try {
+        const { data } = yield call(() => cityService.getCityList());
+        const response = data.Data;
+        const errorCode = data.ErrorCode;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set state in reducer
+            yield put(getCityListAction(response));
+        } else {
+            //Inform error
+            return notify('error', messages[errorCode])
+        }
+    } catch (err) {
+        return notify('error', messages.E500)
+    }
+}
+
+export function* getCityListWatcher() {
+    yield takeLatest(GET_CITY_LIST_SAGA, getCityList)
+}

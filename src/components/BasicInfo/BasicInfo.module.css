@@ -26,6 +26,7 @@
     height: 5rem;
 }
 
+/* View info */
 .icon-container {
     height: 100%;
     display: flex;
@@ -55,4 +56,48 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+}
+
+/* Edit info */
+.gender-select-box {
+    height: 50%;
+    font-weight: 500;
+    border: none;
+}
+
+.gender-select-box:focus {
+    outline: none;
+}
+
+.birthday-picker {
+    height: 50%;
+    font-weight: 500;
+    border: none;
+}
+
+.birthday-picker:focus {
+    outline: none;
+}
+
+.save-btn {
+    border-radius: 1rem;
+    width: 5rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: rgb(211, 141, 140);
+    color: rgb(255, 255, 255);
+}
+
+.cancel-btn {
+    border-radius: 1rem;
+    width: 5rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: gainsboro;
 }

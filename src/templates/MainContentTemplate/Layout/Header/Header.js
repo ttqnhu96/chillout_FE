@@ -4,12 +4,13 @@ import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileDetailByIdAction } from '../../../../redux/actions/ProfileActions';
+import { getProfileDetailByIdSagaAction } from '../../../../redux/actions/ProfileActions';
 import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../../../util/constants/systemSettings';
 import { displayCreatePostModalAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
+import { setHomeMenuIdActiveAction } from '../../../../redux/actions/MenuAction';
 
 export default function Header() {
     //Call API to get user info
@@ -25,7 +26,7 @@ export default function Header() {
         if (sessionStorage.getItem(USER_LOGIN) && sessionStorage.getItem(ACCESS_TOKEN)) {
             // Call API to get user profile
             const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).profileId;
-            dispatch(getProfileDetailByIdAction(profileId));
+            dispatch(getProfileDetailByIdSagaAction(profileId));
         } else {
             history.push('/login');
         }
@@ -42,7 +43,12 @@ export default function Header() {
     }
 
     const handleClickChilloutLogo = () => {
+        dispatch(setHomeMenuIdActiveAction(0));
         history.push('/');
+    }
+
+    const handleClickHomeIcon = () => {
+        dispatch(setHomeMenuIdActiveAction(0))
     }
 
     return (
@@ -63,6 +69,7 @@ export default function Header() {
                 </div>
                 <div className={`${style['home-icon-container']}`}>
                     <NavLink
+                        onClick={handleClickHomeIcon}
                         className={`${style['home-icon']}`}
                         activeClassName={`${style['home-icon-active']}`}
                         isActive={() => ['/', '/home'].includes(pathname)}

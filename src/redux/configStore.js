@@ -6,6 +6,10 @@ import { SignUpReducer } from '../redux/reducers/SignUpReducer';
 import { PostReducer } from '../redux/reducers/PostReducer';
 import { MenuReducer } from '../redux/reducers/MenuReducer';
 import { PhotoReducer } from '../redux/reducers/PhotoReducer';
+import { CityReducer } from '../redux/reducers/CityReducer';
+import { WorkplaceReducer } from '../redux/reducers/WorkplaceReducer';
+import { SchoolReducer } from '../redux/reducers/SchoolReducer';
+import { CollegeReducer } from '../redux/reducers/CollegeReducer';
 import { LoadingReducer } from '../redux/reducers/LoadingReducer';
 
 //Create Saga middleware
@@ -17,6 +21,10 @@ const rootReducer = combineReducers({
     PostReducer,
     MenuReducer,
     PhotoReducer,
+    CityReducer,
+    WorkplaceReducer,
+    SchoolReducer,
+    CollegeReducer,
     LoadingReducer
 })
 

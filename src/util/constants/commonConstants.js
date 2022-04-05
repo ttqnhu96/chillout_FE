@@ -14,5 +14,6 @@ export const messages = {
     E003: `This account has not been registered. Please sign up.`,
     E004: `This account was deactivated.`,
 
-    SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`
+    SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`,
+    UPDATE_SUCCESS: `Your change(s) has been successfully saved!`
 }

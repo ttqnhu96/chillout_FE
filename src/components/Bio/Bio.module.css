@@ -10,10 +10,10 @@
 /*=============================================
             INFO ITEM CONTAINER
 ==============================================*/
-.edit-btn {
+/* .edit-btn {
     width: 3%;
     cursor: pointer;
-}
+} */
 
 .item-container {
     margin: 1rem 0.7rem;
@@ -26,6 +26,7 @@
     height: 5rem;
 }
 
+/* View info */
 .icon-container {
     height: 100%;
     display: flex;
@@ -39,7 +40,9 @@
 }
 
 .info-value {
-    height: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
     font-weight: 500;
     overflow-wrap: break-word;
 }
@@ -55,4 +58,40 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+}
+
+/* Edit info */
+.info-input {
+    height: 100%;
+    width: 100%;
+    font-weight: 500;
+    overflow-wrap: break-word;
+    border: none;
+}
+
+.info-input:focus {
+    outline: none;
+}
+
+.save-btn {
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: rgb(211, 141, 140);
+    color: rgb(255, 255, 255);
+}
+
+.cancel-btn {
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: gainsboro;
 }

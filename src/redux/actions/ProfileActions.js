@@ -1,6 +1,6 @@
-import { GET_FIRST_NAME_AND_AVATAR, GET_PROFILE_DETAIL_BY_ID_SAGA } from "../constants/types"
+import { GET_USER_PROFILE, GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types"
 
-export const getProfileDetailByIdAction = (profileId) => {
+export const getProfileDetailByIdSagaAction = (profileId) => {
     return {
         type: GET_PROFILE_DETAIL_BY_ID_SAGA,
         profileId: profileId
@@ -9,8 +9,16 @@ export const getProfileDetailByIdAction = (profileId) => {
 
 export const getUserProfileAction = (userProfile) => {
     return {
-        type: GET_FIRST_NAME_AND_AVATAR,
+        type: GET_USER_PROFILE,
         userProfile: userProfile
-        // avatar: avatar ? `${AWS_S3_BUCKET_LINK}/${avatar}` : ""
+    }
+}
+
+export const updateProfileSagaAction = (profileId, profileUpdate, fieldNameList) => {
+    return {
+        type: UPDATE_PROFILE_SAGA,
+        profileId: profileId,
+        profileUpdate: profileUpdate,
+        fieldNameList: fieldNameList
     }
 }

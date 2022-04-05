@@ -56,3 +56,39 @@
     align-items: center;
     cursor: pointer;
 }
+
+/* Edit info */
+.info-input {
+    height: 50%;
+    width: 100%;
+    font-weight: 500;
+    overflow-wrap: break-word;
+    border: none;
+}
+
+.info-input:focus {
+    outline: none;
+}
+
+.save-btn {
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: rgb(211, 141, 140);
+    color: rgb(255, 255, 255);
+}
+
+.cancel-btn {
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: gainsboro;
+}

@@ -55,7 +55,7 @@ export default function Contacts() {
     return (
         <div className={`${style['contacts-container']}`}>
             <div className={`${style['contacts-title']}`}>
-                CONTACTS
+                SUGGESTIONS
             </div>
             {renderContactList()}
         </div>

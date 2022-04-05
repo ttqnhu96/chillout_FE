@@ -10,7 +10,7 @@ export default function NewsFeed() {
             firstName: "Như",
             lastName: "Trịnh",
             createdAt: "2022/03/24 00:18",
-            content: "VỊ TRÍ : dàn hoa giấy cực xịn này nằm ở gần Paradise (Ngay khách sạn cao đường thuỳ vân có hẻm to đi vào .... cạnh hông khách sạn “LÂM ĐƯỜNG”) Ngoài ra địa điểm để chụp hoa giấy tại VT rất nhiều vì mùa này nở rộ, các bạn có thể đi dọc đường Phan Chu Trinh, Núi Lớn, đường Thùy Vân....... Toàn bộ ảnh mình chụp bằng cam Thường Sau đó chỉnh ảnh bằng Vsco và lightroom Thời gian chụp ảnh: Khung thời gian từ 8h30 - 9h30 sẽ cho ra những bức ảnh xịn xò nhất theo mình là vậy",
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et netus et malesuada fames. Sit amet venenatis urna cursus eget nunc scelerisque. Odio tempor orci dapibus ultrices. Aliquet lectus proin nibh nisl condimentum id. Aliquam etiam erat velit scelerisque in dictum. Amet justo donec enim diam vulputate ut pharetra sit. Sit amet venenatis urna cursus eget. Nunc sed id semper risus in hendrerit. Pellentesque habitant morbi tristique senectus et netus et. Feugiat pretium nibh ipsum consequat.",
             photo: "https://images.unsplash.com/photo-1581881067989-7e3eaf45f4f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGhvdG8lMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
             likes: 1,
             totalComment: 2,

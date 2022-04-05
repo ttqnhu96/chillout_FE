@@ -5,7 +5,6 @@ export const notify = (type, message, description = '') => {
         message: message,
         description: description,
         placement: 'bottomRight',
-        duration: 10,
         style: {
             marginRight: '10%',
             borderRadius: '1.5rem',

@@ -8,6 +8,10 @@ import UploadImageModal from '../UploadImageModal/UploadImageModal';
 const menuItems = require('./coverMenuItems.json');
 export default function Cover(props) {
     const dispatch = useDispatch();
+
+    //Get state from reducer
+    const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
+    const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
 
     useEffect(() => {
@@ -51,7 +55,7 @@ export default function Cover(props) {
                 </div>
             </div>
             <div className={`${style['cover-user-name']}`}>
-                Như Trịnh
+                {`${firstName || ""} ${lastName || ""}`}
                 <hr style={{ width: '95%' }} />
                 <div className={`${style['cover-menu-container']}`}>
                     {renderMenu()}

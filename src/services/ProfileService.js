@@ -6,6 +6,11 @@ export class ProfileService extends BaseService {
     getProfileDetailById = (profileId) => {
         return this.get(`${FUNCTION_CONSTANTS.PROFILE}/${URL_CONSTANTS.GET_DETAIL}/${profileId}`);
     }
+
+    //Update profile
+    updateProfile = (id, profileUpdate) => {
+        return this.put(`${FUNCTION_CONSTANTS.PROFILE}/${id}`, profileUpdate);
+    }
 }
 
 

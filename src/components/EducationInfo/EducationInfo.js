@@ -20,6 +20,10 @@ export default function EducationInfo(props) {
     });
     const [isEditSchoolMode, setIsEditSchoolMode] = useState(false);
     const [isEditCollegeMode, setIsEditCollegeMode] = useState(false);
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState({
+        school: false,
+        college: false
+    });
 
     //Handle events
     const handleChangeSchoolValue = (event) => {
@@ -30,6 +34,10 @@ export default function EducationInfo(props) {
             id: value,
             name: name
         });
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            school: true
+        }));
     }
 
     const handleChangeCollegeValue = (event) => {
@@ -40,6 +48,10 @@ export default function EducationInfo(props) {
             id: value,
             name: name
         });
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            college: true
+        }));
     }
 
     const handleClickEditSchoolButton = () => {
@@ -81,6 +93,10 @@ export default function EducationInfo(props) {
             id: schoolId,
             name: schoolName
         });
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            school: false
+        }));
     }
     const handleClickCancelCollegeButton = () => {
         setIsEditCollegeMode(false);
@@ -88,6 +104,10 @@ export default function EducationInfo(props) {
             id: collegeId,
             name: collegeName
         });
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            college: false
+        }));
     }
 
     //Functions
@@ -149,7 +169,7 @@ export default function EducationInfo(props) {
                         {
                             isEditSchoolMode ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.school ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={handleClickSaveSchoolButton}>
                                         Save
                                     </div>
@@ -160,6 +180,7 @@ export default function EducationInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={handleClickEditSchoolButton}
@@ -192,7 +213,7 @@ export default function EducationInfo(props) {
                         {
                             isEditCollegeMode ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.college ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={handleClickSaveCollegeButton}>
                                         Save
                                     </div>
@@ -203,6 +224,7 @@ export default function EducationInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={handleClickEditCollegeButton}

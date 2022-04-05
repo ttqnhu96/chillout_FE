@@ -14,6 +14,7 @@ export default function WorkplaceInfo(props) {
         name: workplaceName
     });
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -24,6 +25,7 @@ export default function WorkplaceInfo(props) {
             id: value,
             name: name
         });
+        setIsSaveBtnEnabled(true);
     }
 
     const handleClickEditButton = () => {
@@ -49,6 +51,7 @@ export default function WorkplaceInfo(props) {
             id: workplaceId,
             name: workplaceName
         });
+        setIsSaveBtnEnabled(false);
     }
 
     const renderWorkplaceList = () => {
@@ -96,7 +99,7 @@ export default function WorkplaceInfo(props) {
                         {
                             isEditMode ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={handleClickSaveButton}>
                                         Save
                                     </div>
@@ -107,6 +110,7 @@ export default function WorkplaceInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={handleClickEditButton}

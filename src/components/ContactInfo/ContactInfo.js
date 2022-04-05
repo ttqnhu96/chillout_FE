@@ -21,6 +21,11 @@ export default function ContactInfo(props) {
         email: ''
     })
 
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState({
+        phone: false,
+        email: false
+    });
+
     //Handle events
     const handleChangeValue = (event) => {
         const { name, value } = event.target;
@@ -31,6 +36,10 @@ export default function ContactInfo(props) {
         setErrors(prevState => ({
             ...prevState,
             [name]: ''
+        }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [name]: true
         }));
     }
 
@@ -75,6 +84,10 @@ export default function ContactInfo(props) {
         setErrors(prevState => ({
             ...prevState,
             [fieldName]: ''
+        }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [fieldName]: false
         }));
     }
 
@@ -123,7 +136,7 @@ export default function ContactInfo(props) {
                         {
                             isEditMode.phone ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.phone ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('phone') }}>
                                         Save
                                     </div>
@@ -134,6 +147,7 @@ export default function ContactInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('phone') }}
@@ -177,7 +191,7 @@ export default function ContactInfo(props) {
                         {
                             isEditMode.email ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.email ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('email') }}>
                                         Save
                                     </div>
@@ -188,6 +202,7 @@ export default function ContactInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('email') }}

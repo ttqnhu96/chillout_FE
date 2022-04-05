@@ -6,10 +6,12 @@ export default function Bio(props) {
     
     const [bioValue, setBioValue] = useState(bio);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
 
     //Handle events
     const handleChangeValue = (event) => {
         setBioValue(event.target.value);
+        setIsSaveBtnEnabled(true);
     }
 
     const handleClickEditButton = () => {
@@ -24,6 +26,7 @@ export default function Bio(props) {
     const handleClickCancelButton = () => {
         setIsEditMode(false);
         setBioValue(bio);
+        setIsSaveBtnEnabled(false);
     }
 
     return (
@@ -52,7 +55,7 @@ export default function Bio(props) {
                         {
                             isEditMode ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={handleClickSaveButton}>
                                         Save
                                     </div>
@@ -63,6 +66,7 @@ export default function Bio(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={handleClickEditButton}

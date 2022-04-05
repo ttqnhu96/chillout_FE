@@ -15,6 +15,7 @@ export default function PlaceLived(props) {
         name: cityName
     });
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -25,6 +26,7 @@ export default function PlaceLived(props) {
             id: value,
             name: name
         });
+        setIsSaveBtnEnabled(true);
     }
 
     const handleClickEditButton = () => {
@@ -50,6 +52,7 @@ export default function PlaceLived(props) {
             id: cityId,
             name: cityName
         });
+        setIsSaveBtnEnabled(false);
     }
 
     const renderCityList = () => {
@@ -98,7 +101,7 @@ export default function PlaceLived(props) {
                         {
                             isEditMode ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={handleClickSaveButton}>
                                         Save
                                     </div>
@@ -109,6 +112,7 @@ export default function PlaceLived(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={handleClickEditButton}

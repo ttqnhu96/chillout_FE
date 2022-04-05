@@ -10,11 +10,6 @@
 /*=============================================
             INFO ITEM CONTAINER
 ==============================================*/
-.edit-btn {
-    width: 3%;
-    cursor: pointer;
-}
-
 .item-container {
     margin: 1rem 0.7rem;
     display: flex;
@@ -54,6 +49,9 @@
     margin-left: 1rem;
     display: flex;
     align-items: center;
+}
+
+.edit-btn {
     cursor: pointer;
 }
 
@@ -78,6 +76,21 @@
     margin: 0.25rem;
     background-color: rgb(211, 141, 140);
     color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.save-btn-disabled {
+    border-radius: 1rem;
+    width: 6rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    background-color: rgb(211, 141, 140, 0.6);
+    color: rgb(255, 255, 255, 0.6);
+    pointer-events: none;
+    cursor: default;
 }
 
 .cancel-btn {
@@ -89,4 +102,5 @@
     align-items: center;
     margin: 0.25rem;
     background-color: gainsboro;
+    cursor: pointer;
 }

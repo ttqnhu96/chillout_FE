@@ -45,7 +45,7 @@ export default function CreatePost() {
                                 <select className={`${style['privacy-select-box']}`}>
                                     <option>Only me</option>
                                     <option>Public</option>
-                                    <option>Followers</option>
+                                    {/* <option>Followers</option> */}
                                 </select>
                             </div>
                         </div>

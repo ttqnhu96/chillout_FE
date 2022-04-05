@@ -6,6 +6,7 @@ import style from './Name.module.css';
 export default function Name(props) {
     const { firstName, lastName, handleUpdateProfile } = props;
 
+    //Local state
     const [nameValue, setNameValue] = useState({
         firstName: firstName,
         lastName: lastName
@@ -21,6 +22,11 @@ export default function Name(props) {
         lastName: ''
     })
 
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState({
+        firstName: false,
+        lastName: false
+    });
+
     //Handle events
     const handleChangeValue = (event) => {
         const { name, value } = event.target;
@@ -31,6 +37,10 @@ export default function Name(props) {
         setErrors(prevState => ({
             ...prevState,
             [name]: ''
+        }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [name]: true
         }));
     }
 
@@ -73,6 +83,10 @@ export default function Name(props) {
             ...prevState,
             [fieldName]: ''
         }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [fieldName]: false
+        }));
     }
 
     return (
@@ -111,7 +125,7 @@ export default function Name(props) {
                         {
                             isEditMode.firstName ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.firstName ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('firstName') }}>
                                         Save
                                     </div>
@@ -122,6 +136,7 @@ export default function Name(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('firstName') }}
@@ -159,7 +174,7 @@ export default function Name(props) {
                         {
                             isEditMode.lastName ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.lastName ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('lastName') }}>
                                         Save
                                     </div>
@@ -170,6 +185,7 @@ export default function Name(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('lastName') }}

@@ -93,6 +93,10 @@
     background-color: rgba(34, 34, 34, 0.2);
 }
 
+.privacy-select-box:focus {
+    outline: none
+}
+
 .post-content-container {
     height: 24rem;
     overflow-y: hidden;

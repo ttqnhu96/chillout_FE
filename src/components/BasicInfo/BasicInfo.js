@@ -19,6 +19,10 @@ export default function BasicInfo(props) {
         gender: '',
         birthday: ''
     });
+    const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState({
+        gender: false,
+        birthday: false
+    });
 
     useEffect(() => {
         //Set max date for datetime picker
@@ -36,6 +40,10 @@ export default function BasicInfo(props) {
         setErrors(prevState => ({
             ...prevState,
             [name]: ''
+        }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [name]: true
         }));
     }
 
@@ -95,6 +103,10 @@ export default function BasicInfo(props) {
             ...prevState,
             [fieldName]: ''
         }));
+        setIsSaveBtnEnabled(prevState => ({
+            ...prevState,
+            [fieldName]: true
+        }));
     }
 
     //Functions
@@ -151,7 +163,7 @@ export default function BasicInfo(props) {
                         {
                             isEditMode.gender ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.gender ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('gender') }}>
                                         Save
                                     </div>
@@ -162,6 +174,7 @@ export default function BasicInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('gender') }}
@@ -210,7 +223,7 @@ export default function BasicInfo(props) {
                         {
                             isEditMode.birthday ?
                                 <Fragment>
-                                    <div className={`${style['save-btn']}`}
+                                    <div className={isSaveBtnEnabled.birthday ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
                                         onClick={() => { handleClickSaveButton('birthday') }}>
                                         Save
                                     </div>
@@ -221,6 +234,7 @@ export default function BasicInfo(props) {
                                 </Fragment>
                                 :
                                 <img width={16} height={16}
+                                    className={`${style['edit-btn']}`}
                                     src="./image/icon/edit.png"
                                     alt="edit"
                                     onClick={() => { handleClickEditButton('birthday') }}

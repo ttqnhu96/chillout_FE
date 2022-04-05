@@ -1,4 +1,6 @@
+import { Tooltip } from "antd";
 import { Fragment, useEffect, useState } from "react";
+import { labels } from "../../util/constants/commonConstants";
 import style from './BasicInfo.module.css';
 
 export default function BasicInfo(props) {
@@ -12,6 +14,10 @@ export default function BasicInfo(props) {
     const [isEditMode, setIsEditMode] = useState({
         gender: false,
         birthday: false
+    });
+    const [errors, setErrors] = useState({
+        gender: '',
+        birthday: ''
     });
 
     useEffect(() => {
@@ -27,6 +33,10 @@ export default function BasicInfo(props) {
             ...prevState,
             [name]: value
         }));
+        setErrors(prevState => ({
+            ...prevState,
+            [name]: ''
+        }));
     }
 
     const handleClickEditButton = (fieldName) => {
@@ -37,11 +47,39 @@ export default function BasicInfo(props) {
     }
 
     const handleClickSaveButton = (fieldName) => {
-        handleUpdateProfile(fieldName, basicInfoValue[fieldName]);
-        setIsEditMode(prevState => ({
-            ...prevState,
-            [fieldName]: false
-        }));
+        let isValid = true;
+
+        //Validate empty
+        if (basicInfoValue[fieldName] === '') {
+            setErrors(prevState => ({
+                ...prevState,
+                [fieldName]: labels[fieldName] + ' is required!'
+            }));
+            isValid = false;
+        }
+
+        //Validate date of birth
+        if (fieldName === "birthday") {
+            const minDate = new Date('1905/01/01');
+            const maxDate = new Date();
+            const dateOfBirth = new Date(basicInfoValue[fieldName]);
+            if (dateOfBirth < minDate || dateOfBirth > maxDate) {
+                setErrors(prevState => ({
+                    ...prevState,
+                    birthday: 'Invalid date'
+                }));
+
+                isValid = false;
+            }
+        }
+
+        if (isValid) {
+            handleUpdateProfile(fieldName, basicInfoValue[fieldName]);
+            setIsEditMode(prevState => ({
+                ...prevState,
+                [fieldName]: false
+            }));
+        }
     }
 
     const handleClickCancelButton = (fieldName) => {
@@ -53,6 +91,10 @@ export default function BasicInfo(props) {
             gender: gender,
             birthday: birthday
         });
+        setErrors(prevState => ({
+            ...prevState,
+            [fieldName]: ''
+        }));
     }
 
     //Functions
@@ -140,16 +182,23 @@ export default function BasicInfo(props) {
                         </div>
                         {
                             isEditMode.birthday ?
-                                <input
-                                    className={`${style['birthday-picker']}`}
-                                    type="date"
-                                    id="birthday"
-                                    min="1905-01-01"
-                                    max={maxDate}
-                                    name="birthday"
-                                    value={formatDate(new Date(basicInfoValue.birthday))}
-                                    onChange={handleChangeValue}
-                                />
+                                <Tooltip
+                                    color="rgb(190, 75, 73)"
+                                    title={errors.birthday}
+                                    placement="bottom">
+                                    <input
+                                        style={errors.birthday !== "" ? { border: '0.1rem solid rgb(190, 75, 73)' } : {}}
+                                        className={`${style['birthday-picker']}`}
+                                        type="date"
+                                        id="birthday"
+                                        min="1905-01-01"
+                                        max={maxDate}
+                                        name="birthday"
+                                        onKeyDown={(e) => e.preventDefault()}
+                                        value={basicInfoValue.birthday && formatDate(new Date(basicInfoValue.birthday))}
+                                        onChange={handleChangeValue}
+                                    />
+                                </Tooltip>
                                 :
                                 <div className={`${style['info-value']}`}>
                                     {new Date(basicInfoValue.birthday).toLocaleDateString()}

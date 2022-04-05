@@ -1,4 +1,6 @@
+import { Tooltip } from "antd";
 import { Fragment, useState } from "react";
+import { labels, REGEX_EMAIL } from "../../util/constants/commonConstants";
 import style from './ContactInfo.module.css';
 
 export default function ContactInfo(props) {
@@ -14,12 +16,21 @@ export default function ContactInfo(props) {
         email: false
     });
 
+    const [errors, setErrors] = useState({
+        phone: '',
+        email: ''
+    })
+
     //Handle events
     const handleChangeValue = (event) => {
         const { name, value } = event.target;
         setContactValue(prevState => ({
             ...prevState,
             [name]: value
+        }));
+        setErrors(prevState => ({
+            ...prevState,
+            [name]: ''
         }));
     }
 
@@ -31,11 +42,25 @@ export default function ContactInfo(props) {
     }
 
     const handleClickSaveButton = (fieldName) => {
-        handleUpdateProfile(fieldName, contactValue[fieldName]);
-        setIsEditMode(prevState => ({
-            ...prevState,
-            [fieldName]: false
-        }));
+        let isValid = true;
+        //Validate email
+        if (fieldName === 'email' && contactValue[fieldName] !== '') {
+            if (!REGEX_EMAIL.test(contactValue[fieldName])) { //Invalid email
+                setErrors(prevState => ({
+                    ...prevState,
+                    [fieldName]: 'Invalid email'
+                }));
+                isValid = false;
+            }
+        }
+
+        if (isValid) {
+            handleUpdateProfile(fieldName, contactValue[fieldName]);
+            setIsEditMode(prevState => ({
+                ...prevState,
+                [fieldName]: false
+            }));
+        }
     }
 
     const handleClickCancelButton = (fieldName) => {
@@ -47,6 +72,10 @@ export default function ContactInfo(props) {
             phone: phone,
             email: email
         });
+        setErrors(prevState => ({
+            ...prevState,
+            [fieldName]: ''
+        }));
     }
 
     return (
@@ -125,13 +154,19 @@ export default function ContactInfo(props) {
                         </div>
                         {
                             isEditMode.email ?
-                                <input
-                                    name="email"
-                                    autoFocus
-                                    className={`${style['info-input']}`}
-                                    value={contactValue.email}
-                                    onChange={handleChangeValue}
-                                />
+                                <Tooltip
+                                    color="rgb(190, 75, 73)"
+                                    title={errors.email}
+                                    placement="bottom">
+                                    <input
+                                        style={errors.email !== "" ? { border: '0.1rem solid rgb(190, 75, 73)' } : {}}
+                                        name="email"
+                                        autoFocus
+                                        className={`${style['info-input']}`}
+                                        value={contactValue.email}
+                                        onChange={handleChangeValue}
+                                    />
+                                </Tooltip>
                                 :
                                 <div className={`${style['info-value']}`}>
                                     {contactValue.email}

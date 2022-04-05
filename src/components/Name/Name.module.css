@@ -69,6 +69,15 @@
     border: none;
 }
 
+.info-input-error {
+    height: 50%;
+    width: 100%;
+    font-weight: 500;
+    overflow-wrap: break-word;
+    border: '0.1rem solid rgb(190, 75, 73)';
+    border-radius: 1rem;
+}
+
 .info-input:focus {
     outline: none;
 }

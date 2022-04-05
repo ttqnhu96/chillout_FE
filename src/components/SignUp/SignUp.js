@@ -122,7 +122,9 @@ export default function SignUp() {
                         ...prevState,
                         birthday: 'Invalid date'
                     }));
-                }
+
+                    isValid = false;
+                } 
             }
         }
 

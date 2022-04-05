@@ -17,3 +17,5 @@ export const messages = {
     SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`,
     UPDATE_SUCCESS: `Your change(s) has been successfully saved!`
 }
+
+export const REGEX_EMAIL = /^(|[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,})$/

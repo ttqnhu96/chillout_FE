@@ -1,18 +1,38 @@
 import TextArea from 'antd/lib/input/TextArea';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from "react";
 import style from './CreatePost.module.css';
-import { hideCreatePostModalAction } from '../../redux/actions/PostAction';
+import { hideCreatePostModalAction, createPostSagaAction } from '../../redux/actions/PostAction';
 import CropAndUploadImg from '../CropAndUploadImg/CropAndUploadImg';
 
 export default function CreatePost() {
-
     const dispatch = useDispatch();
 
     //Get state from reducers
     const { isCreatePostModalVisible } = useSelector(state => state.PostReducer);
 
-    const maxFileLength = 10;
+    //Local state
+    const [post, setPost] = useState(
+        {
+            content: "",
+            privacySettingId: "Public",
+            photoList: []
+        }
+    )
 
+    const handleChangeValue = (e) => {
+        const { name, value } = e.target;
+        setPost(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleCreatePost = () => {
+        dispatch(createPostSagaAction(post))
+    }
+
+    const maxFileLength = 10;
     return (
         <div> {isCreatePostModalVisible && (
             <div className={`${style['create-post-modal']}`}>
@@ -42,30 +62,35 @@ export default function CreatePost() {
                                 <div className={`${style['user-name']}`}>
                                     Như Trịnh
                                 </div>
-                                <select className={`${style['privacy-select-box']}`}>
-                                    <option>Only me</option>
+                                <select className={`${style['privacy-select-box']}`}
+                                    onChange={handleChangeValue}
+                                    name="privacySettingId"
+                                    value={post.privacySettingId}>
                                     <option>Public</option>
+                                    <option>Only me</option>
                                     {/* <option>Followers</option> */}
                                 </select>
                             </div>
                         </div>
                         <div className={`${style['post-content-container']}`}>
-                        <TextArea
-                            maxLength={10000}
-                            className={`${style['post-content-text-area']}`}
-                            placeholder="What's on your mind?"
-                            autoSize={{ minRows: 4 }}
-                            onChange={() => { }}
-                            onPressEnter={(e) => { console.log(e.target.value) }}
-                        />
-                        <CropAndUploadImg maxFileLength={maxFileLength} />
+                            <TextArea
+                                name="content"
+                                value={post.content}
+                                maxLength={10000}
+                                className={`${style['post-content-text-area']}`}
+                                placeholder="What's on your mind?"
+                                autoSize={{ minRows: 4 }}
+                                onChange={handleChangeValue}
+                                onPressEnter={(e) => { console.log(e.target.value) }}
+                            />
+                            <CropAndUploadImg maxFileLength={maxFileLength} />
                         </div>
 
                         {/* Footer */}
                         <div className={`${style['create-post-modal-dialog-footer']}`}>
                             <div
                                 className={`${style['create-post-btn']}`}
-                                onClick={() => { }}
+                                onClick={handleCreatePost}
                             >
                                 Post
                             </div>

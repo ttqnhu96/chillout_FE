@@ -1,7 +1,8 @@
-import { DISPLAY_CREATE_POST_MODAL, HIDE_CREATE_POST_MODAL } from "../constants/types";
+import { DISPLAY_CREATE_POST_MODAL, GET_POST_LIST_WALL, HIDE_CREATE_POST_MODAL } from "../constants/types";
 
 const initialState = {
-    isCreatePostModalVisible: false
+    isCreatePostModalVisible: false,
+    postListWall: []
 }
 
 export const PostReducer = (state = initialState, action) => {
@@ -11,6 +12,10 @@ export const PostReducer = (state = initialState, action) => {
             return { ...state }
         case HIDE_CREATE_POST_MODAL: {
             state.isCreatePostModalVisible = false;
+            return { ...state }
+        }
+        case GET_POST_LIST_WALL: {
+            state.postListWall = action.postListWall;
             return { ...state }
         }
         default:

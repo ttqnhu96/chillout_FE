@@ -8,7 +8,7 @@ export default function PostHeader(props) {
             <div className={`${style['avatar-container']}`}>
                 <img
                     className={`${style['avatar-image']}`}
-                    src={post.avatar}
+                    src={post.avatar || "./image/avatar/default_avatar.png"}
                     alt="avatar"
                 />
             </div>

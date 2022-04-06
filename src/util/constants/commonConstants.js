@@ -15,7 +15,8 @@ export const messages = {
     E004: `This account was deactivated.`,
 
     SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`,
-    UPDATE_SUCCESS: `Your change(s) has been successfully saved!`
+    UPDATE_SUCCESS: `Your change(s) has been successfully saved!`,
+    CREATE_POST_SUCCESS: `Post created successfully.`
 }
 
 export const REGEX_EMAIL = /^(|[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,})$/

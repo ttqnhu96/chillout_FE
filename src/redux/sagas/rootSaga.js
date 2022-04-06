@@ -5,6 +5,7 @@ import * as CitySaga from './CitySaga';
 import * as WorkplaceSaga from './WorkplaceSaga';
 import * as SchoolSaga from './SchoolSaga';
 import * as CollegeSaga from './CollegeSaga';
+import * as PostSaga from './PostSaga';
 
 export function* rootSaga() {
     yield all([
@@ -15,6 +16,8 @@ export function* rootSaga() {
         CitySaga.getCityListWatcher(),
         WorkplaceSaga.getWorkplaceListWatcher(),
         SchoolSaga.getSchoolListWatcher(),
-        CollegeSaga.getCollegeListWatcher()
+        CollegeSaga.getCollegeListWatcher(),
+        PostSaga.createPostWatcher(),
+        PostSaga.getPostListWallWatcher()
     ])
 }

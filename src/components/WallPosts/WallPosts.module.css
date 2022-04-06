@@ -3,7 +3,7 @@
 ==============================================*/
 .wall-post-container {
     margin-top: 1.5rem;
-    height: 90%;
+    height: 92%;
     padding: 0 1.5rem 1.5rem 1.5rem;
     overflow-y: hidden;
 }
@@ -36,4 +36,5 @@
 .view-post-container {
     border: 0.1rem solid rgba(199, 199, 199, 0.6);
     border-radius: 3rem;
+    margin-bottom: 2rem;
 }

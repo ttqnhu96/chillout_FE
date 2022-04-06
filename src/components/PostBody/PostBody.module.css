@@ -10,11 +10,11 @@
 ==============================================*/
 .post-photo-container {
     margin: 1.5rem 1.7rem 1.7rem 1.7rem;
-    width: auto;
+    width: 50%;
     position: relative;
     display: block;
-    padding-bottom: 93.5%;
-  }
+    padding-bottom: 50%;
+}
 .post-photo {
     position: absolute;
     border-radius: 3rem;

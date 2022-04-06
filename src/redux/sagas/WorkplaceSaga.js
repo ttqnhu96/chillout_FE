@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { workplaceService } from "../../services/WorkplaceService";
-import { messages } from "../../util/constants/commonConstants";
+import { MESSAGES } from "../../util/constants/commonConstants";
 import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
 import { getWorkplaceListAction } from "../actions/WorkplaceActions";
@@ -23,10 +23,10 @@ function* getWorkplaceList() {
             yield put(getWorkplaceListAction(response));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500)
+        return notify('error', MESSAGES.E500)
     }
 }
 

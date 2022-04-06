@@ -32,6 +32,7 @@ export default function Header() {
         }
         //Hide scrollbar when modal is opened
         document.body.style.overflow = isCreatePostModalVisible ? 'hidden' : 'unset';
+        document.body.style.paddingRight = isCreatePostModalVisible ? '0.6rem' : '0';
     }, [isCreatePostModalVisible])
 
     // extract pathname from location

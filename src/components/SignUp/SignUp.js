@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpAction } from '../../redux/actions/AuthenticationActions';
 import { hideSignUpModalAction } from '../../redux/actions/SignUpAction';
-import { labels } from '../../util/constants/commonConstants';
+import { LABELS } from '../../util/constants/commonConstants';
 import style from './SignUp.module.css';
 
 export default function SignUp() {
@@ -106,7 +106,7 @@ export default function SignUp() {
             if (signUpValues[key] === '') {
                 setSignUpErrors(prevState => ({
                     ...prevState,
-                    [key]: labels[key] + ' is required!'
+                    [key]: LABELS[key] + ' is required!'
                 }));
 
                 isValid = false;

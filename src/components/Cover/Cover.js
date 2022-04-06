@@ -17,7 +17,7 @@ export default function Cover(props) {
     useEffect(() => {
         //Hide scrollbar when modal is opened
         document.body.style.overflow = isUploadImageModalVisible ? 'hidden' : 'unset';
-
+        document.body.style.paddingRight = isUploadImageModalVisible ? '0.6rem' : '0';
     }, [isUploadImageModalVisible])
 
     const { activeMenuId, setActiveMenuId } = props;

@@ -1,8 +1,25 @@
+import { Carousel } from 'antd';
 import { Fragment } from 'react';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import style from './PostBody.module.css';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 export default function PostBody(props) {
     const { post } = props;
+
+    const renderPhotoList = () => {
+        return (
+            post.photoList.map((photo, index) => (
+                <div key={index}>
+                    <img
+                        className={`${style['post-photo']}`}
+                        src={`${AWS_S3_BUCKET_LINK}/${photo.fileName}`}
+                        alt="post_photo"
+                    />
+                </div>
+            ))
+        )
+    }
 
     return (
         <Fragment>
@@ -14,11 +31,9 @@ export default function PostBody(props) {
             {/* Photo */}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className={`${style['post-photo-container']}`}>
-                    <img
-                        className={`${style['post-photo']}`}
-                        src={post.photo ? post.photo[0] : "https://cdn.brvn.vn/news/480px/2017/13343_Maruko.jpg"}
-                        alt="post_photo"
-                    />
+                    <Carousel nextArrow={<ArrowRightOutlined />} prevArrow={<ArrowLeftOutlined/>}>
+                        {renderPhotoList()}
+                    </Carousel>
                 </div>
             </div>
             <hr style={{ width: '95%' }} />

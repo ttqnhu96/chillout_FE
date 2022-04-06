@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, ERROR_CODE, USER_LOGIN } from "../../util/constants/syste
 import { GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types";
 import { getProfileDetailByIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
 import { notify } from "../../util/notification";
-import { messages } from "../../util/constants/commonConstants";
+import { MESSAGES } from "../../util/constants/commonConstants";
 import { history } from "../../util/history";
 
 /*=============================================
@@ -25,7 +25,7 @@ function* getProfileDetailById(action) {
             yield put(getUserProfileAction(response));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
         sessionStorage.removeItem(ACCESS_TOKEN);
@@ -53,16 +53,16 @@ function* updateProfile(action) {
         const { data } = yield call(() => profileService.updateProfile(action.profileId, action.profileUpdate));
         const errorCode = data.ErrorCode;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            notify('success', messages.UPDATE_SUCCESS);
+            notify('success', MESSAGES.UPDATE_SUCCESS);
         
             //Call API to reload user profile detail
             yield put(getProfileDetailByIdSagaAction(action.profileId));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500)
+        return notify('error', MESSAGES.E500)
     }
 }
 /**

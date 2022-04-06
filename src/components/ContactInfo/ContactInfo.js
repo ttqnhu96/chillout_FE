@@ -1,6 +1,6 @@
 import { Tooltip } from "antd";
 import { Fragment, useState } from "react";
-import { labels, REGEX_EMAIL } from "../../util/constants/commonConstants";
+import { LABELS, REGEX_EMAIL } from "../../util/constants/commonConstants";
 import style from './ContactInfo.module.css';
 
 export default function ContactInfo(props) {

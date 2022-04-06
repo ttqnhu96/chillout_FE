@@ -4,7 +4,7 @@ import { history } from "../../util/history";
 import { authenticationService } from "../../services/AuthenticationService";
 import { LOGIN_SAGA, SIGN_UP_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { messages } from "../../util/constants/commonConstants";
+import { MESSAGES } from "../../util/constants/commonConstants";
 import { hideSignUpModalAction } from "../actions/SignUpAction";
 
 /*=============================================
@@ -27,11 +27,11 @@ function* logIn(action) {
             history.push('/home');
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
 
     } catch (err) {
-        return notify('error', messages.E500);
+        return notify('error', MESSAGES.E500);
     }
 }
 /**
@@ -57,15 +57,15 @@ export function* logInWatcher() {
 
         if(data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Inform sign up successfully
-            notify('success', messages.SIGN_UP_SUCCESS);
+            notify('success', MESSAGES.SIGN_UP_SUCCESS);
             yield put(hideSignUpModalAction());
         }
         else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500);
+        return notify('error', MESSAGES.E500);
     }
 }
 /**

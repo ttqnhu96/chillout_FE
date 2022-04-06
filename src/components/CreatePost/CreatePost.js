@@ -20,6 +20,8 @@ export default function CreatePost() {
         }
     )
 
+    const [photoListUpload, setPhotoListUpload] = useState([]);
+
     const handleChangeValue = (e) => {
         const { name, value } = e.target;
         setPost(prevState => ({
@@ -29,7 +31,7 @@ export default function CreatePost() {
     }
 
     const handleCreatePost = () => {
-        dispatch(createPostSagaAction(post))
+        dispatch(createPostSagaAction(photoListUpload, post))
     }
 
     const maxFileLength = 10;
@@ -83,7 +85,7 @@ export default function CreatePost() {
                                 onChange={handleChangeValue}
                                 onPressEnter={(e) => { console.log(e.target.value) }}
                             />
-                            <CropAndUploadImg maxFileLength={maxFileLength} />
+                            <CropAndUploadImg maxFileLength={maxFileLength} setPhotoListUpload={setPhotoListUpload}/>
                         </div>
 
                         {/* Footer */}

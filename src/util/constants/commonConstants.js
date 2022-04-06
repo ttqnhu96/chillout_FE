@@ -1,4 +1,4 @@
-export const labels = {
+export const LABELS = {
     firstName: 'First Name',
     lastName: 'Last Name',
     username: 'Username',
@@ -6,7 +6,7 @@ export const labels = {
     birthday: 'Date of birth'
 }
 
-export const messages = {
+export const MESSAGES = {
     E500: `Server error`,
 
     E001: `A user with this username already exists. Please log in.`,
@@ -17,6 +17,10 @@ export const messages = {
     SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`,
     UPDATE_SUCCESS: `Your change(s) has been successfully saved!`,
     CREATE_POST_SUCCESS: `Post created successfully.`
+}
+
+export const FOLDER_UPLOAD = {
+    POST: 'post'
 }
 
 export const REGEX_EMAIL = /^(|[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,})$/

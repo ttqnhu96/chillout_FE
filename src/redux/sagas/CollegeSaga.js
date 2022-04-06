@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { collegeService } from "../../services/CollegeService";
-import { messages } from "../../util/constants/commonConstants";
+import { MESSAGES } from "../../util/constants/commonConstants";
 import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
 import { getCollegeListAction } from "../actions/CollegeActions";
@@ -23,10 +23,10 @@ function* getCollegeList(action) {
             yield put(getCollegeListAction(response));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500)
+        return notify('error', MESSAGES.E500)
     }
 }
 

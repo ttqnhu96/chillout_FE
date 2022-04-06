@@ -18,6 +18,7 @@ export default function Login() {
     useEffect(() => {
         //Hide scrollbar when sign up modal is opened
         document.body.style.overflow = isSignUpModalVisible ? 'hidden' : 'unset';
+        document.body.style.paddingRight = isSignUpModalVisible ? '0.6rem' : '0';
     }, [isSignUpModalVisible])
 
     const handleChangeUsername = (e) => {

@@ -15,6 +15,7 @@ export const URL_CONSTANTS = {
     LOGIN: 'login',
     GET_DETAIL: 'detail',
     GET_POST_LIST_WALL: 'list-wall',
+    UPLOAD_MULTI_IMAGE:'upload-multi-image',
     // GET_BY_USERNAME: ':username',
     // GET_BY_ID: ':id',
     // DELETE: ':id',

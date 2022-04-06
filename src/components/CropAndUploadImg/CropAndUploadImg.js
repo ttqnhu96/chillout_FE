@@ -4,18 +4,19 @@ import ImgCrop from 'antd-img-crop';
 
 export default function CropAndUploadImg(props) {
   const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
+    // {
+    //   uid: '-1',
+    //   name: 'image.png',
+    //   status: 'done',
+    //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    // },
   ]);
 
-  const { maxFileLength } = props;
+  const { maxFileLength, setPhotoListUpload } = props;
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
+    setPhotoListUpload(newFileList);
   };
 
   const onPreview = async file => {
@@ -36,7 +37,7 @@ export default function CropAndUploadImg(props) {
   return (
     <ImgCrop rotate>
       <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        //action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
         fileList={fileList}
         onChange={onChange}

@@ -2,9 +2,10 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, } from "../../util/constants/systemSettings";
 import { CREATE_POST_SAGA, GET_POST_LIST_WALL_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { messages } from "../../util/constants/commonConstants";
+import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
 import { getPostListWallAction, hideCreatePostModalAction } from "../actions/PostAction";
+import { photoService } from "../../services/PhotoService";
 
 /*=============================================
                 CREATE POST
@@ -15,22 +16,34 @@ import { getPostListWallAction, hideCreatePostModalAction } from "../actions/Pos
  */
 function* createPost(action) {
     try {
-        const { data } = yield call(() => postService.createPost(action.newPost));
+        //Set photo list to upload
+        const photoListUpload = action.photoListUpload;
+
+        const photosUpload = photoListUpload.map(file => file.originFileObj);
+        var formData = new FormData();
+        photosUpload.forEach(item => {
+            formData.append('files', item);
+        })
+        //Call API to upload file
+        const uploadFileResponse = yield call(() => photoService.uploadPhoto(formData, FOLDER_UPLOAD.POST));
+
+        //Update photo list to create post
+        const fileNameList = uploadFileResponse.data.Data;
+        const post = { ...action.newPost, photoList: fileNameList };
+
+        const { data } = yield call(() => postService.createPost(post));
         const errorCode = data.ErrorCode;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            notify('success', messages.CREATE_POST_SUCCESS);
-        
+            notify('success', MESSAGES.CREATE_POST_SUCCESS);
+
             //Hide create post modal
             yield put(hideCreatePostModalAction());
-
-            //Call API to reload user profile detail
-            //yield put(getProfileDetailByIdSagaAction(action.profileId));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500)
+        return notify('error', MESSAGES.E500)
     }
 }
 /**
@@ -48,22 +61,20 @@ export function* createPostWatcher() {
  * getPostListWall
  * @param action 
  */
- function* getPostListWall(action) {
+function* getPostListWall(action) {
     try {
         const { data } = yield call(() => postService.getPostListWall(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            console.log('getPostListWall response: ', response)
-
             //Set post list to reducer
             yield put(getPostListWallAction(response));
         } else {
             //Inform error
-            return notify('error', messages[errorCode])
+            return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        return notify('error', messages.E500)
+        return notify('error', MESSAGES.E500)
     }
 }
 /**

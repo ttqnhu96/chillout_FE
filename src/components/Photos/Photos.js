@@ -13,7 +13,7 @@ export default function Photos() {
     useEffect(() => {
         //Hide scrollbar when modal is opened
         document.body.style.overflow = isViewPhotoModalVisible ? 'hidden' : 'unset';
-
+        document.body.style.paddingRight = isViewPhotoModalVisible ? '0.6rem' : '0';
     }, [isViewPhotoModalVisible])
 
     //Handle events
@@ -30,7 +30,6 @@ export default function Photos() {
                     <img src="./image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['photo']}`}
-                        // onClick={handleClickPhoto("./image/avatar/default_avatar.png")}
                         onClick={() => handleClickPhoto("./image/avatar/default_avatar.png")}
                     />
                     <div className={`${style['photo']} ${style['delete-button']}`}>

@@ -1,6 +1,6 @@
 import { Tooltip } from "antd";
 import { Fragment, useEffect, useState } from "react";
-import { labels } from "../../util/constants/commonConstants";
+import { LABELS } from "../../util/constants/commonConstants";
 import style from './BasicInfo.module.css';
 
 export default function BasicInfo(props) {
@@ -61,7 +61,7 @@ export default function BasicInfo(props) {
         if (basicInfoValue[fieldName] === '') {
             setErrors(prevState => ({
                 ...prevState,
-                [fieldName]: labels[fieldName] + ' is required!'
+                [fieldName]: LABELS[fieldName] + ' is required!'
             }));
             isValid = false;
         }

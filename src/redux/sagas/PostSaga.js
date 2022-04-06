@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, } from "../../util/constants/systemSettings";
-import { CREATE_POST_SAGA, GET_POST_LIST_WALL_SAGA } from "../constants/types";
+import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
-import { getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
+import { getPostListNewsFeedAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
 
 /*=============================================
@@ -89,4 +89,35 @@ function* getPostListWall(action) {
  */
 export function* getPostListWallWatcher() {
     yield takeLatest(GET_POST_LIST_WALL_SAGA, getPostListWall);
+}
+
+/*=============================================
+            GET POST LIST ON WALL
+==============================================*/
+/**
+ * getPostListNewsFeed
+ * @param action 
+ */
+ function* getPostListNewsFeed(action) {
+    try {
+        const { data } = yield call(() => postService.getPostListNewsFeed(action.request));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set post list to reducer
+            yield put(getPostListNewsFeedAction(response));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * getPostListNewsFeedWatcher
+ * @param
+ */
+export function* getPostListNewsFeedWatcher() {
+    yield takeLatest(GET_POST_LIST_NEWSFEED_SAGA, getPostListNewsFeed);
 }

@@ -11,6 +11,11 @@ export class PostService extends BaseService {
     getPostListWall = (request) => {
         return this.post(`${FUNCTION_CONSTANTS.POST}/${URL_CONSTANTS.GET_POST_LIST_WALL}`, request);
     }
+
+    //Get post list on news feed
+    getPostListNewsFeed = (request) => {
+        return this.post(`${FUNCTION_CONSTANTS.POST}/${URL_CONSTANTS.GET_POST_LIST_NEWS_FEED}`, request);
+    }
 }
 
 

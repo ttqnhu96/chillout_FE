@@ -6,6 +6,7 @@ import * as WorkplaceSaga from './WorkplaceSaga';
 import * as SchoolSaga from './SchoolSaga';
 import * as CollegeSaga from './CollegeSaga';
 import * as PostSaga from './PostSaga';
+import * as PhotoSaga from './PhotoSaga';
 
 export function* rootSaga() {
     yield all([
@@ -18,6 +19,8 @@ export function* rootSaga() {
         SchoolSaga.getSchoolListWatcher(),
         CollegeSaga.getCollegeListWatcher(),
         PostSaga.createPostWatcher(),
-        PostSaga.getPostListWallWatcher()
+        PostSaga.getPostListWallWatcher(),
+        PostSaga.getPostListNewsFeedWatcher(),
+        PhotoSaga.getPhotoListByUserIdWatcher()
     ])
 }

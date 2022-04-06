@@ -1,6 +1,5 @@
 import { Carousel } from 'antd';
 import { Fragment } from 'react';
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import style from './PostBody.module.css';
 import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 

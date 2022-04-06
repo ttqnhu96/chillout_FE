@@ -1,9 +1,10 @@
-import { DISPLAY_UPLOAD_IMAGE_MODAL, DISPLAY_VIEW_PHOTO_MODAL, HIDE_UPLOAD_IMAGE_MODAL, HIDE_VIEW_PHOTO_MODAL } from "../constants/types";
+import { DISPLAY_UPLOAD_IMAGE_MODAL, DISPLAY_VIEW_PHOTO_MODAL, GET_PHOTO_LIST_BY_USER_ID, HIDE_UPLOAD_IMAGE_MODAL, HIDE_VIEW_PHOTO_MODAL } from "../constants/types";
 
 const initialState = {
     isViewPhotoModalVisible: false,
     imageSrc: "",
     isUploadImageModalVisible: false,
+    photoList: []
 }
 
 export const PhotoReducer = (state = initialState, action) => {
@@ -22,6 +23,10 @@ export const PhotoReducer = (state = initialState, action) => {
         }
         case HIDE_UPLOAD_IMAGE_MODAL: {
             state.isUploadImageModalVisible = false;
+            return { ...state }
+        }
+        case GET_PHOTO_LIST_BY_USER_ID: {
+            state.photoList = action.photoList;
             return { ...state }
         }
         default:

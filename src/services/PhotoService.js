@@ -6,6 +6,11 @@ export class PhotoService extends BaseService {
     uploadPhoto = (files, folderUpload) => {
         return this.post(`${FUNCTION_CONSTANTS.UPLOAD_FILE}/${URL_CONSTANTS.UPLOAD_MULTI_IMAGE}/${folderUpload}`, files);
     }
+
+    //Get photo list by user id
+    getPhotoListByUserId = (request) => {
+        return this.post(`${FUNCTION_CONSTANTS.PHOTO}/${URL_CONSTANTS.GET_PHOTO_LIST_BY_USER_ID}`, request)
+    }
 }
 
 

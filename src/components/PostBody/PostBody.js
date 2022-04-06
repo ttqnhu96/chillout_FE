@@ -31,7 +31,7 @@ export default function PostBody(props) {
             {/* Photo */}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className={`${style['post-photo-container']}`}>
-                    <Carousel nextArrow={<ArrowRightOutlined />} prevArrow={<ArrowLeftOutlined/>}>
+                    <Carousel>
                         {renderPhotoList()}
                     </Carousel>
                 </div>

@@ -12,9 +12,10 @@ export const hideCreatePostModalAction = () => {
     }
 }
 
-export const createPostSagaAction = (photoListUpload, newPost) => {
+export const createPostSagaAction = (currentUserId, photoListUpload, newPost) => {
     return {
         type: CREATE_POST_SAGA,
+        currentUserId: currentUserId,
         photoListUpload: photoListUpload,
         newPost: newPost
     }

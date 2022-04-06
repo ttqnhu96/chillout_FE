@@ -17,8 +17,9 @@
 .wall-right {
     width: 70%;
     margin: 0 0 0 2rem;
-    background-color: transparent;
-    
+    background-color: transparent !important;
+    border-radius: 3rem;
+    position: relative;
 }
 
 .wall-cover-container {
@@ -26,7 +27,9 @@
 }
 
 .wall-content-container {
+    position: absolute;
     margin: 1.5em 0;
+    width: 100%;
     height: calc(73% - 2rem); /* 2rem is the margin top (space between cover container and post container) */
     border-radius: 3rem;
     font-size: 0.95em;

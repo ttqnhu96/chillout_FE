@@ -4,7 +4,7 @@ import { CREATE_POST_SAGA, GET_POST_LIST_WALL_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
-import { getPostListWallAction, hideCreatePostModalAction } from "../actions/PostAction";
+import { getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
 
 /*=============================================
@@ -28,7 +28,7 @@ function* createPost(action) {
         const uploadFileResponse = yield call(() => photoService.uploadPhoto(formData, FOLDER_UPLOAD.POST));
 
         //Update photo list to create post
-        const fileNameList = uploadFileResponse.data.Data;
+        const fileNameList = uploadFileResponse.data.Data || [];
         const post = { ...action.newPost, photoList: fileNameList };
 
         const { data } = yield call(() => postService.createPost(post));
@@ -38,6 +38,12 @@ function* createPost(action) {
 
             //Hide create post modal
             yield put(hideCreatePostModalAction());
+
+            //Call API to reload wall and news feed
+            yield put(getPostListWallSagaAction({
+                userId: action.currentUserId,
+                isPaginated: false
+            }));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

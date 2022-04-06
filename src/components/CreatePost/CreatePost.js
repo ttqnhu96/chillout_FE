@@ -8,6 +8,8 @@ import CropAndUploadImg from '../CropAndUploadImg/CropAndUploadImg';
 export default function CreatePost() {
     const dispatch = useDispatch();
 
+    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+
     //Get state from reducers
     const { isCreatePostModalVisible } = useSelector(state => state.PostReducer);
 
@@ -31,7 +33,7 @@ export default function CreatePost() {
     }
 
     const handleCreatePost = () => {
-        dispatch(createPostSagaAction(photoListUpload, post))
+        dispatch(createPostSagaAction(currentUserId, photoListUpload, post))
     }
 
     const maxFileLength = 10;

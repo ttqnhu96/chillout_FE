@@ -9,9 +9,10 @@
                     PHOTO
 ==============================================*/
 .post-photo-container {
-    margin: 1.5rem 1.7rem 1.7rem 1.7rem;
+    margin: 0.5rem 0;
     width: 45%;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow-x: hidden;
 }
 .post-photo {
     max-width: 100%;
@@ -41,17 +42,4 @@
     font-weight: 600;
     text-align: right;
     cursor: pointer;
-}
-
-.ant-carousel .slick-prev,
-.ant-carousel .slick-next {
-  color: unset;
-  font-size: unset;
-}
-
-.ant-carousel .slick-prev:hover,
-.ant-carousel .slick-next:hover,
-.ant-carousel .slick-prev:focus,
-.ant-carousel .slick-next:focus {
-  color: red;
 }

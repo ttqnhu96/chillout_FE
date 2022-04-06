@@ -17,7 +17,7 @@ export default function PostHeader(props) {
                     {`${post.firstName} ${post.lastName}`}
                 </div>
                 <div className={`${style['time-text']}`}>
-                    {post.createdAt}
+                    {new Date(post.createdAt).toLocaleString()}
                 </div>
             </div>
             <div className={`${style['post-options-container']}`}>

@@ -1,0 +1,9 @@
+/*=============================================
+                LIKE QUANTITY
+==============================================*/
+.likes-quantity {
+    width:50%;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}

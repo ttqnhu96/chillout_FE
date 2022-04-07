@@ -6,40 +6,11 @@
 }
 
 /*=============================================
-                    PHOTO
-==============================================*/
-.post-photo-container {
-    margin: 0.5rem 0;
-    width: 45%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow-x: hidden;
-}
-.post-photo {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-/*=============================================
             LIKE AND COMMENT QUANTITY
 ==============================================*/
-.like-container {
+.like-comment-quantity-container {
     padding: 0 1.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.likes-quantity {
-    width:50%;
-    margin-left: 0.5rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-.comment-quantity {
-    width: 50%;
-    font-weight: 600;
-    text-align: right;
-    cursor: pointer;
 }

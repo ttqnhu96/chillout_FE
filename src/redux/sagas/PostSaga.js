@@ -4,7 +4,7 @@ import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA,
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
-import { getPostDetailByIdAction, getPostListNewsFeedAction, getPostListNewsFeedSagaAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
+import { getPostListNewsFeedAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
 
 /*=============================================

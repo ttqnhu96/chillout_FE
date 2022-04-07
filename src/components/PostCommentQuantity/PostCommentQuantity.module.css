@@ -1,0 +1,9 @@
+/*=============================================
+                COMMENT QUANTITY
+==============================================*/
+.comment-quantity {
+    width: 50%;
+    font-weight: 600;
+    text-align: right;
+    cursor: pointer;
+}

@@ -2,7 +2,6 @@ import { memo } from 'react';
 import style from './PostHeader.module.css';
 
 function PostHeader(props) {
-    console.log('PostHeader')
     const { post } = props;
 
     return (

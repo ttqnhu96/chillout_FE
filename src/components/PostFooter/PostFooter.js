@@ -1,9 +1,8 @@
 import TextArea from 'antd/lib/input/TextArea';
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import style from './PostFooter.module.css';
 
-export default function PostFooter(props) {
-    // console.log('PostFooter')
+function PostFooter(props) {
     const { post } = props;
 
     const renderCommentList = () => {
@@ -69,3 +68,5 @@ export default function PostFooter(props) {
         </Fragment>
     )
 }
+
+export default memo(PostFooter)

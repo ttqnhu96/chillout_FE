@@ -1,0 +1,35 @@
+/*=============================================
+             CREATE COMMENT TEXT BOX
+==============================================*/
+.write-comment-container {
+    padding: 1.7rem;
+    display: flex;
+    justify-content: center;
+}
+.avatar-current-user-comment {
+    height: 3em;
+    width: 3em;
+    margin-top: 0.3rem;
+    border-radius: 5rem;
+    cursor: pointer;
+}
+.comment-text-area-button-container {
+    width: 100%;
+    margin-left: 0.7rem;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 2rem;
+    background-color: rgba(248, 206, 198, 0.5);
+}
+.comment-text-area {
+    margin: 0.7rem 0.5rem 0.5rem 0.5rem;
+    background-color: transparent;
+    border: none;  
+}
+.send-comment-button {
+    height: 2em;
+    width: 2em;
+    cursor: pointer;
+    margin: 0.8rem 0.7rem 0.5rem 0.5rem;
+}

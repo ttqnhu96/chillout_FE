@@ -1,0 +1,40 @@
+/*=============================================
+                    COMMENTS
+==============================================*/
+.post-comment-container {
+    padding: 1rem 1.7rem 0 1.7rem;
+    display: flex;
+}
+.post-comment-avatar {
+    height: 3em;
+    width: 3em;
+    border-radius: 5rem;
+    cursor: pointer;
+}
+.post-comment-username-content-container {
+    width: 80%;
+    margin-left: 0.7rem;
+    padding: 0;
+    background-color: rgba(248, 206, 198, 0.5);
+    border-radius: 2rem;
+}
+.post-comment-username {
+    margin: 0.7rem 1.7rem 0 1.7rem;
+    font-weight: 500;
+}
+.post-comment-content {
+    margin: 0 1.7rem 0.7rem 1.7rem;
+}
+.post-comments-options-container {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post-comment-time {
+    margin-top: 0.7rem;
+    margin-left: calc(2.4rem + 48px);
+    text-align: left;
+    font-size: 0.8em;
+    color: rgb(68, 68, 68);
+}

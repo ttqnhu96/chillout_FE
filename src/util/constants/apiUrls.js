@@ -19,6 +19,7 @@ export const URL_CONSTANTS = {
     UPLOAD_MULTI_IMAGE:'upload-multi-image',
     GET_PHOTO_LIST_BY_USER_ID: 'list',
     UPDATE_LIKES: 'update/likes',
+    GET_COMMENT_LIST_BY_POST_ID: 'list',
     
     // GET_BY_USERNAME: ':username',
     // GET_BY_ID: ':id',
@@ -34,6 +35,6 @@ export const URL_CONSTANTS = {
     // UPLOAD_SINGLE_IMAGE: 'upload-single-image/:folderName',
     // UPLOAD_MULTI_IMAGE:'upload-multi-image/:folderName',
     // UPDATE_AVATAR: 'update/avatar',
-    // GET_COMMENT_LIST_BY_POST_ID: 'list',
+    
     // SEARCH: 'search'
 }

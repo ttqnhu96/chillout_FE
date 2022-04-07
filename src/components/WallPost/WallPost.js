@@ -8,7 +8,6 @@ import PostHeader from '../PostHeader/PostHeader';
 import style from './WallPost.module.css';
 
 export default function WallPost(props) {
-    // console.log('WallPost')
     const dispatch = useDispatch();
     const likeIconSrc = "./image/icon/like.png";
     const unlikeIconSrc = "./image/icon/unlike.png";

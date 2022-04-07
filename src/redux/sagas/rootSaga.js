@@ -7,6 +7,7 @@ import * as SchoolSaga from './SchoolSaga';
 import * as CollegeSaga from './CollegeSaga';
 import * as PostSaga from './PostSaga';
 import * as PhotoSaga from './PhotoSaga';
+import * as CommentSaga from './CommentSaga';
 
 export function* rootSaga() {
     yield all([
@@ -37,6 +38,10 @@ export function* rootSaga() {
         PostSaga.updateLikesWatcher(),
 
         //Photo
-        PhotoSaga.getPhotoListByUserIdWatcher()
+        PhotoSaga.getPhotoListByUserIdWatcher(),
+
+        //Comment
+        CommentSaga.getCommentListByPostIdWatcher(),
+        CommentSaga.createCommentWatcher()
     ])
 }

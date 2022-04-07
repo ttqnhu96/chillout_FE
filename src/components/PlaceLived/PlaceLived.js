@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useState } from "react";
+import { Fragment, memo, useState } from "react";
 import { useSelector } from "react-redux";
 import style from './PlaceLived.module.css';
 
-export default function PlaceLived(props) {
+function PlaceLived(props) {
     //Get state from reducer
     const { cityList } = useSelector(state => state.CityReducer);
     //Get props
@@ -124,3 +124,5 @@ export default function PlaceLived(props) {
         </Fragment>
     )
 }
+
+export default memo(PlaceLived)

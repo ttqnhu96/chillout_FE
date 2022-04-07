@@ -1,8 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, memo, useState } from "react";
 import { useSelector } from "react-redux";
 import style from './EducationInfo.module.css';
 
-export default function EducationInfo(props) {
+function EducationInfo(props) {
     //Get state from reducer
     const { schoolList } = useSelector(state => state.SchoolReducer);
     const { collegeList } = useSelector(state => state.CollegeReducer);
@@ -236,3 +236,5 @@ export default function EducationInfo(props) {
         </Fragment>
     )
 }
+
+export default memo(EducationInfo)

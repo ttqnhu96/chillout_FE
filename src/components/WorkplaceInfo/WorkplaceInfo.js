@@ -1,8 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, memo, useState } from "react";
 import { useSelector } from "react-redux";
 import style from './WorkplaceInfo.module.css';
 
-export default function WorkplaceInfo(props) {
+function WorkplaceInfo(props) {
     //Get state from reducer
     const { workplaceList } = useSelector(state => state.WorkplaceReducer);
     //Get props
@@ -122,3 +122,5 @@ export default function WorkplaceInfo(props) {
         </Fragment>
     )
 }
+
+export default memo(WorkplaceInfo)

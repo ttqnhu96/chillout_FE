@@ -1,9 +1,9 @@
 import { Tooltip } from "antd";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import { LABELS } from "../../util/constants/commonConstants";
 import style from './BasicInfo.module.css';
 
-export default function BasicInfo(props) {
+function BasicInfo(props) {
     const { gender, birthday, handleUpdateProfile } = props;
 
     const [maxDate, setMaxDate] = useState('2122-01-01');
@@ -246,3 +246,5 @@ export default function BasicInfo(props) {
         </Fragment>
     )
 }
+
+export default memo(BasicInfo)

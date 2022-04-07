@@ -1,9 +1,9 @@
 import { Tooltip } from "antd";
-import { Fragment, useState } from "react";
-import { LABELS, REGEX_EMAIL } from "../../util/constants/commonConstants";
+import { Fragment, memo, useState } from "react";
+import { REGEX_EMAIL } from "../../util/constants/commonConstants";
 import style from './ContactInfo.module.css';
 
-export default function ContactInfo(props) {
+function ContactInfo(props) {
     const { phone, email, handleUpdateProfile } = props;
 
     const [contactValue, setContactValue] = useState({
@@ -214,3 +214,5 @@ export default function ContactInfo(props) {
         </Fragment>
     )
 }
+
+export default memo(ContactInfo)

@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, memo, useState } from "react";
 import style from './Bio.module.css';
 
-export default function Bio(props) {
+function Bio(props) {
+    console.log('Bio')
     const { bio, handleUpdateProfile } = props;
     
     const [bioValue, setBioValue] = useState(bio);
@@ -78,3 +79,5 @@ export default function Bio(props) {
         </Fragment>
     )
 }
+
+export default memo(Bio)

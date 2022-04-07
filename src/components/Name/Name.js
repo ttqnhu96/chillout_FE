@@ -1,9 +1,9 @@
 import { Tooltip } from "antd";
-import { Fragment, useState } from "react";
+import { Fragment, memo, useState } from "react";
 import { LABELS } from "../../util/constants/commonConstants";
 import style from './Name.module.css';
 
-export default function Name(props) {
+function Name(props) {
     const { firstName, lastName, handleUpdateProfile } = props;
 
     //Local state
@@ -197,3 +197,5 @@ export default function Name(props) {
         </Fragment>
     )
 }
+
+export default memo(Name)

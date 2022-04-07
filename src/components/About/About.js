@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCityListSagaAction } from "../../redux/actions/CityActions";
 import { getWorkplaceListSagaAction } from "../../redux/actions/WorkplaceActions";
@@ -23,14 +23,23 @@ export default function About() {
     const [fieldUpdate, setFieldUpdate] = useState("");
     const [userProfileEdit, setUserProfileEdit] = useState(userProfile);
 
-    const handleUpdateProfile = (fieldName, valueUpdate) => {
+    const handleUpdateProfile = useCallback((fieldName, valueUpdate) => {
         setUserProfileEdit(prevState => ({
             ...prevState,
             [fieldName]: valueUpdate
         }));
         setIsUpdate(true);
         setFieldUpdate(fieldName);
-    }
+      }, [])
+      
+    // const handleUpdateProfile = (fieldName, valueUpdate) => {
+    //     setUserProfileEdit(prevState => ({
+    //         ...prevState,
+    //         [fieldName]: valueUpdate
+    //     }));
+    //     setIsUpdate(true);
+    //     setFieldUpdate(fieldName);
+    // }
 
     useEffect(() => {
         dispatch(getCityListSagaAction());

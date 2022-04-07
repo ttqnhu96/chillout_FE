@@ -4,7 +4,8 @@ import style from './PostBody.module.css';
 import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 export default function PostBody(props) {
-    const { post } = props;
+    // console.log('PostBody')
+    const { post, likeIcon, totalLikes, handleLikePost } = props;
 
     const renderPhotoList = () => {
         return (
@@ -40,11 +41,13 @@ export default function PostBody(props) {
             {/* Like and comment quantity */}
             <div className={`${style['like-container']}`}>
                 <img height={18} width={18}
-                    src="./image/icon/like.png"
+                    src={likeIcon}
                     alt="like"
+                    style={{ cursor: 'pointer' }}
+                    onClick={handleLikePost}
                 />
                 <span className={`${style['likes-quantity']}`}>
-                    {post.likes}
+                    {totalLikes}
                 </span>
                 <span className={`${style['comment-quantity']}`}>
                     {post.totalComment} Comments

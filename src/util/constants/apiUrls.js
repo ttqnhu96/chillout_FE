@@ -18,13 +18,15 @@ export const URL_CONSTANTS = {
     GET_POST_LIST_NEWS_FEED: 'list-newsfeed',
     UPLOAD_MULTI_IMAGE:'upload-multi-image',
     GET_PHOTO_LIST_BY_USER_ID: 'list',
+    UPDATE_LIKES: 'update/likes',
+    
     // GET_BY_USERNAME: ':username',
     // GET_BY_ID: ':id',
     // DELETE: ':id',
     
     // UPDATE: ':id',
     // UPDATE_LANGUAGE: 'update/language',
-    // UPDATE_LIKES: 'update/likes',
+    
     
     
     // GET_LIST_USERS_LIKE_POST: 'list-users-like-post',

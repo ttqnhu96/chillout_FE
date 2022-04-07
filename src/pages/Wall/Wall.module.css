@@ -37,7 +37,7 @@
     overflow: hidden;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
-    padding: 2.5rem;
+    padding: 2rem 2.5rem 2.5rem 2.5rem;
 }
 
 .wall-content-container:hover {

@@ -2,13 +2,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostListWallSagaAction } from "../../redux/actions/PostAction";
-import PostBody from "../PostBody/PostBody";
-import PostFooter from "../PostFooter/PostFooter";
-import PostHeader from "../PostHeader/PostHeader";
-import style from './WallPosts.module.css';
+import WallPost from "../WallPost/WallPost";
+import style from './WallPostList.module.css';
 
-export default function WallPosts() {
+export default function WallPostList() {
     const dispatch = useDispatch();
+
     //Get state from reducer
     const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
     const { postListWall } = useSelector(state => state.PostReducer);
@@ -17,8 +16,6 @@ export default function WallPosts() {
     const [requestToGetPostList, setRequestToGetPostList] = useState({
         userId: 0,
         isPaginated: false
-        // pageIndex: 0,
-        // pageSize: 10
     })
 
     //Set current user id
@@ -38,13 +35,10 @@ export default function WallPosts() {
     const renderPostList = () => {
         return (
             postListWall.map((post, index) => (
-                <div key={index} className={`${style['view-post-container']}`}>
-                    <PostHeader post={post} />
-                    <PostBody post={post} />
-                    <PostFooter post={post} />
-                </div>
-            )
-            )
+                <WallPost key={index}
+                    post={post}
+                    currentUserId={currentUserId} />
+            ))
         )
     }
 

@@ -12,7 +12,6 @@ export default function Photos() {
     //Get state from reducer
     const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
     const { photoList } = useSelector(state => state.PhotoReducer);
-    console.log('photoList', photoList)
 
     const { isViewPhotoModalVisible } = useSelector(state => state.PhotoReducer);
 
@@ -32,17 +31,19 @@ export default function Photos() {
 
     //Set current user id
     useEffect(() => {
-        setRequestToGetPhotoList(prevState => ({
-            ...prevState,
-            userId: currentUserId
-        }))
+        if (currentUserId > 0) {
+            setRequestToGetPhotoList(prevState => ({
+                ...prevState,
+                userId: currentUserId
+            }))
+        }
     }, [currentUserId])
 
     useEffect(() => {
         if (requestToGetPhotoList.userId) {
             dispatch(getPhotoListByUserIdSagaAction(requestToGetPhotoList))
         }
-    }, [requestToGetPhotoList])
+    }, [requestToGetPhotoList.userId])
 
     //Handle events
     const handleClickPhoto = (imageSrc) => {

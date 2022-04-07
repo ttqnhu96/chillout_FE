@@ -16,6 +16,16 @@ export class PostService extends BaseService {
     getPostListNewsFeed = (request) => {
         return this.post(`${FUNCTION_CONSTANTS.POST}/${URL_CONSTANTS.GET_POST_LIST_NEWS_FEED}`, request);
     }
+
+    //Update likes
+    updateLikes = (request) => {
+        return this.put(`${FUNCTION_CONSTANTS.POST}/${URL_CONSTANTS.UPDATE_LIKES}`, request);
+    }
+
+    //Get post detail
+    getPostDetailById = (postId) => {
+        return this.get(`${FUNCTION_CONSTANTS.POST}/${URL_CONSTANTS.GET_DETAIL}/${postId}`);
+    }
 }
 
 

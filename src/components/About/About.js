@@ -30,8 +30,8 @@ export default function About() {
         }));
         setIsUpdate(true);
         setFieldUpdate(fieldName);
-      }, [])
-      
+    }, [])
+
     // const handleUpdateProfile = (fieldName, valueUpdate) => {
     //     setUserProfileEdit(prevState => ({
     //         ...prevState,

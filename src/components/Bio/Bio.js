@@ -2,7 +2,6 @@ import { Fragment, memo, useState } from "react";
 import style from './Bio.module.css';
 
 function Bio(props) {
-    console.log('Bio')
     const { bio, handleUpdateProfile } = props;
     
     const [bioValue, setBioValue] = useState(bio);

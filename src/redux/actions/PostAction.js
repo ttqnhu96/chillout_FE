@@ -1,4 +1,4 @@
-import { CREATE_POST_SAGA, DISPLAY_CREATE_POST_MODAL, GET_POST_LIST_NEWSFEED, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL, GET_POST_LIST_WALL_SAGA, HIDE_CREATE_POST_MODAL } from "../constants/types";
+import { CREATE_POST_SAGA, DISPLAY_CREATE_POST_MODAL, GET_POST_DETAIL_BY_ID, GET_POST_DETAIL_BY_ID_SAGA, GET_POST_LIST_NEWSFEED, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL, GET_POST_LIST_WALL_SAGA, HIDE_CREATE_POST_MODAL, UPDATE_LIKES_SAGA } from "../constants/types";
 
 export const displayCreatePostModalAction = () => {
     return {
@@ -46,5 +46,26 @@ export const getPostListNewsFeedAction = (postListNewsFeed) => {
     return {
         type: GET_POST_LIST_NEWSFEED,
         postListNewsFeed: postListNewsFeed
+    }
+}
+
+export const updateLikesSagaAction = (request) => {
+    return {
+        type: UPDATE_LIKES_SAGA,
+        request: request
+    }
+}
+
+export const getPostDetailByIdSagaAction = (postId) => {
+    return {
+        type: GET_POST_DETAIL_BY_ID_SAGA,
+        postId: postId
+    }
+}
+
+export const getPostDetailByIdAction = (postDetail) => {
+    return {
+        type: GET_POST_DETAIL_BY_ID,
+        postDetail: postDetail
     }
 }

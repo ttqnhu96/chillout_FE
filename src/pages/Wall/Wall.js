@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Cover from "../../components/Cover/Cover";
-import WallPosts from "../../components/WallPosts/WallPosts";
+import WallPostList from "../../components/WallPostList/WallPostList";
 import Intro from "../../components/Intro/Intro";
 import RecentContacts from "../../components/RecentContacts/RecentContacts";
 import style from './Wall.module.css';
@@ -24,7 +24,7 @@ export default function Wall() {
                         setActiveMenuId={setActiveMenuId} />
                 </div>
                 <div className={`${style['wall-content-container']}`}>
-                    {activeMenuId === 1 && <WallPosts />}
+                    {activeMenuId === 1 && <WallPostList />}
                     {activeMenuId === 2 && <About />}
                     {activeMenuId === 3 && <FriendList />}
                     {activeMenuId === 4 && <Photos />}

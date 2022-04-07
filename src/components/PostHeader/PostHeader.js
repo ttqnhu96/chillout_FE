@@ -1,6 +1,8 @@
+import { memo } from 'react';
 import style from './PostHeader.module.css';
 
-export default function PostHeader(props) {
+function PostHeader(props) {
+    console.log('PostHeader')
     const { post } = props;
 
     return (
@@ -29,3 +31,5 @@ export default function PostHeader(props) {
         </div>
     )
 }
+
+export default memo(PostHeader)

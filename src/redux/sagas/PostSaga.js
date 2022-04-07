@@ -1,10 +1,10 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, } from "../../util/constants/systemSettings";
-import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA } from "../constants/types";
+import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA, UPDATE_LIKES_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
-import { getPostListNewsFeedAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
+import { getPostDetailByIdAction, getPostListNewsFeedAction, getPostListNewsFeedSagaAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
 
 /*=============================================
@@ -98,7 +98,7 @@ export function* getPostListWallWatcher() {
  * getPostListNewsFeed
  * @param action 
  */
- function* getPostListNewsFeed(action) {
+function* getPostListNewsFeed(action) {
     try {
         const { data } = yield call(() => postService.getPostListNewsFeed(action.request));
         const errorCode = data.ErrorCode;
@@ -120,4 +120,33 @@ export function* getPostListWallWatcher() {
  */
 export function* getPostListNewsFeedWatcher() {
     yield takeLatest(GET_POST_LIST_NEWSFEED_SAGA, getPostListNewsFeed);
+}
+
+/*=============================================
+                UPDATE LIKES
+==============================================*/
+/**
+ * updateLikes
+ * @param action 
+ */
+function* updateLikes(action) {
+    try {
+        const { data } = yield call(() => postService.updateLikes(action.request));
+        const errorCode = ERROR_CODE.SUCCESSFUL;
+
+        if (data.ErrorCode !== ERROR_CODE.SUCCESSFUL) {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+
+/**
+ * updateLikesWatcher
+ * @param
+ */
+export function* updateLikesWatcher() {
+    yield takeLatest(UPDATE_LIKES_SAGA, updateLikes);
 }

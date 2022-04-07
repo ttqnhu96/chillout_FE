@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import style from './PostFooter.module.css';
 
 export default function PostFooter(props) {
+    // console.log('PostFooter')
     const { post } = props;
 
     const renderCommentList = () => {

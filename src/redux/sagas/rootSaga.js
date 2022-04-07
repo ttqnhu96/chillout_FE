@@ -10,17 +10,33 @@ import * as PhotoSaga from './PhotoSaga';
 
 export function* rootSaga() {
     yield all([
+        //Authen
         AuthenticationSaga.signUpWatcher(),
         AuthenticationSaga.logInWatcher(),
+
+        //Profile
         ProfileSaga.getProfileDetailByIdWatcher(),
         ProfileSaga.updateProfileWatcher(),
+
+        //City
         CitySaga.getCityListWatcher(),
+
+        //Workplace
         WorkplaceSaga.getWorkplaceListWatcher(),
+
+        //School
         SchoolSaga.getSchoolListWatcher(),
+
+        //College
         CollegeSaga.getCollegeListWatcher(),
+
+        //Post
         PostSaga.createPostWatcher(),
         PostSaga.getPostListWallWatcher(),
         PostSaga.getPostListNewsFeedWatcher(),
+        PostSaga.updateLikesWatcher(),
+
+        //Photo
         PhotoSaga.getPhotoListByUserIdWatcher()
     ])
 }

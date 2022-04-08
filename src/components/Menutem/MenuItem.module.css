@@ -8,6 +8,7 @@
     height: 6.5rem;
     display: flex;
     cursor: pointer;
+    overflow: hidden;
 }
 .menu-item-container:hover {
     background: linear-gradient(to right, #f8a888 50%, transparent 0);

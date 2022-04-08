@@ -20,7 +20,7 @@ export default function HomePage() {
         if (homeMenuIdActive === 3) {
 
         }
-        else if (homeMenuIdActive === 5) {
+        else if (homeMenuIdActive === 4) {
             return <Settings />
         }
         else {

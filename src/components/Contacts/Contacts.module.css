@@ -66,3 +66,9 @@
     font-size: 0.9em;
     color: rgba(44, 44, 44, 0.7);
 }
+
+@media (max-width: 1024px) {
+    .contacts-container {
+        display: none;
+    }
+  }

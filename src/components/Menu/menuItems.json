@@ -22,14 +22,14 @@
     },
     {
         "id": 4,
-        "name": "Most Recent",
-        "iconSrc": "./image/icon/menu-most-recent.png",
-        "iconAlt": "menu-most-recent"
-    },
-    {
-        "id": 5,
         "name": "Settings",
         "iconSrc": "./image/icon/menu-settings.svg",
         "iconAlt": "menu-settings"
+    },
+    {
+        "id": 5,
+        "name": "Most Recent",
+        "iconSrc": "./image/icon/menu-most-recent.png",
+        "iconAlt": "menu-most-recent"
     }
 ]

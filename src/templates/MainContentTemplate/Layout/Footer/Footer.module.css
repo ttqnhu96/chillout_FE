@@ -33,9 +33,22 @@
     font-size: 0.8em;
 }
 
+@media (max-width: 1024px) {
+    .chillout-footer {
+        /* justify-content: right; */
+        padding-left:calc(100% / 18 * 6);
+    }
+}
+
+@media (max-width: 911px) {
+    .chillout-footer{
+        padding-left: 0;     
+    }
+}
+
 @media (max-width: 511px) {
     .chillout-footer{
       border-radius: 0;
-      height: calc(100% / 15 * 1.2);
+      height: calc(100% / 15 * 1.5);
     }
 }

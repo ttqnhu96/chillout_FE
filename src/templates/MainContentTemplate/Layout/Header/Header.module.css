@@ -14,7 +14,7 @@
 @media (max-width: 511px) {
     .chillout-header{
       border-radius: 0;
-      height: calc(100% / 15 * 1.2);
+      height: calc(100% / 15 * 1.5);
       padding-top: 0rem;
     }
 }

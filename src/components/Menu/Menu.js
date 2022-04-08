@@ -15,7 +15,7 @@ export default function Menu() {
             history.push(navigateTo);
         }
     }
-    
+
 
     //Render menu items
     const renderMenuItemList = () => {
@@ -32,10 +32,13 @@ export default function Menu() {
     return (
         <div className={`${style['menu-container']}`}>
             {renderMenuItemList()}
-            <img className={`${style['menu-banner']}`}
-                src="./image/banner/menu-banner.png"
-                alt="menu-banner"
-            />
+            <div className={`${style['menu-banner-container']}`}>
+                <img className={`${style['menu-banner']}`}
+                    src="./image/banner/menu-banner.png"
+                    alt="menu-banner"
+                />
+            </div>
+
         </div>
     )
 }

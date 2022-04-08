@@ -11,14 +11,30 @@
     box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
     overflow-y: hidden;
 }
+
 .news-feed-container:hover {
     overflow-y: overlay;
     scroll-behavior: smooth;
 }
-.news-feed-container::-webkit-scrollbar{
-    width:.5rem;
+
+.news-feed-container::-webkit-scrollbar {
+    width: .5rem;
 }
-.news-feed-container::-webkit-scrollbar-thumb{
+
+.news-feed-container::-webkit-scrollbar-thumb {
     background-color: rgba(248, 168, 136, 0.6);
     border-radius: 1rem;
+}
+
+
+@media (max-width: 1024px) {
+    .news-feed-container {
+        width: calc(100% / 18 * 12);
+    }
+}
+
+@media (max-width:911px) {
+    .news-feed-container{
+        width: 100%;     
+    }
 }

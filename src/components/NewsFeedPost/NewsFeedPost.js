@@ -51,7 +51,7 @@ export default function NewsFeedPost(props) {
         <div className={`${style['post-container']}`}>
             <PostHeader post={post} />
             <PostBody post={post} likeIcon={likeIcon} totalLikes={totalLikes} handleLikePost={handleLikePost} />
-            <PostFooter post={post} />
+            <PostFooter postIdProps={post.id} commentListProps={post.commentList} totalCommentProps={post.totalComment} />
         </div>
     )
 }

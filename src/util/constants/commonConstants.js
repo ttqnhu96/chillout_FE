@@ -1,3 +1,7 @@
+export const COMMON_CONSTANT = {
+    MAX_COMMENTS_IN_A_PAGE: 3
+}
+
 export const LABELS = {
     firstName: 'First Name',
     lastName: 'Last Name',

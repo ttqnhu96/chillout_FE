@@ -11,6 +11,11 @@ export class CommentService extends BaseService {
     getCommentListByPostId = (request) => {
         return this.post(`${FUNCTION_CONSTANTS.COMMENT}/${URL_CONSTANTS.GET_COMMENT_LIST_BY_POST_ID}`, request);
     }
+
+    //Delete comment
+    deleteComment = (id) => {
+        return this.delete(`${FUNCTION_CONSTANTS.COMMENT}/${id}`);
+    }
 }
 
 

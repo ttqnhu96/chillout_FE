@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, } from "../../util/constants/systemSettings";
-import { CREATE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA } from "../constants/types";
+import { CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { MESSAGES } from "../../util/constants/commonConstants";
+import { COMMON_CONSTANT, MESSAGES } from "../../util/constants/commonConstants";
 import { commentService } from "../../services/CommentService";
-import { getCommentListAction } from "../actions/CommentAction";
-import { getPostListNewsFeedSagaAction, getPostListWallSagaAction } from "../actions/PostAction";
+import { getCommentListAction, getCommentListByPostIdSagaAction } from "../actions/CommentAction";
+import { hideConfirmDeleteModalAction } from "../actions/ConfirmDeleteAction";
 
 /*=============================================
                 CREATE COMMENT 
@@ -20,14 +20,11 @@ function* createComment(action) {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            //Call API to reload wall and news feed
-            yield put(getPostListWallSagaAction({
-                userId: response.userId,
-                isPaginated: false
-            }));
-            yield put(getPostListNewsFeedSagaAction({
-                userId: response.userId,
-                isPaginated: false
+            //Call API to reload comment list
+            yield put(getCommentListByPostIdSagaAction({
+                postId: response.postId,
+                pageIndex: 0,
+                pageSize: COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE
             }));
         } else {
             //Inform error
@@ -56,10 +53,11 @@ function* getCommentListByPostId(action) {
     try {
         const { data } = yield call(() => commentService.getCommentListByPostId(action.request));
         const errorCode = data.ErrorCode;
-        const response = data.Data.pageResults;
+        const response = data.Data;
+        console.log(response)
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Set comment list to reducer
-            yield put(getCommentListAction(action.request.postId, response));
+            yield put(getCommentListAction(action.request.postId, response.pageResults, response.pageIndex, response.totalRecord));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -74,4 +72,42 @@ function* getCommentListByPostId(action) {
  */
 export function* getCommentListByPostIdWatcher() {
     yield takeLatest(GET_COMMENT_LIST_BY_POST_ID_SAGA, getCommentListByPostId);
+}
+
+/*=============================================
+                DELETE COMMENT 
+==============================================*/
+/**
+ * deleteComment
+ * @param action 
+ */
+ function* deleteComment(action) {
+    try {
+        const { data } = yield call(() => commentService.deleteComment(action.commentId));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            yield put(hideConfirmDeleteModalAction());
+
+            //Call API to reload comment list
+            yield put(getCommentListByPostIdSagaAction({
+                postId: response.postId,
+                pageIndex: 0,
+                pageSize: COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE
+            }));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        console.log(err)
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * deleteCommentWatcher
+ * @param
+ */
+export function* deleteCommentWatcher() {
+    yield takeLatest(DELETE_COMMENT_SAGA, deleteComment);
 }

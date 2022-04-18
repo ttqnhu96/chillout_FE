@@ -12,6 +12,7 @@ import { SchoolReducer } from '../redux/reducers/SchoolReducer';
 import { CollegeReducer } from '../redux/reducers/CollegeReducer';
 import { CommentReducer } from '../redux/reducers/CommentReducer';
 import { LoadingReducer } from '../redux/reducers/LoadingReducer';
+import { ConfirmDeleteReducer } from '../redux/reducers/ConfirmDeleteReducer';
 
 //Create Saga middleware
 const sagaMiddleWare = createMiddleWareSaga();
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
     SchoolReducer,
     CollegeReducer,
     LoadingReducer,
-    CommentReducer
+    CommentReducer,
+    ConfirmDeleteReducer
 })
 
 //Inject Saga Middleware to Redux Store

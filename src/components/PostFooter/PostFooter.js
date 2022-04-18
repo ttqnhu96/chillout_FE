@@ -14,6 +14,7 @@ function PostFooter(props) {
     const [displayedCommentList, setDisplayedCommentList] = useState(commentListProps);
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [currentMaxComments, setCurrentMaxComments] = useState(COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE);
+    const [totalComment, setTotalComment] = useState(totalCommentProps);
 
     //Call API to load the next page of comments
     useEffect(() => {
@@ -24,18 +25,22 @@ function PostFooter(props) {
         }))
 
         setCurrentMaxComments(COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE * (currentPageIndex + 1))
-        
     }, [currentPageIndex])
 
-
-    //Set comment list to display (dispkayed comment list = old page of comments + new page of comments)
-    const { postId, commentList } = useSelector(state => state.CommentReducer);
+    //Set comment list to display (displayed comment list = old page of comments + new page of comments)
+    const { postId, commentList, pageIndex, totalRecord } = useSelector(state => state.CommentReducer);
     useEffect(() => {
         if (postId === postIdProps) {
-            setDisplayedCommentList([...displayedCommentList, ...commentList]);
+            if(pageIndex === 0) {
+                setDisplayedCommentList(commentList);
+                setCurrentPageIndex(0);
+                setTotalComment(totalRecord);
+            } else {
+                setDisplayedCommentList([...displayedCommentList, ...commentList]);
+            }
+
         }
     }, [commentList])
-
 
     //Render comment list
     const renderCommentList = () => {
@@ -50,12 +55,14 @@ function PostFooter(props) {
             {renderCommentList()}
 
             {/* Comment list */}
-            {(totalCommentProps > currentMaxComments)
-                && <div className={`${style['view-more-comment']}`}
+            {(totalComment > currentMaxComments)
+                &&
+                <div className={`${style['view-more-comment']}`}
                     onClick={() => { setCurrentPageIndex(prevState => prevState + 1) }}
                 >
                     View more comments
-                </div>}
+                </div>
+            }
 
             {/* Comment text box */}
             <InputComment postId={postIdProps} />

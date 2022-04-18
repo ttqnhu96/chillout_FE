@@ -4,9 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getPostListNewsFeedSagaAction } from '../../redux/actions/PostAction';
 import NewsFeedPost from '../NewsFeedPost/NewsFeedPost';
+import { deleteCommentSagaAction } from '../../redux/actions/CommentAction';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 
 export default function NewsFeed() {
     const dispatch = useDispatch();
+    const { isConfirmDeleteModalVisible } = useSelector(state => state.ConfirmDeleteReducer);
+    const { deletedCommentId } = useSelector(state => state.CommentReducer);
+    
+    const handleDeleteComment = () => {
+        dispatch(deleteCommentSagaAction(deletedCommentId));
+    }
 
     //Get state from reducer
     const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
@@ -43,6 +51,12 @@ export default function NewsFeed() {
 
     return (
         <div className={`${style['news-feed-container']}`}>
+            {isConfirmDeleteModalVisible
+                && <ConfirmDelete
+                    title='Delete Comment?'
+                    content='Are you sure you want to delete this comment?'
+                    handleDelete={handleDeleteComment}
+                />}
             {renderPostList()}
         </div>
     )

@@ -54,7 +54,6 @@ function* getCommentListByPostId(action) {
         const { data } = yield call(() => commentService.getCommentListByPostId(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        console.log(response)
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Set comment list to reducer
             yield put(getCommentListAction(action.request.postId, response.pageResults, response.pageIndex, response.totalRecord));
@@ -125,8 +124,6 @@ export function* deleteCommentWatcher() {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            notify('success', MESSAGES.UPDATE_SUCCESS);
-        
             //Call API to reload comment list
             yield put(getCommentListByPostIdSagaAction({
                 postId: response.postId,

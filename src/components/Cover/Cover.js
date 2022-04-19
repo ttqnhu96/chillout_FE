@@ -4,12 +4,15 @@ import { CameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 const menuItems = require('./coverMenuItems.json');
 export default function Cover(props) {
     const dispatch = useDispatch();
 
     //Get state from reducer
+    const profileId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
@@ -42,11 +45,12 @@ export default function Cover(props) {
     }
     return (
         <Fragment>
-            {isUploadImageModalVisible && <UploadImageModal />}
+            {isUploadImageModalVisible && <UploadImageModal profileId={profileId} />}
             <div className={`${style['cover-avatar-container']}`}>
                 <img
                     className={`${style['cover-avatar']}`}
-                    src="./image/avatar/default_avatar.png"
+                    src={avatar ?
+                        `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
                 />
                 <div className={`${style['cover-avatar']} ${style['upload-avatar-btn']}`}

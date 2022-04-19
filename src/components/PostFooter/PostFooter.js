@@ -16,6 +16,11 @@ function PostFooter(props) {
     const [currentMaxComments, setCurrentMaxComments] = useState(COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE);
     const [totalComment, setTotalComment] = useState(totalCommentProps);
 
+    //Re-render comment list when commentListProps is changed
+    useEffect(()=>{
+        setDisplayedCommentList(commentListProps)
+    },[commentListProps])
+
     //Call API to load the next page of comments
     useEffect(() => {
         dispatch(getCommentListByPostIdSagaAction({

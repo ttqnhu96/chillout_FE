@@ -2,6 +2,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCommentSagaAction } from '../../redux/actions/CommentAction';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 import style from './InputComment.module.css';
 
 export default function InputComment(props) {
@@ -30,7 +31,7 @@ export default function InputComment(props) {
         <div className={`${style['write-comment-container']}`}>
             <img
                 className={`${style['avatar-current-user-comment']}`}
-                src={ currentUserAvatar || "./image/avatar/default_avatar.png" }
+                src={`${AWS_S3_BUCKET_LINK}/${currentUserAvatar}`}
                 alt="avatar"
             />
             <div className={`${style['comment-text-area-button-container']}`}>

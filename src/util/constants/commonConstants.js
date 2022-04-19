@@ -24,7 +24,8 @@ export const MESSAGES = {
 }
 
 export const FOLDER_UPLOAD = {
-    POST: 'post'
+    POST: 'post',
+    AVATAR: 'avatar'
 }
 
 export const REGEX_EMAIL = /^(|[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,})$/

@@ -4,6 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
@@ -14,7 +15,7 @@ export default function Comment(props) {
     const [commentValue, setCommentValue] = useState(comment.content);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setCommentValue(comment.content)
     }, [comment.content])
 
@@ -51,7 +52,8 @@ export default function Comment(props) {
             <div className={`${style['post-comment-container']}`}>
                 <img
                     className={`${style['post-comment-avatar']}`}
-                    src={comment.avatar || "./image/avatar/default_avatar.png"}
+                    src={comment.avatar ?
+                        `${AWS_S3_BUCKET_LINK}/${comment.avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
                 />
                 <div className={`${style['post-comment-username-content-container']}`}>

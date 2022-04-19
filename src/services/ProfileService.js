@@ -11,6 +11,11 @@ export class ProfileService extends BaseService {
     updateProfile = (id, profileUpdate) => {
         return this.put(`${FUNCTION_CONSTANTS.PROFILE}/${id}`, profileUpdate);
     }
+
+    //Update avatar
+    updateAvatar = (avatarUpdate) => {
+        return this.put(`${FUNCTION_CONSTANTS.PROFILE}/${URL_CONSTANTS.UPDATE_AVATAR}`, avatarUpdate);
+    }
 }
 
 

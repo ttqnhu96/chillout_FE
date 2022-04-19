@@ -18,6 +18,7 @@ export function* rootSaga() {
         //Profile
         ProfileSaga.getProfileDetailByIdWatcher(),
         ProfileSaga.updateProfileWatcher(),
+        ProfileSaga.updateAvatarWatcher(),
 
         //City
         CitySaga.getCityListWatcher(),

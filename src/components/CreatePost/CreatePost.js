@@ -4,11 +4,15 @@ import { useState } from "react";
 import style from './CreatePost.module.css';
 import { hideCreatePostModalAction, createPostSagaAction } from '../../redux/actions/PostAction';
 import CropAndUploadImg from '../CropAndUploadImg/CropAndUploadImg';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 export default function CreatePost() {
     const dispatch = useDispatch();
 
     const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
+    const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
+    const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
 
     //Get state from reducers
     const { isCreatePostModalVisible } = useSelector(state => state.PostReducer);
@@ -59,12 +63,13 @@ export default function CreatePost() {
                         <div className={`${style['create-post-user-container']}`}>
                             <img
                                 className={`${style['create-post-user-avatar']}`}
-                                src="./image/avatar/default_avatar.png"
+                                src={avatar ?
+                                    `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
                                 alt="avatar"
                             />
                             <div className={`${style['user-name-privacy-container']}`}>
                                 <div className={`${style['user-name']}`}>
-                                    Như Trịnh
+                                    {`${firstName || ""} ${lastName || ""}`}
                                 </div>
                                 <select className={`${style['privacy-select-box']}`}
                                     onChange={handleChangeValue}
@@ -85,9 +90,9 @@ export default function CreatePost() {
                                 placeholder="What's on your mind?"
                                 autoSize={{ minRows: 4 }}
                                 onChange={handleChangeValue}
-                                onPressEnter={(e) => { console.log(e.target.value) }}
+                            // onPressEnter={(e) => { console.log(e.target.value) }}
                             />
-                            <CropAndUploadImg maxFileLength={maxFileLength} setPhotoListUpload={setPhotoListUpload}/>
+                            <CropAndUploadImg maxFileLength={maxFileLength} setPhotoListUpload={setPhotoListUpload} />
                         </div>
 
                         {/* Footer */}

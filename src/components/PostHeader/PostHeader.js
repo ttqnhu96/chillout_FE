@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 import style from './PostHeader.module.css';
 
 function PostHeader(props) {
@@ -9,7 +10,7 @@ function PostHeader(props) {
             <div className={`${style['avatar-container']}`}>
                 <img
                     className={`${style['avatar-image']}`}
-                    src={post.avatar || "./image/avatar/default_avatar.png"}
+                    src={`${AWS_S3_BUCKET_LINK}/${post.avatar}` || "./image/avatar/default_avatar.png"}
                     alt="avatar"
                 />
             </div>

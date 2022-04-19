@@ -14,6 +14,8 @@ export default function PostBody(props) {
     useEffect(() => {
         if (postId === post.id) {
             setTotalComment(totalRecord);
+        } else {
+            setTotalComment(post.totalComment);
         }
     }, [totalRecord])
 
@@ -27,7 +29,7 @@ export default function PostBody(props) {
 
             {/* Like and comment quantity */}
             <div className={`${style['like-comment-quantity-container']}`}>
-                <PostLikes likeIcon={likeIcon} totalLikes={totalLikes} handleLikePost={handleLikePost}/>
+                <PostLikes likeIcon={likeIcon} totalLikes={totalLikes} handleLikePost={handleLikePost} />
                 <PostCommentQuantity totalComment={totalComment} />
             </div>
             <hr style={{ width: '95%' }} />

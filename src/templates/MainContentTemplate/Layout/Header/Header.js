@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
@@ -19,7 +19,6 @@ export default function Header() {
     //Get state from reducer
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
-
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
 
     useEffect(() => {
@@ -102,6 +101,7 @@ export default function Header() {
                             `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['avatar']}`}
+                            onError={() => { window.location.reload() }}
                         />
                     </div>
                 </div>

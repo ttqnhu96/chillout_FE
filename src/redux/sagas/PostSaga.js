@@ -25,7 +25,7 @@ function* createPost(action) {
             formData.append('files', item);
         })
         //Call API to upload file
-        const uploadFileResponse = yield call(() => photoService.uploadPhoto(formData, FOLDER_UPLOAD.POST));
+        const uploadFileResponse = yield call(() => photoService.uploadMultiImage(formData, FOLDER_UPLOAD.POST));
 
         //Update photo list to create post
         const fileNameList = uploadFileResponse.data.Data || [];

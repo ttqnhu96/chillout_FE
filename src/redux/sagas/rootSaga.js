@@ -40,6 +40,7 @@ export function* rootSaga() {
 
         //Photo
         PhotoSaga.getPhotoListByUserIdWatcher(),
+        PhotoSaga.deletePhotoWatcher(),
 
         //Comment
         CommentSaga.getCommentListByPostIdWatcher(),

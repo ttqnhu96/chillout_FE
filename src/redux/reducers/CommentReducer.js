@@ -20,9 +20,6 @@ export const CommentReducer = (state = initialState, action) => {
         case SET_DELETED_COMMENT_ID:
             state.deletedCommentId = action.deletedCommentId;
             return { ...state }
-        // case RELOAD_COMMENT:
-        //     state.isReloadComment = action.isReloadComment;
-        //     return { ...state }
         default:
             return state;
     }

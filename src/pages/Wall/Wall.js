@@ -10,14 +10,20 @@ import Photos from "../../components/Photos/Photos";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDelete from "../../components/ConfirmDelete/ConfirmDelete";
 import { deleteCommentSagaAction } from "../../redux/actions/CommentAction";
+import { MODAL_TYPE } from "../../util/constants/commonConstants";
+import { deletePhotoSagaAction } from "../../redux/actions/PhotoAction";
 
 export default function Wall() {
-    const { isConfirmDeleteModalVisible } = useSelector(state => state.ConfirmDeleteReducer);
+    const { isConfirmDeleteModalVisible, modalType } = useSelector(state => state.ConfirmDeleteReducer);
     const { deletedCommentId } = useSelector(state => state.CommentReducer);
-    
+    const { deletedPhotoId } = useSelector(state => state.PhotoReducer);
+
     const dispatch = useDispatch();
     const handleDeleteComment = () => {
         dispatch(deleteCommentSagaAction(deletedCommentId));
+    }
+    const handleDeletePhoto = () => {
+        dispatch(deletePhotoSagaAction(deletedPhotoId));
     }
 
     const [activeMenuId, setActiveMenuId] = useState(1);
@@ -25,10 +31,18 @@ export default function Wall() {
     return (
         <div className={`${style['wall']}`}>
             {isConfirmDeleteModalVisible
+                && modalType === MODAL_TYPE.CONFIRM_DELETE_COMMENT
                 && <ConfirmDelete
                     title='Delete Comment?'
                     content='Are you sure you want to delete this comment?'
                     handleDelete={handleDeleteComment}
+                />}
+            {isConfirmDeleteModalVisible
+                && modalType === MODAL_TYPE.CONFIRM_DELETE_PHOTO
+                && <ConfirmDelete
+                    title='Delete Photo?'
+                    content='Are you sure you want to delete this photo?'
+                    handleDelete={handleDeletePhoto}
                 />}
             <div className={`${style['wall-left']}`}>
                 <Intro />

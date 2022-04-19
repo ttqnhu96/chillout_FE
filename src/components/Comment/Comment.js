@@ -2,9 +2,10 @@ import { Fragment, useState, useEffect } from 'react';
 import style from './Comment.module.css';
 import { Menu, Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { displayConfirmDeleteModalAction } from '../../redux/actions/ConfirmDeleteAction';
+import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
 import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { MODAL_TYPE } from '../../util/constants/commonConstants';
 
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
@@ -28,6 +29,7 @@ export default function Comment(props) {
     }
     const handleClickDeleteButton = () => {
         dispatch(displayConfirmDeleteModalAction());
+        dispatch(setModalTypeAction(MODAL_TYPE.CONFIRM_DELETE_COMMENT));
         dispatch(setDeletedCommentIdAction(comment.id));
     }
     const handleClickCancelButton = () => {

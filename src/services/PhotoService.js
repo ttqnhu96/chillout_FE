@@ -16,6 +16,11 @@ export class PhotoService extends BaseService {
     uploadSingleImage = (file, folderUpload) => {
         return this.post(`${FUNCTION_CONSTANTS.UPLOAD_FILE}/${URL_CONSTANTS.UPLOAD_SINGLE_IMAGE}/${folderUpload}`, file);
     }
+
+    //Delete photo
+    deletePhoto = (id) => {
+        return this.delete(`${FUNCTION_CONSTANTS.PHOTO}/${id}`);
+    }
 }
 
 

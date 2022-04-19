@@ -3,9 +3,11 @@ import { Fragment, useEffect, useState } from 'react';
 import style from './Photos.module.css';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { displayViewPhotoModalAction, getPhotoListByUserIdSagaAction } from '../../redux/actions/PhotoAction';
+import { displayViewPhotoModalAction, getPhotoListByUserIdSagaAction, setDeletedPhotoIdAction } from '../../redux/actions/PhotoAction';
 import ViewPhoto from '../ViewPhoto/ViewPhoto';
 import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
+import { MODAL_TYPE } from '../../util/constants/commonConstants';
 
 export default function Photos() {
     const dispatch = useDispatch();
@@ -49,6 +51,11 @@ export default function Photos() {
     const handleClickPhoto = (imageSrc) => {
         dispatch(displayViewPhotoModalAction(imageSrc))
     }
+    const handleClickDeleteButton = (photoId) => {
+        dispatch(displayConfirmDeleteModalAction());
+        dispatch(setModalTypeAction(MODAL_TYPE.CONFIRM_DELETE_PHOTO));
+        dispatch(setDeletedPhotoIdAction(photoId));
+    }
 
     const renderPhotoList = () => {
         return (
@@ -60,7 +67,8 @@ export default function Photos() {
                         className={`${style['photo']}`}
                         onClick={() => handleClickPhoto(`${AWS_S3_BUCKET_LINK}/${photo.fileName}`)}
                     />
-                    <div className={`${style['photo']} ${style['delete-button']}`}>
+                    <div className={`${style['photo']} ${style['delete-button']}`}
+                        onClick={() => { handleClickDeleteButton(photo.id) }}>
                         <DeleteOutlined />
                     </div>
                 </div>

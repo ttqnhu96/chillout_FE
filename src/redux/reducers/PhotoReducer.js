@@ -1,10 +1,11 @@
-import { DISPLAY_UPLOAD_IMAGE_MODAL, DISPLAY_VIEW_PHOTO_MODAL, GET_PHOTO_LIST_BY_USER_ID, HIDE_UPLOAD_IMAGE_MODAL, HIDE_VIEW_PHOTO_MODAL } from "../constants/types";
+import { DISPLAY_UPLOAD_IMAGE_MODAL, DISPLAY_VIEW_PHOTO_MODAL, GET_PHOTO_LIST_BY_USER_ID, HIDE_UPLOAD_IMAGE_MODAL, HIDE_VIEW_PHOTO_MODAL, SET_DELETED_PHOTO_ID } from "../constants/types";
 
 const initialState = {
     isViewPhotoModalVisible: false,
     imageSrc: "",
     isUploadImageModalVisible: false,
-    photoList: []
+    photoList: [],
+    deletedPhotoId: 0
 }
 
 export const PhotoReducer = (state = initialState, action) => {
@@ -29,6 +30,9 @@ export const PhotoReducer = (state = initialState, action) => {
             state.photoList = action.photoList;
             return { ...state }
         }
+        case SET_DELETED_PHOTO_ID:
+            state.deletedPhotoId = action.deletedPhotoId;
+            return { ...state }
         default:
             return state;
     }

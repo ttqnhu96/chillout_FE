@@ -1,10 +1,9 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import style from './Comment.module.css';
 import { Menu, Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
-import { updateProfileSagaAction } from '../../redux/actions/ProfileActions';
 
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
@@ -14,6 +13,10 @@ export default function Comment(props) {
     //Local state
     const [commentValue, setCommentValue] = useState(comment.content);
     const [isEditMode, setIsEditMode] = useState(false);
+
+    useEffect(()=>{
+        setCommentValue(comment.content)
+    }, [comment.content])
 
     //Handle events
     const handleChangeValue = (event) => {

@@ -123,11 +123,16 @@ export function* deleteCommentWatcher() {
     try {
         const { data } = yield call(() => commentService.updateComment(action.id, action.commentUpdate));
         const errorCode = data.ErrorCode;
+        const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             notify('success', MESSAGES.UPDATE_SUCCESS);
         
-            //Call API to reload user profile detail
-            //yield put(getProfileDetailByIdSagaAction(action.profileId));
+            //Call API to reload comment list
+            yield put(getCommentListByPostIdSagaAction({
+                postId: response.postId,
+                pageIndex: 0,
+                pageSize: COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE
+            }));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

@@ -43,6 +43,7 @@ export function* rootSaga() {
         //Comment
         CommentSaga.getCommentListByPostIdWatcher(),
         CommentSaga.createCommentWatcher(),
-        CommentSaga.deleteCommentWatcher()
+        CommentSaga.deleteCommentWatcher(),
+        CommentSaga.updateCommentWatcher()
     ])
 }

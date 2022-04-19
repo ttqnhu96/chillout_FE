@@ -1,4 +1,4 @@
-import { CREATE_COMMENT_SAGA, SET_DELETED_COMMENT_ID, DELETE_COMMENT_SAGA, GET_COMMENT_LIST, GET_COMMENT_LIST_BY_POST_ID_SAGA } from "../constants/types";
+import { CREATE_COMMENT_SAGA, SET_DELETED_COMMENT_ID, DELETE_COMMENT_SAGA, GET_COMMENT_LIST, GET_COMMENT_LIST_BY_POST_ID_SAGA, UPDATE_COMMENT_SAGA } from "../constants/types";
 
 export const createCommentSagaAction = (newComment) => {
     return {
@@ -38,9 +38,10 @@ export const deleteCommentSagaAction = (commentId) => {
     }
 }
 
-// export const reloadCommentAction = (isReloadComment) => {
-//     return {
-//         type: RELOAD_COMMENT,
-//         isReloadComment: isReloadComment
-//     }
-// }
+export const updateCommentSagaAction = (id, content) => {
+    return {
+        type: UPDATE_COMMENT_SAGA,
+        id: id,
+        commentUpdate: { content: content },
+    }
+}

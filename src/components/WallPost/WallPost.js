@@ -50,7 +50,11 @@ export default function WallPost(props) {
         <div className={`${style['view-post-container']}`}>
             <PostHeader post={post} />
             <PostBody post={post} likeIcon={likeIcon} totalLikes={totalLikes} handleLikePost={handleLikePost} />
-            <PostFooter postIdProps={post.id} commentListProps={post.commentList} totalCommentProps={post.totalComment} />
+            <PostFooter
+                postIdProps={post.id}
+                commentListProps={post.commentList}
+                totalCommentProps={post.totalComment}
+                postAuthorIdProps={post.userId} />
         </div>
     )
 }

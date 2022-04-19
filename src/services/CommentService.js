@@ -16,6 +16,11 @@ export class CommentService extends BaseService {
     deleteComment = (id) => {
         return this.delete(`${FUNCTION_CONSTANTS.COMMENT}/${id}`);
     }
+
+    //Update comment
+    updateComment = (id, commentUpdate) => {
+        return this.put(`${FUNCTION_CONSTANTS.COMMENT}/${id}`, commentUpdate);
+    }
 }
 
 

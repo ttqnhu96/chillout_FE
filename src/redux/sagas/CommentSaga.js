@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, } from "../../util/constants/systemSettings";
-import { CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA } from "../constants/types";
+import { CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA, UPDATE_COMMENT_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
 import { COMMON_CONSTANT, MESSAGES } from "../../util/constants/commonConstants";
 import { commentService } from "../../services/CommentService";
@@ -110,4 +110,36 @@ export function* getCommentListByPostIdWatcher() {
  */
 export function* deleteCommentWatcher() {
     yield takeLatest(DELETE_COMMENT_SAGA, deleteComment);
+}
+
+/*=============================================
+                UPDATE COMMENT
+==============================================*/
+/**
+ * updateComment
+ * @param action 
+ */
+ function* updateComment(action) {
+    try {
+        const { data } = yield call(() => commentService.updateComment(action.id, action.commentUpdate));
+        const errorCode = data.ErrorCode;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            notify('success', MESSAGES.UPDATE_SUCCESS);
+        
+            //Call API to reload user profile detail
+            //yield put(getProfileDetailByIdSagaAction(action.profileId));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * updateCommentWatcher
+ * @param
+ */
+export function* updateCommentWatcher() {
+    yield takeLatest(UPDATE_COMMENT_SAGA, updateComment);
 }

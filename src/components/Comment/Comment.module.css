@@ -43,3 +43,41 @@
     font-size: 0.8em;
     color: rgb(68, 68, 68);
 }
+
+/* Edit comment */
+.comment-input {
+    margin: 0 1.7rem 0.7rem 1.7rem;
+    background-color: transparent;
+    overflow-wrap: break-word;
+    border: none;
+}
+
+.comment-input:focus {
+    outline: none;
+}
+
+.edit-comment-buttons-container {
+    display: flex;
+    margin-top: 0.7rem;
+    margin-left: calc(2.4rem + 48px);
+    text-align: left;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+.cancel-btn:hover {
+    text-decoration: underline;
+}
+
+.save-btn {
+    margin-left: 0.5rem;
+    color: rgb(189, 123, 122);
+    cursor: pointer;
+}
+.save-btn:hover {
+    text-decoration: underline;
+}

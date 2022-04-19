@@ -1,24 +1,45 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import style from './Comment.module.css';
 import { Menu, Dropdown } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction } from '../../redux/actions/ConfirmDeleteAction';
-import { setDeletedCommentIdAction } from '../../redux/actions/CommentAction';
+import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
+import { updateProfileSagaAction } from '../../redux/actions/ProfileActions';
 
 export default function Comment(props) {
-    const { comment } = props;
+    const { comment, postAuthorId } = props;
     const dispatch = useDispatch();
+    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+
+    //Local state
+    const [commentValue, setCommentValue] = useState(comment.content);
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    //Handle events
+    const handleChangeValue = (event) => {
+        setCommentValue(event.target.value);
+    }
+    const handleClickEditButton = () => {
+        setIsEditMode(true);
+    }
+    const handleClickDeleteButton = () => {
+        dispatch(displayConfirmDeleteModalAction());
+        dispatch(setDeletedCommentIdAction(comment.id));
+    }
+    const handleClickCancelButton = () => {
+        setIsEditMode(false);
+        setCommentValue(comment.content);
+    }
+    const handleClickSaveButton = () => {
+        dispatch(updateCommentSagaAction(comment.id, commentValue));
+        setIsEditMode(false);
+    }
 
     const menu = (
         <Menu>
-            <Menu.Item key="1">Edit</Menu.Item>
-            <Menu.Item key="2"
-                onClick={() => {
-                    dispatch(displayConfirmDeleteModalAction());
-                    dispatch(setDeletedCommentIdAction(comment.id));
-                }}
-            >Delete
-            </Menu.Item>
+            {(currentUserId === comment.userId) &&
+                <Menu.Item key="1" onClick={handleClickEditButton}>Edit</Menu.Item>}
+            <Menu.Item key="2" onClick={handleClickDeleteButton}>Delete</Menu.Item>
         </Menu>
     );
 
@@ -34,25 +55,57 @@ export default function Comment(props) {
                     <div className={`${style['post-comment-username']}`}>
                         {`${comment.firstName} ${comment.lastName}`}
                     </div>
-                    <div className={`${style['post-comment-content']}`}>
-                        {comment.content}
-                    </div>
+                    {
+                        isEditMode ?
+                            <input
+                                autoFocus
+                                className={`${style['comment-input']}`}
+                                value={commentValue}
+                                onChange={handleChangeValue}
+                            />
+                            :
+                            <div className={`${style['post-comment-content']}`}>
+                                {commentValue}
+                            </div>
+                    }
                 </div>
 
                 <div className={`${style['post-comments-options-container']}`}>
-                    <Dropdown overlay={menu} placement="bottom" trigger={['click']} arrow>
-                        <img
-                            style={{ cursor: 'pointer' }}
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </Dropdown>
+                    {
+                        (currentUserId === comment.userId || currentUserId === postAuthorId)
+                        &&
+                        <Dropdown overlay={menu} placement="bottom" trigger={['click']} arrow>
+                            <img
+                                style={{ cursor: 'pointer' }}
+                                height={15} width={15}
+                                src="./image/icon/more-options.png"
+                                alt="more-options"
+                            />
+                        </Dropdown>
+                    }
+
                 </div>
             </div>
-            <div className={`${style['post-comment-time']}`}>
-                {new Date(comment.createdAt).toLocaleString()}
-            </div>
+            {
+                isEditMode ?
+                    <div className={`${style['edit-comment-buttons-container']}`}>
+                        <div
+                            className={`${style['cancel-btn']}`}
+                            onClick={handleClickCancelButton}>
+                            Cancel
+                        </div>
+                        ·
+                        <div
+                            className={`${style['save-btn']}`}
+                            onClick={handleClickSaveButton}>
+                            Save
+                        </div>
+                    </div>
+                    :
+                    <div className={`${style['post-comment-time']}`}>
+                        {new Date(comment.createdAt).toLocaleString()}
+                    </div>
+            }
         </Fragment>
     )
 }

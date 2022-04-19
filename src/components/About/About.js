@@ -32,15 +32,6 @@ export default function About() {
         setFieldUpdate(fieldName);
     }, [])
 
-    // const handleUpdateProfile = (fieldName, valueUpdate) => {
-    //     setUserProfileEdit(prevState => ({
-    //         ...prevState,
-    //         [fieldName]: valueUpdate
-    //     }));
-    //     setIsUpdate(true);
-    //     setFieldUpdate(fieldName);
-    // }
-
     useEffect(() => {
         dispatch(getCityListSagaAction());
         dispatch(getWorkplaceListSagaAction());

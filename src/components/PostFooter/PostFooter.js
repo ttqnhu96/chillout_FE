@@ -9,7 +9,7 @@ import style from './PostFooter.module.css';
 
 function PostFooter(props) {
     const dispatch = useDispatch();
-    const { postIdProps, commentListProps, totalCommentProps } = props;
+    const { postIdProps, commentListProps, totalCommentProps, postAuthorIdProps } = props;
 
     const [displayedCommentList, setDisplayedCommentList] = useState(commentListProps);
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -45,7 +45,7 @@ function PostFooter(props) {
     //Render comment list
     const renderCommentList = () => {
         return displayedCommentList.map((comment, index) => (
-            <Comment key={index} comment={comment} />
+            <Comment key={index} comment={comment} postAuthorId={postAuthorIdProps}/>
         ))
     }
 

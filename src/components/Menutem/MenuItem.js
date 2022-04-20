@@ -10,7 +10,7 @@ export default function MenuItem(props) {
     return (
         <div
             className={menuIdActive === menuItem.id ? activeMenuItemCSS : menuItemCSS}
-            onClick={() => { handleClickMenuItem(menuItem.id, menuItem.navigateTo) }}>
+            onClick={() => { handleClickMenuItem(menuItem.id, menuItem.name, menuItem.navigateTo) }}>
             <img className={`${style['menu-item-icon']}`}
                 src={menuItem.iconSrc}
                 alt={menuItem.iconAlt}

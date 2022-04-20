@@ -4,13 +4,14 @@ import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileDetailByIdSagaAction } from '../../../../redux/actions/ProfileActions';
+import { getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../../../redux/actions/ProfileActions';
 import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../../../util/constants/systemSettings';
-import { displayCreatePostModalAction } from '../../../../redux/actions/PostAction';
+import { displayCreatePostModalAction, getPostListWallAction, getPostListWallSagaAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
 import { setHomeMenuIdActiveAction } from '../../../../redux/actions/MenuAction';
+import { getPhotoListByUserIdAction } from '../../../../redux/actions/PhotoAction';
 
 export default function Header() {
     //Call API to get user info
@@ -20,6 +21,7 @@ export default function Header() {
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 
     useEffect(() => {
         if (sessionStorage.getItem(USER_LOGIN) && sessionStorage.getItem(ACCESS_TOKEN)) {
@@ -49,6 +51,16 @@ export default function Header() {
 
     const handleClickHomeIcon = () => {
         dispatch(setHomeMenuIdActiveAction(0))
+    }
+
+    const handleClickUser = () => {
+        if(isViewFriendProfile === true) {
+            dispatch(getPostListWallAction([]));
+            dispatch(getPhotoListByUserIdAction([]));
+            dispatch(setIsViewFriendProfileAction(false));
+        }
+        history.push('/wall');
+        dispatch(setIsReloadWallAction(true));
     }
 
     return (
@@ -95,7 +107,7 @@ export default function Header() {
                     <div className={`${style['message-icon']}`}><i height={20} className="far fa-comment-dots"></i></div>
                     <div className={`${style['notification-icon']}`}><i height={20} className="far fa-bell"></i></div>
                     <div className={`${style['user-container']}`}
-                        onClick={() => { history.push('/wall') }}>
+                        onClick={handleClickUser}>
                         <span className={`${style['username']}`}>{firstName}</span>
                         <img src={avatar ?
                             `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}

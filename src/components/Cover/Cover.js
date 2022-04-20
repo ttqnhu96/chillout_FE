@@ -11,11 +11,21 @@ export default function Cover(props) {
     const dispatch = useDispatch();
 
     //Get state from reducer
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    //In case view logged in user profile
     const profileId = useSelector(state => state.ProfileReducer).userProfile.id;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
+
+    //In case view friend profile
+    const friendAvatar = useSelector(state => state.ProfileReducer).friendProfile.avatar;
+    const friendFirstName = useSelector(state => state.ProfileReducer).friendProfile.firstName;
+    const friendLastName = useSelector(state => state.ProfileReducer).friendProfile.lastName;
+
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
+
+
 
     useEffect(() => {
         //Hide scrollbar when modal is opened
@@ -47,19 +57,39 @@ export default function Cover(props) {
         <Fragment>
             {isUploadImageModalVisible && <UploadImageModal profileId={profileId} />}
             <div className={`${style['cover-avatar-container']}`}>
-                <img
-                    className={`${style['cover-avatar']}`}
-                    src={avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
-                    alt="avatar"
-                />
-                <div className={`${style['cover-avatar']} ${style['upload-avatar-btn']}`}
-                    onClick={handleUploadAvatar}>
-                    <CameraOutlined />
-                </div>
+                {
+                    isViewFriendProfile ?
+                        <img
+                            className={`${style['cover-avatar']}`}
+                            src={friendAvatar ?
+                                `${AWS_S3_BUCKET_LINK}/${friendAvatar}` : "./image/avatar/default_avatar.png"}
+                            alt="avatar"
+                        />
+                        :
+                        <img
+                            className={`${style['cover-avatar']}`}
+                            src={avatar ?
+                                `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
+                            alt="avatar"
+                        />
+                }
+
+                {
+                    !isViewFriendProfile
+                    &&
+                    <div className={`${style['cover-avatar']} ${style['upload-avatar-btn']}`}
+                        onClick={handleUploadAvatar}>
+                        <CameraOutlined />
+                    </div>
+                }
             </div>
             <div className={`${style['cover-user-name']}`}>
-                {`${firstName || ""} ${lastName || ""}`}
+                {
+                    isViewFriendProfile ?
+                        `${friendFirstName || ""} ${friendLastName || ""}`
+                        :
+                        `${firstName || ""} ${lastName || ""}`
+                }
                 <hr style={{ width: '95%' }} />
                 <div className={`${style['cover-menu-container']}`}>
                     {renderMenu()}

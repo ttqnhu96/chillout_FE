@@ -5,6 +5,8 @@ import style from './WorkplaceInfo.module.css';
 function WorkplaceInfo(props) {
     //Get state from reducer
     const { workplaceList } = useSelector(state => state.WorkplaceReducer);
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+
     //Get props
     const { workplaceId, workplaceName, handleUpdateProfile } = props;
 
@@ -31,7 +33,7 @@ function WorkplaceInfo(props) {
     const handleClickEditButton = () => {
         setIsEditMode(true);
         //Set default value
-        if(workplaceValue.id === 0) {
+        if (workplaceValue.id === 0) {
             setWorkplaceValue({
                 ...workplaceValue,
                 id: workplaceList[0].id,
@@ -69,6 +71,35 @@ function WorkplaceInfo(props) {
         )
     }
 
+    const renderEditButton = () => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditMode) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={handleClickSaveButton}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={handleClickCancelButton}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={handleClickEditButton}
+                    />
+                )
+            }
+        }
+    }
+
     return (
         <Fragment>
             <div className={`${style['info-title']}`}>
@@ -96,26 +127,7 @@ function WorkplaceInfo(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={handleClickSaveButton}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={handleClickCancelButton}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={handleClickEditButton}
-                                />
-                        }
+                        {renderEditButton()}
                     </div>
                 </div>
             </div>

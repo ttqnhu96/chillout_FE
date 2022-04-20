@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import Cover from "../../components/Cover/Cover";
 import WallPostList from "../../components/WallPostList/WallPostList";
 import Intro from "../../components/Intro/Intro";
@@ -12,11 +13,14 @@ import ConfirmDelete from "../../components/ConfirmDelete/ConfirmDelete";
 import { deleteCommentSagaAction } from "../../redux/actions/CommentAction";
 import { MODAL_TYPE } from "../../util/constants/commonConstants";
 import { deletePhotoSagaAction } from "../../redux/actions/PhotoAction";
+import { setIsReloadWallAction } from "../../redux/actions/ProfileActions";
 
 export default function Wall() {
     const { isConfirmDeleteModalVisible, modalType } = useSelector(state => state.ConfirmDeleteReducer);
     const { deletedCommentId } = useSelector(state => state.CommentReducer);
     const { deletedPhotoId } = useSelector(state => state.PhotoReducer);
+    const { isReload } = useSelector(state => state.ProfileReducer);
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 
     const dispatch = useDispatch();
     const handleDeleteComment = () => {
@@ -27,6 +31,13 @@ export default function Wall() {
     }
 
     const [activeMenuId, setActiveMenuId] = useState(1);
+    useEffect(() => {
+        if (isReload) {
+            setActiveMenuId(1);
+            dispatch(setIsReloadWallAction(false));
+        }
+
+    }, [isReload])
 
     return (
         <div className={`${style['wall']}`}>
@@ -46,7 +57,7 @@ export default function Wall() {
                 />}
             <div className={`${style['wall-left']}`}>
                 <Intro />
-                <RecentContacts />
+                {!isViewFriendProfile && <RecentContacts />}
             </div>
             <div className={`${style['wall-right']}`}>
                 <div className={`${style['wall-cover-container']}`}>

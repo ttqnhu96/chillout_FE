@@ -6,6 +6,8 @@ function EducationInfo(props) {
     //Get state from reducer
     const { schoolList } = useSelector(state => state.SchoolReducer);
     const { collegeList } = useSelector(state => state.CollegeReducer);
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+
     //Get props
     const { schoolId, schoolName, collegeId, collegeName, handleUpdateProfile } = props;
 
@@ -139,6 +141,65 @@ function EducationInfo(props) {
             </select>
         )
     }
+
+    const renderEditSchoolButton = () => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditSchoolMode) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled.school ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={handleClickSaveSchoolButton}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={handleClickCancelSchoolButton}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={handleClickEditSchoolButton}
+                    />
+                )
+            }
+        }
+    }
+
+    const renderEditCollegeButton = () => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditCollegeMode) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled.college ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={handleClickSaveCollegeButton}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={handleClickCancelCollegeButton}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={handleClickEditCollegeButton}
+                    />
+                )
+            }
+        }
+    }
+
     return (
         <Fragment>
             <div className={`${style['info-title']}`}>
@@ -166,26 +227,7 @@ function EducationInfo(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditSchoolMode ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.school ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={handleClickSaveSchoolButton}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={handleClickCancelSchoolButton}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={handleClickEditSchoolButton}
-                                />
-                        }
+                        {renderEditSchoolButton()}
                     </div>
                 </div>
                 <div className={`${style['item-container']}`}>
@@ -210,26 +252,7 @@ function EducationInfo(props) {
 
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditCollegeMode ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.college ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={handleClickSaveCollegeButton}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={handleClickCancelCollegeButton}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={handleClickEditCollegeButton}
-                                />
-                        }
+                        {renderEditCollegeButton()}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,9 @@ import { MODAL_TYPE } from '../../util/constants/commonConstants';
 export default function Photos() {
     const dispatch = useDispatch();
     //Get state from reducer
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id; //In case view logged in user profile
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     const { photoList } = useSelector(state => state.PhotoReducer);
 
     const { isViewPhotoModalVisible } = useSelector(state => state.PhotoReducer);
@@ -27,19 +29,21 @@ export default function Photos() {
     const [requestToGetPhotoList, setRequestToGetPhotoList] = useState({
         userId: 0,
         isPaginated: false
-        // pageIndex: 0,
-        // pageSize: 10
     })
 
     //Set current user id
     useEffect(() => {
-        if (currentUserId > 0) {
-            setRequestToGetPhotoList(prevState => ({
-                ...prevState,
-                userId: currentUserId
-            }))
+        let profileOwnerId = 0;
+        if (isViewFriendProfile) {
+            profileOwnerId = friendId;
+        } else {
+            profileOwnerId = currentUserId;
         }
-    }, [currentUserId])
+        setRequestToGetPhotoList(prevState => ({
+            ...prevState,
+            userId: profileOwnerId
+        }))
+    }, [currentUserId, friendId])
 
     useEffect(() => {
         if (requestToGetPhotoList.userId) {
@@ -67,10 +71,14 @@ export default function Photos() {
                         className={`${style['photo']}`}
                         onClick={() => handleClickPhoto(`${AWS_S3_BUCKET_LINK}/${photo.fileName}`)}
                     />
-                    <div className={`${style['photo']} ${style['delete-button']}`}
-                        onClick={() => { handleClickDeleteButton(photo.id) }}>
-                        <DeleteOutlined />
-                    </div>
+                    {
+                        !isViewFriendProfile
+                        &&
+                        <div className={`${style['photo']} ${style['delete-button']}`}
+                            onClick={() => { handleClickDeleteButton(photo.id) }}>
+                            <DeleteOutlined />
+                        </div>
+                    }
                 </div>
             )
             )

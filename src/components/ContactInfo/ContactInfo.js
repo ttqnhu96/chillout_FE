@@ -1,10 +1,12 @@
 import { Tooltip } from "antd";
 import { Fragment, memo, useState } from "react";
+import { useSelector } from "react-redux";
 import { REGEX_EMAIL } from "../../util/constants/commonConstants";
 import style from './ContactInfo.module.css';
 
 function ContactInfo(props) {
     const { phone, email, handleUpdateProfile } = props;
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 
     const [contactValue, setContactValue] = useState({
         phone: phone,
@@ -91,6 +93,35 @@ function ContactInfo(props) {
         }));
     }
 
+    const renderEditButton = (fieldName) => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditMode[fieldName]) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled[fieldName] ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={() => { handleClickSaveButton(fieldName) }}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={() => { handleClickCancelButton(fieldName) }}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={() => { handleClickEditButton(fieldName) }}
+                    />
+                )
+            }
+        }
+    }
+
     return (
         <Fragment>
             <div className={`${style['info-title']}`}>
@@ -133,26 +164,7 @@ function ContactInfo(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode.phone ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.phone ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={() => { handleClickSaveButton('phone') }}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={() => { handleClickCancelButton('phone') }}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={() => { handleClickEditButton('phone') }}
-                                />
-                        }
+                        {renderEditButton('phone')}
                     </div>
                 </div>
                 <div className={`${style['item-container']}`}>
@@ -188,26 +200,7 @@ function ContactInfo(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode.email ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.email ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={() => { handleClickSaveButton('email') }}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={() => { handleClickCancelButton('email') }}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={() => { handleClickEditButton('email') }}
-                                />
-                        }
+                        {renderEditButton('email')}
                     </div>
                 </div>
             </div>

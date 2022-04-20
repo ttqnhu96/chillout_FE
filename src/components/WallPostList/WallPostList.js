@@ -9,8 +9,10 @@ export default function WallPostList() {
     const dispatch = useDispatch();
 
     //Get state from reducer
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id; //In case view logged in user profile
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
     const { postListWall } = useSelector(state => state.PostReducer);
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 
     //Local state
     const [requestToGetPostList, setRequestToGetPostList] = useState({
@@ -20,12 +22,25 @@ export default function WallPostList() {
 
     //Set current user id
     useEffect(() => {
+        let profileOwnerId = 0;
+        if(isViewFriendProfile) {
+            profileOwnerId = friendId;
+            // console.log('view friend');
+            // console.log('isViewFriendProfile: ',isViewFriendProfile);
+            // console.log('profileOwnerId: ',profileOwnerId);
+        } else {
+            profileOwnerId = currentUserId;
+            // console.log('view logged in user');
+            // console.log('isViewFriendProfile: ',isViewFriendProfile);
+            // console.log('profileOwnerId: ',profileOwnerId);
+        }
         setRequestToGetPostList(prevState => ({
             ...prevState,
-            userId: currentUserId
+            userId: profileOwnerId
         }))
-    }, [currentUserId])
+    }, [currentUserId, friendId, isViewFriendProfile])
 
+    //Get post list
     useEffect(() => {
         if (requestToGetPostList.userId) {
             dispatch(getPostListWallSagaAction(requestToGetPostList))

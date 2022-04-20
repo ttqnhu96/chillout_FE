@@ -6,6 +6,8 @@ import style from './PlaceLived.module.css';
 function PlaceLived(props) {
     //Get state from reducer
     const { cityList } = useSelector(state => state.CityReducer);
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+
     //Get props
     const { cityId, cityName, handleUpdateProfile } = props;
 
@@ -70,6 +72,35 @@ function PlaceLived(props) {
         )
     }
 
+    const renderEditButton = () => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditMode) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={handleClickSaveButton}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={handleClickCancelButton}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={handleClickEditButton}
+                    />
+                )
+            }
+        }
+    }
+
     return (
         <Fragment>
             <div className={`${style['info-title']}`}>
@@ -98,26 +129,7 @@ function PlaceLived(props) {
 
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={handleClickSaveButton}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={handleClickCancelButton}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={handleClickEditButton}
-                                />
-                        }
+                        {renderEditButton()}
                     </div>
                 </div>
             </div>

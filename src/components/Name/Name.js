@@ -1,10 +1,12 @@
 import { Tooltip } from "antd";
 import { Fragment, memo, useState } from "react";
+import { useSelector } from "react-redux";
 import { LABELS } from "../../util/constants/commonConstants";
 import style from './Name.module.css';
 
 function Name(props) {
     const { firstName, lastName, handleUpdateProfile } = props;
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 
     //Local state
     const [nameValue, setNameValue] = useState({
@@ -89,6 +91,35 @@ function Name(props) {
         }));
     }
 
+    const renderEditButton = (fieldName) => {
+        //In case view friend profile, edit button is not displayed
+        if (!isViewFriendProfile) {
+            if (isEditMode[fieldName]) {
+                return (
+                    <Fragment>
+                        <div className={isSaveBtnEnabled[fieldName] ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
+                            onClick={() => { handleClickSaveButton(fieldName) }}>
+                            Save
+                        </div>
+                        <div className={`${style['cancel-btn']}`}
+                            onClick={() => { handleClickCancelButton(fieldName) }}>
+                            Cancel
+                        </div>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <img width={16} height={16}
+                        className={`${style['edit-btn']}`}
+                        src="./image/icon/edit.png"
+                        alt="edit"
+                        onClick={() => { handleClickEditButton(fieldName) }}
+                    />
+                )
+            }
+        }
+    }
+
     return (
         <Fragment>
             <div className={`${style['info-title']}`}>
@@ -122,26 +153,7 @@ function Name(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode.firstName ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.firstName ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={() => { handleClickSaveButton('firstName') }}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={() => { handleClickCancelButton('firstName') }}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={() => { handleClickEditButton('firstName') }}
-                                />
-                        }
+                        {renderEditButton('firstName')}
                     </div>
                 </div>
                 <div className={`${style['item-container']}`}>
@@ -171,26 +183,7 @@ function Name(props) {
                         }
                     </div>
                     <div className={`${style['edit-btn-container']}`} >
-                        {
-                            isEditMode.lastName ?
-                                <Fragment>
-                                    <div className={isSaveBtnEnabled.lastName ? `${style['save-btn']}` : `${style['save-btn-disabled']}`}
-                                        onClick={() => { handleClickSaveButton('lastName') }}>
-                                        Save
-                                    </div>
-                                    <div className={`${style['cancel-btn']}`}
-                                        onClick={() => { handleClickCancelButton('lastName') }}>
-                                        Cancel
-                                    </div>
-                                </Fragment>
-                                :
-                                <img width={16} height={16}
-                                    className={`${style['edit-btn']}`}
-                                    src="./image/icon/edit.png"
-                                    alt="edit"
-                                    onClick={() => { handleClickEditButton('lastName') }}
-                                />
-                        }
+                        {renderEditButton('lastName')}
                     </div>
                 </div>
             </div>

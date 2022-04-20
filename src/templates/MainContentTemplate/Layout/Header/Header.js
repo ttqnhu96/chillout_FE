@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'

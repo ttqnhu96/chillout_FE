@@ -8,7 +8,8 @@ export const FUNCTION_CONSTANTS = {
     POST: 'post',
     PHOTO: 'photo',
     UPLOAD_FILE: 'upload-file',
-    COMMENT: 'comment'
+    COMMENT: 'comment',
+    RELATIONSHIP: 'relationship'
 }
 
 export const URL_CONSTANTS = {
@@ -22,6 +23,7 @@ export const URL_CONSTANTS = {
     UPDATE_LIKES: 'update/likes',
     GET_COMMENT_LIST_BY_POST_ID: 'list',
     UPDATE_AVATAR: 'update/avatar',
+    GET_SUGGESTIONS_LIST: 'list-suggestions',
     
     // GET_BY_USERNAME: ':username',
     // GET_BY_ID: ':id',

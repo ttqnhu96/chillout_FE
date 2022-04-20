@@ -92,7 +92,7 @@ export function* getPostListWallWatcher() {
 }
 
 /*=============================================
-            GET POST LIST ON WALL
+            GET POST LIST ON NEWS FEED
 ==============================================*/
 /**
  * getPostListNewsFeed

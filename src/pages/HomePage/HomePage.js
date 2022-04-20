@@ -3,10 +3,10 @@ import React, { Fragment, useEffect } from 'react';
 import style from './HomePage.module.css';
 import Menu from '../../components/Menu/Menu';
 import NewsFeed from '../../components/NewsFeed/NewsFeed';
-import Contacts from '../../components/Contacts/Contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHomeMenuIdActiveAction } from '../../redux/actions/MenuAction';
 import Settings from '../../components/Settings/Settings';
+import Suggestions from '../../components/Suggestions/Suggestions';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function HomePage() {
             return (
                 <Fragment>
                     <NewsFeed />
-                    <Contacts />
+                    <Suggestions />
                 </Fragment>
             )
         }

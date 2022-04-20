@@ -8,6 +8,7 @@ import * as CollegeSaga from './CollegeSaga';
 import * as PostSaga from './PostSaga';
 import * as PhotoSaga from './PhotoSaga';
 import * as CommentSaga from './CommentSaga';
+import * as RelationshipSaga from './RelationshipSaga';
 
 export function* rootSaga() {
     yield all([
@@ -46,6 +47,9 @@ export function* rootSaga() {
         CommentSaga.getCommentListByPostIdWatcher(),
         CommentSaga.createCommentWatcher(),
         CommentSaga.deleteCommentWatcher(),
-        CommentSaga.updateCommentWatcher()
+        CommentSaga.updateCommentWatcher(),
+
+        //Relationship
+        RelationshipSaga.getSuggestionsListWatcher(),
     ])
 }

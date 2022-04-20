@@ -72,6 +72,9 @@
     font-weight: bolder;
     cursor: pointer;
 }
+.signup-text:hover {
+    text-decoration: underline;
+}
 
 @media (max-width:911px) {
     .signup-text-container {

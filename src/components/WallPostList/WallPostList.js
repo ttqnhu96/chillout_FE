@@ -25,14 +25,8 @@ export default function WallPostList() {
         let profileOwnerId = 0;
         if(isViewFriendProfile) {
             profileOwnerId = friendId;
-            // console.log('view friend');
-            // console.log('isViewFriendProfile: ',isViewFriendProfile);
-            // console.log('profileOwnerId: ',profileOwnerId);
         } else {
             profileOwnerId = currentUserId;
-            // console.log('view logged in user');
-            // console.log('isViewFriendProfile: ',isViewFriendProfile);
-            // console.log('profileOwnerId: ',profileOwnerId);
         }
         setRequestToGetPostList(prevState => ({
             ...prevState,

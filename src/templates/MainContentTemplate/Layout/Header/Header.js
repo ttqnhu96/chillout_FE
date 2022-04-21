@@ -27,7 +27,7 @@ export default function Header() {
         if (sessionStorage.getItem(USER_LOGIN) && sessionStorage.getItem(ACCESS_TOKEN)) {
             // Call API to get user profile
             const profileId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).profileId;
-            dispatch(getProfileDetailByIdSagaAction(profileId));
+            dispatch(getProfileDetailByIdSagaAction(profileId, true));
         } else {
             history.push('/login');
         }

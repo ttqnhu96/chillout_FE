@@ -31,7 +31,8 @@ export default function InputComment(props) {
         <div className={`${style['write-comment-container']}`}>
             <img
                 className={`${style['avatar-current-user-comment']}`}
-                src={`${AWS_S3_BUCKET_LINK}/${currentUserAvatar}`}
+                src={currentUserAvatar ?
+                    `${AWS_S3_BUCKET_LINK}/${currentUserAvatar}` : "./image/avatar/default_avatar.png"}
                 alt="avatar"
             />
             <div className={`${style['comment-text-area-button-container']}`}>

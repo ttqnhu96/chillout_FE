@@ -6,7 +6,7 @@ import style from './Suggestions.module.css';
 import { getSuggestionsListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
-import { setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
+import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
 import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
@@ -26,12 +26,14 @@ export default function Suggestions() {
     }, [currentUserId])
 
     //Handle events
-    const handleClickSuggestedUser = () => {
+    const handleClickSuggestedUser = (profileId) => {
         if (isViewFriendProfile === false) {
             dispatch(getPostListWallAction([]));
             dispatch(getPhotoListByUserIdAction([]));
             dispatch(setIsViewFriendProfileAction(true));
         }
+        dispatch(getFriendProfileAction({}));
+        dispatch(getProfileDetailByIdSagaAction(profileId, false));
         history.push('/wall');
     }
 
@@ -44,7 +46,7 @@ export default function Suggestions() {
                     src={item.avatar ?
                         `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
-                    onClick={handleClickSuggestedUser}
+                    onClick={() => { handleClickSuggestedUser(item.profileId) }}
                 />
                 <div className={`${style['contacts-item-text-container']}`}>
                     <Tooltip title={`${item.firstName} ${item.lastName}`} placement="right">

@@ -17,6 +17,7 @@ export default function Intro() {
     const friendWorkplaceName = useSelector(state => state.ProfileReducer).friendProfile.workplaceName;
     const friendRegisteredAt = useSelector(state => state.ProfileReducer).friendProfile.createdAt;
 
+    console.log('Intro')
     const renderBio = () => {
         if (!isViewFriendProfile) {
             return bio && (

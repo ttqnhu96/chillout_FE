@@ -77,7 +77,6 @@ export default function CreatePost() {
                                     value={post.privacySettingId}>
                                     <option>Public</option>
                                     <option>Only me</option>
-                                    {/* <option>Followers</option> */}
                                 </select>
                             </div>
                         </div>

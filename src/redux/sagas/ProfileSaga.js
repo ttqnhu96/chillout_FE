@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { profileService } from "../../services/ProfileService";
 import { ACCESS_TOKEN, ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
 import { GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_AVATAR_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types";
-import { getProfileDetailByIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
+import { getFriendProfileAction, getProfileDetailByIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { history } from "../../util/history";
@@ -19,13 +19,19 @@ import { getPostListWallSagaAction } from "../actions/PostAction";
  */
 function* getProfileDetailById(action) {
     try {
+        console.log(action)
         const { data } = yield call(() => profileService.getProfileDetailById(action.profileId));
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            //Set user profile state in reducer
-            yield put(getUserProfileAction(response));
+            if(action.isLoggedInUser) {
+                //Set user profile state in reducer
+                yield put(getUserProfileAction(response));
+            } else {
+                //Set friend profile state in reducer
+                yield put(getFriendProfileAction(response));
+            }         
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -57,9 +63,8 @@ function* updateProfile(action) {
         const errorCode = data.ErrorCode;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             notify('success', MESSAGES.UPDATE_SUCCESS);
-
             //Call API to reload user profile detail
-            yield put(getProfileDetailByIdSagaAction(action.profileId));
+            yield put(getProfileDetailByIdSagaAction(action.profileId, true));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -117,7 +122,7 @@ function* updateAvatar(action) {
             }));
 
             //Call API to reload user profile detail
-            yield put(getProfileDetailByIdSagaAction(action.profileId));
+            yield put(getProfileDetailByIdSagaAction(action.profileId, true));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

@@ -67,7 +67,7 @@ export default function Photos() {
                 <div key={index} className={`${style['photo-container']}`}>
                     <img
                         src={`${AWS_S3_BUCKET_LINK}/${photo.fileName}`}
-                        alt="avatar"
+                        alt={`photo_${index}`}
                         className={`${style['photo']}`}
                         onClick={() => handleClickPhoto(`${AWS_S3_BUCKET_LINK}/${photo.fileName}`)}
                     />

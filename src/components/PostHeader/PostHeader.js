@@ -10,7 +10,8 @@ function PostHeader(props) {
             <div className={`${style['avatar-container']}`}>
                 <img
                     className={`${style['avatar-image']}`}
-                    src={`${AWS_S3_BUCKET_LINK}/${post.avatar}` || "./image/avatar/default_avatar.png"}
+                    src={post.avatar ?
+                        `${AWS_S3_BUCKET_LINK}/${post.avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
                 />
             </div>
@@ -19,7 +20,7 @@ function PostHeader(props) {
                     {`${post.firstName} ${post.lastName}`}
                 </div>
                 <div className={`${style['time-text']}`}>
-                    {new Date(post.createdAt).toLocaleString()}
+                {new Date(post.createdAt).toLocaleString()} - {post.privacySettingId}
                 </div>
             </div>
             <div className={`${style['post-options-container']}`}>

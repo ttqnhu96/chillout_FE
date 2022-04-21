@@ -1,8 +1,9 @@
-import { GET_USER_PROFILE, GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_PROFILE_SAGA, UPDATE_AVATAR_SAGA, SET_IS_VIEW_FRIEND_PROFILE, SET_IS_RELOAD_WALL } from "../constants/types"
+import { GET_USER_PROFILE, GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_PROFILE_SAGA, UPDATE_AVATAR_SAGA, SET_IS_VIEW_FRIEND_PROFILE, SET_IS_RELOAD_WALL, GET_FRIEND_PROFILE } from "../constants/types"
 
-export const getProfileDetailByIdSagaAction = (profileId) => {
+export const getProfileDetailByIdSagaAction = (profileId, isLoggedInUser) => {
     return {
         type: GET_PROFILE_DETAIL_BY_ID_SAGA,
+        isLoggedInUser: isLoggedInUser,
         profileId: profileId
     }
 }
@@ -11,6 +12,13 @@ export const getUserProfileAction = (userProfile) => {
     return {
         type: GET_USER_PROFILE,
         userProfile: userProfile
+    }
+}
+
+export const getFriendProfileAction = (friendProfile) => {
+    return {
+        type: GET_FRIEND_PROFILE,
+        friendProfile: friendProfile
     }
 }
 

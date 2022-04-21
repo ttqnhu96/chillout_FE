@@ -5,14 +5,14 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayViewPhotoModalAction, getPhotoListByUserIdSagaAction, setDeletedPhotoIdAction } from '../../redux/actions/PhotoAction';
 import ViewPhoto from '../ViewPhoto/ViewPhoto';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
 
 export default function Photos() {
     const dispatch = useDispatch();
     //Get state from reducer
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id; //In case view logged in user profile
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id; //In case view logged in user profile
     const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     const { photoList } = useSelector(state => state.PhotoReducer);

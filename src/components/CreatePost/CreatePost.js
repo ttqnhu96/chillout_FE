@@ -4,12 +4,12 @@ import { useState } from "react";
 import style from './CreatePost.module.css';
 import { hideCreatePostModalAction, createPostSagaAction } from '../../redux/actions/PostAction';
 import CropAndUploadImg from '../CropAndUploadImg/CropAndUploadImg';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 
 export default function CreatePost() {
     const dispatch = useDispatch();
 
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;

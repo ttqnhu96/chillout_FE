@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../../../redux/actions/ProfileActions';
 import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../../../util/constants/systemSettings';
-import { displayCreatePostModalAction, getPostListWallAction, getPostListWallSagaAction } from '../../../../redux/actions/PostAction';
+import { displayCreatePostModalAction, getPostListWallAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';

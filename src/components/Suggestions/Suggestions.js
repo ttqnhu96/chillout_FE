@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Suggestions.module.css';
 import { getSuggestionsListSagaAction } from '../../redux/actions/RelationshipAction';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
@@ -12,7 +12,7 @@ import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
 export default function Suggestions() {
     const dispatch = useDispatch();
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
     const { suggestionsList } = useSelector(state => state.RelationshipReducer);
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 

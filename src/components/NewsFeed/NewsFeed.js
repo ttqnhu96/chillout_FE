@@ -6,6 +6,7 @@ import { getPostListNewsFeedSagaAction } from '../../redux/actions/PostAction';
 import NewsFeedPost from '../NewsFeedPost/NewsFeedPost';
 import { deleteCommentSagaAction } from '../../redux/actions/CommentAction';
 import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 
 export default function NewsFeed() {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function NewsFeed() {
     }
 
     //Get state from reducer
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
     const { postListNewsFeed } = useSelector(state => state.PostReducer);
 
     //Local state

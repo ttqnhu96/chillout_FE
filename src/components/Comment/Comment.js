@@ -4,13 +4,13 @@ import { Menu, Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
 
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
     const dispatch = useDispatch();
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
 
     //Local state
     const [commentValue, setCommentValue] = useState(comment.content);

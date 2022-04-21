@@ -2,6 +2,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostListWallSagaAction } from "../../redux/actions/PostAction";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import WallPost from "../WallPost/WallPost";
 import style from './WallPostList.module.css';
 
@@ -9,7 +10,7 @@ export default function WallPostList() {
     const dispatch = useDispatch();
 
     //Get state from reducer
-    const currentUserId = useSelector(state => state.ProfileReducer).userProfile.id; //In case view logged in user profile
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id; //In case view logged in user profile
     const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
     const { postListWall } = useSelector(state => state.PostReducer);
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);

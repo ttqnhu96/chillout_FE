@@ -12,7 +12,7 @@ import { MODAL_TYPE } from '../../util/constants/commonConstants';
 export default function Photos() {
     const dispatch = useDispatch();
     //Get state from reducer
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id; //In case view logged in user profile
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id; //In case view logged in user profile
     const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     const { photoList } = useSelector(state => state.PhotoReducer);

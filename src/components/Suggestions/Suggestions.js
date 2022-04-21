@@ -12,7 +12,7 @@ import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
 export default function Suggestions() {
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { suggestionsList } = useSelector(state => state.RelationshipReducer);
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
 

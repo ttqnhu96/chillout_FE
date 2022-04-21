@@ -10,7 +10,7 @@ import { MODAL_TYPE } from '../../util/constants/commonConstants';
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
     //Local state
     const [commentValue, setCommentValue] = useState(comment.content);

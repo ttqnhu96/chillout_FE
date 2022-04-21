@@ -9,7 +9,7 @@ import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSetti
 export default function CreatePost() {
     const dispatch = useDispatch();
 
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
     const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;

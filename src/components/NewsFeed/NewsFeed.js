@@ -18,7 +18,7 @@ export default function NewsFeed() {
     }
 
     //Get state from reducer
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { postListNewsFeed } = useSelector(state => state.PostReducer);
 
     //Local state

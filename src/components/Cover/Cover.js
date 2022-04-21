@@ -13,7 +13,7 @@ export default function Cover(props) {
     //Get state from reducer
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     //In case view logged in user profile
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN)).id;
+    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const profileId = useSelector(state => state.ProfileReducer).userProfile.id;
     const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;

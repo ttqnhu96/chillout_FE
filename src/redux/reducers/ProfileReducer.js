@@ -13,7 +13,6 @@ export const ProfileReducer = (state = initialState, action) => {
             state.userProfile = action.userProfile;
             return { ...state }
         case GET_FRIEND_PROFILE:
-            console.log('GET_FRIEND_PROFILE')
             state.friendProfile = action.friendProfile;
             return { ...state }
         case SET_IS_VIEW_FRIEND_PROFILE:

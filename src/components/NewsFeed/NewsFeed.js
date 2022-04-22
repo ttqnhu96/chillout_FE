@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import style from './NewsFeed.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getPostListNewsFeedSagaAction } from '../../redux/actions/PostAction';
+import { useEffect, useRef, useState } from 'react';
+import { getPostListNewsFeedSagaAction, setIsReloadNewsFeedPostAction } from '../../redux/actions/PostAction';
 import NewsFeedPost from '../NewsFeedPost/NewsFeedPost';
 import { deleteCommentSagaAction } from '../../redux/actions/CommentAction';
 import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
@@ -12,6 +12,7 @@ export default function NewsFeed() {
     const dispatch = useDispatch();
     const { isConfirmDeleteModalVisible } = useSelector(state => state.ConfirmDeleteReducer);
     const { deletedCommentId } = useSelector(state => state.CommentReducer);
+    const { isReloadNewsFeedPost } = useSelector(state => state.PostReducer);
     
     const handleDeleteComment = () => {
         dispatch(deleteCommentSagaAction(deletedCommentId));
@@ -35,11 +36,16 @@ export default function NewsFeed() {
         }))
     }, [currentUserId])
 
+    const newsFeedContainerRef = useRef();
     useEffect(() => {
         if (requestToGetPostList.userId) {
-            dispatch(getPostListNewsFeedSagaAction(requestToGetPostList))
+            dispatch(getPostListNewsFeedSagaAction(requestToGetPostList));
+            if(isReloadNewsFeedPost) {
+                dispatch(setIsReloadNewsFeedPostAction(false));
+                newsFeedContainerRef.current.scrollTop = 0;
+            }
         }
-    }, [requestToGetPostList])
+    }, [requestToGetPostList, isReloadNewsFeedPost])
 
     //Render menu items
     const renderPostList = () => {
@@ -50,8 +56,9 @@ export default function NewsFeed() {
         ))
     }
 
+
     return (
-        <div className={`${style['news-feed-container']}`}>
+        <div ref={newsFeedContainerRef} className={`${style['news-feed-container']}`}>
             {isConfirmDeleteModalVisible
                 && <ConfirmDelete
                     title='Delete Comment?'

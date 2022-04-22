@@ -1,4 +1,4 @@
-import { CREATE_POST_SAGA, DISPLAY_CREATE_POST_MODAL, GET_POST_DETAIL_BY_ID, GET_POST_DETAIL_BY_ID_SAGA, GET_POST_LIST_NEWSFEED, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL, GET_POST_LIST_WALL_SAGA, HIDE_CREATE_POST_MODAL, UPDATE_LIKES_SAGA } from "../constants/types";
+import { CREATE_POST_SAGA, DISPLAY_CREATE_POST_MODAL, GET_POST_DETAIL_BY_ID, GET_POST_DETAIL_BY_ID_SAGA, GET_POST_LIST_NEWSFEED, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL, GET_POST_LIST_WALL_SAGA, HIDE_CREATE_POST_MODAL, SET_IS_RELOAD_NEWS_FEED_POST, UPDATE_LIKES_SAGA } from "../constants/types";
 
 export const displayCreatePostModalAction = () => {
     return {
@@ -67,5 +67,12 @@ export const getPostDetailByIdAction = (postDetail) => {
     return {
         type: GET_POST_DETAIL_BY_ID,
         postDetail: postDetail
+    }
+}
+
+export const setIsReloadNewsFeedPostAction = (isReloadNewsFeedPost) => {
+    return {
+        type: SET_IS_RELOAD_NEWS_FEED_POST,
+        isReloadNewsFeedPost: isReloadNewsFeedPost
     }
 }

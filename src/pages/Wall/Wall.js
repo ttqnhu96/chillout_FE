@@ -36,7 +36,6 @@ export default function Wall() {
             setActiveMenuId(1);
             dispatch(setIsReloadWallAction(false));
         }
-
     }, [isReload])
 
     return (

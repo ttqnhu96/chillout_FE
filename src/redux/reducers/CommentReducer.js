@@ -5,8 +5,7 @@ const initialState = {
     commentList: [],
     pageIndex: -1,
     totalRecord: 0,
-    deletedCommentId: 0,
-    isReloadComment: false
+    deletedCommentId: 0
 }
 
 export const CommentReducer = (state = initialState, action) => {

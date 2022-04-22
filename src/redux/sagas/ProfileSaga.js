@@ -19,7 +19,6 @@ import { getPostListWallSagaAction } from "../actions/PostAction";
  */
 function* getProfileDetailById(action) {
     try {
-        console.log(action)
         const { data } = yield call(() => profileService.getProfileDetailById(action.profileId));
         const response = data.Data;
         const errorCode = data.ErrorCode;

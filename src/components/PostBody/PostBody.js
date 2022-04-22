@@ -11,6 +11,7 @@ export default function PostBody(props) {
     const { post, likeIcon, totalLikes, handleLikePost } = props;
     const [totalComment, setTotalComment] = useState(post.totalComment);
     const { postId, totalRecord } = useSelector(state => state.CommentReducer);
+
     useEffect(() => {
         if (postId === post.id) {
             setTotalComment(totalRecord);
@@ -18,6 +19,10 @@ export default function PostBody(props) {
             setTotalComment(post.totalComment);
         }
     }, [totalRecord])
+
+    useEffect(() => {
+        setTotalComment(post.totalComment);
+    }, [post.totalComment])
 
     return (
         <Fragment>

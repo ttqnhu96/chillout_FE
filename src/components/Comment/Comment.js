@@ -14,6 +14,7 @@ import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
 
     const dispatch = useDispatch();
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
@@ -59,7 +60,11 @@ export default function Comment(props) {
                 dispatch(getPhotoListByUserIdAction([]));
                 dispatch(setIsViewFriendProfileAction(true));
             }
-            dispatch(getFriendProfileAction({}));
+            //If prev profile is not current friend's profile, 
+            // clear old data and get new data
+            if (friendId !== postAuthorId) {
+                dispatch(getFriendProfileAction({}));
+            }
             dispatch(getProfileDetailByIdSagaAction(commentAuthorProfileId, false));
         }
         history.push('/wall');

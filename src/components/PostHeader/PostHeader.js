@@ -12,6 +12,7 @@ function PostHeader(props) {
     const dispatch = useDispatch();
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
 
     const handleClickUser = (postAuthorId, postAuthorProfileId) => {
         if (postAuthorId === currentUserId) {
@@ -26,8 +27,13 @@ function PostHeader(props) {
                 dispatch(getPhotoListByUserIdAction([]));
                 dispatch(setIsViewFriendProfileAction(true));
             }
-            dispatch(getFriendProfileAction({}));
-            dispatch(getProfileDetailByIdSagaAction(postAuthorProfileId, false));
+
+            //If prev profile is not current friend's profile, 
+            // clear old data and get new data
+            if (friendId !== postAuthorId) {
+                dispatch(getFriendProfileAction({}));
+            }
+            dispatch(getProfileDetailByIdSagaAction(postAuthorProfileId, false));    
         }
         
         history.push('/wall');

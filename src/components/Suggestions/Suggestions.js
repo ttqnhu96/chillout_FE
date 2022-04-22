@@ -15,6 +15,7 @@ export default function Suggestions() {
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { suggestionsList } = useSelector(state => state.RelationshipReducer);
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
 
     useEffect(() => {
         if (currentUserId) {
@@ -26,13 +27,17 @@ export default function Suggestions() {
     }, [currentUserId])
 
     //Handle events
-    const handleClickSuggestedUser = (profileId) => {
+    const handleClickSuggestedUser = (userId, profileId) => {
         if (isViewFriendProfile === false) {
             dispatch(getPostListWallAction([]));
             dispatch(getPhotoListByUserIdAction([]));
             dispatch(setIsViewFriendProfileAction(true));
         }
-        dispatch(getFriendProfileAction({}));
+        //If prev profile is not current friend's profile, 
+        // clear old data and get new data
+        if (friendId !== userId) {
+            dispatch(getFriendProfileAction({}));
+        }
         dispatch(getProfileDetailByIdSagaAction(profileId, false));
         history.push('/wall');
     }
@@ -46,13 +51,13 @@ export default function Suggestions() {
                     src={item.avatar ?
                         `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
-                    onClick={() => { handleClickSuggestedUser(item.profileId) }}
+                    onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}
                 />
                 <div className={`${style['contacts-item-text-container']}`}>
                     <Tooltip title={`${item.firstName} ${item.lastName}`} placement="right">
                         <div
                             className={`${style['contacts-first-name']}`}
-                            onClick={handleClickSuggestedUser}>
+                            onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}>
                             {`${item.firstName}`}
                         </div>
                         <div className={`${style['contacts-username']}`}>

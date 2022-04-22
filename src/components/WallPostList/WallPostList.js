@@ -43,10 +43,22 @@ export default function WallPostList() {
         }
     }, [requestToGetPostList])
 
+
+    //Reload post list
     const wallPostContainerRef = useRef();
     useEffect(() => {
         if (isReload) {
             wallPostContainerRef.current.scrollTop = 0;
+            let profileOwnerId = 0;
+            if (isViewFriendProfile) {
+                profileOwnerId = friendId;
+            } else {
+                profileOwnerId = currentUserId;
+            }
+            setRequestToGetPostList(prevState => ({
+                ...prevState,
+                userId: profileOwnerId
+            }))
         }
     }, [isReload])
 

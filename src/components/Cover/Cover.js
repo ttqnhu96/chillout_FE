@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, memo, useEffect } from 'react';
 import style from './Cover.module.css';
 import { CameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,17 +7,17 @@ import UploadImageModal from '../UploadImageModal/UploadImageModal';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 
 const menuItems = require('./coverMenuItems.json');
-export default function Cover(props) {
+function Cover(props) {
     const dispatch = useDispatch();
 
     //Get state from reducer
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     //In case view logged in user profile
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-    const profileId = useSelector(state => state.ProfileReducer).userProfile.id;
-    const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
-    const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
-    const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
+    const profileId = useSelector(state => state.ProfileReducer).userProfile?.id;
+    const avatar = useSelector(state => state.ProfileReducer).userProfile?.avatar;
+    const firstName = useSelector(state => state.ProfileReducer).userProfile?.firstName;
+    const lastName = useSelector(state => state.ProfileReducer).userProfile?.lastName;
 
     //In case view friend profile
     const friendAvatar = useSelector(state => state.ProfileReducer).friendProfile.avatar;
@@ -26,8 +26,6 @@ export default function Cover(props) {
     const friendList = useSelector(state => state.ProfileReducer).friendProfile.friendList;
 
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
-
-
 
     useEffect(() => {
         //Hide scrollbar when modal is opened
@@ -55,6 +53,7 @@ export default function Cover(props) {
     const handleUploadAvatar = () => {
         dispatch(displayUploadImageModalAction())
     }
+    
     const renderAddFriendButton = () => {
         if (isViewFriendProfile) {
             const friendListUserId = friendList?.map(item => { return item.userId })
@@ -136,3 +135,5 @@ export default function Cover(props) {
         </Fragment>
     )
 }
+
+export default memo(Cover);

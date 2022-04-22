@@ -29,6 +29,10 @@
 .name-text {
     font-size: 1.05em;
     font-weight: 600;
+    cursor: pointer;
+}
+.name-text:hover {
+    text-decoration: underline;
 }
 .time-text {
     font-size: 0.8em;

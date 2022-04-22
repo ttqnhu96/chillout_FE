@@ -1,14 +1,20 @@
 import { Fragment, useState, useEffect } from 'react';
 import style from './Comment.module.css';
 import { Menu, Dropdown } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
+import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
+import { history } from '../../util/history';
+import { getPostListWallAction } from '../../redux/actions/PostAction';
+import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
 export default function Comment(props) {
     const { comment, postAuthorId } = props;
+    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+
     const dispatch = useDispatch();
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
@@ -40,6 +46,25 @@ export default function Comment(props) {
         dispatch(updateCommentSagaAction(comment.id, commentValue));
         setIsEditMode(false);
     }
+    const handleClickUser = (commentAuthorId, commentAuthorProfileId) => {
+        if (commentAuthorId === currentUserId) {
+            if (isViewFriendProfile === true) {
+                dispatch(getPostListWallAction([]));
+                dispatch(getPhotoListByUserIdAction([]));
+                dispatch(setIsViewFriendProfileAction(false));
+            }
+        } else {
+            if (isViewFriendProfile === false) {
+                dispatch(getPostListWallAction([]));
+                dispatch(getPhotoListByUserIdAction([]));
+                dispatch(setIsViewFriendProfileAction(true));
+            }
+            dispatch(getFriendProfileAction({}));
+            dispatch(getProfileDetailByIdSagaAction(commentAuthorProfileId, false));
+        }
+        history.push('/wall');
+        dispatch(setIsReloadWallAction(true));
+    }
 
     const menu = (
         <Menu>
@@ -57,9 +82,12 @@ export default function Comment(props) {
                     src={comment.avatar ?
                         `${AWS_S3_BUCKET_LINK}/${comment.avatar}` : "./image/avatar/default_avatar.png"}
                     alt="avatar"
+                    onClick={() => handleClickUser(comment.userId, comment.profileId)}
                 />
                 <div className={`${style['post-comment-username-content-container']}`}>
-                    <div className={`${style['post-comment-username']}`}>
+                    <div
+                        className={`${style['post-comment-username']}`}
+                        onClick={() => handleClickUser(comment.userId, comment.profileId)}>
                         {`${comment.firstName} ${comment.lastName}`}
                     </div>
                     {

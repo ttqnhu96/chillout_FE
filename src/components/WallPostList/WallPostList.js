@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostListWallSagaAction } from "../../redux/actions/PostAction";
 import { USER_LOGIN } from "../../util/constants/systemSettings";
@@ -14,6 +14,7 @@ export default function WallPostList() {
     const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
     const { postListWall } = useSelector(state => state.PostReducer);
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const { isReload } = useSelector(state => state.ProfileReducer);
 
     //Local state
     const [requestToGetPostList, setRequestToGetPostList] = useState({
@@ -24,7 +25,7 @@ export default function WallPostList() {
     //Set current user id
     useEffect(() => {
         let profileOwnerId = 0;
-        if(isViewFriendProfile) {
+        if (isViewFriendProfile) {
             profileOwnerId = friendId;
         } else {
             profileOwnerId = currentUserId;
@@ -42,6 +43,13 @@ export default function WallPostList() {
         }
     }, [requestToGetPostList])
 
+    const wallPostContainerRef = useRef();
+    useEffect(() => {
+        if (isReload) {
+            wallPostContainerRef.current.scrollTop = 0;
+        }
+    }, [isReload])
+
     const renderPostList = () => {
         return (
             postListWall.map((post, index) => (
@@ -55,7 +63,8 @@ export default function WallPostList() {
     return (
         <Fragment>
             <div className={`${style['post-title']}`}>Post</div>
-            <div className={`${style['wall-post-container']}`}>
+            <div className={`${style['wall-post-container']}`}
+                ref={wallPostContainerRef}>
                 {renderPostList()}
             </div>
         </Fragment>

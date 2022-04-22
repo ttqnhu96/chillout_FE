@@ -11,7 +11,7 @@
     width: 3em;
     margin-top: 0.3rem;
     border-radius: 5rem;
-    cursor: pointer;
+    cursor: default;
 }
 .comment-text-area-button-container {
     width: 100%;

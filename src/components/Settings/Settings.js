@@ -12,7 +12,7 @@ export default function Settings() {
                 </div>
                 <select className={`${style['language-select-box']}`}>
                     <option>English</option>
-                    <option>Tiếng Việt</option>
+                    {/* <option>Tiếng Việt</option> */}
                 </select>
                 <div className={`${style['save-button-container']}`}>
                     <div className={`${style['save-button']}`}>

@@ -99,7 +99,6 @@ export function* getCommentListByPostIdWatcher() {
             return notify('error', MESSAGES[errorCode])
         }
     } catch (err) {
-        console.log(err)
         return notify('error', MESSAGES.E500)
     }
 }

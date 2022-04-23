@@ -13,7 +13,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
@@ -22,7 +22,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
@@ -31,7 +31,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
@@ -40,7 +40,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
@@ -49,7 +49,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
@@ -58,7 +58,7 @@ export default function RecentContacts() {
                         className={`${style['recent-contacts-avatar']}`}
                     />
                     <div className={`${style['recent-contacts-name']}`}>
-                        Thoai
+                        User
                     </div>
                 </div>
             </div>

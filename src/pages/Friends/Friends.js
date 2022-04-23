@@ -17,7 +17,7 @@ export default function Friends() {
 
     const { friendsMenuIdActive } = useSelector(state => state.MenuReducer);
 
-    const handleClickMenuItem = (id, navigateTo) => {
+    const handleClickMenuItem = (id, name, navigateTo) => {
         dispatch(setFriendsMenuIdActiveAction(id));
         if (navigateTo) {
             history.push(navigateTo);

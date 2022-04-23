@@ -10,6 +10,8 @@ export default function MenuItem(props) {
     return (
         <div
             className={menuIdActive === menuItem.id ? activeMenuItemCSS : menuItemCSS}
+            /* To do */
+            style={(menuItem.name === 'Messenger' || menuItem.name === 'Most Recent') ? { cursor: 'not-allowed' } : {}}
             onClick={() => { handleClickMenuItem(menuItem.id, menuItem.name, menuItem.navigateTo) }}>
             <img className={`${style['menu-item-icon']}`}
                 src={menuItem.iconSrc}

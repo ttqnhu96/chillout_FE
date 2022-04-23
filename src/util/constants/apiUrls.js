@@ -9,7 +9,8 @@ export const FUNCTION_CONSTANTS = {
     PHOTO: 'photo',
     UPLOAD_FILE: 'upload-file',
     COMMENT: 'comment',
-    RELATIONSHIP: 'relationship'
+    RELATIONSHIP: 'relationship',
+    FRIEND_REQUEST: 'friend-request',
 }
 
 export const URL_CONSTANTS = {
@@ -24,6 +25,7 @@ export const URL_CONSTANTS = {
     GET_COMMENT_LIST_BY_POST_ID: 'list',
     UPDATE_AVATAR: 'update/avatar',
     GET_SUGGESTIONS_LIST: 'list-suggestions',
+    GET_RECEIVED_FRIEND_REQUEST_LIST: 'list-received',
     
     // GET_BY_USERNAME: ':username',
     // GET_BY_ID: ':id',

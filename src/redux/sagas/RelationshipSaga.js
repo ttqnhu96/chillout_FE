@@ -3,8 +3,8 @@ import { relationshipService } from "../../services/RelationshipService";
 import { MESSAGES } from "../../util/constants/commonConstants";
 import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
-import { getReceivedFriendRequestListAction, getSuggestionsListAction } from "../actions/RelationshipAction";
-import { GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
+import { getFriendListAction, getFriendListSagaAction, getReceivedFriendRequestListAction, getReceivedFriendRequestListSagaAction, getSuggestionsListAction } from "../actions/RelationshipAction";
+import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
 
 /*=============================================
             GET SUGGESTIONS LIST
@@ -19,7 +19,7 @@ function* getSuggestionsList(action) {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            //Set suggestions list to reducer
+            //Set suggestions list state in reducer
             yield put(getSuggestionsListAction(response));
         } else {
             //Inform error
@@ -38,13 +38,44 @@ export function* getSuggestionsListWatcher() {
 }
 
 /*=============================================
+            GET FRIEND LIST
+==============================================*/
+/**
+ * getFriendList
+ * @param action 
+ */
+function* getFriendList(action) {
+    try {
+        const { data } = yield call(() => relationshipService.getFriendList(action.request));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set friend list state in reducer
+            yield put(getFriendListAction(response));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * getFriendListWatcher
+ * @param
+ */
+export function* getFriendListWatcher() {
+    yield takeLatest(GET_FRIEND_LIST_SAGA, getFriendList);
+}
+
+/*=============================================
             GET FRIEND REQUEST LIST
 ==============================================*/
 /**
  * getReceivedFriendRequestList
  * @param action 
  */
- function* getReceivedFriendRequestList(action) {
+function* getReceivedFriendRequestList(action) {
     try {
         const { data } = yield call(() => relationshipService.getReceivedFriendRequestList(action.request));
         const errorCode = data.ErrorCode;
@@ -66,4 +97,117 @@ export function* getSuggestionsListWatcher() {
  */
 export function* getReceivedFriendRequestListWatcher() {
     yield takeLatest(GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, getReceivedFriendRequestList);
+}
+
+/*=============================================
+            ACCEPT FRIEND REQUEST
+==============================================*/
+/**
+ * acceptFriendRequest
+ * @param action 
+ */
+function* acceptFriendRequest(action) {
+    try {
+        const { data } = yield call(() => relationshipService.acceptFriendRequest(action.friendRequestId));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set friend request list to reducer
+            yield put(getReceivedFriendRequestListSagaAction({
+                receiverId: response.receiverId,
+                isPaginated: false
+            }));
+            //Reload friend list of request sender
+            yield put(getFriendListSagaAction({
+                userId: response.senderId,
+                isPaginated: false
+            }));
+            //Reload friend list of request receiver
+            yield put(getFriendListSagaAction({
+                userId: response.receiverId,
+                isPaginated: false
+            }));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * acceptFriendRequestWatcher
+ * @param
+ */
+export function* acceptFriendRequestWatcher() {
+    yield takeLatest(ACCEPT_FRIEND_REQUEST_SAGA, acceptFriendRequest);
+}
+
+/*=============================================
+            DELETE FRIEND REQUEST
+==============================================*/
+/**
+ * deleteFriendRequest
+ * @param action 
+ */
+function* deleteFriendRequest(action) {
+    try {
+        const { data } = yield call(() => relationshipService.deletetFriendRequest(action.friendRequestId));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set friend request list to reducer
+            yield put(getReceivedFriendRequestListSagaAction({
+                receiverId: response.receiverId,
+                isPaginated: false
+            }));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * deleteFriendRequestWatcher
+ * @param
+ */
+export function* deleteFriendRequestWatcher() {
+    yield takeLatest(DELETE_FRIEND_REQUEST_SAGA, deleteFriendRequest);
+}
+
+/*=============================================
+            CREATE FRIEND REQUEST 
+==============================================*/
+/**
+ * createFriendRequest
+ * @param action 
+ */
+function* createFriendRequest(action) {
+    try {
+        const { data } = yield call(() => relationshipService.createFriendRequest(action.newFriendRequest));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        console.log('response: ', response)
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set friend request list to reducer
+            yield put(getReceivedFriendRequestListSagaAction({
+                receiverId: response.receiverId,
+                isPaginated: false
+            }));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * createFriendRequestWatcher
+ * @param
+ */
+export function* createFriendRequestWatcher() {
+    yield takeLatest(CREATE_FRIEND_REQUEST_SAGA, createFriendRequest);
 }

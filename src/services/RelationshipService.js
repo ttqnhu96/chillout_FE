@@ -7,6 +7,11 @@ export class RelationshipService extends BaseService {
         return this.post(`${FUNCTION_CONSTANTS.RELATIONSHIP}/${URL_CONSTANTS.GET_SUGGESTIONS_LIST}`, request);
     }
 
+    //Get friend list
+    getFriendList = (request) => {
+        return this.post(`${FUNCTION_CONSTANTS.RELATIONSHIP}/${URL_CONSTANTS.GET_FRIEND_LIST}`, request);
+    }
+
     //Get friend request list
     getReceivedFriendRequestList = (request) => {
         return this.post(`${FUNCTION_CONSTANTS.FRIEND_REQUEST}/${URL_CONSTANTS.GET_RECEIVED_FRIEND_REQUEST_LIST}`, request);
@@ -20,6 +25,11 @@ export class RelationshipService extends BaseService {
     //Delete friend request
     deletetFriendRequest = (id) => {
         return this.delete(`${FUNCTION_CONSTANTS.FRIEND_REQUEST}/${id}`);
+    }
+
+    //Create friend request
+    createFriendRequest = (newFriendRequest) => {
+        return this.post(FUNCTION_CONSTANTS.FRIEND_REQUEST, newFriendRequest);
     }
 }
 

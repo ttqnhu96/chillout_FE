@@ -1,8 +1,10 @@
-import { Fragment } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
 import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
+import { getFriendListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import Search from '../Search/Search';
@@ -11,10 +13,26 @@ import style from './FriendList.module.css';
 export default function FriendList() {
     const dispatch = useDispatch();
     const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-    const loggedInUserfriendList = useSelector(state => state.ProfileReducer).userProfile.friendList; //In case view logged in user profile
-    const friendFriendList = useSelector(state => state.ProfileReducer).friendProfile.friendList; //In case view friend profile
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+   const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
+    const { friendList } = useSelector(state => state.RelationshipReducer);
+
+    useEffect(() => {
+        let profileOwnerId = 0;
+        if (isViewFriendProfile) {
+            profileOwnerId = friendId;
+        } else {
+            profileOwnerId = currentUserId;
+        }
+        if (profileOwnerId) {
+            dispatch(getFriendListSagaAction(
+                {
+                    userId: profileOwnerId,
+                    isPaginated: false
+                }
+            ))
+        }
+    }, [currentUserId, friendId, isViewFriendProfile])
 
     //Handle events
     const handleClickFriend = (userId, profileId) => {
@@ -43,7 +61,7 @@ export default function FriendList() {
     }
 
     const renderFriendList = () => {
-        const friendList = isViewFriendProfile ? friendFriendList : loggedInUserfriendList;
+        //const friendList = isViewFriendProfile ? friendFriendList : loggedInUserfriendList;
         return (
             friendList?.map((friend, index) => {
                 return (
@@ -80,244 +98,6 @@ export default function FriendList() {
             </div>
             <div className={`${style['friendlist-item-container']}`}>
                 {renderFriendList()}
-                {/* <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div>
-                <div className={`${style['friendlist-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
-                        alt="avatar"
-                        className={`${style['friendlist-item-avatar']}`}
-                    />
-                    <div className={`${style['friendlist-item-name']}`}>
-                        Thoai
-                    </div>
-                    <div className={`${style['friendlist-options']}`}>
-                        <img
-
-                            height={15} width={15}
-                            src="./image/icon/more-options.png"
-                            alt="more-options"
-                        />
-                    </div>
-                </div> */}
             </div>
         </Fragment>
     )

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { createFriendRequestSagaAction } from '../../redux/actions/RelationshipAction';
 
 const menuItems = require('./coverMenuItems.json');
 function Cover(props) {
@@ -20,10 +21,11 @@ function Cover(props) {
     const lastName = useSelector(state => state.ProfileReducer).userProfile?.lastName;
 
     //In case view friend profile
+    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
     const friendAvatar = useSelector(state => state.ProfileReducer).friendProfile.avatar;
     const friendFirstName = useSelector(state => state.ProfileReducer).friendProfile.firstName;
     const friendLastName = useSelector(state => state.ProfileReducer).friendProfile.lastName;
-    const friendList = useSelector(state => state.ProfileReducer).friendProfile.friendList;
+    const friendListUserId = useSelector(state => state.ProfileReducer).friendProfile.friendListUserId;
 
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
 
@@ -53,14 +55,19 @@ function Cover(props) {
     const handleUploadAvatar = () => {
         dispatch(displayUploadImageModalAction())
     }
-    
+    const handleCreateFriendRequest = () => {
+        dispatch(createFriendRequestSagaAction({
+            receiverId: friendId
+        }))
+    }
+
     const renderAddFriendButton = () => {
         if (isViewFriendProfile) {
-            const friendListUserId = friendList?.map(item => { return item.userId })
+            //const friendListUserId = friendList?.map(item => { return item.userId })
             if (friendListUserId?.includes(currentUserId)) {
                 return (
                     <div className={`${style['friend-btn']}`}>
-                        <img width={16} height={16} style={{opacity: 0.4}}
+                        <img width={16} height={16} style={{ opacity: 0.4 }}
                             src="./image/icon/friend_added.png"
                             alt="friend_added"
                         />
@@ -68,7 +75,8 @@ function Cover(props) {
                 )
             } else {
                 return (
-                    <div className={`${style['add-friend-btn']}`}>
+                    <div className={`${style['add-friend-btn']}`}
+                        onClick={handleCreateFriendRequest}>
                         Add friend
                     </div>
                 )

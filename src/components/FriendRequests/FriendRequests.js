@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import style from './FriendRequests.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
-import { getReceivedFriendRequestListSagaAction } from '../../redux/actions/RelationshipAction';
+import { acceptFriendRequestSagaAction, deleteFriendRequestSagaAction, getReceivedFriendRequestListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
@@ -43,6 +43,16 @@ export default function FriendRequests() {
         history.push('/wall');
     }
 
+    //Handle accept friend request
+    const handleAcceptFriendRequest = (friendRequestId) => {
+        dispatch(acceptFriendRequestSagaAction(friendRequestId))
+    }
+
+    //Handle delete friend request
+    const handleDeleteFriendRequest = (friendRequestId) => {
+        dispatch(deleteFriendRequestSagaAction(friendRequestId))
+    }
+
     const renderFriendRequestList = () => {
         return (
             receivedFriendRequestList?.map((friendRequest, index) => {
@@ -59,10 +69,13 @@ export default function FriendRequests() {
                             onClick={() => { handleClickFriend(friendRequest.userId, friendRequest.profileId) }}>
                             {`${friendRequest.firstName || ""} ${friendRequest.lastName || ""}`}
                         </div>
-                        <div className={`${style['friend-request-confirm-btn']}`}>
+                        <div
+                            className={`${style['friend-request-confirm-btn']}`}
+                            onClick={() => { handleAcceptFriendRequest(friendRequest.id) }}>
                             Confirm
                         </div>
-                        <div className={`${style['friend-request-delete-btn']}`}>
+                        <div className={`${style['friend-request-delete-btn']}`}
+                            onClick={() => { handleDeleteFriendRequest(friendRequest.id) }}>
                             Delete
                         </div>
                     </div>

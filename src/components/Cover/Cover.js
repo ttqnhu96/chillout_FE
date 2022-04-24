@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
-import { createFriendRequestSagaAction } from '../../redux/actions/RelationshipAction';
+import { createFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
+import { RELATIONSHIP_TYPE } from '../../util/constants/commonConstants';
 
 const menuItems = require('./coverMenuItems.json');
 function Cover(props) {
@@ -26,8 +27,17 @@ function Cover(props) {
     const friendFirstName = useSelector(state => state.ProfileReducer).friendProfile.firstName;
     const friendLastName = useSelector(state => state.ProfileReducer).friendProfile.lastName;
     const friendListUserId = useSelector(state => state.ProfileReducer).friendProfile.friendListUserId;
+    const relationshipWithCurrentUser = useSelector(state => state.RelationshipReducer).relationshipWithCurrentUser;
 
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
+
+    useEffect(() => {
+        if (isViewFriendProfile && friendId) {
+            dispatch(getRelationshipWithCurrentUserSagaAction({
+                userId: Number(friendId)
+            }))
+        }
+    }, [friendId, isViewFriendProfile])
 
     useEffect(() => {
         //Hide scrollbar when modal is opened
@@ -64,22 +74,54 @@ function Cover(props) {
     const renderAddFriendButton = () => {
         if (isViewFriendProfile) {
             //const friendListUserId = friendList?.map(item => { return item.userId })
-            if (friendListUserId?.includes(currentUserId)) {
-                return (
-                    <div className={`${style['friend-btn']}`}>
-                        <img width={16} height={16} style={{ opacity: 0.4 }}
-                            src="./image/icon/friend_added.png"
-                            alt="friend_added"
-                        />
-                    </div>
-                )
-            } else {
-                return (
-                    <div className={`${style['add-friend-btn']}`}
-                        onClick={handleCreateFriendRequest}>
-                        Add friend
-                    </div>
-                )
+            // if (friendListUserId?.includes(currentUserId)) {
+            //     return (
+            //         <div className={`${style['friend-btn']}`}>
+            //             <img width={16} height={16} style={{ opacity: 0.4 }}
+            //                 src="./image/icon/friend_added.png"
+            //                 alt="friend_added"
+            //             />
+            //         </div>
+            //     )
+            // } else {
+            //     return (
+            //         <div className={`${style['add-friend-btn']}`}
+            //             onClick={handleCreateFriendRequest}>
+            //             Add friend
+            //         </div>
+            //     )
+            // }
+            switch (relationshipWithCurrentUser) {
+                case RELATIONSHIP_TYPE.FRIEND:
+                    return (
+                        <div className={`${style['friend-btn']}`}>
+                            <img width={16} height={16} style={{ opacity: 0.4 }}
+                                src="./image/icon/friend_added.png"
+                                alt="friend_added"
+                            />
+                        </div>
+                    )
+                case RELATIONSHIP_TYPE.FRIEND_REQUEST_RECEIVER:
+                    return (
+                        <div className={`${style['add-friend-btn']}`}
+                            onClick={() => { }}>
+                            Cancel
+                        </div>
+                    )
+                case RELATIONSHIP_TYPE.FRIEND_REQUEST_SENDER:
+                    return (
+                        <div className={`${style['add-friend-btn']}`}
+                            onClick={() => { }}>
+                            Response
+                        </div>
+                    )
+                default:
+                    return (
+                        <div className={`${style['add-friend-btn']}`}
+                            onClick={handleCreateFriendRequest}>
+                            Add friend
+                        </div>
+                    )
             }
         }
     }

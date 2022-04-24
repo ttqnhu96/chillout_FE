@@ -3,8 +3,8 @@ import { relationshipService } from "../../services/RelationshipService";
 import { MESSAGES } from "../../util/constants/commonConstants";
 import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
-import { getFriendListAction, getFriendListSagaAction, getReceivedFriendRequestListAction, getReceivedFriendRequestListSagaAction, getSuggestionsListAction } from "../actions/RelationshipAction";
-import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
+import { getFriendListAction, getFriendListSagaAction, getReceivedFriendRequestListAction, getReceivedFriendRequestListSagaAction, getRelationshipWithCurrentUserSagaAction, getRelationshipWithCurrentUserAction, getSuggestionsListAction } from "../actions/RelationshipAction";
+import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
 
 /*=============================================
             GET SUGGESTIONS LIST
@@ -127,6 +127,9 @@ function* acceptFriendRequest(action) {
                 userId: response.receiverId,
                 isPaginated: false
             }));
+            yield put(getRelationshipWithCurrentUserSagaAction({
+                userId: Number(response.senderId)
+            }));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -189,8 +192,10 @@ function* createFriendRequest(action) {
         const { data } = yield call(() => relationshipService.createFriendRequest(action.newFriendRequest));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        console.log('response: ', response)
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            yield put(getRelationshipWithCurrentUserSagaAction({
+                userId: Number(response.receiverId)
+            }));
             //Set friend request list to reducer
             yield put(getReceivedFriendRequestListSagaAction({
                 receiverId: response.receiverId,
@@ -210,4 +215,35 @@ function* createFriendRequest(action) {
  */
 export function* createFriendRequestWatcher() {
     yield takeLatest(CREATE_FRIEND_REQUEST_SAGA, createFriendRequest);
+}
+
+/*=============================================
+        GET RELATIONSHIP WITH CURRENT USER
+==============================================*/
+/**
+ * getRelationshipWithCurrentUser
+ * @param action 
+ */
+function* getRelationshipWithCurrentUser(action) {
+    try {
+        const { data } = yield call(() => relationshipService.getRelationshipWithCurrentUser(action.request));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set state in reducer
+            yield put(getRelationshipWithCurrentUserAction(response.type));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * getRelationshipWithCurrentUserWatcher
+ * @param
+ */
+export function* getRelationshipWithCurrentUserWatcher() {
+    yield takeLatest(GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, getRelationshipWithCurrentUser);
 }

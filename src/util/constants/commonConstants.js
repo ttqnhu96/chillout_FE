@@ -33,4 +33,10 @@ export const MODAL_TYPE = {
     CONFIRM_DELETE_PHOTO: 'CONFIRM_DELETE_PHOTO'
 }
 
+export const RELATIONSHIP_TYPE = {
+    FRIEND: 'FRIEND',
+    FRIEND_REQUEST_RECEIVER: 'FRIEND_REQUEST_RECEIVER',
+    FRIEND_REQUEST_SENDER: 'FRIEND_REQUEST_SENDER'
+}
+
 export const REGEX_EMAIL = /^(|[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,})$/

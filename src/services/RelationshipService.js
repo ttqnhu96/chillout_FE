@@ -31,6 +31,11 @@ export class RelationshipService extends BaseService {
     createFriendRequest = (newFriendRequest) => {
         return this.post(FUNCTION_CONSTANTS.FRIEND_REQUEST, newFriendRequest);
     }
+
+    //Get relationship with current user
+    getRelationshipWithCurrentUser = (request) => {
+        return this.post(`${FUNCTION_CONSTANTS.RELATIONSHIP}/${URL_CONSTANTS.GET_RELATIONSHIP_WITH_CURRENT_USER}`, request);
+    }
 }
 
 export const relationshipService = new RelationshipService();

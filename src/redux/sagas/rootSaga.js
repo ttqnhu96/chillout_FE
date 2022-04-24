@@ -55,6 +55,7 @@ export function* rootSaga() {
         RelationshipSaga.getReceivedFriendRequestListWatcher(),
         RelationshipSaga.acceptFriendRequestWatcher(),
         RelationshipSaga.deleteFriendRequestWatcher(),
-        RelationshipSaga.createFriendRequestWatcher()
+        RelationshipSaga.createFriendRequestWatcher(),
+        RelationshipSaga.getRelationshipWithCurrentUserWatcher()
     ])
 }

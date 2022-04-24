@@ -1,9 +1,10 @@
-import { GET_FRIEND_LIST, GET_RECEIVED_FRIEND_REQUEST_LIST, GET_SUGGESTIONS_LIST } from "../constants/types";
+import { GET_FRIEND_LIST, GET_RECEIVED_FRIEND_REQUEST_LIST, GET_RELATIONSHIP_WITH_CURRENT_USER, GET_SUGGESTIONS_LIST } from "../constants/types";
 
 const initialState = {
     suggestionsList: [],
     friendList: [],
-    receivedFriendRequestList: []
+    receivedFriendRequestList: [],
+    relationshipWithCurrentUser: ''
 }
 
 export const RelationshipReducer = (state = initialState, action) => {
@@ -16,6 +17,9 @@ export const RelationshipReducer = (state = initialState, action) => {
             return { ...state }
         case GET_RECEIVED_FRIEND_REQUEST_LIST:
             state.receivedFriendRequestList = action.receivedFriendRequestList;
+            return { ...state }
+        case GET_RELATIONSHIP_WITH_CURRENT_USER:
+            state.relationshipWithCurrentUser = action.relationshipWithCurrentUser;
             return { ...state }
         default:
             return state

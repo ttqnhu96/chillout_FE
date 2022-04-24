@@ -164,6 +164,9 @@ function* deleteFriendRequest(action) {
                 receiverId: response.receiverId,
                 isPaginated: false
             }));
+            yield put(getRelationshipWithCurrentUserSagaAction({
+                userId: Number(response.receiverId)
+            }));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -231,7 +234,7 @@ function* getRelationshipWithCurrentUser(action) {
         const response = data.Data;
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Set state in reducer
-            yield put(getRelationshipWithCurrentUserAction(response.type));
+            yield put(getRelationshipWithCurrentUserAction(response));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

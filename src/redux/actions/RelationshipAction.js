@@ -71,9 +71,10 @@ export const getRelationshipWithCurrentUserSagaAction = (request) => {
     }
 }
 
-export const getRelationshipWithCurrentUserAction = (relationshipWithCurrentUser) => {
+export const getRelationshipWithCurrentUserAction = (data) => {
     return {
         type: GET_RELATIONSHIP_WITH_CURRENT_USER,
-        relationshipWithCurrentUser: relationshipWithCurrentUser
+        relationshipWithCurrentUser: data.type,
+        friendRequestId: data.friendRequestId
     }
 }

@@ -43,7 +43,6 @@ export default function InputComment(props) {
                     autoSize
                     onChange={handleChangeValue}
                     value={commentContent}
-                    // onPressEnter={(e) => {console.log('commentContent', commentContent)}}
                     maxLength={5000}
                 />
                 <img

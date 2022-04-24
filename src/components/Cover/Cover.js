@@ -1,12 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, memo, useEffect } from 'react';
 import style from './Cover.module.css';
 import { CameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
-import { createFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
+import { acceptFriendRequestSagaAction, createFriendRequestSagaAction, deleteFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
 import { RELATIONSHIP_TYPE } from '../../util/constants/commonConstants';
+import { Dropdown, Menu } from 'antd';
 
 const menuItems = require('./coverMenuItems.json');
 function Cover(props) {
@@ -15,7 +17,6 @@ function Cover(props) {
     //Get state from reducer
     const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     //In case view logged in user profile
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const profileId = useSelector(state => state.ProfileReducer).userProfile?.id;
     const avatar = useSelector(state => state.ProfileReducer).userProfile?.avatar;
     const firstName = useSelector(state => state.ProfileReducer).userProfile?.firstName;
@@ -26,8 +27,7 @@ function Cover(props) {
     const friendAvatar = useSelector(state => state.ProfileReducer).friendProfile.avatar;
     const friendFirstName = useSelector(state => state.ProfileReducer).friendProfile.firstName;
     const friendLastName = useSelector(state => state.ProfileReducer).friendProfile.lastName;
-    const friendListUserId = useSelector(state => state.ProfileReducer).friendProfile.friendListUserId;
-    const relationshipWithCurrentUser = useSelector(state => state.RelationshipReducer).relationshipWithCurrentUser;
+    const { relationshipWithCurrentUser, friendRequestId } = useSelector(state => state.RelationshipReducer);
 
     const { isUploadImageModalVisible } = useSelector(state => state.PhotoReducer);
 
@@ -70,50 +70,56 @@ function Cover(props) {
             receiverId: friendId
         }))
     }
+    const handleAcceptFriendRequest = () => {
+        if (friendRequestId) {
+            dispatch(acceptFriendRequestSagaAction(friendRequestId))
+        }
+    }
+    const handleCancelFriendRequest = () => {
+        if (friendRequestId) {
+            dispatch(deleteFriendRequestSagaAction(friendRequestId))
+        }
+    }
+
+    const responseRequestMenu = (
+        <Menu>
+            <Menu.Item key="1" onClick={handleAcceptFriendRequest}>Confirm</Menu.Item>
+            <Menu.Item key="2" onClick={handleCancelFriendRequest}>Delete request</Menu.Item>
+        </Menu>
+    );
 
     const renderAddFriendButton = () => {
         if (isViewFriendProfile) {
-            //const friendListUserId = friendList?.map(item => { return item.userId })
-            // if (friendListUserId?.includes(currentUserId)) {
-            //     return (
-            //         <div className={`${style['friend-btn']}`}>
-            //             <img width={16} height={16} style={{ opacity: 0.4 }}
-            //                 src="./image/icon/friend_added.png"
-            //                 alt="friend_added"
-            //             />
-            //         </div>
-            //     )
-            // } else {
-            //     return (
-            //         <div className={`${style['add-friend-btn']}`}
-            //             onClick={handleCreateFriendRequest}>
-            //             Add friend
-            //         </div>
-            //     )
-            // }
             switch (relationshipWithCurrentUser) {
                 case RELATIONSHIP_TYPE.FRIEND:
                     return (
                         <div className={`${style['friend-btn']}`}>
                             <img width={16} height={16} style={{ opacity: 0.4 }}
-                                src="./image/icon/friend_added.png"
+                                src="./image/icon/friend-added.png"
                                 alt="friend_added"
-                            />
+                            /> <span style={{ opacity: 0.4 }}>Friends</span>
                         </div>
                     )
                 case RELATIONSHIP_TYPE.FRIEND_REQUEST_RECEIVER:
                     return (
-                        <div className={`${style['add-friend-btn']}`}
-                            onClick={() => { }}>
-                            Cancel
+                        <div className={`${style['cancel-request-btn']}`}
+                            onClick={handleCancelFriendRequest}>
+                            <img width={16} height={16}
+                                src="./image/icon/cancel-friend-request.png"
+                                alt="cancel_friend_request"
+                            /> Cancel Request
                         </div>
                     )
                 case RELATIONSHIP_TYPE.FRIEND_REQUEST_SENDER:
                     return (
-                        <div className={`${style['add-friend-btn']}`}
-                            onClick={() => { }}>
-                            Response
-                        </div>
+                        <Dropdown overlay={responseRequestMenu} placement="bottom" trigger={['click']} arrow>
+                            <div className={`${style['response-request-btn']}`}>
+                                <img width={16} height={16}
+                                    src="./image/icon/friend-added.png"
+                                    alt="response_friend_request"
+                                /> Response
+                            </div>
+                        </Dropdown>
                     )
                 default:
                     return (

@@ -26,12 +26,10 @@
 
 .friend-btn {
     height: 2em;
-    width: 10rem;
+    /* width: 10rem; */
     padding: 0.1rem 1rem;
     border-radius: 0.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     background: rgba(255, 255, 255, 0.5);
     border: 0.1rem solid rgba(0, 0, 0, 0.2);
     color:rgba(0, 0, 0, 1);
@@ -40,7 +38,7 @@
 }
 .add-friend-btn {
     height: 2em;
-    width: 10rem;
+    /* width: 10rem; */
     padding: 0.1rem 1rem;
     border-radius: 0.8rem;
     text-align: center;
@@ -50,9 +48,33 @@
     cursor: pointer;
     font-size: 0.9em;
 }
+.cancel-request-btn {
+    height: 2em;
+    /* width: 10rem; */
+    padding: 0.1rem 1rem;
+    border-radius: 0.8rem;
+    text-align: center;
+    background: rgba(211, 211, 211, 0.5);
+    border: 0.1rem solid rgba(0, 0, 0, 0.4);
+    color:rgba(0, 0, 0, 1);
+    cursor: pointer;
+    font-size: 0.9em;
+}
+.response-request-btn {
+    height: 2em;
+    /* width: 10rem; */
+    padding: 0.1rem 1rem;
+    border-radius: 0.8rem;
+    text-align: center;
+    background: rgba(211, 211, 211, 0.5);
+    border: 0.1rem solid rgba(0, 0, 0, 0.4);
+    color:rgba(0, 0, 0, 1);
+    cursor: pointer;
+    font-size: 0.9em;
+}
 .message-btn {
     height: 2em;
-    width: 10rem;
+    /* width: 10rem; */
     padding: 0.1rem 1rem;
     border-radius: 0.8rem;
     text-align: center;

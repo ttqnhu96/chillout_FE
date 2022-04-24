@@ -4,7 +4,8 @@ const initialState = {
     suggestionsList: [],
     friendList: [],
     receivedFriendRequestList: [],
-    relationshipWithCurrentUser: ''
+    relationshipWithCurrentUser: '',
+    friendRequestId: 0
 }
 
 export const RelationshipReducer = (state = initialState, action) => {
@@ -20,6 +21,7 @@ export const RelationshipReducer = (state = initialState, action) => {
             return { ...state }
         case GET_RELATIONSHIP_WITH_CURRENT_USER:
             state.relationshipWithCurrentUser = action.relationshipWithCurrentUser;
+            state.friendRequestId = action.friendRequestId;
             return { ...state }
         default:
             return state

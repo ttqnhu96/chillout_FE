@@ -89,7 +89,6 @@ export default function CreatePost() {
                                 placeholder="What's on your mind?"
                                 autoSize={{ minRows: 4 }}
                                 onChange={handleChangeValue}
-                            // onPressEnter={(e) => { console.log(e.target.value) }}
                             />
                             <CropAndUploadImg maxFileLength={maxFileLength} setPhotoListUpload={setPhotoListUpload} />
                         </div>

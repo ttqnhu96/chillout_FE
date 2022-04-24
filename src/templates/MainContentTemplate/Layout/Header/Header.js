@@ -115,7 +115,7 @@ export default function Header() {
                             `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['avatar']}`}
-                            onError={() => { window.location.reload() }}
+                            // onError={() => { window.location.reload() }}
                         />
                     </div>
                 </div>

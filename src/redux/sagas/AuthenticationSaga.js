@@ -4,6 +4,7 @@ import { history } from "../../util/history";
 import { authenticationService } from "../../services/AuthenticationService";
 import { LOGIN_SAGA, SIGN_UP_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
+import { socketInit } from "../actions/SocketAction";
 import { MESSAGES } from "../../util/constants/commonConstants";
 import { hideSignUpModalAction } from "../actions/SignUpAction";
 
@@ -14,16 +15,17 @@ import { hideSignUpModalAction } from "../actions/SignUpAction";
  * logIn
  * @param action 
  */
-function* logIn(action) {
+function* logIn(action, dispatch) {
     try {
         const { data } = yield call(() => authenticationService.logIn(action.userLogin));
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
-        if(data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Save login information to sessionStore when login success
             sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
             sessionStorage.setItem(USER_LOGIN, JSON.stringify(response));
+            dispatch(socketInit());
             history.push('/home');
         } else {
             //Inform error
@@ -38,8 +40,8 @@ function* logIn(action) {
  * logInWatcher
  * @param
  */
-export function* logInWatcher() {
-    yield takeLatest(LOGIN_SAGA, logIn);
+export function* logInWatcher(dispatch) {
+    yield takeLatest(LOGIN_SAGA, (action) => logIn(action, dispatch));
 }
 
 
@@ -50,12 +52,12 @@ export function* logInWatcher() {
  * signUp
  * @param action 
  */
- function* signUp(action) {
+function* signUp(action) {
     try {
         const { data } = yield call(() => authenticationService.signUp(action.userSignUp));
         const errorCode = data.ErrorCode;
 
-        if(data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             //Inform sign up successfully
             notify('success', MESSAGES.SIGN_UP_SUCCESS);
             yield put(hideSignUpModalAction());

@@ -12,14 +12,18 @@ import { SchoolReducer } from '../redux/reducers/SchoolReducer';
 import { CollegeReducer } from '../redux/reducers/CollegeReducer';
 import { CommentReducer } from '../redux/reducers/CommentReducer';
 import { LoadingReducer } from '../redux/reducers/LoadingReducer';
+import { MessageReducer } from './reducers/MessageReducer';
 import { ConfirmDeleteReducer } from '../redux/reducers/ConfirmDeleteReducer';
 import { RelationshipReducer } from '../redux/reducers/RelationshipReducer';
+import { NotificationReducer } from '../redux/reducers/NotificationReducer';
 
 //Create Saga middleware
 const sagaMiddleWare = createMiddleWareSaga();
 
 const rootReducer = combineReducers({
     ProfileReducer,
+    MessageReducer,
+    CommentReducer,
     SignUpReducer,
     PostReducer,
     MenuReducer,
@@ -31,13 +35,14 @@ const rootReducer = combineReducers({
     LoadingReducer,
     CommentReducer,
     ConfirmDeleteReducer,
-    RelationshipReducer
+    RelationshipReducer,
+    NotificationReducer
 })
 
 //Inject Saga Middleware to Redux Store
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleWare));
 
 //Run Saga
-sagaMiddleWare.run(rootSaga);
+sagaMiddleWare.run(rootSaga, store.dispatch);
 
 export default store;

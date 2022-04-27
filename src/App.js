@@ -5,6 +5,8 @@ import Login from './pages/Login/Login';
 import { LoginTemplate } from './templates/LoginTemplate/LoginTemplate';
 import Wall from './pages/Wall/Wall';
 import Friends from './pages/Friends/Friends';
+import Messenger from './pages/Messenger/Messenger';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 function App() {
   return (
@@ -14,8 +16,10 @@ function App() {
         <LoginTemplate exact path="/login" Component={Login} />
         <MainContentTemplate exact path="/wall" Component={Wall} />
         <MainContentTemplate exact path="/friends" Component={Friends} />
-
+        <MainContentTemplate exact path="/message" Component={Messenger} />
         <MainContentTemplate exact path="/" Component={HomePage} />
+
+        <MainContentTemplate exact path="*" Component={PageNotFound} />
       </Switch>
     </>
   );

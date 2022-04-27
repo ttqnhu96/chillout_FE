@@ -26,7 +26,7 @@ export default function WallPost(props) {
     const [totalLikes, setTotalLikes] = useState(initialLikes);
 
     const handleLikePost = useCallback(() => {
-        dispatch(updateLikesSagaAction({ postId: post.id }));
+        dispatch(updateLikesSagaAction({ postId: post.id, like: !isLiked }));
         if (isLiked) {
             //If current state is "like", set to "unlike"
             setLikeIcon(unlikeIconSrc);

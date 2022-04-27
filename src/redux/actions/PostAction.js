@@ -52,7 +52,8 @@ export const getPostListNewsFeedAction = (postListNewsFeed) => {
 export const updateLikesSagaAction = (request) => {
     return {
         type: UPDATE_LIKES_SAGA,
-        request: request
+        like: request.like,
+        postId: request.postId
     }
 }
 

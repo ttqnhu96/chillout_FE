@@ -6,6 +6,7 @@ import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
 import { getPostListNewsFeedAction, getPostListNewsFeedSagaAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
+import { likePostSocketHandlerAction } from "../actions/SocketAction";
 
 /*=============================================
                 CREATE POST
@@ -135,9 +136,12 @@ export function* getPostListNewsFeedWatcher() {
  */
 function* updateLikes(action) {
     try {
-        const { data } = yield call(() => postService.updateLikes(action.request));
+        const { data } = yield call(() => postService.updateLikes({ postId: action.postId }));
         const errorCode = ERROR_CODE.SUCCESSFUL;
-
+        yield put(likePostSocketHandlerAction({
+            postId: action.postId,
+            like: action.like
+        }));
         if (data.ErrorCode !== ERROR_CODE.SUCCESSFUL) {
             //Inform error
             return notify('error', MESSAGES[errorCode])

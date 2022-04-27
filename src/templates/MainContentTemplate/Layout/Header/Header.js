@@ -12,6 +12,8 @@ import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
 import { setHomeMenuIdActiveAction } from '../../../../redux/actions/MenuAction';
 import { getPhotoListByUserIdAction } from '../../../../redux/actions/PhotoAction';
+import { DropdownNotification } from '../../../../components/DropdownNotification/DropdownNotification';
+import { DropdownMessage } from '../../../../components/DropdownMessage/DropdownMessage';
 
 export default function Header() {
     //Call API to get user info
@@ -56,7 +58,7 @@ export default function Header() {
     }
 
     const handleClickUser = () => {
-        if(isViewFriendProfile === true) {
+        if (isViewFriendProfile === true) {
             dispatch(getPostListWallAction([]));
             dispatch(getPhotoListByUserIdAction([]));
             dispatch(setIsViewFriendProfileAction(false));
@@ -106,8 +108,8 @@ export default function Header() {
                     />
                 </div>
                 <div className={`${style['notification-user-container']}`}>
-                    <div className={`${style['message-icon']}`}><i height={20} className="far fa-comment-dots"></i></div>
-                    <div className={`${style['notification-icon']}`}><i height={20} className="far fa-bell"></i></div>
+                    <DropdownMessage />
+                    <DropdownNotification />
                     <div className={`${style['user-container']}`}
                         onClick={handleClickUser}>
                         <span className={`${style['username']}`}>{firstName}</span>

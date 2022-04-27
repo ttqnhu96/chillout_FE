@@ -19,14 +19,14 @@ export default function NewsFeedPost(props) {
     const initialIsLiked = post.userIdLikePostList?.includes(currentUserId);
     const initialLikeIcon = initialIsLiked ? likeIconSrc : unlikeIconSrc;
     const initialLikes = post.likes;
-    
+
     //Local state
     const [isLiked, setIsLiked] = useState(initialIsLiked);
     const [likeIcon, setLikeIcon] = useState(initialLikeIcon);
     const [totalLikes, setTotalLikes] = useState(initialLikes);
 
     const handleLikePost = useCallback(() => {
-        dispatch(updateLikesSagaAction({ postId: post.id }));
+        dispatch(updateLikesSagaAction({ postId: post.id, like: !isLiked }));
 
         if (isLiked) {
             //If current state is "like", set to "unlike"

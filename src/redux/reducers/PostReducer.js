@@ -45,8 +45,8 @@ export const PostReducer = (state = initialState, action) => {
 
 const updateLikeByPostIdInListWall = (postId, data, state) => {
     const { postListWall } = state;
-    const index = postListWall.findIndex(item => item.id == postId);
-    if (index != -1) {
+    const index = postListWall.findIndex(item => item.id === postId);
+    if (index !== -1) {
         postListWall[index].likes = data.likes;
         postListWall[index].userIdLikePostList = data.userIdLikePostList;
     }
@@ -54,8 +54,8 @@ const updateLikeByPostIdInListWall = (postId, data, state) => {
 
 const updateLikeByPostIdInListNewsFeed = (postId, data, state) => {
     const { postListNewsFeed } = state;
-    const index = postListNewsFeed.findIndex(item => item.id == postId);
-    if (index != -1) {
+    const index = postListNewsFeed.findIndex(item => item.id === postId);
+    if (index !== -1) {
         postListNewsFeed[index].likes = data.likes;
         postListNewsFeed[index].userIdLikePostList = data.userIdLikePostList;
     }

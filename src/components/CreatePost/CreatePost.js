@@ -9,10 +9,8 @@ import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSetti
 export default function CreatePost() {
     const dispatch = useDispatch();
 
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-    const avatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
-    const firstName = useSelector(state => state.ProfileReducer).userProfile.firstName;
-    const lastName = useSelector(state => state.ProfileReducer).userProfile.lastName;
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+    const { avatar, firstName, lastName } = useSelector(state => state.ProfileReducer).loginUserProfile;
 
     //Get state from reducers
     const { isCreatePostModalVisible } = useSelector(state => state.PostReducer);
@@ -37,7 +35,7 @@ export default function CreatePost() {
     }
 
     const handleCreatePost = () => {
-        dispatch(createPostSagaAction(currentUserId, photoListUpload, post))
+        dispatch(createPostSagaAction(loginUserId, photoListUpload, post))
     }
 
     const maxFileLength = 10;
@@ -64,7 +62,7 @@ export default function CreatePost() {
                             <img
                                 className={`${style['create-post-user-avatar']}`}
                                 src={avatar ?
-                                    `${AWS_S3_BUCKET_LINK}/${avatar}` : "./image/avatar/default_avatar.png"}
+                                    `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
                                 alt="avatar"
                             />
                             <div className={`${style['user-name-privacy-container']}`}>

@@ -1,18 +1,22 @@
 [
     {
         "id": 1,
-        "name": "Posts"
+        "name": "Posts",
+        "path": ""
     },
     {
         "id": 2,
-        "name": "About"
+        "name": "About",
+        "path": "/about"
     },
     {
         "id": 3,
-        "name": "Friends"
+        "name": "Friends",
+        "path": "/friends"
     },
     {
         "id": 4,
-        "name": "Photos"
+        "name": "Photos",
+        "path": "/photos"
     }
 ]

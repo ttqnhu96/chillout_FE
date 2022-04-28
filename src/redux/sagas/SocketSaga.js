@@ -1,4 +1,4 @@
-import { takeEvery, put, takeLatest } from 'redux-saga/effects'
+import { takeEvery } from 'redux-saga/effects'
 import * as types from '../constants/types'
 import { io } from 'socket.io-client';
 import * as actions from '../actions/SocketAction.js'
@@ -26,7 +26,6 @@ const setupSocket = (dispatch) => {
                 dispatch(actions.addCommentNotification(event.data));
                 break;
             case types.ADD_COMMENT_NOTIFICATION_FROM_SERVER:
-                console.log('ADD_COMMENT_NOTIFICATION_FROM_SERVER', event.data)
                 dispatch(setCommentNotificationToReducerAction(event.data));
                 break;
             case types.UPDATE_COMMENT_MESSAGE_FROM_SERVER:

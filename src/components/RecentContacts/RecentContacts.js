@@ -8,7 +8,7 @@ export default function RecentContacts() {
             </div>
             <div className={`${style['recent-contacts-item-container']}`}>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />
@@ -17,7 +17,7 @@ export default function RecentContacts() {
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />
@@ -26,7 +26,7 @@ export default function RecentContacts() {
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />
@@ -35,7 +35,7 @@ export default function RecentContacts() {
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />
@@ -44,7 +44,7 @@ export default function RecentContacts() {
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />
@@ -53,7 +53,7 @@ export default function RecentContacts() {
                     </div>
                 </div>
                 <div className={`${style['recent-contacts-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['recent-contacts-avatar']}`}
                     />

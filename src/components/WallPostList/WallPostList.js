@@ -1,64 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostListWallSagaAction } from "../../redux/actions/PostAction";
+import { getPostListWallAction, getPostListWallSagaAction } from "../../redux/actions/PostAction";
+import { setIsReloadWallAction } from "../../redux/actions/ProfileActions";
 import { USER_LOGIN } from "../../util/constants/systemSettings";
 import WallPost from "../WallPost/WallPost";
 import style from './WallPostList.module.css';
 
 export default function WallPostList() {
     const dispatch = useDispatch();
-
-    //Get state from reducer
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id; //In case view logged in user profile
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile?.id; //In case view friend profile
+    
+    //State from reducer
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+    const { userId } = useSelector(state => state.ProfileReducer).userProfile;
     const { postListWall } = useSelector(state => state.PostReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
     const { isReload } = useSelector(state => state.ProfileReducer);
-
-    //Local state
-    const [requestToGetPostList, setRequestToGetPostList] = useState({
-        userId: 0,
-        isPaginated: false
-    })
-
-    //Set current user id
-    useEffect(() => {
-        let profileOwnerId = 0;
-        if (isViewFriendProfile) {
-            profileOwnerId = friendId;
-        } else {
-            profileOwnerId = currentUserId;
-        }
-        setRequestToGetPostList(prevState => ({
-            ...prevState,
-            userId: profileOwnerId
-        }))
-    }, [currentUserId, friendId, isViewFriendProfile])
 
     //Get post list
     useEffect(() => {
-        if (requestToGetPostList.userId) {
-            dispatch(getPostListWallSagaAction(requestToGetPostList))
+        if (userId) {
+            dispatch(getPostListWallSagaAction({
+                userId: userId,
+                isPaginated: false
+            }))
         }
-    }, [requestToGetPostList])
+
+        //Clean friend list when component is unmounted
+        return () => {
+            dispatch(getPostListWallAction([]))
+        }
+    }, [userId])
 
 
     //Reload post list
     const wallPostContainerRef = useRef();
     useEffect(() => {
         if (isReload) {
+            dispatch(setIsReloadWallAction(false));
             wallPostContainerRef.current.scrollTop = 0;
-            let profileOwnerId = 0;
-            if (isViewFriendProfile) {
-                profileOwnerId = friendId;
-            } else {
-                profileOwnerId = currentUserId;
-            }
-            setRequestToGetPostList(prevState => ({
-                ...prevState,
-                userId: profileOwnerId
-            }))
+            if (userId) {
+                dispatch(getPostListWallSagaAction({
+                    userId: userId,
+                    isPaginated: false
+                }))
+            }  
         }
     }, [isReload])
 
@@ -67,7 +52,7 @@ export default function WallPostList() {
             postListWall.map((post, index) => (
                 <WallPost key={index}
                     post={post}
-                    currentUserId={currentUserId} />
+                    currentUserId={loginUserId} />
             ))
         )
     }

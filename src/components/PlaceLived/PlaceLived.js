@@ -1,23 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, memo, useState } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './PlaceLived.module.css';
 
 function PlaceLived(props) {
-    //Get state from reducer
-    const { cityList } = useSelector(state => state.CityReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
-    //Get props
-    const { cityId, cityName, handleUpdateProfile } = props;
+    //Props
+    const { profileOwnerId, cityId, cityName, handleUpdateProfile } = props;
+
+    //State from reducer
+    const { cityList } = useSelector(state => state.CityReducer);
 
     //Local state
     const [cityValue, setCityValue] = useState({
-        id: cityId,
-        name: cityName
+        id: 0,
+        name: ''
     });
     const [isEditMode, setIsEditMode] = useState(false);
     const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
+
+    //Use effect
+    useEffect(() => {
+        setCityValue({
+            id: cityId,
+            name: cityName
+        })
+    }, [cityId, cityName])
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -34,7 +44,7 @@ function PlaceLived(props) {
     const handleClickEditButton = () => {
         setIsEditMode(true);
         //Set default value
-        if(cityValue.id === 0) {
+        if (cityValue.id === 0) {
             setCityValue({
                 ...cityValue,
                 id: cityList[0].id,
@@ -57,6 +67,7 @@ function PlaceLived(props) {
         setIsSaveBtnEnabled(false);
     }
 
+    //Functions
     const renderCityList = () => {
         return (
             <select
@@ -72,9 +83,10 @@ function PlaceLived(props) {
         )
     }
 
+    //Functions
     const renderEditButton = () => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode) {
                 return (
                     <Fragment>
@@ -92,7 +104,7 @@ function PlaceLived(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={handleClickEditButton}
                     />
@@ -110,7 +122,7 @@ function PlaceLived(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/place-lived.png"
+                            src="/image/icon/place-lived.png"
                             alt="place_lived"
                         />
                     </div>

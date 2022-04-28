@@ -1,11 +1,11 @@
-.container {
-  /* height: calc(100% / 15 * 11); */
-  /* background-color: rgba(255, 255, 255, 0.8) !important; */
-  /* display: flex;
+/* .container {
+  height: calc(100% / 15 * 11);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2rem; */
-}
+  padding: 0 2rem;
+} */
 
 .left-col {
   width: 30%;

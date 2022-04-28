@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { profileService } from "../../services/ProfileService";
 import { ACCESS_TOKEN, ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
-import { GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_AVATAR_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types";
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
+import { GET_LOGIN_USER_PROFILE_SAGA, GET_PROFILE_DETAIL_BY_USER_ID_SAGA, UPDATE_AVATAR_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types";
+import { getLogInUserProfileAction, getProfileDetailByUserIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { history } from "../../util/history";
@@ -10,27 +10,22 @@ import { photoService } from "../../services/PhotoService";
 import { hideUploadImageModalAction } from "../actions/PhotoAction";
 import { getPostListWallSagaAction } from "../actions/PostAction";
 
+
 /*=============================================
-                GET PROFILE
+            GET LOGIN USER PROFILE
 ==============================================*/
 /**
- * getProfileDetailById
+ * getLogInUserProfile
  * @param action 
  */
-function* getProfileDetailById(action) {
+function* getLogInUserProfile(action) {
     try {
-        const { data } = yield call(() => profileService.getProfileDetailById(action.profileId));
+        const { data } = yield call(() => profileService.getProfileDetailByUserId(action.userId));
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
-            if(action.isLoggedInUser) {
-                //Set user profile state in reducer
-                yield put(getUserProfileAction(response));
-            } else {
-                //Set friend profile state in reducer
-                yield put(getFriendProfileAction(response));
-            }         
+            yield put(getLogInUserProfileAction(response));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -42,11 +37,43 @@ function* getProfileDetailById(action) {
     }
 }
 /**
- * getProfileDetailByIdWatcher
+ * getLogInUserProfileWatcher
  * @param
  */
-export function* getProfileDetailByIdWatcher() {
-    yield takeLatest(GET_PROFILE_DETAIL_BY_ID_SAGA, getProfileDetailById);
+export function* getLogInUserProfileWatcher() {
+    yield takeLatest(GET_LOGIN_USER_PROFILE_SAGA, getLogInUserProfile);
+}
+
+/*=============================================
+                GET PROFILE
+==============================================*/
+/**
+ * getProfileDetailByUserId
+ * @param action 
+ */
+function* getProfileDetailByUserId(action) {
+    try {
+        const { data } = yield call(() => profileService.getProfileDetailByUserId(action.userId));
+        const response = data.Data;
+        const errorCode = data.ErrorCode;
+
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set user profile state in reducer
+            yield put(getUserProfileAction(response));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * getProfileDetailByUserIdWatcher
+ * @param
+ */
+export function* getProfileDetailByUserIdWatcher() {
+    yield takeLatest(GET_PROFILE_DETAIL_BY_USER_ID_SAGA, getProfileDetailByUserId);
 }
 
 /*=============================================
@@ -63,7 +90,7 @@ function* updateProfile(action) {
         if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
             notify('success', MESSAGES.UPDATE_SUCCESS);
             //Call API to reload user profile detail
-            yield put(getProfileDetailByIdSagaAction(action.profileId, true));
+            yield put(getProfileDetailByUserIdSagaAction(action.profileId));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -121,7 +148,7 @@ function* updateAvatar(action) {
             }));
 
             //Call API to reload user profile detail
-            yield put(getProfileDetailByIdSagaAction(action.profileId, true));
+            yield put(getProfileDetailByUserIdSagaAction(action.profileId));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

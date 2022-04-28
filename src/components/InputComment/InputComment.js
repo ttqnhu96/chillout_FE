@@ -32,7 +32,7 @@ export default function InputComment(props) {
             <img
                 className={`${style['avatar-current-user-comment']}`}
                 src={currentUserAvatar ?
-                    `${AWS_S3_BUCKET_LINK}/${currentUserAvatar}` : "./image/avatar/default_avatar.png"}
+                    `${AWS_S3_BUCKET_LINK}/${currentUserAvatar}` : "/image/avatar/default_avatar.png"}
                 alt="avatar"
             />
             <div className={`${style['comment-text-area-button-container']}`}>
@@ -47,7 +47,7 @@ export default function InputComment(props) {
                 />
                 <img
                     className={`${style['send-comment-button']}`}
-                    src="./image/icon/send.png"
+                    src="/image/icon/send.png"
                     alt="send"
                     onClick={handlePostComment}
                 />

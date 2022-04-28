@@ -9,12 +9,14 @@
     display: flex;
     cursor: pointer;
     overflow: hidden;
+    color: rgb(0, 0, 0);
 }
 .menu-item-container:hover {
     background: linear-gradient(to right, #f8a888 50%, transparent 0);
     animation: makeItfadeIn 0.5s forwards;
     background-size: 200% 100%;
     background-position: right;
+    color: rgb(0, 0, 0);
 }
 @keyframes makeItfadeIn {
     100% {
@@ -31,8 +33,20 @@
     cursor: pointer;
     transform: scale(0.9);
     box-shadow: 3px 2px 22px 1px rgba(235, 151, 151, 0.726);
+    color: rgb(0, 0, 0);
 }
-
+.menu-item-container-active:hover {
+    background-color: #f8a888;
+    margin: 1.5em 2rem;
+    border: 0;
+    border-radius: 2rem;
+    height: 6.5rem;
+    display: flex;
+    cursor: pointer;
+    transform: scale(0.9);
+    box-shadow: 3px 2px 22px 1px rgba(235, 151, 151, 0.726);
+    color: rgb(0, 0, 0);
+}
 /*=============================================
                 MENU ITEM ICON
 ==============================================*/

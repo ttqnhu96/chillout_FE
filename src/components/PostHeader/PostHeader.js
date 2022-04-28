@@ -1,42 +1,17 @@
 import { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
-import { getPostListWallAction } from '../../redux/actions/PostAction';
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { useDispatch } from 'react-redux';
+import { setIsReloadWallAction } from '../../redux/actions/ProfileActions';
+import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import style from './PostHeader.module.css';
 
 function PostHeader(props) {
     const { post } = props;
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
 
-    const handleClickUser = (postAuthorId, postAuthorProfileId) => {
-        if (postAuthorId === currentUserId) {
-            if (isViewFriendProfile === true) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(false));
-            }
-        } else {
-            if (isViewFriendProfile === false) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(true));
-            }
-
-            //If prev profile is not current friend's profile, 
-            // clear old data and get new data
-            if (friendId !== postAuthorId) {
-                dispatch(getFriendProfileAction({}));
-            }
-            dispatch(getProfileDetailByIdSagaAction(postAuthorProfileId, false));    
-        }
-        
-        history.push('/wall');
+    //Handle events
+    const handleClickUser = (postAuthorId) => {
+        history.push(`/user/${postAuthorId}`);
         dispatch(setIsReloadWallAction(true));
     }
 
@@ -46,7 +21,7 @@ function PostHeader(props) {
                 <img
                     className={`${style['avatar-image']}`}
                     src={post.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${post.avatar}` : "./image/avatar/default_avatar.png"}
+                        `${AWS_S3_BUCKET_LINK}/${post.avatar}` : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => handleClickUser(post.userId, post.profileId)}
                 />
@@ -62,7 +37,7 @@ function PostHeader(props) {
             </div>
             <div className={`${style['post-options-container']}`}>
                 <img height={20} width={20}
-                    src="./image/icon/more-options.png"
+                    src="/image/icon/more-options.png"
                     alt="more-options"
                 />
             </div>

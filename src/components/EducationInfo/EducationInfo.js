@@ -1,15 +1,17 @@
-import { Fragment, memo, useState } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './EducationInfo.module.css';
 
 function EducationInfo(props) {
-    //Get state from reducer
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+
+    //Props
+    const { profileOwnerId, schoolId, schoolName, collegeId, collegeName, handleUpdateProfile } = props;
+
+    //State from reducer
     const { schoolList } = useSelector(state => state.SchoolReducer);
     const { collegeList } = useSelector(state => state.CollegeReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-
-    //Get props
-    const { schoolId, schoolName, collegeId, collegeName, handleUpdateProfile } = props;
 
     //Local state
     const [schoolValue, setSchoolValue] = useState({
@@ -26,6 +28,23 @@ function EducationInfo(props) {
         school: false,
         college: false
     });
+
+
+    //Use effect
+    useEffect(() => {
+        setSchoolValue({
+            id: schoolId,
+            name: schoolName
+        })
+    }, [schoolId, schoolName])
+
+    useEffect(() => {
+        setCollegeValue({
+            id: collegeId,
+            name: collegeName
+        })
+    }, [collegeId, collegeName])
+
 
     //Handle events
     const handleChangeSchoolValue = (event) => {
@@ -144,7 +163,7 @@ function EducationInfo(props) {
 
     const renderEditSchoolButton = () => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditSchoolMode) {
                 return (
                     <Fragment>
@@ -162,7 +181,7 @@ function EducationInfo(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={handleClickEditSchoolButton}
                     />
@@ -173,7 +192,7 @@ function EducationInfo(props) {
 
     const renderEditCollegeButton = () => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditCollegeMode) {
                 return (
                     <Fragment>
@@ -191,7 +210,7 @@ function EducationInfo(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={handleClickEditCollegeButton}
                     />
@@ -209,7 +228,7 @@ function EducationInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/school.png"
+                            src="/image/icon/school.png"
                             alt="school"
                         />
                     </div>
@@ -233,7 +252,7 @@ function EducationInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/college.png"
+                            src="/image/icon/college.png"
                             alt="college"
                         />
                     </div>

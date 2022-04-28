@@ -9,9 +9,9 @@ const initialState = {
 export const NotificationReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.REDUCER_COMMENT_NOTIFICATION: {
-            debugger
+            // debugger
             const user = JSON.parse(sessionStorage.getItem(USER_LOGIN));
-            if (action.fromUserId != user?.id) {
+            if (action.fromUserId !== user?.id) {
                 state.haveNotification = true;
             }
             return { ...state };
@@ -26,7 +26,7 @@ export const NotificationReducer = (state = initialState, action) => {
         case types.REDUCER_LIKE_POST_NOTIFICATION: {
             const user = JSON.parse(sessionStorage.getItem(USER_LOGIN));
             const { like, fromUserId } = action;
-            if (like && fromUserId != user?.id) {
+            if (like && fromUserId !== user?.id) {
                 state.haveNotification = true;
             }
             return { ...state };

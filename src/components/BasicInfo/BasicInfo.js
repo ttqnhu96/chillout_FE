@@ -1,18 +1,20 @@
 import { Tooltip } from "antd";
 import { Fragment, memo, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { LABELS } from "../../util/constants/commonConstants";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './BasicInfo.module.css';
 
 function BasicInfo(props) {
-    const { gender, birthday, handleUpdateProfile } = props;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+
+    //Props
+    const { profileOwnerId, gender, birthday, handleUpdateProfile } = props;
 
     //Local state
     const [maxDate, setMaxDate] = useState('2122-01-01');
     const [basicInfoValue, setBasicInfoValue] = useState({
-        gender: gender,
-        birthday: birthday
+        gender: '',
+        birthday: ''
     });
     const [isEditMode, setIsEditMode] = useState({
         gender: false,
@@ -27,11 +29,28 @@ function BasicInfo(props) {
         birthday: false
     });
 
+
+    //Use effect
+    useEffect(() => {
+        setBasicInfoValue(prevState => ({
+            ...prevState,
+            gender: gender
+        }));
+    }, [gender])
+
+    useEffect(() => {
+        setBasicInfoValue(prevState => ({
+            ...prevState,
+            birthday: birthday
+        }));
+    }, [birthday])
+
     useEffect(() => {
         //Set max date for datetime picker
         const today = new Date();
         setMaxDate(formatDate(today));
     }, [])
+
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -130,7 +149,7 @@ function BasicInfo(props) {
 
     const renderEditButton = (fieldName) => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode[fieldName]) {
                 return (
                     <Fragment>
@@ -148,7 +167,7 @@ function BasicInfo(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={() => { handleClickEditButton(fieldName) }}
                     />
@@ -167,7 +186,7 @@ function BasicInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/gender.png"
+                            src="/image/icon/gender.png"
                             alt="gender"
                         />
                     </div>
@@ -199,7 +218,7 @@ function BasicInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/birthday.png"
+                            src="/image/icon/birthday.png"
                             alt="birthday"
                         />
                     </div>

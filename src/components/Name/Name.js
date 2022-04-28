@@ -1,17 +1,19 @@
 import { Tooltip } from "antd";
-import { Fragment, memo, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, memo, useEffect, useState } from "react";
 import { LABELS } from "../../util/constants/commonConstants";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './Name.module.css';
 
 function Name(props) {
-    const { firstName, lastName, handleUpdateProfile } = props;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+
+    //Props
+    const { profileOwnerId, firstName, lastName, handleUpdateProfile } = props;
 
     //Local state
     const [nameValue, setNameValue] = useState({
-        firstName: firstName,
-        lastName: lastName
+        firstName: '',
+        lastName: ''
     });
 
     const [isEditMode, setIsEditMode] = useState({
@@ -28,6 +30,23 @@ function Name(props) {
         firstName: false,
         lastName: false
     });
+
+
+    //Use effect
+    useEffect(() => {
+        setNameValue(prevState => ({
+            ...prevState,
+            firstName: firstName
+        }));
+    }, [firstName])
+    
+    useEffect(() => {
+        setNameValue(prevState => ({
+            ...prevState,
+            lastName: lastName
+        }));
+    }, [lastName])
+
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -91,9 +110,10 @@ function Name(props) {
         }));
     }
 
+    //Functions
     const renderEditButton = (fieldName) => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode[fieldName]) {
                 return (
                     <Fragment>
@@ -111,7 +131,7 @@ function Name(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={() => { handleClickEditButton(fieldName) }}
                     />

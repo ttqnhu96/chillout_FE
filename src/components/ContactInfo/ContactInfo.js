@@ -1,16 +1,19 @@
 import { Tooltip } from "antd";
-import { Fragment, memo, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, memo, useEffect, useState } from "react";
 import { REGEX_EMAIL } from "../../util/constants/commonConstants";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './ContactInfo.module.css';
 
 function ContactInfo(props) {
-    const { phone, email, handleUpdateProfile } = props;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
+    //Props
+    const { profileOwnerId, phone, email, handleUpdateProfile } = props;
+
+    //Local state
     const [contactValue, setContactValue] = useState({
-        phone: phone,
-        email: email
+        phone: '',
+        email: ''
     });
 
     const [isEditMode, setIsEditMode] = useState({
@@ -27,6 +30,21 @@ function ContactInfo(props) {
         phone: false,
         email: false
     });
+
+    //Use effect
+    useEffect(() => {
+        setContactValue(prevState => ({
+            ...prevState,
+            phone: phone
+        }));
+    }, [phone])
+    
+    useEffect(() => {
+        setContactValue(prevState => ({
+            ...prevState,
+            email: email
+        }));
+    }, [email])
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -93,9 +111,10 @@ function ContactInfo(props) {
         }));
     }
 
+    //Functions
     const renderEditButton = (fieldName) => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode[fieldName]) {
                 return (
                     <Fragment>
@@ -113,7 +132,7 @@ function ContactInfo(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={() => { handleClickEditButton(fieldName) }}
                     />
@@ -131,7 +150,7 @@ function ContactInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/phone.png"
+                            src="/image/icon/phone.png"
                             alt="phone"
                         />
                     </div>
@@ -170,7 +189,7 @@ function ContactInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/email.png"
+                            src="/image/icon/email.png"
                             alt="email"
                         />
                     </div>

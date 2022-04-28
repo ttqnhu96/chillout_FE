@@ -6,18 +6,18 @@ import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
+import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { history } from '../../util/history';
-import { getPostListWallAction } from '../../redux/actions/PostAction';
-import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
 export default function Comment(props) {
-    const { comment, postAuthorId } = props;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
-
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+
+    //Props
+    const { comment, postAuthorId } = props;
+
+    //State from reducer
+    const { userId } = useSelector(state => state.ProfileReducer).userProfile;
 
     //Local state
     const [commentValue, setCommentValue] = useState(comment.content);
@@ -47,33 +47,17 @@ export default function Comment(props) {
         dispatch(updateCommentSagaAction(comment.id, commentValue));
         setIsEditMode(false);
     }
-    const handleClickUser = (commentAuthorId, commentAuthorProfileId) => {
-        if (commentAuthorId === currentUserId) {
-            if (isViewFriendProfile === true) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(false));
-            }
-        } else {
-            if (isViewFriendProfile === false) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(true));
-            }
-            //If prev profile is not current friend's profile, 
-            // clear old data and get new data
-            if (friendId !== postAuthorId) {
-                dispatch(getFriendProfileAction({}));
-            }
-            dispatch(getProfileDetailByIdSagaAction(commentAuthorProfileId, false));
+    const handleClickUser = (commentAuthorId) => {
+        if (commentAuthorId !== userId) {
+            dispatch(getUserProfileAction({}));
         }
-        history.push('/wall');
         dispatch(setIsReloadWallAction(true));
+        history.push(`/user/${commentAuthorId}`);
     }
 
     const menu = (
         <Menu>
-            {(currentUserId === comment.userId) &&
+            {(loginUserId === comment.userId) &&
                 <Menu.Item key="1" onClick={handleClickEditButton}>Edit</Menu.Item>}
             <Menu.Item key="2" onClick={handleClickDeleteButton}>Delete</Menu.Item>
         </Menu>
@@ -85,7 +69,7 @@ export default function Comment(props) {
                 <img
                     className={`${style['post-comment-avatar']}`}
                     src={comment.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${comment.avatar}` : "./image/avatar/default_avatar.png"}
+                        `${AWS_S3_BUCKET_LINK}/${comment.avatar}` : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => handleClickUser(comment.userId, comment.profileId)}
                 />
@@ -112,13 +96,13 @@ export default function Comment(props) {
 
                 <div className={`${style['post-comments-options-container']}`}>
                     {
-                        (currentUserId === comment.userId || currentUserId === postAuthorId)
+                        (loginUserId === comment.userId || loginUserId === postAuthorId)
                         &&
                         <Dropdown overlay={menu} placement="bottom" trigger={['click']} arrow>
                             <img
                                 style={{ cursor: 'pointer' }}
                                 height={15} width={15}
-                                src="./image/icon/more-options.png"
+                                src="/image/icon/more-options.png"
                                 alt="more-options"
                             />
                         </Dropdown>

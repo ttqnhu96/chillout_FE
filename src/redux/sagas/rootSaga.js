@@ -28,7 +28,8 @@ export function* rootSaga(dispatch) {
                 AuthenticationSaga.logInWatcher(dispatch),
 
                 //Profile
-                ProfileSaga.getProfileDetailByIdWatcher(),
+                ProfileSaga.getLogInUserProfileWatcher(),
+                ProfileSaga.getProfileDetailByUserIdWatcher(),
                 ProfileSaga.updateProfileWatcher(),
                 ProfileSaga.updateAvatarWatcher(),
 

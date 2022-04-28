@@ -1,22 +1,32 @@
-import { Fragment, memo, useState } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './WorkplaceInfo.module.css';
 
 function WorkplaceInfo(props) {
-    //Get state from reducer
-    const { workplaceList } = useSelector(state => state.WorkplaceReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
-    //Get props
-    const { workplaceId, workplaceName, handleUpdateProfile } = props;
+    //Props
+    const { profileOwnerId, workplaceId, workplaceName, handleUpdateProfile } = props;
+
+    //State from reducer
+    const { workplaceList } = useSelector(state => state.WorkplaceReducer);
 
     //Local state
     const [workplaceValue, setWorkplaceValue] = useState({
-        id: workplaceId,
-        name: workplaceName
+        id: 0,
+        name: ''
     });
     const [isEditMode, setIsEditMode] = useState(false);
     const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
+
+    //Use effect
+    useEffect(() => {
+        setWorkplaceValue({
+            id: workplaceId,
+            name: workplaceName
+        })
+    }, [workplaceId, workplaceName])
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -56,6 +66,8 @@ function WorkplaceInfo(props) {
         setIsSaveBtnEnabled(false);
     }
 
+
+    //Functions
     const renderWorkplaceList = () => {
         return (
             <select
@@ -73,7 +85,7 @@ function WorkplaceInfo(props) {
 
     const renderEditButton = () => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode) {
                 return (
                     <Fragment>
@@ -91,7 +103,7 @@ function WorkplaceInfo(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={handleClickEditButton}
                     />
@@ -109,7 +121,7 @@ function WorkplaceInfo(props) {
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}
-                            src="./image/icon/work-info.png"
+                            src="/image/icon/work-info.png"
                             alt="work_info"
                         />
                     </div>

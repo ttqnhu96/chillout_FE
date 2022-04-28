@@ -6,40 +6,35 @@ import style from './Suggestions.module.css';
 import { getSuggestionsListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
+import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
-import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
 
 export default function Suggestions() {
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-    const { suggestionsList } = useSelector(state => state.RelationshipReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
+    //State from reducer
+    const { userId } = useSelector(state => state.ProfileReducer).userProfile;
+    const { suggestionsList } = useSelector(state => state.RelationshipReducer);
+
+    //Use effect
     useEffect(() => {
-        if (currentUserId) {
+        if (loginUserId) {
             dispatch(getSuggestionsListSagaAction({
-                userId: currentUserId,
+                userId: loginUserId,
                 isPaginated: false
             }))
         }
-    }, [currentUserId])
+    }, [loginUserId])
 
     //Handle events
-    const handleClickSuggestedUser = (userId, profileId) => {
-        if (isViewFriendProfile === false) {
+    const handleClickSuggestedUser = (suggestedUserId) => {
+        if (userId && userId !== suggestedUserId) {
+            dispatch(getUserProfileAction({}));
             dispatch(getPostListWallAction([]));
-            dispatch(getPhotoListByUserIdAction([]));
-            dispatch(setIsViewFriendProfileAction(true));
         }
-        //If prev profile is not current friend's profile, 
-        // clear old data and get new data
-        if (friendId !== userId) {
-            dispatch(getFriendProfileAction({}));
-        }
-        dispatch(getProfileDetailByIdSagaAction(profileId, false));
-        history.push('/wall');
+        dispatch(setIsReloadWallAction(true));
+        history.push(`/user/${suggestedUserId}`);
     }
 
     //Render menu items
@@ -49,7 +44,7 @@ export default function Suggestions() {
                 <img
                     className={`${style['contacts-item-avatar']}`}
                     src={item.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "./image/avatar/default_avatar.png"}
+                        `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}
                 />

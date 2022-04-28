@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, MESSAGE_NOTIFICATION_RECEIVED, REDUCER_MESSAGE_RECEIVED } from "../constants/types"
+import { REDUCER_MESSAGE_RECEIVED } from "../constants/types"
 
 const initialState = {
     message: "",

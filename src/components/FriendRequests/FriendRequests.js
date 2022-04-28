@@ -6,40 +6,25 @@ import { useEffect } from "react";
 import { acceptFriendRequestSagaAction, deleteFriendRequestSagaAction, getReceivedFriendRequestListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
-import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
-import { getPostListWallAction } from '../../redux/actions/PostAction';
+import { getProfileDetailByUserIdSagaAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 
 export default function FriendRequests() {
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { receivedFriendRequestList } = useSelector(state => state.RelationshipReducer);
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getReceivedFriendRequestListSagaAction(
             {
-                receiverId: currentUserId,
+                receiverId: loginUserId,
                 isPaginated: false
             }))
     }, [])
 
     //Handle events
     const handleClickFriend = (userId, profileId) => {
-        if (isViewFriendProfile === false) {
-            dispatch(getPostListWallAction([]));
-            dispatch(getPhotoListByUserIdAction([]));
-            dispatch(setIsViewFriendProfileAction(true));
-        }
-        //If prev profile is not current friend's profile, 
-        // clear old data and get new data
-        if (friendId !== userId) {
-            dispatch(getFriendProfileAction({}));
-        }
-
         dispatch(setIsReloadWallAction(true));
-        dispatch(getProfileDetailByIdSagaAction(profileId, false));
+        dispatch(getProfileDetailByUserIdSagaAction(profileId));
         history.push('/wall');
     }
 
@@ -60,7 +45,7 @@ export default function FriendRequests() {
                     <div key={index} className={`${style['friend-request-item']}`}>
                         <img
                             src={friendRequest.avatar ?
-                                `${AWS_S3_BUCKET_LINK}/${friendRequest.avatar}` : "./image/avatar/default_avatar.png"}
+                                `${AWS_S3_BUCKET_LINK}/${friendRequest.avatar}` : "/image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['friend-request-item-avatar']}`}
                             onClick={() => { handleClickFriend(friendRequest.userId, friendRequest.profileId) }}
@@ -90,7 +75,7 @@ export default function FriendRequests() {
             <div className={`${style['friend-request-item-container']}`}>
                 {renderFriendRequestList()}
                 {/* <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -105,7 +90,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -120,7 +105,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -135,7 +120,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -150,7 +135,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -165,7 +150,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -180,7 +165,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -195,7 +180,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />
@@ -210,7 +195,7 @@ export default function FriendRequests() {
                     </div>
                 </div>
                 <div className={`${style['friend-request-item']}`}>
-                    <img src="./image/avatar/default_avatar.png"
+                    <img src="/image/avatar/default_avatar.png"
                         alt="avatar"
                         className={`${style['friend-request-item-avatar']}`}
                     />

@@ -1,14 +1,22 @@
-import { Fragment, memo, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, memo, useEffect, useState } from "react";
+import { USER_LOGIN } from "../../util/constants/systemSettings";
 import style from './Bio.module.css';
 
 function Bio(props) {
-    const { bio, handleUpdateProfile } = props;
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
-    const [bioValue, setBioValue] = useState(bio);
+    //Props
+    const { profileOwnerId, bio, handleUpdateProfile } = props;
+
+    //Local state
+    const [bioValue, setBioValue] = useState('');
     const [isEditMode, setIsEditMode] = useState(false);
     const [isSaveBtnEnabled, setIsSaveBtnEnabled] = useState(false);
+
+    //Use effect
+    useEffect(() => {
+        setBioValue(bio);
+    }, [bio])
 
     //Handle events
     const handleChangeValue = (event) => {
@@ -33,7 +41,7 @@ function Bio(props) {
 
     const renderEditButton = () => {
         //In case view friend profile, edit button is not displayed
-        if (!isViewFriendProfile) {
+        if (profileOwnerId === loginUserId) {
             if (isEditMode) {
                 return (
                     <Fragment>
@@ -51,7 +59,7 @@ function Bio(props) {
                 return (
                     <img width={16} height={16}
                         className={`${style['edit-btn']}`}
-                        src="./image/icon/edit.png"
+                        src="/image/icon/edit.png"
                         alt="edit"
                         onClick={handleClickEditButton}
                     />

@@ -39,11 +39,11 @@ export default function Login() {
             <div className={`${style['login-logo-container']}`}>
                 <img
                     className={`${style['login-logo']}`}
-                    src="./image/logo/Chillout_logo_circle.png" height={50} alt="chillout_logo"
+                    src="/image/logo/Chillout_logo_circle.png" height={50} alt="chillout_logo"
                 />
                 <img
                     className={`${style['login-brand-name']}`}
-                    src="./image/logo/Chillout_text.png" height={35} alt="chillout_brandname"
+                    src="/image/logo/Chillout_text.png" height={35} alt="chillout_brandname"
                 />
             </div>
             <div className={`${style['login-input-container']}`}>

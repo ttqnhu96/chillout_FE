@@ -2,34 +2,36 @@
     {
         "id": 1,
         "name": "Profile",
-        "iconSrc": "./image/icon/menu-profile.svg",
-        "iconAlt": "menu-profile",
-        "navigateTo": "/wall"
+        "iconSrc": "/image/icon/menu-profile.svg",
+        "iconAlt": "menu_profile",
+        "path": "/wall"
     },
     {
         "id": 2,
         "name": "Friends",
-        "iconSrc": "./image/icon/menu-friends.png",
-        "iconAlt": "menu-friends",
-        "navigateTo": "/friends"
+        "iconSrc": "/image/icon/menu-friends.png",
+        "iconAlt": "menu_friends",
+        "path": "/friends"
     },
     {
         "id": 3,
         "name": "Messenger",
-        "iconSrc": "./image/icon/menu-message.svg",
+        "iconSrc": "/image/icon/menu-message.svg",
         "iconAlt": "menu_message",
-        "navigateTo": "/message"
+        "path": "/message"
     },
     {
         "id": 4,
         "name": "Settings",
-        "iconSrc": "./image/icon/menu-settings.svg",
-        "iconAlt": "menu-settings"
+        "iconSrc": "/image/icon/menu-settings.svg",
+        "iconAlt": "menu_settings",
+        "path": "settings"
     },
     {
         "id": 5,
-        "name": "Most Recent",
-        "iconSrc": "./image/icon/menu-most-recent.png",
-        "iconAlt": "menu-most-recent"
+        "name": "Memories",
+        "iconSrc": "/image/icon/menu-memories.png",
+        "iconAlt": "menu_memories",
+        "path": "memories"
     }
 ]

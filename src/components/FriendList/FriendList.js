@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPhotoListByUserIdAction } from '../../redux/actions/PhotoAction';
-import { getPostListWallAction } from '../../redux/actions/PostAction';
-import { getFriendProfileAction, getProfileDetailByIdSagaAction, setIsReloadWallAction, setIsViewFriendProfileAction } from '../../redux/actions/ProfileActions';
-import { getFriendListSagaAction } from '../../redux/actions/RelationshipAction';
+import { useParams } from 'react-router-dom';
+import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
+import { getFriendListAction, getFriendListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import Search from '../Search/Search';
@@ -12,63 +11,53 @@ import style from './FriendList.module.css';
 
 export default function FriendList() {
     const dispatch = useDispatch();
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
-   const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
-    const friendId = useSelector(state => state.ProfileReducer).friendProfile.userId;
+    const { id } = useParams();
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+
+    //State from reducer
     const { friendList } = useSelector(state => state.RelationshipReducer);
 
+    //Local state
+    const [userId, setUserId] = useState(0);
     useEffect(() => {
-        let profileOwnerId = 0;
-        if (isViewFriendProfile) {
-            profileOwnerId = friendId;
-        } else {
-            profileOwnerId = currentUserId;
-        }
-        if (profileOwnerId) {
+        setUserId(prevState => { return id ? id : loginUserId });
+    }, [id])
+
+
+    //Use effect
+    useEffect(() => {
+        if (userId) {
             dispatch(getFriendListSagaAction(
                 {
-                    userId: profileOwnerId,
+                    userId: userId,
                     isPaginated: false
                 }
             ))
         }
-    }, [currentUserId, friendId, isViewFriendProfile])
+
+        //Clean friend list when component is unmounted
+        return () => {
+            dispatch(getFriendListAction([]))
+        }
+    }, [userId])
 
     //Handle events
-    const handleClickFriend = (userId, profileId) => {
-        if (userId === currentUserId) {
-            if (isViewFriendProfile === true) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(false));
-            }
-        } else {
-            if (isViewFriendProfile === false) {
-                dispatch(getPostListWallAction([]));
-                dispatch(getPhotoListByUserIdAction([]));
-                dispatch(setIsViewFriendProfileAction(true));
-            }
-            //If prev profile is not current friend's profile, 
-            // clear old data and get new data
-            if (friendId !== userId) {
-                dispatch(getFriendProfileAction({}));
-            }
+    const handleClickFriend = (friendId) => {
+        if (friendId !== userId) {
+            dispatch(getUserProfileAction({}));
         }
-
         dispatch(setIsReloadWallAction(true));
-        dispatch(getProfileDetailByIdSagaAction(profileId, false));
-        history.push('/wall');
+        history.push(`/user/${friendId}`);
     }
 
     const renderFriendList = () => {
-        //const friendList = isViewFriendProfile ? friendFriendList : loggedInUserfriendList;
         return (
             friendList?.map((friend, index) => {
                 return (
                     <div key={index} className={`${style['friendlist-item']}`}>
                         <img
                             src={friend.avatar ?
-                                `${AWS_S3_BUCKET_LINK}/${friend.avatar}` : "./image/avatar/default_avatar.png"}
+                                `${AWS_S3_BUCKET_LINK}/${friend.avatar}` : "/image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['friendlist-item-avatar']}`}
                             onClick={() => { handleClickFriend(friend.userId, friend.profileId) }}
@@ -81,7 +70,7 @@ export default function FriendList() {
                             <img
 
                                 height={15} width={15}
-                                src="./image/icon/more-options.png"
+                                src="/image/icon/more-options.png"
                                 alt="more-options"
                             />
                         </div> */}

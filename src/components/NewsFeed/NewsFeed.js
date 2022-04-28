@@ -19,7 +19,7 @@ export default function NewsFeed() {
     }
 
     //Get state from reducer
-    const currentUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
+    const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
     const { postListNewsFeed } = useSelector(state => state.PostReducer);
 
     //Local state
@@ -32,9 +32,9 @@ export default function NewsFeed() {
     useEffect(() => {
         setRequestToGetPostList(prevState => ({
             ...prevState,
-            userId: currentUserId
+            userId: loginUserId
         }))
-    }, [currentUserId])
+    }, [loginUserId])
 
     const newsFeedContainerRef = useRef();
     useEffect(() => {
@@ -52,7 +52,7 @@ export default function NewsFeed() {
         return postListNewsFeed.map((post, index) => (
             <NewsFeedPost key={index}
                 post={post}
-                currentUserId={currentUserId} />
+                currentUserId={loginUserId} />
         ))
     }
 

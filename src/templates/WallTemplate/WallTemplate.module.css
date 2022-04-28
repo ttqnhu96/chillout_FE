@@ -1,11 +1,11 @@
-.wall {
+.container {
     height: calc(100% / 15 * 11);
     background-color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 2rem;
     display: flex;
 }
 
-.wall-left {
+.left-col {
     width: 30%;
     height: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -14,7 +14,7 @@
     box-shadow: 50px 0px 93px -11px rgba(250, 163, 163, 0.4);
 }
 
-.wall-right {
+.right-col {
     width: 70%;
     margin: 0 0 0 2rem;
     background-color: transparent !important;
@@ -22,11 +22,11 @@
     position: relative;
 }
 
-.wall-cover-container {
+.cover-container {
     height: 27%;
 }
 
-.wall-content-container {
+.content-container {
     position: absolute;
     margin: 1.5em 0;
     width: 100%;
@@ -40,14 +40,14 @@
     padding: 2rem 2.5rem 2.5rem 2.5rem;
 }
 
-.wall-content-container:hover {
+.content-container:hover {
     overflow-y: overlay;
     scroll-behavior: smooth;
 }
-.wall-content-container::-webkit-scrollbar{
+.content-container::-webkit-scrollbar{
     width:.5rem;
 }
-.wall-content-container::-webkit-scrollbar-thumb{
+.content-container::-webkit-scrollbar-thumb{
     background-color: rgba(248, 168, 136, 0.6);
     border-radius: 1rem;
 }

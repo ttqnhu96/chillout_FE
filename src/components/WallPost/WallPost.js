@@ -9,8 +9,8 @@ import style from './WallPost.module.css';
 
 export default function WallPost(props) {
     const dispatch = useDispatch();
-    const likeIconSrc = "./image/icon/like.png";
-    const unlikeIconSrc = "./image/icon/unlike.png";
+    const likeIconSrc = "/image/icon/like.png";
+    const unlikeIconSrc = "/image/icon/unlike.png";
 
     //Get props
     const { post, currentUserId } = props;

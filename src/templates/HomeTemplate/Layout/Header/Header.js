@@ -11,6 +11,7 @@ import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
 import { DropdownNotification } from '../../../../components/DropdownNotification/DropdownNotification';
+import { DropdownMessage } from '../../../../components/DropdownMessage/DropdownMessage';
 
 export default function Header() {
     const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
@@ -19,6 +20,7 @@ export default function Header() {
     //Get state from reducer
     const { firstName, avatar } = useSelector(state => state.ProfileReducer).loginUserProfile;
     const { userId } = useSelector(state => state.ProfileReducer).userProfile;
+   
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
 
     useEffect(() => {
@@ -100,7 +102,7 @@ export default function Header() {
                     />
                 </div>
                 <div className={`${style['notification-user-container']}`}>
-                    {/* <DropdownMessage /> */}
+                    <DropdownMessage />
                     <DropdownNotification />
                     <div className={`${style['user-container']}`}
                         onClick={handleClickUser}>

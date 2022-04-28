@@ -1,10 +1,23 @@
-import { GET_USER_PROFILE, GET_PROFILE_DETAIL_BY_ID_SAGA, UPDATE_PROFILE_SAGA, UPDATE_AVATAR_SAGA, SET_IS_VIEW_FRIEND_PROFILE, SET_IS_RELOAD_WALL, GET_FRIEND_PROFILE } from "../constants/types"
+import { GET_USER_PROFILE, GET_PROFILE_DETAIL_BY_USER_ID_SAGA, UPDATE_PROFILE_SAGA, UPDATE_AVATAR_SAGA, SET_IS_RELOAD_WALL, GET_FRIEND_PROFILE, GET_LOGIN_USER_PROFILE_SAGA, GET_LOGIN_USER_PROFILE } from "../constants/types"
 
-export const getProfileDetailByIdSagaAction = (profileId, isLoggedInUser) => {
+export const getLogInUserProfileSagaAction = (userId) => {
     return {
-        type: GET_PROFILE_DETAIL_BY_ID_SAGA,
-        isLoggedInUser: isLoggedInUser,
-        profileId: profileId
+        type: GET_LOGIN_USER_PROFILE_SAGA,
+        userId: userId
+    }
+}
+
+export const getLogInUserProfileAction = (loginUserProfile) => {
+    return {
+        type: GET_LOGIN_USER_PROFILE,
+        loginUserProfile: loginUserProfile
+    }
+}
+
+export const getProfileDetailByUserIdSagaAction = (userId) => {
+    return {
+        type: GET_PROFILE_DETAIL_BY_USER_ID_SAGA,
+        userId: userId
     }
 }
 
@@ -36,13 +49,6 @@ export const updateAvatarSagaAction = (profileId, photoListUpload) => {
         type: UPDATE_AVATAR_SAGA,
         profileId: profileId,
         photoListUpload: photoListUpload
-    }
-}
-
-export const setIsViewFriendProfileAction = (isViewFriendProfile) => {
-    return {
-        type: SET_IS_VIEW_FRIEND_PROFILE,
-        isViewFriendProfile: isViewFriendProfile
     }
 }
 

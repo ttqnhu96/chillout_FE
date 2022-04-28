@@ -83,6 +83,7 @@
     color:rgba(0, 0, 0, 1);
     cursor: pointer;
     font-size: 0.9em;
+    cursor: not-allowed;
 }
 
 .cover-avatar {
@@ -139,14 +140,27 @@
     background-color: transparent;
     padding: 0.2rem 0.5rem;
     margin: 0 0.7rem;
+    color: rgb(0, 0, 0);
 }
 
 .cover-menu-item:hover {
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.1);
+    color: rgb(0, 0, 0);
 }
 
 .cover-menu-item-active {
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.7rem;
+    border-bottom: 0.2rem solid rgb(255,123,119);
+    border-radius: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cover-menu-item-active:hover {
     font-size: 0.75em;
     font-weight: 600;
     padding: 0.2rem 0.5rem;

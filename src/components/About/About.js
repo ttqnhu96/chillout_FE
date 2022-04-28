@@ -17,15 +17,15 @@ import style from './About.module.css';
 
 export default function About() {
     const dispatch = useDispatch();
-    //Get state from reducer
-    const { userProfile } = useSelector(state => state.ProfileReducer); //In case view logged in user profile
-    const { friendProfile } = useSelector(state => state.ProfileReducer); //In case view friend profile
-    const { isViewFriendProfile } = useSelector(state => state.ProfileReducer);
+    //State from reducer
+    const { userProfile } = useSelector(state => state.ProfileReducer);
 
+    //Local state
     const [isUpdate, setIsUpdate] = useState(false);
     const [fieldUpdate, setFieldUpdate] = useState("");
-    const [userProfileEdit, setUserProfileEdit] = useState(userProfile);
+    const [userProfileEdit, setUserProfileEdit] = useState({});
 
+    //Handle events
     const handleUpdateProfile = useCallback((fieldName, valueUpdate) => {
         setUserProfileEdit(prevState => ({
             ...prevState,
@@ -34,6 +34,12 @@ export default function About() {
         setIsUpdate(true);
         setFieldUpdate(fieldName);
     }, [])
+
+
+    //Use effect
+    useEffect(() => {
+        setUserProfileEdit(userProfile);
+    }, [userProfile])
 
     useEffect(() => {
         dispatch(getCityListSagaAction());
@@ -55,33 +61,40 @@ export default function About() {
             <div className={`${style['title']}`}>About</div>
             <div className={`${style['container']}`}>
                 <Bio
-                    bio={isViewFriendProfile ? friendProfile.bio : userProfile.bio}
+                    profileOwnerId={userProfile.id}
+                    bio={userProfile.bio}
                     handleUpdateProfile={handleUpdateProfile} />
                 <Name
-                    firstName={isViewFriendProfile ? friendProfile.firstName : userProfile.firstName}
-                    lastName={isViewFriendProfile ? friendProfile.lastName : userProfile.lastName}
+                    profileOwnerId={userProfile.id}
+                    firstName={userProfile.firstName}
+                    lastName={userProfile.lastName}
                     handleUpdateProfile={handleUpdateProfile} />
                 <BasicInfo
-                    gender={isViewFriendProfile ? friendProfile.gender : userProfile.gender}
-                    birthday={isViewFriendProfile ? friendProfile.birthday : userProfile.birthday}
+                    profileOwnerId={userProfile.id}
+                    gender={userProfile.gender}
+                    birthday={userProfile.birthday}
                     handleUpdateProfile={handleUpdateProfile} />
                 <ContactInfo
-                    phone={isViewFriendProfile ? friendProfile.phone : userProfile.phone}
-                    email={isViewFriendProfile ? friendProfile.email : userProfile.email}
+                    profileOwnerId={userProfile.id}
+                    phone={userProfile.phone}
+                    email={userProfile.email}
                     handleUpdateProfile={handleUpdateProfile} />
                 <PlaceLived
-                    cityId={isViewFriendProfile ? friendProfile.cityId : userProfile.cityId}
-                    cityName={isViewFriendProfile ? friendProfile.cityName : userProfile.cityName}
+                    profileOwnerId={userProfile.id}
+                    cityId={userProfile.cityId}
+                    cityName={userProfile.cityName}
                     handleUpdateProfile={handleUpdateProfile} />
                 <WorkplaceInfo
-                    workplaceId={isViewFriendProfile ? friendProfile.workplaceId : userProfile.workplaceId}
-                    workplaceName={isViewFriendProfile ? friendProfile.workplaceName : userProfile.workplaceName}
+                    profileOwnerId={userProfile.id}
+                    workplaceId={userProfile.workplaceId}
+                    workplaceName={userProfile.workplaceName}
                     handleUpdateProfile={handleUpdateProfile} />
                 <EducationInfo
-                    schoolId={isViewFriendProfile ? friendProfile.schoolId : userProfile.schoolId}
-                    schoolName={isViewFriendProfile ? friendProfile.schoolName : userProfile.schoolName}
-                    collegeId={isViewFriendProfile ? friendProfile.collegeId : userProfile.collegeId}
-                    collegeName={isViewFriendProfile ? friendProfile.collegeName : userProfile.collegeName}
+                    profileOwnerId={userProfile.id}
+                    schoolId={userProfile.schoolId}
+                    schoolName={userProfile.schoolName}
+                    collegeId={userProfile.collegeId}
+                    collegeName={userProfile.collegeName}
                     handleUpdateProfile={handleUpdateProfile} />
             </div>
         </Fragment>

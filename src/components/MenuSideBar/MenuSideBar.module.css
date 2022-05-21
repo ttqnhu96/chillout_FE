@@ -1,0 +1,147 @@
+/*=============================================
+                CONTAINER
+==============================================*/
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    padding: 74px 25px 20px 20px;
+}
+
+/*=============================================
+                    LOGO
+==============================================*/
+.logo-container {
+    width: 130px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.brand-name {
+    margin-top: 2px;
+    margin-left: 8px;
+}
+
+/*=============================================
+                    SEARCH
+==============================================*/
+.search-container {
+    width: 100%;
+    margin-top: 10px;
+    display: none;
+}
+
+.search-box {
+    border: 1px solid rgba(199, 199, 199, 0.6);
+    border-radius: 4px;
+    margin-left: 8px;
+    padding: 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: var(--text-color);
+    outline: none;
+}
+
+.search-button {
+    color: var(--text-color);
+    cursor: pointer;
+    border: 0;
+    text-align: right;
+}
+
+/*=============================================
+                    MENU
+==============================================*/
+.menu-list {
+    padding: 10px 0;
+    margin-top: 10px;
+    list-style: none;
+    border-bottom: 1px solid #ebebeb;
+}
+
+/*=============================================
+                USER & LOG OUT
+==============================================*/
+.user-container,
+.user-container--active,
+.log-out {
+    width: 100%;
+    height: 30px;
+    margin-left: 6px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+.user-container {
+    padding: 20px 8px;
+}
+
+.log-out {
+    padding: 20px 15px;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin-right: 8px;
+}
+
+.log-out i {
+    margin-right: 12px;
+    color: #757575;
+}
+
+.user-container:hover,
+.log-out:hover {
+    color: var(--text-color);
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    animation: fadeIn ease 0.3s;
+}
+
+.user-container--active,
+.user-container--active:hover {
+    background-color: transparent;
+    color: #db8482;
+    border-radius: 4px;
+    animation: unset;
+}
+
+@keyframes fadeIn {
+    from {
+        background-color: transparent;
+    }
+
+    to {
+        background-color: #f0f0f0;
+    }
+}
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 711px) {
+    .container {
+        padding-top: 84px;
+    }
+
+    .search-container {
+        display: block;
+    }
+}

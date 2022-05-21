@@ -145,7 +145,7 @@ function Name(props) {
             <div className={`${style['info-title']}`}>
                 Name
             </div>
-            <div style={{ display: "flex" }}>
+            <div className={`${style['wrapper']}`}>
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['info-container']}`}>
                         <div className={`${style['info-label']}`}>

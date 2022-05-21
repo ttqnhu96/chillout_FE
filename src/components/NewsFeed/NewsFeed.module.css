@@ -5,8 +5,8 @@
     width: calc(100% / 18 * 10);
     background-color: rgba(255, 255, 255, 1);
     height: 100%;
-    margin: 0 2rem;
-    padding: 0.5rem 0;
+    margin: 0 20px;
+    padding: 5px 0;
     border-radius: 3rem;
     box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
     overflow-y: hidden;
@@ -27,14 +27,28 @@
 }
 
 
-@media (max-width: 1024px) {
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 1111px) {
     .news-feed-container {
-        width: calc(100% / 18 * 12);
+        flex: 1;
     }
 }
 
-@media (max-width:911px) {
-    .news-feed-container{
-        width: 100%;     
+@media (max-width: 911px) {
+    .news-feed-container {
+        flex: 1;
+        background-color: transparent;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: unset;
+        overflow-y: hidden;
+    }
+}
+
+@media (max-width: 711px) {
+    .news-feed-container::-webkit-scrollbar {
+        display: none;
     }
 }

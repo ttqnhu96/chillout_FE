@@ -27,6 +27,6 @@
 ==============================================*/
 .search-button {
     cursor: pointer;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-color);
     text-align: right;
 }

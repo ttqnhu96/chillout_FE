@@ -181,7 +181,7 @@ function BasicInfo(props) {
             <div className={`${style['info-title']}`}>
                 Basic Info
             </div>
-            <div style={{ display: "flex" }}>
+            <div className={`${style['wrapper']}`}>
 
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >

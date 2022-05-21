@@ -1,10 +1,14 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+}
 
 /*=============================================
                     INFO
 ==============================================*/
 .info-title {
-    font-size: 1.1em;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 /*=============================================
@@ -44,7 +48,7 @@
 
 .info-label {
     height: 50%;
-    font-size: 0.9em;
+    font-size: 1.2rem;
 }
 
 .edit-btn-container {
@@ -117,4 +121,11 @@
     margin: 0.25rem;
     background-color: gainsboro;
     cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 711px) {
+    .wrapper {
+        flex-direction: column;
+    }
 }

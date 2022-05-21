@@ -9,7 +9,7 @@
     width: 10%;
     font-size: large;
     text-align: right;
-    color: black;
+    color: var(--text-color);
     cursor: pointer;
     position: relative;
 }

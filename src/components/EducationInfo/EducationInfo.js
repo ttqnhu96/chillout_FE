@@ -224,7 +224,7 @@ function EducationInfo(props) {
             <div className={`${style['info-title']}`}>
                 Education
             </div>
-            <div style={{ display: "flex" }}>
+            <div className={`${style['wrapper']}`}>
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}

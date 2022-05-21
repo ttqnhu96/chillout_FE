@@ -179,7 +179,7 @@ export default function SignUp() {
                                 <Tooltip
                                     color="rgb(190, 75, 73)"
                                     title={signUpErrors.firstName}
-                                    placement="left">
+                                    placement="bottom">
                                     <input
                                         style={signUpErrors.firstName !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                         className={`${style['signup-input']}`}
@@ -200,7 +200,7 @@ export default function SignUp() {
                                 <Tooltip
                                     color="rgb(190, 75, 73)"
                                     title={signUpErrors.lastName}
-                                    placement="right">
+                                    placement="bottom">
                                     <input
                                         style={signUpErrors.lastName !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                         className={`${style['signup-input']}`}
@@ -222,7 +222,7 @@ export default function SignUp() {
                             <Tooltip
                                 color="rgb(190, 75, 73)"
                                 title={signUpErrors.username}
-                                placement="left">
+                                placement="bottom">
                                 <input
                                     style={signUpErrors.username !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                     className={`${style['signup-input']}`}
@@ -242,7 +242,7 @@ export default function SignUp() {
                         <div className={`${style['signup-password-container']}`}>
                             <Tooltip color="rgb(190, 75, 73)"
                                 title={signUpErrors.password}
-                                placement="left">
+                                placement="bottom">
                                 <input
                                     style={signUpErrors.password !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                     type="password"
@@ -264,7 +264,7 @@ export default function SignUp() {
                             <Tooltip
                                 color="rgb(190, 75, 73)"
                                 title={signUpErrors.birthday}
-                                placement="left">
+                                placement="bottom">
                                 <input
                                     style={signUpErrors.password !== "" ? { border: '0.2rem solid rgb(190, 75, 73)' } : {}}
                                     className={`${style['signup-birthday-picker']}`}

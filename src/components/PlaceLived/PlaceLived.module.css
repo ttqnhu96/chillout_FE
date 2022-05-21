@@ -3,15 +3,15 @@
                     INFO
 ==============================================*/
 .info-title {
-    font-size: 1.1em;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 /*=============================================
             INFO ITEM CONTAINER
 ==============================================*/
 .item-container {
-    margin: 1rem 0.7rem;
+    margin: 10px 7px;
     display: flex;
     align-items: flex-start;
     border-radius: 2rem;
@@ -41,7 +41,7 @@
 
 .info-label {
     height: 50%;
-    font-size: 0.9em;
+    font-size: 1.2rem;
 }
 
 .edit-btn {
@@ -103,4 +103,11 @@
     margin: 0.25rem;
     background-color: gainsboro;
     cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 711px) {
+    .item-container {
+        margin: 10px 0;
+    }
 }

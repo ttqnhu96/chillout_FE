@@ -27,7 +27,7 @@
     padding-left: 1rem;
 }
 .name-text {
-    font-size: 1.05em;
+    font-size: 1.4rem;
     font-weight: 600;
     cursor: pointer;
 }
@@ -35,7 +35,7 @@
     text-decoration: underline;
 }
 .time-text {
-    font-size: 0.8em;
+    font-size: 1.2rem;
 }
 
 /*=============================================

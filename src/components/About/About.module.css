@@ -2,7 +2,7 @@
                     TITLE
 ==============================================*/
 .title {
-    font-size: 1.3em;
+    font-size: 1.8rem;
     font-weight: 600;
     text-align: left;
     height: 4%;
@@ -25,7 +25,6 @@
 
 .container:hover {
     overflow-y: overlay;
-    scroll-behavior: smooth;
 }
 .container::-webkit-scrollbar{
     width:.5rem;
@@ -33,56 +32,4 @@
 .container::-webkit-scrollbar-thumb{
     background-color: rgba(248, 168, 136, 0.6);
     border-radius: 1rem;
-}
-
-/*=============================================
-                    INFO
-==============================================*/
-.info-title {
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-/*=============================================
-            INFO ITEM CONTAINER
-==============================================*/
-.item-container {
-    margin: 1rem 0.7rem;
-    display: flex;
-    align-items: flex-start;
-    border-radius: 2rem;
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
-    padding: 0.5rem 1.5rem;
-    width: 100%;
-}
-
-.icon-container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.info-container {
-    height: 100%;
-    width: 95%
-}
-
-.info-value {
-    height: 50%;
-    font-weight: 500;
-    overflow-wrap: break-word;
-}
-
-.info-label {
-    height: 50%;
-    font-size: 0.9em;
-}
-
-.edit-btn-container {
-    height: 100%;
-    margin-left: 1rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
 }

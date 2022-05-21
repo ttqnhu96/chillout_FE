@@ -2,7 +2,15 @@
                     CONTAINER
 ==============================================*/
 .view-post-container {
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
-    border-radius: 3rem;
-    margin-bottom: 2rem;
+    border: 1px solid rgba(199, 199, 199, 0.6);
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 911px) {
+    .view-post-container {
+        border-radius: 20px;
+        margin-bottom: 16px;
+    }
 }

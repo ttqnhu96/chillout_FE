@@ -1,12 +1,12 @@
 .container {
     height: calc(100% / 15 * 11);
-    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
 }
 
-@media (max-width: 511px) {
-    .container{
-      border-radius: 0;
-      height: calc(100% / 15 * 12);
+/* Responsive */
+@media (max-width: 711px) {
+    .container {
+      height: calc(100% / 15 * 12.5);
     }
 }

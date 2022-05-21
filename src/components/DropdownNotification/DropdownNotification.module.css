@@ -1,81 +1,149 @@
-.notification_wrap {
-    /* width: 500px;
-    margin: 0px 0px 0px 0px; */
-    z-index: 10;
-}
-
-.notification_wrap .notification_icon {
-    width: 10%;
-    font-size: large;
-    margin: 0 auto;
-    text-align: right;
-    color: black;
+.notification-wrap {
+    z-index: 99;
+    width: 50%;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color);
     cursor: pointer;
 }
 
-.notification_wrap .notification_icon_effect {
-    width: 10%;
-    font-size: large;
-    margin: 0 auto;
-    text-align: right;
-    color: red;
-    cursor: pointer;
+.notification-icon-wrapper {
+    height: 100%;
+    width: 18px;
+    position: relative;
 }
 
-.notification_wrap .notification_icon .fa-bell {
-    cursor: pointer;
+.notification-icon--have-notification {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    color: rgb(255, 123, 119);
+    font-size: 0.6rem;
 }
 
-.notification_wrap .dropdown {
-    width: 350px;
-    height: auto;
+.notification-list {
+    width: 300px;
+    max-height: 400px;
     background: #fff;
     border-radius: 5px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.125);
-    margin: 0px 0px 0px -168px;
-    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
     position: absolute;
     display: block;
     z-index: 3;
-    /* transform: translateX(-50%); */
-    transform: translateY(5%);
+    top: calc(100% + 15px);
+    right: 50%;
+    transform: translateX(50%);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.notification_wrap .dropdown .notify_item {
+.notification-list-wrapper:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -7px;
+    border: 15px solid;
+    border-color: transparent transparent #fff transparent;
+    z-index: 4;
+}
+
+.notification-list:hover {
+    overflow: overlay;
+}
+
+.notification-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
+}
+
+.notification-item {
     display: flex;
+    justify-content: left;
     align-items: center;
-    padding: 10px 0;
+    padding: 4px 0;
     border-bottom: 1px solid #dbdaff;
 }
 
-.notification_wrap .dropdown .notify_item:last-child {
+.notification-item:last-child {
     border-bottom: 0px;
 }
 
-.notification_wrap .dropdown .notify_item .notify_img {
+.notification-item__img {
     margin-right: 15px;
+    display: flex;
+    justify-content: left;
 }
 
-.notification_wrap .dropdown .notify_item .notify_info p {
-    margin-bottom: 5px;
+.notification-item__img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
 }
 
-.notification_wrap .dropdown .notify_item .notify_info p span {
+.notification-item__info {
+    flex: 1;
+    text-align: left;
+    font-weight: 400;
+}
+
+.notification-item__info p {
+    margin-bottom: 0;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    max-height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.notification-item__info p span {
+    margin-top: 0;
     color: #605dff;
-    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
 }
 
-.notification_wrap .dropdown .notify_item .notify_info .notify_time {
+.notification-item__info-time {
     color: #c5c5e6;
-    font-size: 12px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
 }
 
-.notification_wrap .dropdown:before {
-    content: "";
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-20%);
-    border: 15px solid;
-    border-color: transparent transparent #fff transparent;
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 911px) {
+    .notification-list {
+        right: 50%;
+        transform: translateX(40%);
+    }
+}
+
+@media (max-width: 711px) {
+    .notification-icon-wrapper {
+        position: unset;
+    }
+
+    .notification-list {
+        top: calc(100% / 15 * 1.5);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0;
+        width: 100vw;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification-list-wrapper:before {
+        display: none;
+    }
 }

@@ -33,3 +33,12 @@
     cursor: pointer;
     margin: 0.8rem 0.7rem 0.5rem 0.5rem;
 }
+
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 911px) {
+    .comment-text-area-button-container {
+        border-radius: 16px;
+    }
+}

@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Tooltip } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import style from './Suggestions.module.css';
+import style from './SuggestionsSideBar.module.css';
 import { getSuggestionsListSagaAction } from '../../redux/actions/RelationshipAction';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
 
-export default function Suggestions() {
+export default function SuggestionsSideBar() {
     const dispatch = useDispatch();
     const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
 
@@ -40,36 +39,36 @@ export default function Suggestions() {
     //Render suggestion items
     const renderSuggestionsList = () => {
         return suggestionsList.map((item, index) => (
-            <div key={index} className={`${style['contacts-item-container']}`}>
+            <li key={index} className={`${style['suggestions-item']}`}>
                 <img
-                    className={`${style['contacts-item-avatar']}`}
+                    className={`${style['suggestions-item__avatar']}`}
                     src={item.avatar ?
                         `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}
                 />
-                <div className={`${style['contacts-item-text-container']}`}>
-                    <Tooltip title={`${item.firstName} ${item.lastName}`} placement="right">
-                        <div
-                            className={`${style['contacts-first-name']}`}
-                            onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}>
-                            {`${item.firstName}`}
-                        </div>
-                        <div className={`${style['contacts-username']}`}>
-                            {`@${item.username}`}
-                        </div>
-                    </Tooltip>
+                <div className={`${style['suggestions-item__name']}`}>
+                    <div
+                        className={`${style['suggestions-item__name__first-name']}`}
+                        onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}>
+                        {`${item.firstName}`} Nguyen Phu Thoai Ng
+                    </div>
+                    <div className={`${style['suggestions-item__name__username']}`}>
+                        {`@${item.username}`}
+                    </div>
                 </div>
-            </div>
+            </li>
         ))
     }
 
     return (
-        <div className={`${style['contacts-container']}`}>
-            <div className={`${style['contacts-title']}`}>
+        <div className={`${style['suggestions']}`}>
+            <h3 className={`${style['suggestions__heading']}`}>
                 SUGGESTIONS
-            </div>
-            {renderSuggestionsList()}
+            </h3>
+            <ul className={`${style['suggestions__list']}`}>
+                {renderSuggestionsList()}
+            </ul>
         </div>
     )
 }

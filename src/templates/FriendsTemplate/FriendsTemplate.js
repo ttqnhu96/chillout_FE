@@ -26,11 +26,11 @@ export const FriendsTemplate = (props) => {
                 <div className="chillout-container">
                     <Header />
                     <div className={`${style['container']}`}>
-                        <div className={`${style['left-col']}`}>
+                        <div className={`${style['menu']}`}>
                             {renderMenuItemList()}
                         </div>
 
-                        <div className={`${style['right-col']}`}>
+                        <div className={`${style['main']}`}>
                             <div className={`${style['content-container']}`}>
                                 <Component {...propsRoute} />
                             </div>

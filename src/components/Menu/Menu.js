@@ -15,14 +15,15 @@ export default function Menu() {
 
     return (
         <div className={`${style['menu-container']}`}>
-            {renderMenuItemList()}
+            <div className={`${style['menu-list']}`}>
+                {renderMenuItemList()}
+            </div>
             <div className={`${style['menu-banner-container']}`}>
                 <img className={`${style['menu-banner']}`}
                     src="/image/banner/menu-banner.png"
                     alt="menu-banner"
                 />
             </div>
-
         </div>
     )
 }

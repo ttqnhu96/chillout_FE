@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import style from './Header.module.css';
 import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
@@ -11,6 +11,9 @@ import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
 import { useLocation } from 'react-router-dom';
 import { DropdownNotification } from '../../../../components/DropdownNotification/DropdownNotification';
+import SuggestionsSideBar from '../../../../components/SuggestionsSideBar/SuggestionsSideBar';
+import MenuSideBar from '../../../../components/MenuSideBar/MenuSideBar';
+import { Dropdown, Menu } from 'antd';
 
 export default function Header() {
     const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
@@ -20,6 +23,14 @@ export default function Header() {
     const { firstName, avatar } = useSelector(state => state.ProfileReducer).loginUserProfile;
     const { userId } = useSelector(state => state.ProfileReducer).userProfile;
     const isCreatePostModalVisible = useSelector(state => state.PostReducer).isCreatePostModalVisible;
+
+    //Local state
+    const [isShowSideBar, setIsShowSideBar] = useState(
+        {
+            leftSideBar: false,
+            rightSideBar: false
+        }
+    );
 
     useEffect(() => {
         if (sessionStorage.getItem(USER_LOGIN) && sessionStorage.getItem(ACCESS_TOKEN)) {
@@ -59,20 +70,53 @@ export default function Header() {
         history.push(`/user/${loginUserId}`);
     }
 
+    const showHideLeftSideBar = (isShowed) => {
+        setIsShowSideBar(prevState => ({
+            ...prevState,
+            leftSideBar: isShowed
+        }));
+    }
+
+    const showHideRightSideBar = (isShowed) => {
+        setIsShowSideBar(prevState => ({
+            ...prevState,
+            rightSideBar: isShowed
+        }));
+    }
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem(USER_LOGIN);
+        sessionStorage.removeItem(ACCESS_TOKEN);
+        history.push('/login');
+    }
+
+    const menu = (
+        <Menu className={`${style['header-menu-PC']}`}>
+            <Menu.Item key="1" onClick={handleClickUser}>Profile</Menu.Item>
+            <Menu.Item key="2" onClick={() => { history.push('/settings') }}>Settings</Menu.Item>
+            <hr style={{ margin: '0 auto' }} />
+            <Menu.Item key="3" onClick={handleLogOut}>Log out</Menu.Item>
+        </Menu>
+    );
+
     return (
         <>
             {isCreatePostModalVisible && <CreatePost />}
             <div className={`${style['chillout-header']}`}>
-                <div className={`${style['logo-container']}`}
-                    onClick={handleClickChilloutLogo}
-                >
+                <div className={`${style['logo-container']}`}>
+                    <label className={`${style['header-menu-icon']} ${style['header-menu-icon--left']}`}
+                        onClick={() => { showHideLeftSideBar(true) }}>
+                        <i className="fa-solid fa-bars"></i>
+                    </label>
                     <img
                         className={`${style['logo']}`}
                         src="/image/logo/Chillout_logo_circle.png" height={35} alt="chillout_logo"
+                        onClick={handleClickChilloutLogo}
                     />
                     <img
                         className={`${style['brand-name']}`}
                         src="/image/logo/Chillout_text.png" height={20} alt="chillout_brandname"
+                        onClick={handleClickChilloutLogo}
                     />
                 </div>
                 <div className={`${style['home-icon-container']}`}>
@@ -102,17 +146,53 @@ export default function Header() {
                 <div className={`${style['notification-user-container']}`}>
                     {/* <DropdownMessage /> */}
                     <DropdownNotification />
-                    <div className={`${style['user-container']}`}
-                        onClick={handleClickUser}>
-                        <span className={`${style['username']}`}>{firstName}</span>
-                        <img src={avatar ?
-                            `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
-                            alt="avatar"
-                            className={`${style['avatar']}`}
+                    <div className={`${style['user-container']}`}>
+                        <span className={`${style['username']}`} onClick={handleClickUser}>{firstName}</span>
+                        <Dropdown overlay={menu} placement="bottom" arrow>
+                            <img src={avatar ?
+                                `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
+                                alt="avatar"
+                                className={`${style['avatar']}`}
                             // onError={() => { window.location.reload() }}
-                        />
+                            />
+                        </Dropdown>
                     </div>
+
+                    <label className={`${style['header-menu-icon']} ${style['header-menu-icon--right']}`}
+                        onClick={() => { showHideRightSideBar(true) }}>
+                        <i className="fa-solid fa-bars"></i>
+                    </label>
+                    {/* Sidebars */}
+                    {isShowSideBar.leftSideBar
+                        &&
+                        <div className={`${style['header-menu-sidebar-container']}`}>
+                            <div className={`${style['header-menu-sidebar']} ${style['header-menu-sidebar--left']}`}>
+                                <MenuSideBar />
+                                <div className={`${style['header-menu-sidebar-icon']}`}
+                                    onClick={() => { showHideLeftSideBar(false) }}>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div className={`${style['header-menu-sidebar-overlay']}`}
+                                onClick={() => { showHideLeftSideBar(false) }} />
+                        </div>
+                    }
+                    {isShowSideBar.rightSideBar
+                        &&
+                        <div className={`${style['header-menu-sidebar-container']}`}>
+                            <div className={`${style['header-menu-sidebar']} ${style['header-menu-sidebar--right']}`}>
+                                <SuggestionsSideBar />
+                                <div className={`${style['header-menu-sidebar-icon']}`}
+                                    onClick={() => { showHideRightSideBar(false) }}>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div className={`${style['header-menu-sidebar-overlay']}`}
+                                onClick={() => { showHideRightSideBar(false) }} />
+                        </div>
+                    }
                 </div>
+
             </div >
         </>
     )

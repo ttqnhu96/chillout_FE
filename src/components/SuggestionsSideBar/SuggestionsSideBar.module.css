@@ -1,60 +1,64 @@
 /*=============================================
-            CONTACTS (4/18 HOMEPAGE)
+            SUGGESTIONS SIDE BAR
 ==============================================*/
-.contacts-container {
-    width: calc(100% / 18 * 4);
-    background-color: rgba(253, 199, 189, 0.5);
+.suggestions {
+    width: 100%;
     height: 100%;
-    margin: 0 2rem;
-    padding: 2rem;
-    border-radius: 3rem;
-    color: var(--text-color);
-    overflow-y: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    direction: rtl;
+    padding: 50px 20px 20px 25px;
 }
-.contacts-container:hover {
+.suggestions {
     overflow-y: overlay;
-    scroll-behavior: smooth;
 }
-.contacts-container::-webkit-scrollbar{
-    width:.5rem;
+.suggestions::-webkit-scrollbar{
+    width: 0.6rem;
 }
-.contacts-container::-webkit-scrollbar-thumb{
+.suggestions::-webkit-scrollbar-thumb{
     background-color: rgba(248, 168, 136, 0.6);
     border-radius: 1rem;
 }
 
-.contacts-title {
+.suggestions__heading {
     font-size: 1.6rem;
+    line-height: 1.6rem;
     font-weight: 700;
 }
 
-.contacts-item-container {
+.suggestions__list {
+    padding-left: 0;
+    list-style: none;
+    direction: ltr;
+}
+
+.suggestions-item {
     margin: 2rem 0;
     border-radius: 2rem;
     height: 6.5rem;
     display: flex;
 }
-.contacts-item-avatar {
-    width: 35%;
-    height: 100%;
-    border-radius: inherit;
-    display: flex;
+.suggestions-item__avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    display: block;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     cursor: pointer;
 }
-.contacts-item-text-container {
+
+.suggestions-item__name {
     width: 50%;
     height: 100%;
-    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding-left: 10px;
 }
-.contacts-first-name {
+.suggestions-item__name__first-name {
     height: 1.4rem;
     font-size: 1.4rem;
     line-height: 1.4rem;
@@ -65,7 +69,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 }
-.contacts-username {
+.suggestions-item__name__username {
     height: 2rem;
     display: flex;
     align-items: flex-start;
@@ -78,12 +82,11 @@
     overflow: hidden;
 }
 
-
 /*=============================================
                 RESPONSIVE
 ==============================================*/
-@media (max-width: 1111px) {
-    .contacts-container {
-        display: none;
+@media (max-width:711px) {
+    .suggestions {
+        padding-top: 44px;
     }
-  }
+}

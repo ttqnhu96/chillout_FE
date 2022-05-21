@@ -3,7 +3,6 @@ import HomePage from './pages/HomePage/HomePage';
 import { MainContentTemplate } from './templates/MainContentTemplate/MainContentTemplate';
 import Login from './pages/Login/Login';
 import { LoginTemplate } from './templates/LoginTemplate/LoginTemplate';
-import Messenger from './pages/Messenger/Messenger';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
 import WallPostList from './components/WallPostList/WallPostList';
 import About from './components/About/About';
@@ -33,7 +32,7 @@ function App() {
         <FriendsTemplate exact path="/friends" Component={FriendList} />
         <FriendsTemplate exact path="/friends/request" Component={FriendRequests} />
 
-        <MainContentTemplate exact path="/message" Component={Messenger} />
+        <MainContentTemplate exact path="/message" Component={PageNotFound} />
         <MainContentTemplate exact path="*" Component={PageNotFound} />
       </Switch>
     </>

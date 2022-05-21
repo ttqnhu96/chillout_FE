@@ -54,7 +54,6 @@ export default function CreatePost() {
                             ✕
                         </div>
                     </div>
-                    <hr />
 
                     {/* Body */}
                     <div className={`${style['create-post-modal-dialog-body']}`}>

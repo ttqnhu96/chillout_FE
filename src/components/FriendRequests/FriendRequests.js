@@ -80,7 +80,7 @@ export default function FriendRequests() {
                         className={`${style['friend-request-item-avatar']}`}
                     />
                     <div className={`${style['friend-request-item-name']}`}>
-                        Thoai
+                        Thoai Thoai Thoai Thoai Hihih Thoai Thoai Nhu
                     </div>
                     <div className={`${style['friend-request-confirm-btn']}`}>
                         Confirm

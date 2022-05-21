@@ -2,12 +2,12 @@
             SETTING (14/18 HOMEPAGE)
 ==============================================*/
 .settings {
-    width: calc(100% / 18 * 14 + 4.5rem);
-    /* background-color: greenyellow; */
+    /* width: calc(100% / 18 * 14); */
+    flex: 1;
     background-color: rgba(255, 255, 255, 1);
     height: 100%;
-    margin: 0 2rem;
-    padding: 2rem;
+    margin: 0 20px;
+    padding: 20px;
     border-radius: 3rem;
     box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
     overflow-y: hidden;
@@ -28,7 +28,7 @@
                 SETTINGS TITLE
 ==============================================*/
 .settings-title {
-    font-size: 1.2em;
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
@@ -36,27 +36,27 @@
                 SETTINGS CONTAINER
 ==============================================*/
 .settings-container {
-    margin: 1.5em 2rem;
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
-    border-radius: 3rem;
+    margin: 20px;
+    border: 1px solid rgba(199, 199, 199, 0.6);
+    border-radius: 30px;
     font-weight: normal;
-    font-size: 0.95em;
-    height: 85%;
-    padding: 2rem;
+    /* height: 85%; */
+    padding: 20px;
 }
 
 .settings-label {
-    font-size: 1.1em;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 .language-select-box {
     width: 100%;
-    padding: 0.7rem;
-    border-radius: 1rem;
+    padding: 7px;
+    border-radius: 10px;
     border: none;
     background-color: rgba(199, 199, 199, 0.6);
-    margin: 1rem 0;
+    margin: 10px 0;
+    font-size: 1.4rem;
 }
 
 .save-button-container {
@@ -75,4 +75,31 @@
     color:rgb(255, 255, 255);
     font-weight: 600;
     cursor: pointer;
+}
+
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 911px) {
+    .settings {
+        border-radius: 20px;
+        margin: 0 20px;
+        padding: 10px;
+    }
+
+    .settings-container {
+        margin: 10px;
+        border-radius: 20px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 711px) {
+    .settings-title {
+        font-size: 1.6rem;
+    }
+
+    .settings-label {
+        font-size: 1.4rem;
+    }
 }

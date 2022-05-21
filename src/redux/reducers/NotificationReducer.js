@@ -16,7 +16,7 @@ export const NotificationReducer = (state = initialState, action) => {
             }
             return { ...state };
         };
-        case types.REDUCER_READED_NOTIFICATION: {
+        case types.REDUCER_READ_NOTIFICATION: {
             state.haveNotification = false;
             return { ...state };
         }

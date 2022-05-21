@@ -2,9 +2,9 @@
                     CONTAINER
 ==============================================*/
 .wall-post-container {
-    margin-top: 1.5rem;
+    margin-top: 15px;
     height: 92%;
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 15px 15px 15px;
     overflow-y: hidden;
 }
 
@@ -24,9 +24,19 @@
                     TITLE
 ==============================================*/
 .post-title {
-    font-size: 1.3em;
+    font-size: 1.8rem;
     font-weight: 600;
     text-align: left;
     height: 4%;
 }
 
+/* Responsive */
+@media (max-width: 911px) {
+    .wall-post-container {
+        margin-top: 10px;
+        height: auto;
+        padding: 0;
+        overflow-y: visible;
+        border-radius: 20px;
+    }
+}

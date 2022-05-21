@@ -61,7 +61,7 @@ export default function Photos() {
                     {
                         (userId === loginUserId)
                         &&
-                        <div className={`${style['photo']} ${style['delete-button']}`}
+                        <div className={`${style['delete-button']}`}
                             onClick={() => { handleClickDeleteButton(photo.id) }}>
                             <DeleteOutlined />
                         </div>

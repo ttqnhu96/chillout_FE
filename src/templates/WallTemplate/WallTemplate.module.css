@@ -1,53 +1,122 @@
-.container {
+.wrapper {
     height: calc(100% / 15 * 11);
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    padding: 0 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.container {
+    height: 100%;
+    padding: 0 20px;
     display: flex;
 }
 
-.left-col {
+.sub-module {
     width: 30%;
     height: 100%;
     background-color: rgba(255, 255, 255, 1);
-    margin: 0 2rem 0 0;
-    border-radius: 3rem;
+    margin: 0 20px 0 0;
+    border-radius: 30px;
     box-shadow: 50px 0px 93px -11px rgba(250, 163, 163, 0.4);
+    overflow: hidden;
+}
+.sub-module:hover {
+    overflow-y: overlay;
+}
+.sub-module::-webkit-scrollbar{
+    width:.5rem;
+}
+.sub-module::-webkit-scrollbar-thumb{
+    background-color: rgba(248, 168, 136, 0.6);
+    border-radius: 1rem;
 }
 
-.right-col {
+.post-content-text-area {
+    margin: 5px 0 25px 0;
+    background-color: transparent;
+    border: none;
+}
+
+.main-module {
     width: 70%;
-    margin: 0 0 0 2rem;
-    background-color: transparent !important;
-    border-radius: 3rem;
+    margin: 0 0 0 20px;
+    background-color: transparent;
+    border-radius: 30px;
     position: relative;
 }
 
 .cover-container {
-    height: 27%;
+    height: 160px;
+}
+
+.intro-container {
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 16px;
+    margin-top: 20px;
+    display: none;
 }
 
 .content-container {
     position: absolute;
-    margin: 1.5em 0;
+    margin: 20px 0;
     width: 100%;
-    height: calc(73% - 2rem); /* 2rem is the margin top (space between cover container and post container) */
-    border-radius: 3rem;
-    font-size: 0.95em;
+    height: calc(73% - 20px);
+    /* 2px is the margin top (space between cover container and post container) */
+    border-radius: 30px;
+    font-size: 1.4rem;
     font-weight: normal;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0px 79px 93px -11px rgba(250, 163, 163, 0.4);
-    padding: 2rem 2.5rem 2.5rem 2.5rem;
+    padding: 20px 25px;
 }
 
-.content-container:hover {
-    overflow-y: overlay;
-    scroll-behavior: smooth;
+/* Responsive */
+@media (max-width: 911px) {
+    .container {
+        flex-direction: column;
+        overflow: hidden;
+        margin: 0 4px;
+    }
+
+    .container:hover {
+        overflow-y: overlay;
+    }
+
+    .container::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+        background-color: rgba(248, 168, 136, 0.6);
+        border-radius: 10px;
+    }
+
+    .sub-module {
+        display: none;
+    }
+
+    .main-module {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        margin: 0;
+    }
+
+    .content-container {
+        height: auto;
+        border-radius: 20px;
+        padding: 10px 16px;
+        box-shadow: unset;
+        overflow: visible;
+    }
+
+    .intro-container {
+        display: block;
+    }
 }
-.content-container::-webkit-scrollbar{
-    width:.5rem;
-}
-.content-container::-webkit-scrollbar-thumb{
-    background-color: rgba(248, 168, 136, 0.6);
-    border-radius: 1rem;
+
+@media (max-width: 711px) {
+    .wrapper {
+        height: calc(100% / 15 * 12.5);
+    }
 }

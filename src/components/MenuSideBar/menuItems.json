@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Friends",
+        "icon": "fas fa-user-group",
+        "iconAlt": "menu_friends",
+        "path": "/friends"
+    },
+    {
+        "id": 2,
+        "name": "Messenger",
+        "icon": "fa-brands fa-facebook-messenger",
+        "iconAlt": "menu_message",
+        "path": "/message"
+    },
+    {
+        "id": 3,
+        "name": "Settings",
+        "icon": "fa-solid fa-gear",
+        "iconAlt": "menu_settings",
+        "path": "/settings"
+    },
+    {
+        "id": 4,
+        "name": "Memories",
+        "icon": "fa-solid fa-clock",
+        "iconAlt": "menu_memories",
+        "path": "/memories"
+    }
+]

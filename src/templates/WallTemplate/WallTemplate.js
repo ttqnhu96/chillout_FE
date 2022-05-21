@@ -24,7 +24,7 @@ export const WallTemplate = (props) => {
     const { id } = props.computedMatch.params;
     //Use effect
     useEffect(() => {
-        if(id) {
+        if (id) {
             dispatch(getProfileDetailByUserIdSagaAction(id));
         }
 
@@ -56,34 +56,45 @@ export const WallTemplate = (props) => {
             <div className="chillout-bg">
                 <div className="chillout-container">
                     <Header />
-                    <div className={`${style['container']}`}>
-                        {isConfirmDeleteModalVisible
-                            && modalType === MODAL_TYPE.CONFIRM_DELETE_COMMENT
-                            && <ConfirmDelete
-                                title='Delete Comment?'
-                                content='Are you sure you want to delete this comment?'
-                                handleDelete={handleDeleteComment}
-                            />}
-                        {isConfirmDeleteModalVisible
-                            && modalType === MODAL_TYPE.CONFIRM_DELETE_PHOTO
-                            && <ConfirmDelete
-                                title='Delete Photo?'
-                                content='Are you sure you want to delete this photo?'
-                                handleDelete={handleDeletePhoto}
-                            />}
-                        <div className={`${style['left-col']}`}>
-                            <Intro />
-                            { (Number(id) === loginUserId ) && <RecentContacts />}
-                        </div>
-                        <div className={`${style['right-col']}`}>
-                            <div className={`${style['cover-container']}`}>
-                                <Cover />
+                    <div className={`${style['wrapper']}`}>
+                        <div className={`${style['container']}`}>
+                            {isConfirmDeleteModalVisible
+                                && modalType === MODAL_TYPE.CONFIRM_DELETE_COMMENT
+                                && <ConfirmDelete
+                                    title='Delete Comment?'
+                                    content='Are you sure you want to delete this comment?'
+                                    handleDelete={handleDeleteComment}
+                                />}
+                            {isConfirmDeleteModalVisible
+                                && modalType === MODAL_TYPE.CONFIRM_DELETE_PHOTO
+                                && <ConfirmDelete
+                                    title='Delete Photo?'
+                                    content='Are you sure you want to delete this photo?'
+                                    handleDelete={handleDeletePhoto}
+                                />}
+                            <div className={`${style['sub-module']}`}>
+                                <Intro />
+                                {(Number(id) === loginUserId) && <RecentContacts />}
                             </div>
-                            <div className={`${style['content-container']}`}>
-                                <Component {...propsRoute} />
+                            <div className={`${style['main-module']}`}>
+                                <div className={`${style['cover-container']}`}>
+                                    <Cover />
+                                </div>
+                                <div className={`${style['intro-container']}`}>
+                                    <Intro />
+                                </div>
+                                {/* {
+                                (Number(id) === loginUserId) &&
+                                <div className={`${style['recent-contact-container']}`}>
+                                    <RecentContacts />
+                                </div>
+                            } */}
+                                <div className={`${style['content-container']}`}>
+                                    <Component {...propsRoute} />
+                                </div>
                             </div>
-                        </div>
-                    </div >
+                        </div >
+                    </div>
                     <Footer />
                 </div>
             </div>

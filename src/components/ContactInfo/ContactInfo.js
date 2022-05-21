@@ -146,7 +146,7 @@ function ContactInfo(props) {
             <div className={`${style['info-title']}`}>
                 Contact Info
             </div>
-            <div style={{ display: "flex" }}>
+            <div className={`${style['wrapper']}`}>
                 <div className={`${style['item-container']}`}>
                     <div className={`${style['icon-container']}`} >
                         <img width={30} height={30}

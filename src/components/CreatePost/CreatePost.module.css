@@ -22,36 +22,42 @@
 ==============================================*/
 .create-post-modal-dialog {
     background-color: #fefefe;
-    width: 50rem;
-    height: 46rem;
+    width: 500px;
+    height: 460px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -25rem;
-    margin-top: -23rem;
-    border-radius: 3rem;
-    padding: 2rem;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    padding: 20px;
     box-shadow: rgba(58, 58, 58, 0.1) 0vh 2vh 10vh 0vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* overflow: hidden; */
 }
 
 /*=============================================
             MODAL DIALOG HEADER
 ==============================================*/
 .create-post-modal-dialog-header {
+    /* flex: 1; */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .create-post-modal-dialog-title {
     width: 95%;
-    font-size: 2em;
+    font-size: 2.8rem;
     font-weight: 700;
     text-align: center;
 }
 .create-post-modal-dialog-close-btn {
     width: 5%;
     text-align: right;
-    font-size: 1.2em;
+    font-size: 1.7rem;
     cursor: pointer;
 }
 .create-post-modal-dialog-close-btn:hover {
@@ -62,18 +68,19 @@
             MODAL DIALOG BODY
 ==============================================*/
 .create-post-modal-dialog-body {
-    padding: 1rem 0;
+    padding: 10px 0;
+    flex: 1;
 }
 
 .create-post-user-container {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
 }
 .create-post-user-avatar {
-    width: 3em;
-    height: 3em;
-    border-radius: 5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50px;
     cursor: default;
 }
 .user-name-privacy-container {
@@ -81,14 +88,14 @@
 }
 
 .user-name {
-    font-size: 1.05em;
+    font-size: 1.4rem;
     font-weight: 600;
 }
 
 .privacy-select-box {
-    border-radius: 0.5rem;
-    margin-top: 0.1rem;
-    padding: 0 0.5rem;
+    border-radius: 5px;
+    margin-top: 1px;
+    padding: 0 5px;
     border: none;
     background-color: rgba(34, 34, 34, 0.2);
 }
@@ -98,7 +105,7 @@
 }
 
 .post-content-container {
-    height: 24rem;
+    /* height: 240px; */
     overflow-y: hidden;
 }
 .post-content-container:hover {
@@ -113,7 +120,7 @@
 }
 
 .post-content-text-area {
-    margin: 0.5rem 0 2.5rem 0;
+    margin: 5px 0 25px 0;
     background-color: transparent;
     border: none;
 }
@@ -125,12 +132,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 10px;
 }
 .create-post-btn {
     width: 100%;
-    font-size: 1.1em;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 600;
     border-radius: 1rem;
     height: 4rem;
     padding: 0.5rem;
@@ -141,4 +148,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/*=============================================
+                RESPONSIVE
+==============================================*/
+@media (max-width: 711px) {
+    .create-post-modal-dialog {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
 }

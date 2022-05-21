@@ -2,18 +2,18 @@
                 INTRO CONTAINER
 ==============================================*/
 .intro-container {
-    margin: 2.5rem 2.5rem 1rem 2.5rem;
-    padding: 1.5rem 2rem; 
-    border: 0.1rem solid rgba(199, 199, 199, 0.6);
-    border-radius: 3rem;
+    margin: 25px 25px 10px 25px;
+    padding: 15px 20px; 
+    border: 1px solid rgba(199, 199, 199, 0.6);
+    border-radius: 30px;
 }
 
 /*=============================================
                 INTRO TITLE
 ==============================================*/
 .intro-title {
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 /*=============================================
@@ -41,4 +41,14 @@
 .intro-item-text {
     font-weight: normal;
     overflow-wrap: break-word;
+}
+
+/* Responsive */
+@media (max-width: 911px) {
+    .intro-container {
+        margin: 0;
+        /* padding: 0;  */
+        /* border: 1px solid rgba(199, 199, 199, 0.6); */
+        border-radius: 20px;
+    }
 }

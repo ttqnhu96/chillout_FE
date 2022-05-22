@@ -129,6 +129,7 @@ export const updateCommentToPostWatcher = function* updateCommentToPostWatcher()
     yield takeEvery(types.UPDATE_COMMENT_SOCKET_HANDLER, (action) => updateCommentToPost(action));
 }
 
+// eslint-disable-next-line require-yield
 function* handleLikePost(action) {
     if (socket) {
         socket.emit('client-like-post', {

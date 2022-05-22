@@ -12,6 +12,7 @@ import * as AuthenticationSaga from "./AuthenticationSaga";
 import * as ProfileSaga from "./ProfileSaga";
 import * as PhotoSaga from './PhotoSaga';
 import * as RelationshipSaga from './RelationshipSaga';
+import * as NotificationSaga from './NotificationSaga';
 
 export function* rootSaga(dispatch) {
         yield all([
@@ -70,6 +71,10 @@ export function* rootSaga(dispatch) {
                 RelationshipSaga.acceptFriendRequestWatcher(),
                 RelationshipSaga.deleteFriendRequestWatcher(),
                 RelationshipSaga.createFriendRequestWatcher(),
-                RelationshipSaga.getRelationshipWithCurrentUserWatcher()
+                RelationshipSaga.getRelationshipWithCurrentUserWatcher(),
+
+                //Notification
+                NotificationSaga.createNotificationWatcher(),
+                NotificationSaga.getNotificationListByReceiverIdWatcher()
         ])
 }

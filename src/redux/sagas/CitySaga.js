@@ -18,7 +18,7 @@ function* getCityList() {
         const { data } = yield call(() => cityService.getCityList());
         const response = data.Data;
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set state in reducer
             yield put(getCityListAction(response));
         } else {

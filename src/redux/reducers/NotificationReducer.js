@@ -31,6 +31,10 @@ export const NotificationReducer = (state = initialState, action) => {
             }
             return { ...state };
         }
+        case types.REDUCER_GET_NOTIFICATION_LIST: {
+            state.notificationList = action.notificationList;
+            return { ...state };
+        }
         default:
             return state;
     }

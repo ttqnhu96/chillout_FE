@@ -1,12 +1,13 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { ERROR_CODE, } from "../../util/constants/systemSettings";
+import { ERROR_CODE, USER_LOGIN, } from "../../util/constants/systemSettings";
 import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA, UPDATE_LIKES_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
+import { FOLDER_UPLOAD, MESSAGES, NOTIFICATION_ACTION, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
 import { getPostListNewsFeedAction, getPostListNewsFeedSagaAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
 import { likePostSocketHandlerAction } from "../actions/SocketAction";
+import { createNotificationSagaAction } from "../actions/NotificationAction";
 
 /*=============================================
                 CREATE POST
@@ -34,7 +35,7 @@ function* createPost(action) {
 
         const { data } = yield call(() => postService.createPost(post));
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             notify('success', MESSAGES.CREATE_POST_SUCCESS);
 
             //Hide create post modal
@@ -77,7 +78,7 @@ function* getPostListWall(action) {
         const { data } = yield call(() => postService.getPostListWall(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set post list to reducer
             yield put(getPostListWallAction(response));
         } else {
@@ -108,7 +109,7 @@ function* getPostListNewsFeed(action) {
         const { data } = yield call(() => postService.getPostListNewsFeed(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set post list to reducer
             yield put(getPostListNewsFeedAction(response));
         } else {
@@ -137,12 +138,31 @@ export function* getPostListNewsFeedWatcher() {
 function* updateLikes(action) {
     try {
         const { data } = yield call(() => postService.updateLikes({ postId: action.postId }));
-        const errorCode = ERROR_CODE.SUCCESSFUL;
-        yield put(likePostSocketHandlerAction({
-            postId: action.postId,
-            like: action.like
-        }));
-        if (data.ErrorCode !== ERROR_CODE.SUCCESSFUL) {
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+
+        const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
+
+            //Create notification if like, not create notification if unlike
+            const executorId = id;
+            const receiverId = response.userId; 
+            if (response.isLikeAction && executorId !== receiverId) {
+                yield put(createNotificationSagaAction({
+                    executorId: executorId,
+                    receiverId: receiverId,
+                    action: NOTIFICATION_ACTION.LIKE,
+                    objectType: OBJECT_TYPE.POST,
+                    objectId: response.id,
+                    message: "reacted to your post."
+                }));
+            }
+
+            yield put(likePostSocketHandlerAction({
+                postId: action.postId,
+                like: action.like
+            }));
+        } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
         }

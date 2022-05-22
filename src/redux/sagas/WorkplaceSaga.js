@@ -18,7 +18,7 @@ function* getWorkplaceList() {
         const { data } = yield call(() => workplaceService.getWorkplaceList());
         const response = data.Data;
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set state in reducer
             yield put(getWorkplaceListAction(response));
         } else {

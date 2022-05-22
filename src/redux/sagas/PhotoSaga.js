@@ -19,7 +19,7 @@ function* getPhotoListByUserId(action) {
         const { data } = yield call(() => photoService.getPhotoListByUserId(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set photo list to reducer
             yield put(getPhotoListByUserIdAction(response));
         } else {
@@ -50,7 +50,7 @@ function* deletePhoto(action) {
         const { data } = yield call(() => photoService.deletePhoto(action.photoId));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             yield put(hideConfirmDeleteModalAction());
 
             //Call API to reload comment list

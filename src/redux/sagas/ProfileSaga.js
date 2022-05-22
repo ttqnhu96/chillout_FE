@@ -24,7 +24,7 @@ function* getLogInUserProfile(action) {
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             yield put(getLogInUserProfileAction(response));
         } else {
             //Inform error
@@ -57,7 +57,7 @@ function* getProfileDetailByUserId(action) {
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set user profile state in reducer
             yield put(getUserProfileAction(response));
         } else {
@@ -87,7 +87,7 @@ function* updateProfile(action) {
     try {
         const { data } = yield call(() => profileService.updateProfile(action.profileId, action.profileUpdate));
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             notify('success', MESSAGES.UPDATE_SUCCESS);
             //Call API to reload user profile detail
             yield put(getProfileDetailByUserIdSagaAction(action.profileId));
@@ -136,7 +136,7 @@ function* updateAvatar(action) {
 
         const response = data.Data;
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //notify('success', MESSAGES.CREATE_POST_SUCCESS);
             //Hide create post modal
             yield put(hideUploadImageModalAction());

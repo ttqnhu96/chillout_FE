@@ -17,3 +17,24 @@ export const setLikePostNotificationToReducerAction = (data) => {
         postId: data.postId
     }
 }
+
+export const createNotificationSagaAction = (newNotification) => {
+    return {
+        type: types.CREATE_NOTIFICATION_SAGA,
+        newNotification: newNotification
+    }
+}
+
+export const getNotificationListByReceiverIdSagaAction = (request) => {
+    return {
+        type: types.GET_NOTIFICATION_LIST_BY_RECEIVER_ID_SAGA,
+        request: request
+    }
+}
+
+export const getNotificationListAction = (notificationList) => {
+    return {
+        type: types.REDUCER_GET_NOTIFICATION_LIST,
+        notificationList: notificationList
+    }
+}

@@ -3,11 +3,12 @@ import { call, put, takeLatest, takeEvery } from "redux-saga/effects";
 import { ERROR_CODE, USER_LOGIN, } from "../../util/constants/systemSettings";
 import { UPDATE_COMMENT_NOTIFICATION_SAGA, CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA, UPDATE_COMMENT_SAGA, ADD_COMMENT_NOTIFICATION_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { COMMON_CONSTANT, MESSAGES } from "../../util/constants/commonConstants";
+import { COMMON_CONSTANT, MESSAGES, NOTIFICATION_ACTION, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { commentService } from "../../services/CommentService";
 import { getCommentListAction, getCommentListByPostIdSagaAction } from "../actions/CommentAction";
 import { addCommentSocketHandlerAction, updateCommentSocketHandlerAction } from "../actions/SocketAction";
 import { hideConfirmDeleteModalAction } from "../actions/ConfirmDeleteAction";
+import { createNotificationSagaAction } from "../actions/NotificationAction";
 
 /*=============================================
                 CREATE COMMENT 
@@ -22,13 +23,27 @@ function* createComment(action) {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         const { id, username } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Call API to reload comment list
             yield put(getCommentListByPostIdSagaAction({
                 postId: response.postId,
                 pageIndex: 0,
                 pageSize: COMMON_CONSTANT.MAX_COMMENTS_IN_A_PAGE
             }));
+
+            //Create notification
+            const executorId = id;
+            const receiverId = response.postAuthorId; 
+            if (executorId !== receiverId) {
+                yield put(createNotificationSagaAction({
+                    executorId: executorId,
+                    receiverId: receiverId,
+                    action: NOTIFICATION_ACTION.COMMENT,
+                    objectType: OBJECT_TYPE.POST,
+                    objectId: response.postId,
+                    message: "commented on your post."
+                }));
+            }
 
             yield put(addCommentSocketHandlerAction({
                 postId: action.newComment.postId,
@@ -63,7 +78,7 @@ function* getCommentListByPostId(action) {
         const { data } = yield call(() => commentService.getCommentListByPostId(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set comment list to reducer
             yield put(getCommentListAction(action.request.postId, response.pageResults, response.pageIndex, response.totalRecord));
         } else {
@@ -95,7 +110,7 @@ function* deleteComment(action) {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         const { id, username } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             yield put(hideConfirmDeleteModalAction());
 
             //Call API to reload comment list
@@ -138,7 +153,7 @@ function* updateComment(action) {
         const errorCode = data.ErrorCode;
         const response = data.Data;
         const { id, username } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Call API to reload comment list
             yield put(getCommentListByPostIdSagaAction({
                 postId: response.postId,

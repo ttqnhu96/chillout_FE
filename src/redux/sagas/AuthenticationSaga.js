@@ -21,7 +21,7 @@ function* logIn(action, dispatch) {
         const response = data.Data;
         const errorCode = data.ErrorCode;
 
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Save login information to sessionStore when login success
             sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
             sessionStorage.setItem(USER_LOGIN, JSON.stringify(response));
@@ -57,7 +57,7 @@ function* signUp(action) {
         const { data } = yield call(() => authenticationService.signUp(action.userSignUp));
         const errorCode = data.ErrorCode;
 
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Inform sign up successfully
             notify('success', MESSAGES.SIGN_UP_SUCCESS);
             yield put(hideSignUpModalAction());

@@ -18,7 +18,7 @@ function* getSuggestionsList(action) {
         const { data } = yield call(() => relationshipService.getSuggestionsList(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set suggestions list state in reducer
             yield put(getSuggestionsListAction(response));
         } else {
@@ -49,7 +49,7 @@ function* getFriendList(action) {
         const { data } = yield call(() => relationshipService.getFriendList(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set friend list state in reducer
             yield put(getFriendListAction(response));
         } else {
@@ -80,7 +80,7 @@ function* getReceivedFriendRequestList(action) {
         const { data } = yield call(() => relationshipService.getReceivedFriendRequestList(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set friend request list to reducer
             yield put(getReceivedFriendRequestListAction(response));
         } else {
@@ -111,7 +111,7 @@ function* acceptFriendRequest(action) {
         const { data } = yield call(() => relationshipService.acceptFriendRequest(action.friendRequestId));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set friend request list to reducer
             yield put(getReceivedFriendRequestListSagaAction({
                 receiverId: response.receiverId,
@@ -158,7 +158,7 @@ function* deleteFriendRequest(action) {
         const { data } = yield call(() => relationshipService.deletetFriendRequest(action.friendRequestId));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set friend request list to reducer
             yield put(getReceivedFriendRequestListSagaAction({
                 receiverId: response.receiverId,
@@ -195,7 +195,7 @@ function* createFriendRequest(action) {
         const { data } = yield call(() => relationshipService.createFriendRequest(action.newFriendRequest));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             yield put(getRelationshipWithCurrentUserSagaAction({
                 userId: Number(response.receiverId)
             }));
@@ -232,7 +232,7 @@ function* getRelationshipWithCurrentUser(action) {
         const { data } = yield call(() => relationshipService.getRelationshipWithCurrentUser(action.request));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set state in reducer
             yield put(getRelationshipWithCurrentUserAction(response));
         } else {

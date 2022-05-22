@@ -11,6 +11,7 @@ export const FUNCTION_CONSTANTS = {
     COMMENT: 'comment',
     RELATIONSHIP: 'relationship',
     FRIEND_REQUEST: 'friend-request',
+    NOTIFICATION: 'notification'
 }
 
 export const URL_CONSTANTS = {
@@ -28,4 +29,5 @@ export const URL_CONSTANTS = {
     GET_FRIEND_LIST: 'list-friends',
     GET_RECEIVED_FRIEND_REQUEST_LIST: 'list-received',
     GET_RELATIONSHIP_WITH_CURRENT_USER: 'get-relationship-with-current-user',
+    GET_NOTIFICATION_LIST_BY_RECEIVER_ID: 'list',
 }

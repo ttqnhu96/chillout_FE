@@ -18,7 +18,7 @@ function* getSchoolList(action) {
         const { data } = yield call(() => schoolService.getSchoolList());
         const response = data.Data;
         const errorCode = data.ErrorCode;
-        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+        if (errorCode === ERROR_CODE.SUCCESSFUL) {
             //Set state in reducer
             yield put(getSchoolListAction(response));
         } else {

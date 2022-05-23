@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { relationshipService } from "../../services/RelationshipService";
-import { MESSAGES, NOTIFICATION_ACTION, OBJECT_TYPE } from "../../util/constants/commonConstants";
+import { MESSAGES, NOTIFICATION_ACTION, NOTIFICATION_MESSAGE, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
 import { createNotificationSagaAction } from "../actions/NotificationAction";
@@ -143,7 +143,7 @@ function* acceptFriendRequest(action) {
                 action: NOTIFICATION_ACTION.ACCEPT_FRIEND_REQUEST,
                 objectType: OBJECT_TYPE.USER,
                 objectId: executorId,
-                message: "accepted your friend request."
+                message: NOTIFICATION_MESSAGE.ACCEPTED_FRIEND_REQUEST
             }));
         } else {
             //Inform error
@@ -231,7 +231,7 @@ function* createFriendRequest(action) {
                 action: NOTIFICATION_ACTION.SEND_FRIEND_REQUEST,
                 objectType: OBJECT_TYPE.FRIEND_REQUEST,
                 objectId: response.id,
-                message: "sent you a friend request."
+                message: NOTIFICATION_MESSAGE.SENT_FRIEND_REQUEST
             }));
         } else {
             //Inform error

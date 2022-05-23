@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE, USER_LOGIN, } from "../../util/constants/systemSettings";
 import { CREATE_POST_SAGA, GET_POST_LIST_NEWSFEED_SAGA, GET_POST_LIST_WALL_SAGA, UPDATE_LIKES_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { FOLDER_UPLOAD, MESSAGES, NOTIFICATION_ACTION, OBJECT_TYPE } from "../../util/constants/commonConstants";
+import { FOLDER_UPLOAD, MESSAGES, NOTIFICATION_ACTION, NOTIFICATION_MESSAGE, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { postService } from "../../services/PostService";
 import { getPostListNewsFeedAction, getPostListNewsFeedSagaAction, getPostListWallAction, getPostListWallSagaAction, hideCreatePostModalAction } from "../actions/PostAction";
 import { photoService } from "../../services/PhotoService";
@@ -144,7 +144,7 @@ function* updateLikes(action) {
         if (errorCode === ERROR_CODE.SUCCESSFUL) {
 
             //Create notification if like, not create notification if unlike
-            const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+            const { id, username } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
             const executorId = id;
             const receiverId = response.userId; 
             if (response.isLikeAction && executorId !== receiverId) {
@@ -154,13 +154,15 @@ function* updateLikes(action) {
                     action: NOTIFICATION_ACTION.LIKE,
                     objectType: OBJECT_TYPE.POST,
                     objectId: response.id,
-                    message: "reacted to your post."
+                    message: NOTIFICATION_MESSAGE.REACTED_TO_YOUR_POST
                 }));
             }
 
             yield put(likePostSocketHandlerAction({
                 postId: action.postId,
-                like: action.like
+                like: action.like,
+                fromUserId: id,
+                fromUserName: username
             }));
         } else {
             //Inform error

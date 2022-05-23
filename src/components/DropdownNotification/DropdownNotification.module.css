@@ -119,6 +119,22 @@
     line-height: 1.6rem;
 }
 
+/* No notification */
+.no-notification {
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 18px;
+    color: #505050;
+}
+
+.no-notification__img {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
 /*=============================================
                 RESPONSIVE
 ==============================================*/

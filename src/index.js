@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
@@ -9,11 +9,14 @@ import { Provider } from 'react-redux';
 import store from './redux/configStore'
 import { Router } from 'react-router-dom';
 import { history } from './util/history';
+import './i18n';
 
 ReactDOM.render(
   <Router history={history}>
     <Provider store={store}>
-      <App />
+      <Suspense fallback="">
+        <App />
+      </Suspense>
     </Provider>
   </Router>,
   document.getElementById('root')

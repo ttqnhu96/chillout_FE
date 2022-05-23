@@ -140,11 +140,11 @@ function* updateLikes(action) {
         const { data } = yield call(() => postService.updateLikes({ postId: action.postId }));
         const errorCode = data.ErrorCode;
         const response = data.Data;
-
-        const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+        
         if (errorCode === ERROR_CODE.SUCCESSFUL) {
 
             //Create notification if like, not create notification if unlike
+            const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
             const executorId = id;
             const receiverId = response.userId; 
             if (response.isLikeAction && executorId !== receiverId) {

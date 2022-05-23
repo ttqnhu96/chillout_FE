@@ -51,7 +51,7 @@ export default function SuggestionsSideBar() {
                     <div
                         className={`${style['suggestions-item__name__first-name']}`}
                         onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}>
-                        {`${item.firstName}`} Nguyen Phu Thoai Ng
+                        {`${item.firstName}`} {`${item.lastName}`}
                     </div>
                     <div className={`${style['suggestions-item__name__username']}`}>
                         {`@${item.username}`}

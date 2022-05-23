@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { relationshipService } from "../../services/RelationshipService";
-import { MESSAGES } from "../../util/constants/commonConstants";
-import { ERROR_CODE } from "../../util/constants/systemSettings";
+import { MESSAGES, NOTIFICATION_ACTION, OBJECT_TYPE } from "../../util/constants/commonConstants";
+import { ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
+import { createNotificationSagaAction } from "../actions/NotificationAction";
 import { getFriendListAction, getFriendListSagaAction, getReceivedFriendRequestListAction, getReceivedFriendRequestListSagaAction, getRelationshipWithCurrentUserSagaAction, getRelationshipWithCurrentUserAction, getSuggestionsListAction } from "../actions/RelationshipAction";
 import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
 
@@ -117,11 +118,13 @@ function* acceptFriendRequest(action) {
                 receiverId: response.receiverId,
                 isPaginated: false
             }));
+
             //Reload friend list of request sender
             yield put(getFriendListSagaAction({
                 userId: response.senderId,
                 isPaginated: false
             }));
+
             //Reload friend list of request receiver
             yield put(getFriendListSagaAction({
                 userId: response.receiverId,
@@ -129,6 +132,18 @@ function* acceptFriendRequest(action) {
             }));
             yield put(getRelationshipWithCurrentUserSagaAction({
                 userId: Number(response.senderId)
+            }));
+
+            //Create notification
+            const executorId = response.receiverId; //Notification executor is friend request receiver
+            const receiverId = response.senderId; //Notification receiver is friend request sender
+            yield put(createNotificationSagaAction({
+                executorId: executorId,
+                receiverId: receiverId,
+                action: NOTIFICATION_ACTION.ACCEPT_FRIEND_REQUEST,
+                objectType: OBJECT_TYPE.USER,
+                objectId: executorId,
+                message: "accepted your friend request."
             }));
         } else {
             //Inform error
@@ -199,10 +214,24 @@ function* createFriendRequest(action) {
             yield put(getRelationshipWithCurrentUserSagaAction({
                 userId: Number(response.receiverId)
             }));
+
             //Set friend request list to reducer
             yield put(getReceivedFriendRequestListSagaAction({
                 receiverId: response.receiverId,
                 isPaginated: false
+            }));
+
+            //Create notification
+            const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+            const executorId = id;
+            const receiverId = response.receiverId;
+            yield put(createNotificationSagaAction({
+                executorId: executorId,
+                receiverId: receiverId,
+                action: NOTIFICATION_ACTION.SEND_FRIEND_REQUEST,
+                objectType: OBJECT_TYPE.FRIEND_REQUEST,
+                objectId: response.id,
+                message: "sent you a friend request."
             }));
         } else {
             //Inform error

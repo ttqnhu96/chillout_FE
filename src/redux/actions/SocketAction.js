@@ -155,7 +155,7 @@ export const deleteFriendRequestNotification = (data) => ({
     }
 })
 
-export const socketInit = () => ({
+export const socketInitAction = () => ({
     type: types.SOCKET_INIT,
 })
 

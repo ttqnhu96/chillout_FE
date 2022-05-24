@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { relationshipService } from "../../services/RelationshipService";
 import { MESSAGES, NOTIFICATION_ACTION, NOTIFICATION_MESSAGE, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
@@ -353,7 +353,7 @@ function* handleAddFriendNotifyBySocket(action) {
 
 }
 export function* handleAddFriendNotifyBySocketWatcher() {
-    yield takeEvery(ADD_FRIEND_REQUEST_MESSAGE_SAGA, handleAddFriendNotifyBySocket);
+    yield takeLatest(ADD_FRIEND_REQUEST_MESSAGE_SAGA, handleAddFriendNotifyBySocket);
 }
 
 /*============================================================
@@ -374,7 +374,7 @@ function* handleAcceptFriendNotifyBySocket(action) {
 
 }
 export function* handleAcceptFriendNotifyBySocketWatcher() {
-    yield takeEvery(ACCEPT_FRIEND_REQUEST_MESSAGE_SAGA, handleAcceptFriendNotifyBySocket);
+    yield takeLatest(ACCEPT_FRIEND_REQUEST_MESSAGE_SAGA, handleAcceptFriendNotifyBySocket);
 }
 
 /*=============================================
@@ -391,7 +391,7 @@ function* handleCancelFriendRequestNotifyBySocket(action) {
     }));
 }
 export function* handleCancelFriendRequestNotifyBySocketWatcher() {
-    yield takeEvery(CANCEL_FRIEND_REQUEST_MESSAGE_SAGA, handleCancelFriendRequestNotifyBySocket);
+    yield takeLatest(CANCEL_FRIEND_REQUEST_MESSAGE_SAGA, handleCancelFriendRequestNotifyBySocket);
 }
 
 /*=============================================
@@ -408,5 +408,5 @@ function* handleDeleteFriendRequestNotifyBySocket(action) {
     }));
 }
 export function* handleDeleteFriendRequestNotifyBySocketWatcher() {
-    yield takeEvery(DELETE_FRIEND_REQUEST_MESSAGE_SAGA, handleDeleteFriendRequestNotifyBySocket)
+    yield takeLatest(DELETE_FRIEND_REQUEST_MESSAGE_SAGA, handleDeleteFriendRequestNotifyBySocket)
 }

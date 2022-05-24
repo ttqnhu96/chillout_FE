@@ -30,7 +30,7 @@ export function* rootSaga(dispatch) {
                 ReactPostSaga.receiveLikePostWatcher(),
                 //Authen
                 AuthenticationSaga.signUpWatcher(),
-                AuthenticationSaga.logInWatcher(dispatch),
+                AuthenticationSaga.logInWatcher(),
 
                 //Profile
                 ProfileSaga.getLogInUserProfileWatcher(),

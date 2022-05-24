@@ -4,7 +4,7 @@ import { history } from "../../util/history";
 import { authenticationService } from "../../services/AuthenticationService";
 import { LOGIN_SAGA, SIGN_UP_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { socketInit } from "../actions/SocketAction";
+import { socketInitAction } from "../actions/SocketAction";
 import { MESSAGES } from "../../util/constants/commonConstants";
 import { hideSignUpModalAction } from "../actions/SignUpAction";
 
@@ -15,7 +15,7 @@ import { hideSignUpModalAction } from "../actions/SignUpAction";
  * logIn
  * @param action 
  */
-function* logIn(action, dispatch) {
+function* logIn(action) {
     try {
         const { data } = yield call(() => authenticationService.logIn(action.userLogin));
         const response = data.Data;
@@ -25,7 +25,10 @@ function* logIn(action, dispatch) {
             //Save login information to sessionStore when login success
             sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
             sessionStorage.setItem(USER_LOGIN, JSON.stringify(response));
-            dispatch(socketInit());
+
+            //Init socket
+            yield put(socketInitAction());
+
             history.push('/home');
         } else {
             //Inform error
@@ -40,8 +43,8 @@ function* logIn(action, dispatch) {
  * logInWatcher
  * @param
  */
-export function* logInWatcher(dispatch) {
-    yield takeLatest(LOGIN_SAGA, (action) => logIn(action, dispatch));
+export function* logInWatcher() {
+    yield takeLatest(LOGIN_SAGA, logIn);
 }
 
 

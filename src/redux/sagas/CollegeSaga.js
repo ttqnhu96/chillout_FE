@@ -11,9 +11,9 @@ import { GET_COLLEGE_LIST_SAGA } from "../constants/types";
 ==============================================*/
 /**
  * getCollegeList
- * @param action 
+ * @param 
  */
-function* getCollegeList(action) {
+function* getCollegeList() {
     try {
         const { data } = yield call(() => collegeService.getCollegeList());
         const response = data.Data;

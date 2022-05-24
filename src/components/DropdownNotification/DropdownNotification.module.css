@@ -14,10 +14,14 @@
     position: relative;
 }
 
+.notification-icon {
+    position: relative;
+}
+
 .notification-icon--have-notification {
     position: absolute;
-    top: 0;
-    right: -4px;
+    top: -2px;
+    right: -5px;
     color: rgb(255, 123, 119);
     font-size: 0.6rem;
 }

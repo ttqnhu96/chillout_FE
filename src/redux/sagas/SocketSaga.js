@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, takeLatest } from 'redux-saga/effects'
 import * as types from '../constants/types'
 import { io } from 'socket.io-client';
 import * as actions from '../actions/SocketAction.js'
@@ -39,23 +39,18 @@ const setupSocket = (dispatch) => {
                 dispatch(notifyAction.setLikePostNotificationToReducerAction(event.data));
                 break;
             case types.ADD_FRIEND_MESSAGE_FROM_SERVER:
-                console.log('ADD_FRIEND_MESSAGE_FROM_SERVER', event.data);
                 dispatch(actions.addFriendNotification(event.data))
                 break;
             case types.ACCEPT_FRIEND_MESSAGE_FROM_SERVER:
-                console.log('ACCEPT_FRIEND_MESSAGE_FROM_SERVER', event.data);
                 dispatch(actions.acceptFriendNotification(event.data))
                 break;
             case types.ACCEPT_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER:
-                console.log('ACCEPT_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER', event.data);
                 dispatch(notifyAction.setAcceptFriendRequestNotificationToReducerAction(event.data))
                 break;
             case types.ADD_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER:
-                console.log('ADD_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER', event.data);
                 dispatch(notifyAction.setAddFriendRequestNotificationToReducerAction(event.data))
                 break;
             case types.CANCEL_FRIEND_REQUEST_MESSAGE_FROM_SERVER:
-                console.log('CANCEL_FRIEND_REQUEST_MESSAGE_FROM_SERVER', event.data);
                 dispatch(actions.cancelFriendRequestNotification(event.data));
                 break;
             case types.DELETE_FRIEND_REQUEST_MESSAGE_FROM_SERVER:
@@ -104,7 +99,7 @@ export const disconnectSocketWatcher = function* disconnectSocketWatcher() {
 
 function* sendMessage(action) {
     if (socket) {
-        socket.emit('client-message', {
+        yield socket.emit('client-message', {
             data: {
                 toUserId: action.messageInfomation.toUserId,
                 message: action.messageInfomation.message
@@ -126,7 +121,7 @@ function* addCommentToPost(action) {
     if (!socket) {
         setupSocket();
     }
-    socket.emit('client-add-comment', {
+    yield socket.emit('client-add-comment', {
         data: {
             postId: action.commentInfomation.postId,
             fromUserId: action.commentInfomation.fromUserId,
@@ -147,7 +142,7 @@ function* updateCommentToPost(action) {
     if (!socket) {
         setupSocket();
     }
-    socket.emit('client-update-comment', {
+    yield socket.emit('client-update-comment', {
         data: {
             postId: action.commentInfomation.postId,
             fromUserId: action.commentInfomation.fromUserId,
@@ -166,7 +161,7 @@ export const updateCommentToPostWatcher = function* updateCommentToPostWatcher()
 
 function* handleLikePost(action) {
     if (socket) {
-        socket.emit('client-like-post', {
+        yield socket.emit('client-like-post', {
             data: {
                 postId: action.reactPostInfomation.postId,
                 like: action.reactPostInfomation.like,
@@ -179,7 +174,7 @@ function* handleLikePost(action) {
 
 
 export const reactPostWatcher = function* reactPostWatcher() {
-    yield takeEvery(types.LIKE_POST_SOCKET_HANDLER, (action) => handleLikePost(action));
+    yield takeLatest(types.LIKE_POST_SOCKET_HANDLER, handleLikePost);
 }
 
 /*=============================================
@@ -188,7 +183,7 @@ export const reactPostWatcher = function* reactPostWatcher() {
 
 function* handleAddFriend(action) {
     if (socket) {
-        socket.emit('client-add-friend', {
+        yield socket.emit('client-add-friend', {
             senderId: action.addFriendInfomation.senderId,
             receiverId: action.addFriendInfomation.receiverId
         });
@@ -204,7 +199,7 @@ export const addFriendWatcher = function* addFriendWatcher() {
 ==============================================*/
 function* handleAcceptFriendRequest(action) {
     if (socket) {
-        socket.emit('client-accept-friend', {
+        yield socket.emit('client-accept-friend', {
             senderId: action.acceptFriendInfomation.senderId,
             receiverId: action.acceptFriendInfomation.receiverId
         });
@@ -221,7 +216,7 @@ export const acceptFriendRequestWatcher = function* acceptFriendRequestWatcher()
 
 function* handleCancelFriendRequest(action) {
     if (socket) {
-        socket.emit('client-cancel-friend-request', {
+        yield socket.emit('client-cancel-friend-request', {
             senderId: action.cancelFriendReuestInfomation.senderId,
             receiverId: action.cancelFriendReuestInfomation.receiverId
         });
@@ -238,7 +233,7 @@ export const cancelFriendRequestWatcher = function* cancelFriendRequestWatcher()
 
 function* handleDeleteFriendRequest(action) {
     if (socket) {
-        socket.emit('client-delete-friend-request', {
+        yield socket.emit('client-delete-friend-request', {
             senderId: action.deleteFriendReuestInfomation.senderId,
             receiverId: action.deleteFriendReuestInfomation.receiverId
         });

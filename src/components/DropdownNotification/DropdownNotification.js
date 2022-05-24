@@ -20,7 +20,7 @@ export const DropdownNotification = () => {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
 
     const renderDropdownNotification = () => {
-        if(notificationList.length > 0) {
+        if (notificationList.length > 0) {
             return notificationList.map((item, index) => (
                 <div key={index} className={`${style['notification-item']}`}>
                     <div className={`${style['notification-item__img']}`}>
@@ -63,11 +63,12 @@ export const DropdownNotification = () => {
     return (
         <div ref={ref} className={`${style['notification-wrap']}`}>
             <div className={`${style['notification-icon-wrapper']}`} onClick={handleClickItem}>
-                <i className={`fa-regular fa-bell ${style['notification-icon']}`}></i>
-                {
-                    haveNotification &&
-                    <i className={`fa-solid fa-circle ${style['notification-icon--have-notification']}`}></i>
-                }
+                <i className={`fa-regular fa-bell ${style['notification-icon']}`}>
+                    {
+                        haveNotification &&
+                        <i className={`fa-solid fa-circle ${style['notification-icon--have-notification']}`}></i>
+                    }
+                </i>
                 {
                     isComponentVisible &&
                     <div className={`${style['notification-list-wrapper']}`}>

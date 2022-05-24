@@ -7,9 +7,9 @@ const initialState = {
 }
 
 export const NotificationReducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
         case types.REDUCER_COMMENT_NOTIFICATION: {
-            // debugger
             const user = JSON.parse(sessionStorage.getItem(USER_LOGIN));
             if (action.fromUserId !== user?.id) {
                 state.haveNotification = true;
@@ -30,6 +30,14 @@ export const NotificationReducer = (state = initialState, action) => {
                 state.haveNotification = true;
             }
             return { ...state };
+        }
+        case types.REDUCER_ADD_FRIEND_REQUEST_NOTIFICATION: {
+            state.haveNotification = true;
+            return { ...state }
+        }
+        case types.REDUCER_ACCEPT_FRIEND_REQUEST_NOTIFICATION: {
+            state.haveNotification = true;
+            return { ...state }
         }
         case types.REDUCER_GET_NOTIFICATION_LIST: {
             state.notificationList = action.notificationList;

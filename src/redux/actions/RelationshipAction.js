@@ -1,4 +1,4 @@
-import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types"
+import { CANCEL_FRIEND_REQUEST_SAGA, ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types"
 
 export const getSuggestionsListSagaAction = (request) => {
     return {
@@ -52,6 +52,14 @@ export const acceptFriendRequestSagaAction = (friendRequestId) => {
 export const deleteFriendRequestSagaAction = (friendRequestId, currentUserId) => {
     return {
         type: DELETE_FRIEND_REQUEST_SAGA,
+        currentUserId: currentUserId,
+        friendRequestId: friendRequestId
+    }
+}
+
+export const cancelFriendRequestSagaAction = (friendRequestId, currentUserId) => {
+    return {
+        type: CANCEL_FRIEND_REQUEST_SAGA,
         currentUserId: currentUserId,
         friendRequestId: friendRequestId
     }

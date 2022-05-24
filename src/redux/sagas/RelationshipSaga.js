@@ -1,12 +1,12 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest, takeEvery } from "redux-saga/effects";
 import { relationshipService } from "../../services/RelationshipService";
 import { MESSAGES, NOTIFICATION_ACTION, NOTIFICATION_MESSAGE, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
 import { notify } from "../../util/notification";
+import * as socketAction from "../actions/SocketAction";
 import { createNotificationSagaAction } from "../actions/NotificationAction";
 import { getFriendListAction, getFriendListSagaAction, getReceivedFriendRequestListAction, getReceivedFriendRequestListSagaAction, getRelationshipWithCurrentUserSagaAction, getRelationshipWithCurrentUserAction, getSuggestionsListAction } from "../actions/RelationshipAction";
-import { ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST_SAGA } from "../constants/types";
-
+import { ACCEPT_FRIEND_REQUEST_MESSAGE_SAGA, DELETE_FRIEND_REQUEST_MESSAGE_SAGA, CANCEL_FRIEND_REQUEST_SAGA, ADD_FRIEND_REQUEST_MESSAGE_SAGA, ACCEPT_FRIEND_REQUEST_SAGA, CREATE_FRIEND_REQUEST_SAGA, DELETE_FRIEND_REQUEST_SAGA, GET_FRIEND_LIST_SAGA, GET_RECEIVED_FRIEND_REQUEST_LIST_SAGA, GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, GET_SUGGESTIONS_LIST_SAGA, CANCEL_FRIEND_REQUEST_MESSAGE_SAGA } from "../constants/types";
 /*=============================================
             GET SUGGESTIONS LIST
 ==============================================*/
@@ -130,9 +130,15 @@ function* acceptFriendRequest(action) {
                 userId: response.receiverId,
                 isPaginated: false
             }));
+
             yield put(getRelationshipWithCurrentUserSagaAction({
                 userId: Number(response.senderId)
             }));
+
+            yield put(socketAction.acceptFriendSocketHandlerAction({
+                senderId: response.senderId,
+                receiverId: response.receiverId
+            }))
 
             //Create notification
             const executorId = response.receiverId; //Notification executor is friend request receiver
@@ -182,6 +188,10 @@ function* deleteFriendRequest(action) {
             yield put(getRelationshipWithCurrentUserSagaAction({
                 userId: Number(response.receiverId)
             }));
+            yield put(socketAction.deleteFriendRequestSocketHandlerAction({
+                senderId: response.senderId,
+                receiverId: response.receiverId
+            }));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])
@@ -196,6 +206,47 @@ function* deleteFriendRequest(action) {
  */
 export function* deleteFriendRequestWatcher() {
     yield takeLatest(DELETE_FRIEND_REQUEST_SAGA, deleteFriendRequest);
+}
+
+/*=============================================
+            CANCEL FRIEND REQUEST
+==============================================*/
+/**
+ * cancelFriendRequest
+ * @param action 
+ */
+function* cancelFriendRequest(action) {
+    try {
+        const { data } = yield call(() => relationshipService.deletetFriendRequest(action.friendRequestId));
+        const errorCode = data.ErrorCode;
+        const response = data.Data;
+        if (data.ErrorCode === ERROR_CODE.SUCCESSFUL) {
+            //Set friend request list to reducer
+            yield put(getReceivedFriendRequestListSagaAction({
+                receiverId: response.receiverId,
+                isPaginated: false
+            }));
+            yield put(getRelationshipWithCurrentUserSagaAction({
+                userId: Number(response.receiverId)
+            }));
+            yield put(socketAction.cancelFriendRequestSocketHandlerAction({
+                senderId: response.senderId,
+                receiverId: response.receiverId
+            }));
+        } else {
+            //Inform error
+            return notify('error', MESSAGES[errorCode])
+        }
+    } catch (err) {
+        return notify('error', MESSAGES.E500)
+    }
+}
+/**
+ * cancelFriendRequestWatcher
+ * @param
+ */
+export function* cancelFriendRequestWatcher() {
+    yield takeLatest(CANCEL_FRIEND_REQUEST_SAGA, cancelFriendRequest);
 }
 
 /*=============================================
@@ -221,8 +272,15 @@ function* createFriendRequest(action) {
                 isPaginated: false
             }));
 
-            //Create notification
             const { id } = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+
+            //Socket
+            yield put(socketAction.addFriendSocketHandlerAction({
+                senderId: id,
+                receiverId: response.receiverId
+            }))
+
+            //Create notification
             const executorId = id;
             const receiverId = response.receiverId;
             yield put(createNotificationSagaAction({
@@ -278,4 +336,77 @@ function* getRelationshipWithCurrentUser(action) {
  */
 export function* getRelationshipWithCurrentUserWatcher() {
     yield takeLatest(GET_RELATIONSHIP_WITH_CURRENT_USER_SAGA, getRelationshipWithCurrentUser);
+}
+
+/*===================================================
+    ADD FRIEND HANDLE MESSAGE FROM SOCKET SERVER
+=====================================================*/
+
+function* handleAddFriendNotifyBySocket(action) {
+    yield put(getReceivedFriendRequestListSagaAction({
+        receiverId: action.data.receiverId,
+        isPaginated: false
+    }));
+    yield put(getRelationshipWithCurrentUserSagaAction({
+        userId: Number(action.data.senderId)
+    }));
+
+}
+export function* handleAddFriendNotifyBySocketWatcher() {
+    yield takeEvery(ADD_FRIEND_REQUEST_MESSAGE_SAGA, handleAddFriendNotifyBySocket);
+}
+
+/*============================================================
+    ACCEPT FRIEND REQUEST HANDLE MESSAGE FROM SOCKET SERVER
+=============================================================*/
+
+function* handleAcceptFriendNotifyBySocket(action) {
+    //Reload relationship
+    yield put(getRelationshipWithCurrentUserSagaAction({
+        userId: Number(action.data.receiverId)
+    }));
+
+    //Reload friend list of friend request sender
+    yield put(getFriendListSagaAction({
+        userId: action.data.senderId,
+        isPaginated: false
+    }));
+
+}
+export function* handleAcceptFriendNotifyBySocketWatcher() {
+    yield takeEvery(ACCEPT_FRIEND_REQUEST_MESSAGE_SAGA, handleAcceptFriendNotifyBySocket);
+}
+
+/*=============================================
+            CANCEL FRIEND REQUEST HANDLE MESSAGE FROM SOCKET SERVER
+==============================================*/
+
+function* handleCancelFriendRequestNotifyBySocket(action) {
+    yield put(getReceivedFriendRequestListSagaAction({
+        receiverId: action.data.receiverId,
+        isPaginated: false
+    }));
+    yield put(getRelationshipWithCurrentUserSagaAction({
+        userId: Number(action.data.senderId)
+    }));
+}
+export function* handleCancelFriendRequestNotifyBySocketWatcher() {
+    yield takeEvery(CANCEL_FRIEND_REQUEST_MESSAGE_SAGA, handleCancelFriendRequestNotifyBySocket);
+}
+
+/*=============================================
+            DELETE FRIEND REQUEST HANDLE MESSAGE FROM SOCKET SERVER
+==============================================*/
+
+function* handleDeleteFriendRequestNotifyBySocket(action) {
+    yield put(getReceivedFriendRequestListSagaAction({
+        receiverId: action.data.receiverId,
+        isPaginated: false
+    }));
+    yield put(getRelationshipWithCurrentUserSagaAction({
+        userId: Number(action.data.receiverId)
+    }));
+}
+export function* handleDeleteFriendRequestNotifyBySocketWatcher() {
+    yield takeEvery(DELETE_FRIEND_REQUEST_MESSAGE_SAGA, handleDeleteFriendRequestNotifyBySocket)
 }

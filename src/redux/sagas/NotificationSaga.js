@@ -3,8 +3,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { ERROR_CODE } from "../../util/constants/systemSettings";
 import { CREATE_NOTIFICATION_SAGA, GET_NOTIFICATION_LIST_BY_RECEIVER_ID_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
-import { COMMON_CONSTANT, MESSAGES } from "../../util/constants/commonConstants";
-import { getCommentListByPostIdSagaAction } from "../actions/CommentAction";
+import { MESSAGES } from "../../util/constants/commonConstants";
 import { notificationService } from "../../services/NotificationService";
 import { getNotificationListAction, getNotificationListByReceiverIdSagaAction } from "../actions/NotificationAction";
 

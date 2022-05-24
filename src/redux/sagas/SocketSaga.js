@@ -3,7 +3,7 @@ import * as types from '../constants/types'
 import { io } from 'socket.io-client';
 import * as actions from '../actions/SocketAction.js'
 import { ACCESS_TOKEN, USER_LOGIN } from '../../util/constants/systemSettings';
-import { setCommentNotificationToReducerAction, setLikePostNotificationToReducerAction } from '../actions/NotificationAction';
+import * as notifyAction from '../actions/NotificationAction'
 const url = 'http://localhost:3006';
 let socket;
 const setupSocket = (dispatch) => {
@@ -18,6 +18,7 @@ const setupSocket = (dispatch) => {
     });
 
     socket.on('message', function (event) {
+        console.log('message', event);
         switch (event.type) {
             case types.MESSAGE_NOTIFICATION_RECEIVED:
                 dispatch(actions.messageReceived(event.data));
@@ -25,8 +26,8 @@ const setupSocket = (dispatch) => {
             case types.ADD_COMMENT_MESSAGE_FROM_SERVER:
                 dispatch(actions.addCommentNotification(event.data));
                 break;
-            case types.ADD_COMMENT_NOTIFICATION_FROM_SERVER:
-                dispatch(setCommentNotificationToReducerAction(event.data));
+            case types.ADD_COMMENT_NOTIFICATION_MESSAGE_FROM_SERVER:
+                dispatch(notifyAction.setCommentNotificationToReducerAction(event.data));
                 break;
             case types.UPDATE_COMMENT_MESSAGE_FROM_SERVER:
                 dispatch(actions.updateCommentNotification(event.data));
@@ -34,8 +35,32 @@ const setupSocket = (dispatch) => {
             case types.LIKE_POST_MESSAGE_FROM_SERVER:
                 dispatch(actions.likePostNotification(event.data))
                 break;
-            case types.LIKE_POST_NOTIFICATION_FROM_SERVER:
-                dispatch(setLikePostNotificationToReducerAction(event.data))
+            case types.LIKE_POST_NOTIFICATION_MESSAGE_FROM_SERVER:
+                dispatch(notifyAction.setLikePostNotificationToReducerAction(event.data));
+                break;
+            case types.ADD_FRIEND_MESSAGE_FROM_SERVER:
+                console.log('ADD_FRIEND_MESSAGE_FROM_SERVER', event.data);
+                dispatch(actions.addFriendNotification(event.data))
+                break;
+            case types.ACCEPT_FRIEND_MESSAGE_FROM_SERVER:
+                console.log('ACCEPT_FRIEND_MESSAGE_FROM_SERVER', event.data);
+                dispatch(actions.acceptFriendNotification(event.data))
+                break;
+            case types.ACCEPT_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER:
+                console.log('ACCEPT_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER', event.data);
+                dispatch(notifyAction.setAcceptFriendRequestNotificationToReducerAction(event.data))
+                break;
+            case types.ADD_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER:
+                console.log('ADD_FRIEND_NOTIFICATION_MESSAGE_FROM_SERVER', event.data);
+                dispatch(notifyAction.setAddFriendRequestNotificationToReducerAction(event.data))
+                break;
+            case types.CANCEL_FRIEND_REQUEST_MESSAGE_FROM_SERVER:
+                console.log('CANCEL_FRIEND_REQUEST_MESSAGE_FROM_SERVER', event.data);
+                dispatch(actions.cancelFriendRequestNotification(event.data));
+                break;
+            case types.DELETE_FRIEND_REQUEST_MESSAGE_FROM_SERVER:
+                console.log('DELETE_FRIEND_REQUEST_MESSAGE_FROM_SERVER', event.data);
+                dispatch(actions.deleteFriendRequestNotification(event.data));
                 break;
             default:
                 break;
@@ -93,6 +118,10 @@ export const newMessageSocketWatcher = function* newMessageSocketWatcher() {
     yield takeEvery(types.ADD_MESSAGE, (action) => sendMessage(action));
 }
 
+/*=============================================
+            ADD COMMENT SOCKET HANDLE
+==============================================*/
+
 function* addCommentToPost(action) {
     if (!socket) {
         setupSocket();
@@ -106,10 +135,13 @@ function* addCommentToPost(action) {
     });
 }
 
-// Handle comment for UI
 export const addCommentToPostWatcher = function* addCommentToPostWatcher() {
     yield takeEvery(types.ADD_COMMENT_SOCKET_HANDLER, (action) => addCommentToPost(action));
 }
+
+/*=============================================
+            UPDATE COMMENT SOCKET HANDLE
+==============================================*/
 
 function* updateCommentToPost(action) {
     if (!socket) {
@@ -124,12 +156,14 @@ function* updateCommentToPost(action) {
     });
 }
 
-// Handle comment for UI
 export const updateCommentToPostWatcher = function* updateCommentToPostWatcher() {
     yield takeEvery(types.UPDATE_COMMENT_SOCKET_HANDLER, (action) => updateCommentToPost(action));
 }
 
-// eslint-disable-next-line require-yield
+/*=============================================
+            LIKE POST SOCKET HANDLE
+==============================================*/
+
 function* handleLikePost(action) {
     if (socket) {
         socket.emit('client-like-post', {
@@ -143,7 +177,74 @@ function* handleLikePost(action) {
     }
 }
 
-// Handle react post for UI
+
 export const reactPostWatcher = function* reactPostWatcher() {
     yield takeEvery(types.LIKE_POST_SOCKET_HANDLER, (action) => handleLikePost(action));
+}
+
+/*=============================================
+            ADD FRIEND SOCKET HANDLE
+==============================================*/
+
+function* handleAddFriend(action) {
+    if (socket) {
+        socket.emit('client-add-friend', {
+            senderId: action.addFriendInfomation.senderId,
+            receiverId: action.addFriendInfomation.receiverId
+        });
+    }
+}
+
+export const addFriendWatcher = function* addFriendWatcher() {
+    yield takeEvery(types.ADD_FRIEND_SOCKET_HANDLER, (action) => handleAddFriend(action));
+}
+
+/*=============================================
+        ACCEPT FRIEND REQUEST SOCKET HANDLE
+==============================================*/
+function* handleAcceptFriendRequest(action) {
+    if (socket) {
+        socket.emit('client-accept-friend', {
+            senderId: action.acceptFriendInfomation.senderId,
+            receiverId: action.acceptFriendInfomation.receiverId
+        });
+    }
+}
+
+export const acceptFriendRequestWatcher = function* acceptFriendRequestWatcher() {
+    yield takeEvery(types.ACCEPT_FRIEND_REQUEST_SOCKET_HANDLER, (action) => handleAcceptFriendRequest(action));
+}
+
+/*=============================================
+        CANCEL FRIEND REQUEST SOCKET HANDLE
+==============================================*/
+
+function* handleCancelFriendRequest(action) {
+    if (socket) {
+        socket.emit('client-cancel-friend-request', {
+            senderId: action.cancelFriendReuestInfomation.senderId,
+            receiverId: action.cancelFriendReuestInfomation.receiverId
+        });
+    }
+}
+
+export const cancelFriendRequestWatcher = function* cancelFriendRequestWatcher() {
+    yield takeEvery(types.CANCEL_FRIEND_REQUEST_SOCKET_HANDLER, handleCancelFriendRequest)
+}
+
+/*=============================================
+        DELETE FRIEND REQUEST SOCKET HANDLE
+==============================================*/
+
+function* handleDeleteFriendRequest(action) {
+    if (socket) {
+        socket.emit('client-delete-friend-request', {
+            senderId: action.deleteFriendReuestInfomation.senderId,
+            receiverId: action.deleteFriendReuestInfomation.receiverId
+        });
+    }
+}
+
+export const deleteFriendRequestWatcher = function* deleteFriendRequestWatcher() {
+    yield takeEvery(types.DELETE_FRIEND_REQUEST_SOCKET_HANDLER, handleDeleteFriendRequest)
 }

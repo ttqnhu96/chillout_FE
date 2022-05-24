@@ -1,7 +1,7 @@
 //--------------------------------------------------------------------------
 import { call, put, takeLatest, takeEvery } from "redux-saga/effects";
 import { ERROR_CODE, USER_LOGIN, } from "../../util/constants/systemSettings";
-import { UPDATE_COMMENT_NOTIFICATION_SAGA, CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA, UPDATE_COMMENT_SAGA, ADD_COMMENT_NOTIFICATION_SAGA } from "../constants/types";
+import { UPDATE_COMMENT_MESSAGE_SAGA, CREATE_COMMENT_SAGA, DELETE_COMMENT_SAGA, GET_COMMENT_LIST_BY_POST_ID_SAGA, UPDATE_COMMENT_SAGA, ADD_COMMENT_MESSAGE_SAGA } from "../constants/types";
 import { notify } from "../../util/notification";
 import { COMMON_CONSTANT, MESSAGES, NOTIFICATION_ACTION, NOTIFICATION_MESSAGE, OBJECT_TYPE } from "../../util/constants/commonConstants";
 import { commentService } from "../../services/CommentService";
@@ -198,7 +198,7 @@ function* handleAddCommentBySocket(action) {
  * @param
  */
 export function* handleAddCommentBySocketWatcher() {
-    yield takeEvery(ADD_COMMENT_NOTIFICATION_SAGA, handleAddCommentBySocket);
+    yield takeEvery(ADD_COMMENT_MESSAGE_SAGA, handleAddCommentBySocket);
 }
 
 /**
@@ -217,5 +217,5 @@ function* handleUpdateCommentBySocket(action) {
  * @param
  */
 export function* handleUpdateCommentBySocketWatcher() {
-    yield takeEvery(UPDATE_COMMENT_NOTIFICATION_SAGA, handleUpdateCommentBySocket);
+    yield takeEvery(UPDATE_COMMENT_MESSAGE_SAGA, handleUpdateCommentBySocket);
 }

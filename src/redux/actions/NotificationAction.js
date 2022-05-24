@@ -18,6 +18,25 @@ export const setLikePostNotificationToReducerAction = (data) => {
     }
 }
 
+export const setAddFriendRequestNotificationToReducerAction = (data) => {
+    return {
+        type: types.REDUCER_ADD_FRIEND_REQUEST_NOTIFICATION,
+        senderId: data.senderId,
+        receiverId: data.receiverId,
+        senderName: data.senderName,
+        senderAvatar: data.senderAvatar
+    }
+}
+export const setAcceptFriendRequestNotificationToReducerAction = (data) => {
+    return {
+        type: types.REDUCER_ACCEPT_FRIEND_REQUEST_NOTIFICATION,
+        senderId: data.senderId,
+        receiverId: data.receiverId,
+        receiverName: data.receiverName,
+        receiverAvatar: data.receiverAvatar
+    }
+}
+
 export const createNotificationSagaAction = (newNotification) => {
     return {
         type: types.CREATE_NOTIFICATION_SAGA,

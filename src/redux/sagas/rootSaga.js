@@ -22,6 +22,10 @@ export function* rootSaga(dispatch) {
                 SocketSaga.addCommentToPostWatcher(),
                 SocketSaga.updateCommentToPostWatcher(),
                 SocketSaga.socketInitWatcher(dispatch),
+                SocketSaga.addFriendWatcher(),
+                SocketSaga.acceptFriendRequestWatcher(),
+                SocketSaga.cancelFriendRequestWatcher(),
+                SocketSaga.deleteFriendRequestWatcher(),
                 MessageSaga.receiveMessageWatcher(),
                 ReactPostSaga.receiveLikePostWatcher(),
                 //Authen
@@ -70,8 +74,13 @@ export function* rootSaga(dispatch) {
                 RelationshipSaga.getReceivedFriendRequestListWatcher(),
                 RelationshipSaga.acceptFriendRequestWatcher(),
                 RelationshipSaga.deleteFriendRequestWatcher(),
+                RelationshipSaga.cancelFriendRequestWatcher(),
                 RelationshipSaga.createFriendRequestWatcher(),
                 RelationshipSaga.getRelationshipWithCurrentUserWatcher(),
+                RelationshipSaga.handleAddFriendNotifyBySocketWatcher(),
+                RelationshipSaga.handleCancelFriendRequestNotifyBySocketWatcher(),
+                RelationshipSaga.handleDeleteFriendRequestNotifyBySocketWatcher(),
+                RelationshipSaga.handleAcceptFriendNotifyBySocketWatcher(),
 
                 //Notification
                 NotificationSaga.createNotificationWatcher(),

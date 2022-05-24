@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
 import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
-import { acceptFriendRequestSagaAction, createFriendRequestSagaAction, deleteFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
+import { cancelFriendRequestSagaAction, acceptFriendRequestSagaAction, createFriendRequestSagaAction, deleteFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
 import { RELATIONSHIP_TYPE } from '../../util/constants/commonConstants';
 import { Dropdown, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
@@ -70,6 +70,12 @@ function Cover() {
     }
     const handleCancelFriendRequest = () => {
         if (friendRequestId) {
+            dispatch(cancelFriendRequestSagaAction(friendRequestId))
+        }
+    }
+
+    const handleDeleteFriendRequest = () => {
+        if (friendRequestId) {
             dispatch(deleteFriendRequestSagaAction(friendRequestId))
         }
     }
@@ -77,7 +83,7 @@ function Cover() {
     const responseRequestMenu = (
         <Menu>
             <Menu.Item key="1" onClick={handleAcceptFriendRequest}>Confirm</Menu.Item>
-            <Menu.Item key="2" onClick={handleCancelFriendRequest}>Delete request</Menu.Item>
+            <Menu.Item key="2" onClick={handleDeleteFriendRequest}>Delete request</Menu.Item>
         </Menu>
     );
 

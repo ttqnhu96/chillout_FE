@@ -7,7 +7,6 @@ const initialState = {
 }
 
 export const NotificationReducer = (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case types.REDUCER_COMMENT_NOTIFICATION: {
             const user = JSON.parse(sessionStorage.getItem(USER_LOGIN));

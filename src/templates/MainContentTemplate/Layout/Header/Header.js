@@ -5,7 +5,7 @@ import '../../../../index.css';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getLogInUserProfileSagaAction, getUserProfileAction, setIsReloadWallAction } from '../../../../redux/actions/ProfileActions';
-import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../../../util/constants/systemSettings';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../../../util/constants/systemSettings';
 import { displayCreatePostModalAction, setIsReloadNewsFeedPostAction } from '../../../../redux/actions/PostAction';
 import CreatePost from "../../../../components/CreatePost/CreatePost";
 import { history } from "../../../../util/history";
@@ -149,8 +149,7 @@ export default function Header() {
                     <div className={`${style['user-container']}`}>
                         <span className={`${style['username']}`} onClick={handleClickUser}>{firstName}</span>
                         <Dropdown overlay={menu} placement="bottom" arrow>
-                            <img src={avatar ?
-                                `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
+                            <img src={avatar ? avatar : "/image/avatar/default_avatar.png"}
                                 alt="avatar"
                                 className={`${style['avatar']}`}
                             // onError={() => { window.location.reload() }}

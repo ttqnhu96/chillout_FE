@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { setDeletedCommentIdAction, updateCommentSagaAction } from '../../redux/actions/CommentAction';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
 import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { history } from '../../util/history';
@@ -68,8 +68,7 @@ export default function Comment(props) {
             <div className={`${style['post-comment-container']}`}>
                 <img
                     className={`${style['post-comment-avatar']}`}
-                    src={comment.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${comment.avatar}` : "/image/avatar/default_avatar.png"}
+                    src={comment.avatar ? comment.avatar : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => handleClickUser(comment.userId, comment.profileId)}
                 />

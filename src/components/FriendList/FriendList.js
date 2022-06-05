@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { getFriendListAction, getFriendListSagaAction } from '../../redux/actions/RelationshipAction';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import Search from '../Search/Search';
 import style from './FriendList.module.css';
@@ -56,8 +56,7 @@ export default function FriendList() {
                 return (
                     <div key={index} className={`${style['friendlist-item']}`}>
                         <img
-                            src={friend.avatar ?
-                                `${AWS_S3_BUCKET_LINK}/${friend.avatar}` : "/image/avatar/default_avatar.png"}
+                            src={friend.avatar ? friend.avatar : "/image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['friendlist-item-avatar']}`}
                             onClick={() => { handleClickFriend(friend.userId, friend.profileId) }}

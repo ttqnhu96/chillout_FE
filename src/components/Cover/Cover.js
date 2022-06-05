@@ -5,7 +5,7 @@ import { CameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayUploadImageModalAction } from '../../redux/actions/PhotoAction';
 import UploadImageModal from '../UploadImageModal/UploadImageModal';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { cancelFriendRequestSagaAction, acceptFriendRequestSagaAction, createFriendRequestSagaAction, deleteFriendRequestSagaAction, getRelationshipWithCurrentUserSagaAction } from '../../redux/actions/RelationshipAction';
 import { RELATIONSHIP_TYPE } from '../../util/constants/commonConstants';
 import { Dropdown, Menu } from 'antd';
@@ -139,8 +139,7 @@ function Cover() {
                 <div className={`${style['center-col-container']}`}>
                     <img
                         className={`${style['cover-avatar']}`}
-                        src={avatar ?
-                            `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
+                        src={avatar ? avatar : "/image/avatar/default_avatar.png"}
                         alt="avatar"
                     />
 

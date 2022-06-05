@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsReloadWallAction } from '../../redux/actions/ProfileActions';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import style from './PostHeader.module.css';
 
@@ -20,8 +19,7 @@ function PostHeader(props) {
             <div className={`${style['avatar-container']}`}>
                 <img
                     className={`${style['avatar-image']}`}
-                    src={post.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${post.avatar}` : "/image/avatar/default_avatar.png"}
+                    src={post.avatar ? post.avatar : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => handleClickUser(post.userId, post.profileId)}
                 />

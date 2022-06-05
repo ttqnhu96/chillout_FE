@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './SuggestionsSideBar.module.css';
 import { getSuggestionsListSagaAction } from '../../redux/actions/RelationshipAction';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 import { getPostListWallAction } from '../../redux/actions/PostAction';
@@ -42,8 +42,7 @@ export default function SuggestionsSideBar() {
             <li key={index} className={`${style['suggestions-item']}`}>
                 <img
                     className={`${style['suggestions-item__avatar']}`}
-                    src={item.avatar ?
-                        `${AWS_S3_BUCKET_LINK}/${item.avatar}` : "/image/avatar/default_avatar.png"}
+                    src={item.avatar ? item.avatar : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     onClick={() => { handleClickSuggestedUser(item.userId, item.profileId) }}
                 />

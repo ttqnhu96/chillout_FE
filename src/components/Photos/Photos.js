@@ -5,7 +5,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayViewPhotoModalAction, getPhotoListByUserIdSagaAction, setDeletedPhotoIdAction } from '../../redux/actions/PhotoAction';
 import ViewPhoto from '../ViewPhoto/ViewPhoto';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { displayConfirmDeleteModalAction, setModalTypeAction } from '../../redux/actions/ConfirmDeleteAction';
 import { MODAL_TYPE } from '../../util/constants/commonConstants';
 
@@ -53,10 +53,10 @@ export default function Photos() {
             photoList.map((photo, index) => (
                 <div key={index} className={`${style['photo-container']}`}>
                     <img
-                        src={`${AWS_S3_BUCKET_LINK}/${photo.fileName}`}
+                        src={photo.fileName}
                         alt={`photo_${index}`}
                         className={`${style['photo']}`}
-                        onClick={() => handleClickPhoto(`${AWS_S3_BUCKET_LINK}/${photo.fileName}`)}
+                        onClick={() => handleClickPhoto(photo.fileName)}
                     />
                     {
                         (userId === loginUserId)

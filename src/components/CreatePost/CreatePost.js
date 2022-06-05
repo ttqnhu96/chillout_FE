@@ -4,7 +4,7 @@ import { useState } from "react";
 import style from './CreatePost.module.css';
 import { hideCreatePostModalAction, createPostSagaAction } from '../../redux/actions/PostAction';
 import CropAndUploadImg from '../CropAndUploadImg/CropAndUploadImg';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 
 export default function CreatePost() {
     const dispatch = useDispatch();
@@ -60,8 +60,7 @@ export default function CreatePost() {
                         <div className={`${style['create-post-user-container']}`}>
                             <img
                                 className={`${style['create-post-user-avatar']}`}
-                                src={avatar ?
-                                    `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
+                                src={avatar ? avatar : "/image/avatar/default_avatar.png"}
                                 alt="avatar"
                             />
                             <div className={`${style['user-name-privacy-container']}`}>

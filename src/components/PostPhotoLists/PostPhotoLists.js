@@ -1,7 +1,6 @@
 import { Carousel } from 'antd';
 import { Fragment, memo } from 'react';
 import style from './PostPhotoLists.module.css';
-import { AWS_S3_BUCKET_LINK } from '../../util/constants/systemSettings';
 
 function PostPhotoLists(props) {
     const { photoList } = props;
@@ -12,7 +11,7 @@ function PostPhotoLists(props) {
                 <div key={index}>
                     <img
                         className={`${style['post-photo']}`}
-                        src={`${AWS_S3_BUCKET_LINK}/${photo.fileName}`}
+                        src={photo.fileName}
                         alt="post_photo"
                     />
                 </div>

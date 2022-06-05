@@ -4,7 +4,7 @@ import style from './FriendRequests.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { acceptFriendRequestSagaAction, deleteFriendRequestSagaAction, getReceivedFriendRequestListSagaAction } from '../../redux/actions/RelationshipAction';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import { getProfileDetailByUserIdSagaAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 
@@ -44,8 +44,7 @@ export default function FriendRequests() {
                 return (
                     <div key={index} className={`${style['friend-request-item']}`}>
                         <img
-                            src={friendRequest.avatar ?
-                                `${AWS_S3_BUCKET_LINK}/${friendRequest.avatar}` : "/image/avatar/default_avatar.png"}
+                            src={friendRequest.avatar ? friendRequest.avatar : "/image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['friend-request-item-avatar']}`}
                             onClick={() => { handleClickFriend(friendRequest.userId, friendRequest.profileId) }}

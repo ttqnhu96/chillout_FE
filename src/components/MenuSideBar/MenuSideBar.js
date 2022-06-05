@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { setIsReloadNewsFeedPostAction } from '../../redux/actions/PostAction';
-import { ACCESS_TOKEN, AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { ACCESS_TOKEN, USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
 import MenuItemSideBar from '../MenuItemSideBar/MenuItemSideBar';
 import style from './MenuSideBar.module.css';
@@ -65,8 +65,7 @@ export default function MenuSideBar() {
                 className={`${style['user-container']}`}
                 activeClassName={`${style['user-container--active']}`}
                 to={`/user/${loginUserId}`} >
-                <img src={avatar ?
-                    `${AWS_S3_BUCKET_LINK}/${avatar}` : "/image/avatar/default_avatar.png"}
+                <img src={avatar ? avatar : "/image/avatar/default_avatar.png"}
                     alt="avatar"
                     className={`${style['avatar']}`}
                 />

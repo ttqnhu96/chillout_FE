@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next'; //Multi language
 import * as types from '../../redux/constants/types';
 import { getNotificationListByReceiverIdSagaAction } from '../../redux/actions/NotificationAction';
-import { AWS_S3_BUCKET_LINK, USER_LOGIN } from '../../util/constants/systemSettings';
+import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { COMMON_CONSTANT } from '../../util/constants/commonConstants';
 
 export const DropdownNotification = () => {
@@ -24,7 +24,7 @@ export const DropdownNotification = () => {
             return notificationList.map((item, index) => (
                 <div key={index} className={`${style['notification-item']}`}>
                     <div className={`${style['notification-item__img']}`}>
-                        <img src={item.executorAvatar ? `${AWS_S3_BUCKET_LINK}/${item.executorAvatar}` : "/image/avatar/default_avatar.png"}
+                        <img src={item.executorAvatar ? item.executorAvatar : "/image/avatar/default_avatar.png"}
                             alt="avatar" />
                     </div>
                     <div className={`${style['notification-item__info']}`}>

@@ -18,7 +18,6 @@ const setupSocket = (dispatch) => {
     });
 
     socket.on('message', function (event) {
-        console.log('message', event);
         switch (event.type) {
             case types.MESSAGE_NOTIFICATION_RECEIVED:
                 dispatch(actions.messageReceived(event.data));
@@ -54,7 +53,6 @@ const setupSocket = (dispatch) => {
                 dispatch(actions.cancelFriendRequestNotification(event.data));
                 break;
             case types.DELETE_FRIEND_REQUEST_MESSAGE_FROM_SERVER:
-                console.log('DELETE_FRIEND_REQUEST_MESSAGE_FROM_SERVER', event.data);
                 dispatch(actions.deleteFriendRequestNotification(event.data));
                 break;
             default:

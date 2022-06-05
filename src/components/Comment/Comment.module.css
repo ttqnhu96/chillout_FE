@@ -29,6 +29,7 @@
 
 .post-comment-content {
     margin: 0 1.7rem 0.7rem 1.7rem;
+    white-space: pre-line;
 }
 .post-comments-options-container {
     width: 5%;

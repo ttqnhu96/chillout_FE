@@ -9,7 +9,7 @@ export default function InputComment(props) {
     const inputCommentRef = useRef();
     const { postId } = props;
 
-    const currentUserAvatar = useSelector(state => state.ProfileReducer).userProfile.avatar;
+    const currentUserAvatar = useSelector(state => state.ProfileReducer).loginUserProfile.avatar;
 
     const [commentContent, setCommentContent] = useState('');
 
@@ -44,7 +44,7 @@ export default function InputComment(props) {
                     maxLength={5000}
                 />
                 <img
-                    className={`${style['send-comment-button']}`}
+                    className={commentContent ? `${style['send-comment-button']}`: `${style['send-comment-button--disabled']}`}
                     src="/image/icon/send.png"
                     alt="send"
                     onClick={handlePostComment}

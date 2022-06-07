@@ -164,7 +164,7 @@ export default function Header() {
                     {/* Sidebars */}
                     {isShowSideBar.leftSideBar
                         &&
-                        <div className={`${style['header-menu-sidebar-container']}`}>
+                        <div className={`${style['header-menu-sidebar-container']} ${style['header-menu-sidebar-container--left']}`}>
                             <div className={`${style['header-menu-sidebar']} ${style['header-menu-sidebar--left']}`}>
                                 <MenuSideBar />
                                 <div className={`${style['header-menu-sidebar-icon']}`}
@@ -178,7 +178,7 @@ export default function Header() {
                     }
                     {isShowSideBar.rightSideBar
                         &&
-                        <div className={`${style['header-menu-sidebar-container']}`}>
+                        <div className={`${style['header-menu-sidebar-container']} ${style['header-menu-sidebar-container--right']}`}>
                             <div className={`${style['header-menu-sidebar']} ${style['header-menu-sidebar--right']}`}>
                                 <SuggestionsSideBar />
                                 <div className={`${style['header-menu-sidebar-icon']}`}

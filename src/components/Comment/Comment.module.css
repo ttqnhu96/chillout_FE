@@ -48,6 +48,7 @@
 
 /* Edit comment */
 .comment-input {
+    width: 100%;
     margin: 0 1.7rem 0.7rem 1.7rem;
     background-color: transparent;
     overflow-wrap: break-word;

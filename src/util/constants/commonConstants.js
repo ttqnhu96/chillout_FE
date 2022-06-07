@@ -18,6 +18,7 @@ export const MESSAGES = {
     E002: `User does not exist.`,
     E003: `This account has not been registered. Please sign up.`,
     E004: `This account was deactivated.`,
+    E005: `The password is incorrect. Please try again`,
 
     SIGN_UP_SUCCESS: `Congratulations, your account has been successfully created.`,
     UPDATE_SUCCESS: `Your change(s) has been successfully saved!`,

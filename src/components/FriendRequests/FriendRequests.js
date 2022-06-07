@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { acceptFriendRequestSagaAction, deleteFriendRequestSagaAction, getReceivedFriendRequestListSagaAction } from '../../redux/actions/RelationshipAction';
 import { USER_LOGIN } from '../../util/constants/systemSettings';
 import { history } from '../../util/history';
-import { getProfileDetailByUserIdSagaAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
+import { getUserProfileAction, setIsReloadWallAction } from '../../redux/actions/ProfileActions';
 
 export default function FriendRequests() {
     const loginUserId = JSON.parse(sessionStorage.getItem(USER_LOGIN))?.id;
@@ -22,10 +22,13 @@ export default function FriendRequests() {
     }, [])
 
     //Handle events
-    const handleClickFriend = (userId, profileId) => {
+    const handleClickFriend = (friendId) => {
+        // dispatch(getProfileDetailByUserIdSagaAction(profileId));
+        if (friendId !== loginUserId) {
+            dispatch(getUserProfileAction({}));
+        }
         dispatch(setIsReloadWallAction(true));
-        dispatch(getProfileDetailByUserIdSagaAction(profileId));
-        history.push('/wall');
+        history.push(`/user/${friendId}`);
     }
 
     //Handle accept friend request
@@ -47,10 +50,10 @@ export default function FriendRequests() {
                             src={friendRequest.avatar ? friendRequest.avatar : "/image/avatar/default_avatar.png"}
                             alt="avatar"
                             className={`${style['friend-request-item-avatar']}`}
-                            onClick={() => { handleClickFriend(friendRequest.userId, friendRequest.profileId) }}
+                            onClick={() => { handleClickFriend(friendRequest.senderId) }}
                         />
                         <div className={`${style['friend-request-item-name']}`}
-                            onClick={() => { handleClickFriend(friendRequest.userId, friendRequest.profileId) }}>
+                            onClick={() => { handleClickFriend(friendRequest.senderId) }}>
                             {`${friendRequest.firstName || ""} ${friendRequest.lastName || ""}`}
                         </div>
                         <div

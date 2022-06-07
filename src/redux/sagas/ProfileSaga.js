@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { profileService } from "../../services/ProfileService";
 import { ACCESS_TOKEN, ERROR_CODE, USER_LOGIN } from "../../util/constants/systemSettings";
 import { GET_LOGIN_USER_PROFILE_SAGA, GET_PROFILE_DETAIL_BY_USER_ID_SAGA, UPDATE_AVATAR_SAGA, UPDATE_PROFILE_SAGA } from "../constants/types";
-import { getLogInUserProfileAction, getProfileDetailByUserIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
+import { getLogInUserProfileAction, getLogInUserProfileSagaAction, getProfileDetailByUserIdSagaAction, getUserProfileAction } from '../actions/ProfileActions';
 import { notify } from "../../util/notification";
 import { FOLDER_UPLOAD, MESSAGES } from "../../util/constants/commonConstants";
 import { history } from "../../util/history";
@@ -149,6 +149,8 @@ function* updateAvatar(action) {
 
             //Call API to reload user profile detail
             yield put(getProfileDetailByUserIdSagaAction(action.profileId));
+
+            yield put(getLogInUserProfileSagaAction(response.userId));
         } else {
             //Inform error
             return notify('error', MESSAGES[errorCode])

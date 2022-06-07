@@ -86,11 +86,12 @@
 /* Responsive */
 @media (max-width: 511px) {
     .friendlist-item-container {
+        height: auto;
         display: flex;
         flex-direction: column;
     }
     
     .friendlist-item {
-        width: 100%;
+        width: 96%;
     }
 }

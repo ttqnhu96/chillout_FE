@@ -312,6 +312,12 @@
 /*=============================================
                 RESPONSIVE
 ==============================================*/
+@media (min-width: 1112px) {
+    .header-menu-sidebar-container--right {
+        display: none;
+    }
+}
+
 @media (max-width: 1111px) {
     .user-container {
         margin-right: 0;
@@ -322,6 +328,11 @@
     }
 }
 
+@media (min-width: 912px) {
+    .header-menu-sidebar-container--left {
+        display: none;
+    }
+}
 @media (max-width: 911px) {
     .header-menu-icon--left {
         display: block;

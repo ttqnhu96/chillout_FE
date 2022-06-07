@@ -59,7 +59,7 @@ export default function Login() {
                     onChange={handleChangePassword}
                 />
                 <div
-                    className={`${style['login-button']}`}
+                    className={(username !== '' && password !== '') ? `${style['login-button']}` : `${style['login-button--disabled']}`}
                     onClick={handleSubmit}
                 >
                     Log In

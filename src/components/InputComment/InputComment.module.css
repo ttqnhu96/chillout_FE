@@ -27,13 +27,18 @@
     background-color: transparent;
     border: none;  
 }
-.send-comment-button {
+.send-comment-button,
+.send-comment-button--disabled {
     height: 2em;
     width: 2em;
     cursor: pointer;
     margin: 0.8rem 0.7rem 0.5rem 0.5rem;
 }
 
+.send-comment-button--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
 /*=============================================
                 RESPONSIVE
 ==============================================*/
